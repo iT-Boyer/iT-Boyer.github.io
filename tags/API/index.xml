@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>API on 习七</title><link>https://it-boyer.github.io/tags/API/</link><description>Recent content in API on 习七</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Sun, 24 Sep 2017 18:21:38 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/API/index.xml" rel="self" type="application/rss+xml"/><item><title>GCD底层并发API</title><link>https://it-boyer.github.io/post/old/iOS/GCD%E5%BA%95%E5%B1%82%E5%B9%B6%E5%8F%91API/</link><pubDate>Sun, 24 Sep 2017 18:21:38 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/iOS/GCD%E5%BA%95%E5%B1%82%E5%B9%B6%E5%8F%91API/</guid><description>这篇文章里，我们将会讨论一些 iOS 和 OS X 都可以使用的底层 API。除了 dispatch_once ，我们一般不鼓励使用其中的任何一种技术。 但是我们想要揭示出表面之下深层次的</description></item><item><title>UIStackView教程了解StackView</title><link>https://it-boyer.github.io/post/old/iOS/UI/UIStackView%E6%95%99%E7%A8%8B%E4%BA%86%E8%A7%A3StackView/</link><pubDate>Fri, 24 Feb 2017 18:12:14 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/iOS/UI/UIStackView%E6%95%99%E7%A8%8B%E4%BA%86%E8%A7%A3StackView/</guid><description>原地址 UIStackView简单介绍 一个Stack View能够将它所含的View以各种方式沿其轴向进行分布，同时也可以将View沿某个方向等</description></item><item><title>UIImage的渲染模式</title><link>https://it-boyer.github.io/post/old/iOS/UI/UIImage%E7%9A%84%E6%B8%B2%E6%9F%93%E6%A8%A1%E5%BC%8F/</link><pubDate>Thu, 26 Nov 2015 16:15:11 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/iOS/UI/UIImage%E7%9A%84%E6%B8%B2%E6%9F%93%E6%A8%A1%E5%BC%8F/</guid><description>设置UIImage的渲染模式：UIImage.renderingMode 在 iOS 7 中 UIImage 添加了一个 renderingMode 属性。我们可以使用 imageWithRende</description></item><item><title>TextKit之便笺实战</title><link>https://it-boyer.github.io/post/old/iOS/UI/TextKit%E4%B9%8B%E4%BE%BF%E7%AC%BA%E5%AE%9E%E6%88%98/</link><pubDate>Thu, 03 Jul 2014 17:29:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/iOS/UI/TextKit%E4%B9%8B%E4%BE%BF%E7%AC%BA%E5%AE%9E%E6%88%98/</guid><description>&lt;h2 id="便笺练习功能点">便笺练习功能点:&lt;/h2>
+&lt;p>通过实现以下特效，练习并掌握布局管理器（layout manger），文本容器（text containers）和文本存储器（text storage）等用法。&lt;/p>
+&lt;ul>
+&lt;li>动态样式（Dynamic type）&lt;/li>
+&lt;li>凸版印刷效果（Letterpress effects）&lt;/li>
+&lt;li>环绕路径（Exclusion paths）&lt;/li>
+&lt;li>动态文本格式及存储（Dynamic text formatting and storage）&lt;/li>
+&lt;/ul>
+&lt;p>这个应用中我们将实现回流文本，字体大小的动态变换，以及闪回文本等效果。
+效果图:&lt;br>
+&lt;img src="https://it-boyer.github.io/images/bianqian.png" alt="image">&lt;br>
+App开始运行后自动生成一组便笺实例并利用&lt;code>tableViewController&lt;/code>显示出来。&lt;code>Storyboards&lt;/code>和&lt;code>segues&lt;/code>会将被选中的单元格所对应的便笺内容显示出来以供用户编辑。
+项目开发包：&lt;a href="http://cdn4.raywenderlich.com/wp-content/uploads/2013/09/TextKitNotepad-starter.zip">Notepad.zip&lt;/a>&lt;/p>
+&lt;h2 id="动态样式">动态样式&lt;/h2>
+&lt;p>&lt;code>动态样式（Dynamic type）&lt;/code>是iOS 7里面变化最大的特性之一; 它使得app可以遵从用户选择的字体大小和粗细。
+选择 &lt;strong>通用-&amp;gt;文字大小&lt;/strong> 或 &lt;strong>通用-&amp;gt;辅助功能&lt;/strong> 来查看app中的字体设置。&lt;/p>
+&lt;p>&lt;img src="https://it-boyer.github.io/images/UserTextPreferences.png" alt="image">&lt;br>
+iOS 7 支持通过&lt;code>粗体&lt;/code>、&lt;code>设置字体大小&lt;/code>等方式提高支持动态文本的应用的易读性。
+例如**&lt;code>UIFont&lt;/code>**新增的一个方法： &lt;strong>&lt;code>preferredFontForTextStyle&lt;/code>&lt;/strong> 用来根据用户对字体大小的设置来自动制定字体样式。&lt;br>
+下面表格中是六种可用字体样式的示例：&lt;br>
+&lt;img src="https://it-boyer.github.io/images/TextStyles.png" alt="image">&lt;br>
+最左边一列是最小字体；中间一列是最大字体；最右边一列是粗体效果。&lt;/p>
+&lt;h3 id="使用系统动态字体样式">使用系统动态字体样式&lt;/h3>
+&lt;p>使用动态文本，是通过给&lt;code>文本字体&lt;/code>设置字体样式&lt;strong>style&lt;/strong>而不是指定具体的&lt;code>字体名称&lt;/code>和&lt;code>大小&lt;/code>。这样，系统会在运行时自动根据这一样式以及用户的字体大小设置来选择使用合适的字体。&lt;/p>
+&lt;h4 id="preferredfontfortextstyle方法设置字体样式">&lt;code>preferredFontForTextStyle:&lt;/code>方法设置字体样式&lt;/h4>
+&lt;ol>
+&lt;li>打开 &lt;code>NoteEditorViewController.m/swift&lt;/code> 在&lt;code>viewDidLoad：&lt;/code>方法实现的最后面加入以下代码：
+{%codeblock lang:objc%}
+self.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+{%endcodeblock%}
+{% codeblock lang:swift %}
+self.textView.font = UIFont.preferredFont(forTextStyle: .body)
+{% endcodeblock %}&lt;/li>
+&lt;li>打开 &lt;code>NotesListViewController.m/swift&lt;/code> 在 &lt;code>tableView:cellForRowAtIndexPath:&lt;/code> 方法中增加如下代码:
+{%codeblock lang:objc%}
+cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+{%endcodeblock%}
+{% codeblock lang:swift %}
+cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+{% endcodeblock %}
+上面两行代码都用到了新版iOS的字体样式.&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>字体样式：通过语义法命名字体，例如 &lt;code>UIFontTextStyleSubHeadline&lt;/code>, 可以避免在代码里每一处都指定具体的字体名称和样式， 而且确保app能对用户的字体大小设置做出恰当的回应。&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="app响应用户字体设置">APP响应用户字体设置&lt;/h4>
+&lt;ol>
+&lt;li>设置系统字体
+返回到&lt;strong>通用-&amp;gt;文字大小&lt;/strong>重新修改字体设置.
+再运行App, &lt;strong>Note&lt;/strong>页面的文字大小是当前设定的字体大小；前后截屏对比,分辨率小了一半。&lt;br>
+&lt;img src="https://it-boyer.github.io/images/NotepadWithDynamicType.png" alt="image">&lt;/li>
+&lt;li>设置系统字体生效
+当我们返回到&lt;strong>通用-&amp;gt;文字大小&lt;/strong>重新修改字体设置. 再打开&lt;strong>Note&lt;/strong>页面, 会发现app并没有&lt;strong>立即&lt;/strong>对字体设置的变化做出相应反应。&lt;/li>
+&lt;/ol>
+&lt;h5 id="监听系统通知实现app响应用户字体设置">监听系统通知：实现APP响应用户字体设置&lt;/h5>
+&lt;p>当用户修改了他们的字体大小设置之后，这一样式对应的字体并不会自动更新，必须重新请求才能获取新的值。用户设置变化后，&lt;code>preferredFontForTextStyle:&lt;/code>方法返回的字体也会变化。&lt;/p>
+&lt;ol>
+&lt;li>添加监听系统通知&lt;code>UIContentSizeCategoryDidChangeNotification&lt;/code>通知APP响应用户字体设置的变化
+打开 &lt;code>NoteEditorViewController.m&lt;/code> 并在 &lt;code>viewDidLoad&lt;/code> 方法的实现的最后加入以下代码：
+{%codeblock lang:objc%}
+[[NSNotificationCenter defaultCenter]
+addObserver:self
+selector:@selector(preferredContentSizeChanged:)
+name:UIContentSizeCategoryDidChangeNotification
+object:nil];
+{%endcodeblock%}
+{%codeblock lang:swift%}
+//字体变化通知:调用preferredContentSizeChanged:方法
+NotificationCenter.default.addObserver(self, selector: #selector(NoteEditorViewController.preferredContentSizeChanged(_:)), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
+{%endcodeblock%}&lt;/li>
+&lt;li>添加系统通知响应事件
+收到用于指定本类接收字体设定变化的通知后，调用&lt;code>preferredContentSizeChanged:&lt;/code>方法
+在&lt;code>NoteEditorViewController.m&lt;/code>中&lt;code>viewDidLoad&lt;/code>方法之后紧接着添加以下方法：
+{%codeblock lang:objc%}&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>(void)preferredContentSizeChanged:(NSNotification *)notification
+{
+self.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+}
+{%endcodeblock%}
+{%codeblock lang:swift %}
+//字体变化通知时调用
+func preferredContentSizeChanged(_ notification:NSNotification)
+{
+self.textView.font = UIFont.preferredFont(forTextStyle: .body)
+}
+{%endcodeblock%}
+这一方法作用是根据新的字体设置来设定&lt;code>textView&lt;/code>中的字体。 &lt;br>
+Build并运行app，修改字体大小设置，Note页面就可以即时更新字体大小了。&lt;/li>
+&lt;/ul></description></item><item><title>iOS Document Interaction 编程指南</title><link>https://it-boyer.github.io/post/old/iOS/iOSDocumentInteraction%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/</link><pubDate>Tue, 01 Jul 2014 23:12:01 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/iOS/iOSDocumentInteraction%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/</guid><description>&lt;h4 id="关于-document-interaction">关于 Document Interaction&lt;/h4>
+&lt;p>iOS支持在你的app中通过调用其他app来预览和显示文档。iOS还支持文件关联，允许其他app调用你的app打开文件。这些技术包括了UIKit中提供的&lt;a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDocumentInteractionController_class/Reference/Reference.html">UIDocumentInteractionController&lt;/a>类，以及&lt;a href="https://developer.apple.com/library/ios/documentation/QuickLook/Reference/QuickLookFrameworkReference_iPhoneOS/_index.html">Quick Look&lt;/a>框架。&lt;/p>
+&lt;ul>
+&lt;li>######预览文档和呈现选项菜单&lt;br>
+如果app需要打开自身并不支持的文件时，就需要使用&lt;strong>UIDocumentInteractionController&lt;/strong>。一个&lt;strong>document interaction controller&lt;/strong>通过&lt;strong>Quick Look框架&lt;/strong>判断文档是否能被另一个app打开和预览。也就是说，app可以通过&lt;strong>documentinteraction controller&lt;/strong>提供一些支持打开该文件方式的菜单。&lt;/li>
+&lt;/ul>
+&lt;p>具体实现需要以下步骤：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;ul>
+&lt;li>需要通过其他APP打开的文件，来实例化&lt;code>UIDocumentInteractionController&lt;/code>实例对象。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>在自己的APP UI中提供一个代表这种文件的图像标（一般显示文件名或者图标）。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>用户交互，如触摸这个控件，则调用&lt;code>documentinteractioncontroller&lt;/code>对象。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>三种交互界面:
+1. 预览文件的内容。
+2. 一个包含预览和打开操作的菜单。可以通过实现某些委托方法，向菜单中加入其他操作，比如复制、打印。
+3. 一个菜单，仅包含“以其它方式打开”操作。&lt;/p>
+&lt;p>同时，&lt;code>documentinteractioncontroller&lt;/code>内置了一些手势，必要时可以直接实现它们。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>######使用&lt;code>documentinteractioncontroller&lt;/code>的场景:&lt;strong>与文件交互的app都可以使用。&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>需要从网络下载文件的APP:&lt;br>
+例如，email程序需要打开和预览邮件附件。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>不下载文件的APP:&lt;br>
+例如，APP需要支持文件共享（参考“File-Sharing Support” in &lt;a href="https://developer.apple.com/library/ios/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007898">iOS Technology Overview&lt;/a>), 即可以对同步到app Documents/Shared目录下的文件使用&lt;code>documentinteractioncontroller&lt;/code>。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>IOS7新宠TextKit</title><link>https://it-boyer.github.io/post/old/iOS/UI/IOS7%E6%96%B0%E5%AE%A0TextKit/</link><pubDate>Mon, 16 Jun 2014 22:24:48 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/iOS/UI/IOS7%E6%96%B0%E5%AE%A0TextKit/</guid><description>&lt;h2 id="text-kit">Text Kit&lt;/h2>
+&lt;p>&lt;strong>&lt;code>Text Kit&lt;/code>&lt;/strong>：是个庞大的framework，继承了&lt;code>Core Text&lt;/code>的全部功能，构建了快速、先进的文本排版和渲染引擎，更让开发者们高兴的是，设计者把它封装在了一个面向对象的API中。并且与UIKit框架很好的集成，它让程序能够通过&lt;strong>NSTextStorage&lt;/strong>对象存储文本排版和显示文本等主要信息，并支持排版所需要的所有特性，包括字距调整、连写、换行和对齐等。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;font size=3>更直观的理解，&lt;strong>UITextView&lt;/strong>，&lt;strong>UITextField&lt;/strong>、&lt;strong>UILabel&lt;/strong>等UIKit控件都已经基于&lt;strong>Text Kit&lt;/strong>重新构建，是为UIKit框架提供高质量排版服务而扩展的一些类和协议.&lt;br>
+例如：NSTextStorage对象，它本身是&lt;strong>NSMutableAttributedString&lt;/strong>的子类，支持分批编辑，这就意味着在改变一个范围内的字符样式时，不用整体替换文本内容，就能完成排版效果。其中支持分页文本、文本包装、富文本编辑、交互式文本着色、文本折叠和自定义截取等特性。&lt;/font>&lt;/p>
+&lt;/blockquote>
+&lt;p>IOS6之前，想实现一些丰富的文本排版，例如在textView中显示不同样式的文本，或者图片和文字混排等，就需要借助于UIWebView或者深入研究一下&lt;code>Core Text&lt;/code>。后来iOS6，增加一个很棒的属性:&lt;code>NSAttributedString&lt;/code>，主要用于支持UILabel、UITextField、UITextView等UIKit控件自主排版的功能。很显然，IOS7并没有满足于这一改进，同时推出一款功能更为齐全，易用的&lt;code>Text Kit&lt;/code>新宠。&lt;br>
+在iOS 6中, 用于文本的UIKit控件是基于WebKit和Core Graphics的字符串绘制方法来实现的。如下面层级体系图所示：&lt;br>
+iOS 7的整体构架要更清晰，所有基于文本的UIKit控件（除了UIWebView）现在都可以使用Text Kit，如下图所示：&lt;/p></description></item></channel></rss>

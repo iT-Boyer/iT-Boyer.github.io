@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>文档 on 习七</title><link>https://it-boyer.github.io/tags/%E6%96%87%E6%A1%A3/</link><description>Recent content in 文档 on 习七</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Sat, 07 Sep 2019 20:47:29 +0800</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/%E6%96%87%E6%A1%A3/index.xml" rel="self" type="application/rss+xml"/><item><title>总结集成工具使用文档</title><link>https://it-boyer.github.io/post/old/%E4%BD%BF%E7%94%A8fastlane%E9%9B%86%E6%88%90cocopads%E5%92%8Cjazzy%E5%B7%A5%E5%85%B7%E6%8F%90%E9%AB%98%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87/</link><pubDate>Sat, 07 Sep 2019 20:47:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E4%BD%BF%E7%94%A8fastlane%E9%9B%86%E6%88%90cocopads%E5%92%8Cjazzy%E5%B7%A5%E5%85%B7%E6%8F%90%E9%AB%98%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87/</guid><description>DONE jazzy工具使用实现基本的文档的生成,并同步到hugo目录中 支持oc/swift文档 swift文档 oc 文档 .jazzy.yaml配置文件使</description></item><item><title>集配门店样式和跳转功能</title><link>https://it-boyer.github.io/post/old/%E5%BC%80%E5%8F%91%E9%9B%86%E9%85%8D%E9%97%A8%E5%BA%97%E6%8F%92%E4%BB%B6%E7%BB%A7%E6%89%BF%E5%88%B0%E9%97%A8%E5%BA%97%E8%AF%A6%E6%83%85/</link><pubDate>Wed, 21 Aug 2019 11:32:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%BC%80%E5%8F%91%E9%9B%86%E9%85%8D%E9%97%A8%E5%BA%97%E6%8F%92%E4%BB%B6%E7%BB%A7%E6%89%BF%E5%88%B0%E9%97%A8%E5%BA%97%E8%AF%A6%E6%83%85/</guid><description>STARTED UI实现 新建列表UI,继承到门店详情中,实现跳转流程. 集配门店code:StoreDistribution UI:在gb组件中新建实体类:S</description></item><item><title>优化网络实现方式,重构SDImage组件调用接口</title><link>https://it-boyer.github.io/post/old/%E4%BC%98%E5%8C%96%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F-%E9%87%8D%E6%9E%84sdimage%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8%E6%8E%A5%E5%8F%A3/</link><pubDate>Fri, 09 Aug 2019 11:47:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E4%BC%98%E5%8C%96%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F-%E9%87%8D%E6%9E%84sdimage%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8%E6%8E%A5%E5%8F%A3/</guid><description>&amp;mdash;&amp;ndash;BEGIN PGP MESSAGE&amp;mdash;&amp;ndash; jA0EBwMCUlTuBCTI8Rbk0ukBersHDQQnHsO5+FaUQKR/ZYY6m1lxq+gbwYyCaV0y rDRbuteR30Hqyipc72CjIUWnE1DdqbSsiy7GZdh+oWUPb/cxZUFvZ0tOXStliAHC wGsqab2ewbfstgM9vfHv2dMmfUvbFIFBED0z8Oo7psXyjvUv/06yMLM07Ap9C7jD kARn3Q88hdeHTorDGKPF4sPteAyCA/h0kdgglUSlpAOZP+KqDyz8kj4gGPp/zW3t zJHuYjS8ZrtWjhr0UifLAmgOjIS7glKX2clOTVGv7nyUCfK3ctWOxjtA1Rbf6cKA LTgVrwwLps7E8oe8ATgi4H+0FyQ0gwpt/y6fDzmoelEzHD1MhFkNWAlZJn5USaGI 2E425Zv4MgzfmwAYbr65JUmyNuZAq2JlkvSFFDNZPQ1N2edmpyZf8ZB2LQf9bOcy 836RjOmebZca5ARuFHcUAG/5SjoXf5vL2hPusWhHhPlK9oJNr15rwNt5tFQVv0zL YQUGUtzSAe5iN08sgb7Vj5ZeRDqcIfAm+QbTGSSe5jFIIt3zR4lfaATz7f6g797h vPm11zneE6wu90ltmdZQVkwE2Mq3zGpN5NUwoDDpehoGReZszLfPr+in0khzxgYj bNjeT95BDAHqMdQp/g6YJItGsdlcJzMrcU1JoQkVu4t1pBsz4JSpxqu2VbJCQqDq OsEVNzys/TACtP35rqD3HVPpCypp79gjb+/vTcUlESYRQvHUlemGAJTMGqiu6GUu VwhGvW2+Xii1UJtlN1h0XqKddb6cNJXnjSMaGQOH1mnSVxn5OZxrVm9UCqm8pN1G 9WMEzB8lcJo5nS5DdzbsD/X7hydnARX//Ge/aTQ8Cruw7CTILwqnBaw529HMP8Q4 iFBJcacVfnYz4AEeevvIGXSavzrUkTQGViaoHh/t5rHRLnW7V4EYmykUrbqVKohs pmy77RuQfMA3r37qVKqmKE7Qxy04EGyh/JDhYXCZWmoDW6C1amJfmHzJcKENo22P 577ldYhgZ5GUQ9IEWN/RqxT4sD+2RY+YTf+Ja1jRisN7ocdg7JOLo776MsohS99C XHUv+NhaZC0rWoqX3ge652TmZJp9cDEeE6PxgWPRHKRPHTQeDdErSQSTjfQCUnGT szvB7XFJh/SEf4PjyeWqV5t9d+lLlW37EwuB+ovzFd94GU8tnNlTNnkjPpqobsWy JaljzhDDQXomL+EDaGePIBKB9/fi6CChFNNnGtuuSPCpK6c7/XlUNIRVsI1pOWcs FU29dsxewXfclRW7jl3hs1+FVwErKHwpPVXYTGkIaCSkBUpiDo11Yg== =2Zpw &amp;mdash;&amp;ndash;END PGP MESSAGE&amp;mdash;&amp;ndash;</description></item><item><title>XcodeHeaderDoc教程</title><link>https://it-boyer.github.io/post/old/xcode/XcodeHeaderDoc%E6%95%99%E7%A8%8B/</link><pubDate>Thu, 28 Aug 2014 15:18:41 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/xcode/XcodeHeaderDoc%E6%95%99%E7%A8%8B/</guid><description>&lt;p>HeaderDoc 是在Xcode 5 和 iOS7 发布时，新增的一个命令行工具，功能：可以从代码中自动生成格式良好的HTML文档——当然，必须依赖于特定格式的注释来完成的。&lt;/p>
+&lt;p>另外，Xcode 还会在 quick look 面板中以&lt;strong>HeaderDoc&lt;/strong>风格显示你的注释。&lt;/p>
+&lt;p>通过本教程，将学习如下几点：&lt;/p>
+&lt;ul>
+&lt;li>如何书写 HeaderDoc 风格的注释&lt;/li>
+&lt;li>分如何在 Xcode 中预览文档&lt;/li>
+&lt;li>如何生成 HTML 文档&lt;/li>
+&lt;li>如何使用 VVDocumenter-Xcode(一个易于使用的第3方文档制作工具)&lt;/li>
+&lt;/ul>
+&lt;h4 id="准备工作">准备工作&lt;/h4>
+&lt;p>下载本教程中用到的 &lt;a href="http://cdn2.raywenderlich.com/wp-content/uploads/2014/03/DocumentationExamples_Starter.zip">示例项目&lt;/a>&lt;/p>
+&lt;p>这个简单的示例程序只包含了两个类：&lt;/p>
+&lt;ul>
+&lt;li>Car: 包含几个属性及一个 “drive” 方法以及一个 completion 块。&lt;/li>
+&lt;li>MathAPI: 包含了1个方法，用于累加两个数。
+现在，这两个类还没有任何注释。以便演示如何通过 &lt;strong>HeaderDoc&lt;/strong> 为这两个类创建文档。&lt;/li>
+&lt;/ul></description></item><item><title>iOS Document Interaction 编程指南</title><link>https://it-boyer.github.io/post/old/iOS/iOSDocumentInteraction%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/</link><pubDate>Tue, 01 Jul 2014 23:12:01 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/iOS/iOSDocumentInteraction%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/</guid><description>&lt;h4 id="关于-document-interaction">关于 Document Interaction&lt;/h4>
+&lt;p>iOS支持在你的app中通过调用其他app来预览和显示文档。iOS还支持文件关联，允许其他app调用你的app打开文件。这些技术包括了UIKit中提供的&lt;a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDocumentInteractionController_class/Reference/Reference.html">UIDocumentInteractionController&lt;/a>类，以及&lt;a href="https://developer.apple.com/library/ios/documentation/QuickLook/Reference/QuickLookFrameworkReference_iPhoneOS/_index.html">Quick Look&lt;/a>框架。&lt;/p>
+&lt;ul>
+&lt;li>######预览文档和呈现选项菜单&lt;br>
+如果app需要打开自身并不支持的文件时，就需要使用&lt;strong>UIDocumentInteractionController&lt;/strong>。一个&lt;strong>document interaction controller&lt;/strong>通过&lt;strong>Quick Look框架&lt;/strong>判断文档是否能被另一个app打开和预览。也就是说，app可以通过&lt;strong>documentinteraction controller&lt;/strong>提供一些支持打开该文件方式的菜单。&lt;/li>
+&lt;/ul>
+&lt;p>具体实现需要以下步骤：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;ul>
+&lt;li>需要通过其他APP打开的文件，来实例化&lt;code>UIDocumentInteractionController&lt;/code>实例对象。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>在自己的APP UI中提供一个代表这种文件的图像标（一般显示文件名或者图标）。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>用户交互，如触摸这个控件，则调用&lt;code>documentinteractioncontroller&lt;/code>对象。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>三种交互界面:
+1. 预览文件的内容。
+2. 一个包含预览和打开操作的菜单。可以通过实现某些委托方法，向菜单中加入其他操作，比如复制、打印。
+3. 一个菜单，仅包含“以其它方式打开”操作。&lt;/p>
+&lt;p>同时，&lt;code>documentinteractioncontroller&lt;/code>内置了一些手势，必要时可以直接实现它们。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>######使用&lt;code>documentinteractioncontroller&lt;/code>的场景:&lt;strong>与文件交互的app都可以使用。&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>需要从网络下载文件的APP:&lt;br>
+例如，email程序需要打开和预览邮件附件。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>不下载文件的APP:&lt;br>
+例如，APP需要支持文件共享（参考“File-Sharing Support” in &lt;a href="https://developer.apple.com/library/ios/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007898">iOS Technology Overview&lt;/a>), 即可以对同步到app Documents/Shared目录下的文件使用&lt;code>documentinteractioncontroller&lt;/code>。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

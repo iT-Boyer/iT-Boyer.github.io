@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>单元测试 on 习七</title><link>https://it-boyer.github.io/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</link><description>Recent content in 单元测试 on 习七</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Mon, 20 Feb 2017 23:09:30 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml"/><item><title>高期望实现异步单元测试</title><link>https://it-boyer.github.io/post/old/%E8%B0%83%E8%AF%95/%E9%AB%98%E6%9C%9F%E6%9C%9B%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</link><pubDate>Mon, 20 Feb 2017 23:09:30 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E8%B0%83%E8%AF%95/%E9%AB%98%E6%9C%9F%E6%9C%9B%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</guid><description>异步单元测试 在Xcode 6之前的版本里面并没有内置XCTest，只能是在主线程的RunLoop里面使用一个while循环,然后一直等待响应或</description></item><item><title>Xcode和Jenkins持续集成的几种实现方式</title><link>https://it-boyer.github.io/post/old/macOS/Xcode%E5%92%8CJenkins%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</link><pubDate>Fri, 18 Sep 2015 23:52:06 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/macOS/Xcode%E5%92%8CJenkins%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E7%9A%84%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</guid><description>&lt;h2 id="ci服务器">CI服务器&lt;/h2>
+&lt;p>写到这儿，对于iOS开发者来说，需要准备好：&lt;/p>
+&lt;ul>
+&lt;li>一个比较容易获取的源代码仓库(包含源代码)&lt;/li>
+&lt;li>一套自动化构建脚本&lt;/li>
+&lt;li>一系列围绕构建的可执行测试&lt;/li>
+&lt;/ul>
+&lt;p>接下来就需要一个CI服务器来根据源代码的变更触发构建，监控测试结果。&lt;/p>
+&lt;p>目前，业界比较流行的，支持iOS构建的CI服务器有&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://travis-ci.org">Travis CI&lt;/a>：是一个免费的云服务平台，基本上支持所有目前主流的语言，Object-C自然也在其中，但是只支持github极大的限制了其应用场景。目前国内无法访问，&lt;a href="http://www.infoq.com/cn/articles/build-ios-continuous-integration-platform-part3">详见&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Jenkins&lt;/strong>：经过多年的发展，其活跃的社区和丰富的插件让其成为了业界最受欢迎的CI服务器。通过使用Xcode插件，可以非常方便在Jenkins中运行iOS项目的构建脚本。&lt;/li>
+&lt;/ul></description></item></channel></rss>

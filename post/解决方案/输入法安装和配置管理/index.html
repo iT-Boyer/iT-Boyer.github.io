@@ -1,0 +1,233 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>trime,emacs-rime和squirrel输入法和配置管理 - 习七</title>
+<meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="坚持七习，磨练人生."><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.122.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E8%BE%93%E5%85%A5%E6%B3%95%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:title" content="trime,emacs-rime和squirrel输入法和配置管理"><meta property="og:description" content="坚持七习，磨练人生."><meta property="og:type" content="article"><meta property="og:url" content="https://it-boyer.github.io/post/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E8%BE%93%E5%85%A5%E6%B3%95%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/"><meta property="article:section" content="post"><meta property="article:published_time" content="2021-06-22T00:00:00+08:00"><meta property="article:modified_time" content="2021-08-26T19:28:50+08:00"><meta itemprop=name content="trime,emacs-rime和squirrel输入法和配置管理"><meta itemprop=description content="坚持七习，磨练人生."><meta itemprop=datePublished content="2021-06-22T00:00:00+08:00"><meta itemprop=dateModified content="2021-08-26T19:28:50+08:00"><meta itemprop=wordCount content="2263"><meta itemprop=keywords content="管理者,"><meta name=twitter:card content="summary"><meta name=twitter:title content="trime,emacs-rime和squirrel输入法和配置管理"><meta name=twitter:description content="坚持七习，磨练人生."><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>trime,emacs-rime和squirrel输入法和配置管理</h1><div class=post-meta><span class=post-time>2021-06-22</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 2263 字 </span><span class=more-meta>预计阅读 5 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by
+<a href=/authors/iTBoyer>iTBoyer</a></span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#rime>rime</a></li><li><a href=#输入方案>输入方案</a></li><li><a href=#安卓版-trime>安卓版:trime</a><ul><li><a href=#trime输入方案>trime输入方案</a></li></ul></li><li><a href=#squirrel>squirrel</a></li><li><a href=#emacs-rime>emacs-rime</a><ul><li><a href=#安装-librime>安装 librime</a></li><li><a href=#emacs-配置>emacs 配置</a></li><li><a href=#高低配置>高低配置</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2021-08-26T19:28:50 title="August 26, 2021">August 26, 2021</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2 id=rime>rime</h2><p>rime 是一款输入引擎，它开放了一套配置协议，为多元的输入法（同文输入法、鼠须管输入法等）的基础，输入法和rime引擎之间通过这套协议实现多样化的输入方案。</p><p>官方解释：rime是啥？ > Rime 不是一种输入法。是从各种常见键盘输入法中提炼出来的抽象的输入算法框架。因为Rime 涵盖了大多数输入法的「共性」，所以在不同的设定下，Rime 可化身为不同的输入法用来打字。</p><p><a href=https://rime.im/download/>下載及安裝 | RIME | 中州韻輸入法引擎</a></p><h2 id=输入方案>输入方案</h2><p>rime是一款开源的输入法引擎，约定了配置规范，根据这套规范可以定制自己的 <code>输入方案</code> ，由此，应运而生配置管理工具 <a href=https://hub.fastgit.org/rime/plum#packages>東風破 <em>plum</em></a> 维护着大量优秀的 <code>输入方案</code> 。</p><p>官方解释： >要让Rime 实现某种具体输入法的功能，就需要一些数据来描述这种输入法以何种形式工作。即，定义该输入法的「个性」。 >如「汉语拼音」、「注音」、「仓颉码」、「五笔字型」，这些方法可凭借Rime 提供的通用设施、给定不同的工作参数来实作。以本文介绍的规格写成一套套的配方，就是Rime 输入方案。</p><p>常用的输入方案：<a href=https://github.com/rime/rime-luna-pinyin>rime-luna-pinyin: 【朙月拼音】輸入方案</a></p><p>如果想定制键位/快捷键可以参考： <a href=https://hub.fastgit.org/rime/home/wiki/CustomizationGuide>CustomizationGuide · rime/home Wiki · GitHub</a></p><p>创建自己的 <code>输入方案</code> ：<a href=https://hub.fastgit.org/rime/home/wiki/RimeWithSchemata>RimeWithSchemata · rime/home Wiki · GitHub</a></p><h2 id=安卓版-trime>安卓版:trime</h2><p>详细的文档 ：<a href=https://github.com/osfans/trime/wiki/trime.yaml%E8%A9%B3%E8%A7%A3>trime.yaml詳解</a></p><figure><img src=/ox-hugo/trime.png></figure><h3 id=trime输入方案>trime输入方案</h3><p>使用输入法配置库：<a href=https://hub.fastgit.org/Bambooin/rimerc>rimerc</a>, 大牛配置好的配置，包括同文和squirrel 配置。</p><p>配置路径在<code>/sdcard/rime</code>, 将<code>rimerc</code> 库中的trime.z7 解压到该目录。</p><blockquote><p>rimerc 库内容已经变化，作者还没有更新readme.</p></blockquote><h4 id=定制候选词条的个数>定制候选词条的个数</h4><p>在 <code>default.custom.yaml</code> 文件中添加</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=w>  </span><span class=nt>patch</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>menu/page_size</span><span class=p>:</span><span class=w> </span><span class=m>10</span></span></span></code></pre></td></tr></table></div></div><h4 id=隐藏侯选框的方法>隐藏侯选框的方法</h4><p>在 <code>luna_pinyin.schema.yaml</code> 定制：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>_hide_candidate</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>reset</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>  </span><span class=c>#默认开启这个开关，隐藏候选栏</span></span></span></code></pre></td></tr></table></div></div><h4 id=设置输入法偏好>设置输入法偏好</h4><ul><li><input checked disabled type=checkbox> 汉字与小写半角</li><li><input checked disabled type=checkbox> 汉字与中文标点配套</li><li><input checked disabled type=checkbox> 英文与英文标点</li></ul><p>在 <code>luna_pinyin.schema.yaml</code> 定制：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>switches</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ascii_mode</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>reset</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>states</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>中文, 西文 ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>full_shape</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>states</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>半角, 全角 ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>simplification</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>reset</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>states</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>漢字, 汉字 ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ascii_punct</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>reset</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>states</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>。，, ．， ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#  - name: _hide_candidate</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=c>#   reset: 0  #默认开启这个开关，隐藏候选栏</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=c># 这个按键用来收起软键盘</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#  - options: [ _key_Control_L ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#    states: [ &#34;CTRL&#34; ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#  - options: [ _key_Escape ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#    states: [ &#34;ESC&#34; ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#  - options: [ _key_Alt_L ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>#    states: [ &#34;Alt&#34; ]</span></span></span></code></pre></td></tr></table></div></div><h4 id=键位设置>键位设置</h4><p>trime 键位分为两种，26键和36键</p><p>trime默认26键位,绑定键位的方法： <code>querty</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=w> </span><span class=nt>&#34;preset_keyboards/qwerty/keys/@26/click&#34;: </span><span class=l>date_time</span></span></span></code></pre></td></tr></table></div></div><p>开启36键位的方法： <code>querty0</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=w>   </span><span class=nt>&#34;preset_keyboards/luna_pinyin/import_preset&#34;: </span><span class=l>qwerty0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=nt>&#34;preset_keyboards/qwerty0/keys/@43/long_click&#34;: </span><span class=l>Mode_switch</span></span></span></code></pre></td></tr></table></div></div><p>键位绑定支持两种方式：键位占用和键位长按</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># click绑定键位</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>&#34;preset_keyboards/qwerty/keys/@26/click&#34;: </span><span class=l>date_time</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c># long_click绑定键位长按</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w> </span><span class=nt>&#34;preset_keyboards/qwerty/keys/@26/long_click&#34;: </span><span class=l>date_time</span></span></span></code></pre></td></tr></table></div></div><ul><li><p>声明键事件并绑定</p><ol><li><p>声明方式使用 <code>"preset_keys/custom_key":</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=w>   </span><span class=c># 参考trime.yaml内置的date键，新建一个按键date_time</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=s2>&#34;preset_keys/date_time&#34;</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=l>date</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>label</span><span class=p>:</span><span class=w> </span><span class=l>时间</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>option</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;yyyy-MM-dd  HH:mm:ss&#34;</span><span class=w>  </span><span class=c>#通过`option`参数控制输出的日期和时间格式</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>send</span><span class=p>:</span><span class=w> </span><span class=l>function</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c>#Clear: {label: 清除, text: &#34;{Control+a}{BackSpace}&#34;} #全選並刪除</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=s2>&#34;preset_keys/cg&#34;</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>label</span><span class=p>:</span><span class=w> </span><span class=l>撤销</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>send</span><span class=p>:</span><span class=w> </span><span class=l>Control+g</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=s2>&#34;preset_keys/cc&#34;</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>label</span><span class=p>:</span><span class=w> </span><span class=l>完1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>text</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{Control+c}{Control+c}&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=s2>&#34;preset_keys/control&#34;</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>label</span><span class=p>:</span><span class=w> </span><span class=l>CTR</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>send</span><span class=p>:</span><span class=w> </span><span class=l>Control_L</span><span class=w> </span><span class=c>#space+colon</span></span></span></code></pre></td></tr></table></div></div></li><li><p>用data_time替换原预设26键键盘中的time</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=w>     </span><span class=nt>&#34;preset_keyboards/qwerty/keys/@26/long_click&#34;: </span><span class=l>date_time</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=nt>&#34;preset_keyboards/qwerty/keys/@33/long_click&#34;: </span><span class=l>Mode_switch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>     </span><span class=nt>&#34;preset_keyboards/qwerty/keys/@36/long_click&#34;: </span><span class=l>todo</span></span></span></code></pre></td></tr></table></div></div></li><li><p>让朙月拼音使用36键键盘布局</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=w>      </span><span class=nt>&#34;preset_keyboards/luna_pinyin/import_preset&#34;: </span><span class=l>qwerty0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>&#34;preset_keyboards/qwerty0/keys/@36/long_click&#34;: </span><span class=l>date_time</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>&#34;preset_keyboards/qwerty0/keys/@43/long_click&#34;: </span><span class=l>Mode_switch</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>&#34;preset_keyboards/qwerty0/keys/@46/long_click&#34;: </span><span class=l>todo</span></span></span></code></pre></td></tr></table></div></div></li></ol></li></ul><h4 id=定制长按空格键切换中英文>定制长按空格键切换中英文</h4><p>在 <code>trime.custom.yaml</code> 中定制如下操作： <code>Mode_switch</code> 是切换中英文事件，区分大小写。绑定到空格的键位 <code>@33</code> 上。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=w>    </span><span class=nt>&#34;preset_keyboards/qwerty/keys/@33/long_click&#34;: </span><span class=l>Mode_switch</span></span></span></code></pre></td></tr></table></div></div><h4 id=定制长按enter键输入>定制长按Enter键输入 ~ - [ ] ~</h4><p>在 <code>trime.custom.yaml</code> 中定制如下操作：声明输入的文本</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=w>  </span><span class=s2>&#34;preset_keys/todo&#34;</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>label</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;- [ ]&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>text</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;- [ ] &#34;</span></span></span></code></pre></td></tr></table></div></div><p>添加到长按事件中</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=w>    </span><span class=nt>&#34;preset_keyboards/qwerty/keys/@36/long_click&#34;: </span><span class=l>todo</span></span></span></code></pre></td></tr></table></div></div><h4 id=状态栏添加菜单项>状态栏添加菜单项</h4><p><a href=https://github.com/osfans/trime/wiki/trime.yaml%E8%A9%B3%E8%A7%A3#2switches>trime.yaml詳解 ·switches</a> 在状态栏上添加按键：</p><p>示例： 在状态栏放置按键（试验功能） <code>option</code> 格式：</p><ol><li><code>_key_</code> + <code>按键</code> （这里的按键可以是功能键、符号、字母、任意文本）</li><li><code>_keyboard_</code> + <code>键盘布局ID</code> （一些比较特殊的id：.default返回当前主键盘，.next下一个键盘，.last在最近使用的两个键盘间轮换，.last_lock返回上一个标记为lock的键盘）</li></ol><p>需要在方案文件的 <code>xx.custom.yaml</code> 中添加如下配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>switches</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 这个按键用来收起软键盘</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>options</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>_key_Hide ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>states</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=s2>&#34;▼&#34;</span><span class=w> </span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c>#states是显示在状态栏的图标，options是实际执行的功能</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 这个按键用来调出输入法切换菜单</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>options</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>_key_IME_switch ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>states</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=s2>&#34;🌐&#34;</span><span class=w> </span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 更多功能键请查阅trime.yaml/preset_keys</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 这是一个空按键，按下去不会执行任何动作</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>options</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>_key_VoidSymbol ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>states</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=s2>&#34;    &#34;</span><span class=w> </span><span class=p>]</span><span class=w> </span><span class=c>#空键的宽度由这里的空格决定</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 这个按键用来输出句号</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>options</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>_key_period ]</span><span class=w> </span><span class=c>#period是句号的英文名，也可以直接写成[ _key_. ]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>states</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=s2>&#34;。&#34;</span><span class=w> </span><span class=p>]</span></span></span></code></pre></td></tr></table></div></div><h2 id=squirrel>squirrel</h2><p>网上教程很多，输入法目录在<code>~/Library/Rime</code> 下，可以借助<code>plum</code> 工具安装. 本人使用<code>rimerc</code> 库中的配置，clone 之后，解压安装到Rime 目录即可. 设置多台设备同步：sync_dir: &ldquo;<em>Users/boyer/ResilioSync/RimeSync/squirrel</em>&rdquo;</p><h2 id=emacs-rime>emacs-rime</h2><h3 id=安装-librime>安装 librime</h3><ol><li><p>先安装鼠须管，里面有输入法方案。</p></li><li><p>然后直接下载编译好的 <code>librime</code> 的 <a href=https://github.com/rime/librime/releases/>Releases</a> 版本。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>   curl -L -O https://github.com/rime/librime/releases/download/1.7.1/rime-1.7.1-osx.zip
+</span></span><span class=line><span class=cl>   unzip rime-1.7.1-osx.zip -d ~/.emacs.d/librime
+</span></span><span class=line><span class=cl>   rm -rf rime-1.7.1-osx.zip</span></span></code></pre></td></tr></table></div></div></li></ol><h3 id=emacs-配置>emacs 配置</h3><p>在 doom 下安装</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nv>package!</span> <span class=nv>rime</span><span class=p>)</span></span></span></code></pre></td></tr></table></div></div><p>偏好设置： <code>rime-librime-root</code> : 指定为安装 <code>librime</code> 的目录 <code>~/.emacs.d/librime/dist</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=hl><span class=lnt> 5
+</span></span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nv>use-package!</span> <span class=nv>rime</span>
+</span></span><span class=line><span class=cl>  <span class=nb>:custom</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>default-input-method</span> <span class=s>&#34;rime&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>rime-emacs-module-header-root</span> <span class=s>&#34;/Applications/Emacs.app/Contents/Resources/include/&#34;</span><span class=p>)</span>
+</span></span><span class="line hl"><span class=cl>  <span class=p>(</span><span class=nv>rime-librime-root</span> <span class=p>(</span><span class=nf>expand-file-name</span> <span class=s>&#34;librime/dist&#34;</span> <span class=nv>user-emacs-directory</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>rime-cursor</span> <span class=s>&#34;˰&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>rime-show-candidate</span> <span class=ss>&#39;posframe</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;;https://emacs-china.org/t/doom-emacs-rime/12499/18?u=huos3203</span>
+</span></span><span class=line><span class=cl><span class=c1>;;  (rime-share-data-dir &#34;/Users/boyer/Library/Rime&#34;)</span>
+</span></span><span class=line><span class=cl><span class=c1>;;  (rime-user-data-dir &#34;/Users/boyer/Library/Rime&#34;)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>rime-posframe-properties</span>
+</span></span><span class=line><span class=cl>   <span class=p>(</span><span class=nf>list</span> <span class=nb>:background-color</span> <span class=s>&#34;#073642&#34;</span>
+</span></span><span class=line><span class=cl>         <span class=nb>:foreground-color</span> <span class=s>&#34;#839496&#34;</span>
+</span></span><span class=line><span class=cl>         <span class=nb>:internal-border-width</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>         <span class=nb>:font</span> <span class=s>&#34;Input Mono Narrow&#34;</span>
+</span></span><span class=line><span class=cl>         <span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>rime-disable-predicates</span> <span class=o>&#39;</span><span class=p>(</span><span class=nv>rime-predicate-evil-mode-p</span>
+</span></span><span class=line><span class=cl>                             <span class=nv>rime-predicate-after-alphabet-char-p</span>
+</span></span><span class=line><span class=cl>                             <span class=nv>rime-predicate-prog-in-code-p</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;;; 具体参考 mode-line-mule-info 默认值，其中可能有其它有用信息</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>mode-line-mule-info</span> <span class=o>&#39;</span><span class=p>((</span><span class=nb>:eval</span> <span class=p>(</span><span class=nv>rime-lighter</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;;在 minibuffer 使用后自动关闭输入法</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>rime-deactivate-when-exit-minibuffer</span> <span class=no>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nb>:config</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>set-face-attribute</span> <span class=ss>&#39;rime-default-face</span> <span class=no>nil</span> <span class=nb>:foreground</span> <span class=s>&#34;#839496&#34;</span> <span class=nb>:background</span> <span class=s>&#34;#073642&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span></span></span></code></pre></td></tr></table></div></div><h3 id=高低配置>高低配置</h3><ol><li>设置默认输入法： <code>Mx: rime-open-configuration</code> 打开文件： <code>~/L.emacs.d/.local/etc/rime/default.custom.yaml</code>,不存在时，新建。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>patch</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>schema_list</span><span class=p>:</span><span class=w>  </span><span class=c># 對於列表類型，現在無有辦法指定如何添加、消除或單一修改某項，於是要在定製檔中將整個列表替換！</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>schema</span><span class=p>:</span><span class=w> </span><span class=l>luna_pinyin_simp </span><span class=w> </span><span class=c>#默认简体输入法</span></span></span></code></pre></td></tr></table></div></div><ol><li>设置用户配置同步目录不能和 <code>squirrel</code> 共用同步目录，会出现配置无效等异常问题。 <code>emacs-rime</code> 同步目录： <code>sync_dir: "/Users/boyer/ResilioSync/RimeSync/emacs-rime/"</code></li></ol><p>有帮助的资料：作者总结经常问题：<a href=https://github.com/DogLooksGood/emacs-rime#faq>GitHub - DogLooksGood/emacs-rime: RIME ㄓ in Emacs</a></p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2021-08-26</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/%E7%AE%A1%E7%90%86%E8%80%85/>管理者</a></div><nav class=post-nav><a class=prev href=/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E7%A9%BA%E8%B0%83%E5%85%AC%E4%BA%A4%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E4%B8%80%E7%89%87%E7%9F%AD%E6%96%87/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">苦闷天,尝鲜空调公交的浪漫行</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%BF%9C%E7%A8%8B%E9%80%9A%E7%9F%A5%E7%9A%84%E6%B6%88%E6%81%AF%E7%9A%84%E5%B1%95%E7%A4%BA%E6%9D%A1%E4%BB%B6%E6%8E%A7%E5%88%B6/><span class="next-text nav-default">iOS 通知提醒几种展示方式和具体代码配置</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2021-06-22 00:00:00 +0800 +0800",title:"trime,emacs-rime和squirrel输入法和配置管理",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span><span class=division>|</span>
+<span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy;
+2017 -
+2024<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>智能设备 on 习七</title><link>https://it-boyer.github.io/tags/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/</link><description>Recent content in 智能设备 on 习七</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Sun, 14 Oct 2018 23:27:01 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/index.xml" rel="self" type="application/rss+xml"/><item><title>opkg在小米路由器的使用</title><link>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/opkg%E5%9C%A8%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/</link><pubDate>Sun, 14 Oct 2018 23:27:01 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/opkg%E5%9C%A8%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/</guid><description>{% github openwrt openwrt 759f111 width = 30% %} openwrt.io 小米路由器固件信息 路由器read-only file system怎么改权限 1 mount -o remount,rw / 新建配置 备份初始conf 1 mv /etc/opkg.conf /etc/opkg.conf.bak 开始配置 vim /etc/opkg.conf</description></item><item><title>zeroTier内网穿透</title><link>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/zeroTier%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</link><pubDate>Wed, 05 Sep 2018 18:29:50 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/zeroTier%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</guid><description>zeroTier内网穿透</description></item><item><title>LaunchPad打击垫学习</title><link>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/LaunchPad%E6%89%93%E5%87%BB%E5%9E%AB%E5%AD%A6%E4%B9%A0/</link><pubDate>Wed, 05 Sep 2018 15:52:33 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/LaunchPad%E6%89%93%E5%87%BB%E5%9E%AB%E5%AD%A6%E4%B9%A0/</guid><description>trello卡片 LaunchPad学习 第二期：Chain的选择与设置/页数的映射 分轨和音频采样 音频轨道 拖拽音频文件或视频文件到Simple采</description></item><item><title>在GarageBand中使用LaunchPad</title><link>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/%E5%9C%A8GarageBand%E4%B8%AD%E4%BD%BF%E7%94%A8LaunchPad/</link><pubDate>Tue, 19 Jun 2018 15:39:56 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/%E5%9C%A8GarageBand%E4%B8%AD%E4%BD%BF%E7%94%A8LaunchPad/</guid><description>Garageband不支持控件表面，因此无法使用Launchpad/LaunchKey的全部功能。 在Garageband中，仅可以使用Lau</description></item><item><title>AbletonLive10安装使用</title><link>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/AbletonLive10%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</link><pubDate>Tue, 19 Jun 2018 14:23:13 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/AbletonLive10%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</guid><description>launchPad 设备官网 官方教程资源 官方工程试听资源支持下载 ableton live 软件 官网下载 中国社区 ABLETON LIVE 10.0.1 SUITE 破解版下载 WINDOWS &amp;amp; MAC ABLETON LIVE10.0.1破解机下载 下载 安装 {% post_path M</description></item><item><title>LaunchPadMini说明书</title><link>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/LaunchPadMini%E8%AF%B4%E6%98%8E%E4%B9%A6/</link><pubDate>Tue, 19 Jun 2018 14:23:13 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/LaunchPadMini%E8%AF%B4%E6%98%8E%E4%B9%A6/</guid><description>工程demo 官方资源 Launchpad几种模式视频教程 硬件设置 贴纸：确保标签与相应的按钮对齐。 使用USB连接线将你的Launchpad Min</description></item><item><title>WacomSlate笔记本使用</title><link>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/WacomSlate%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 03 Jun 2017 23:32:45 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/WacomSlate%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>使用场景 梳理任务列表，整理阅读笔记和思维导图，来配合iPad完成每日工作任务 使用效率 按时出图，分解任务，规划职业 带来的回报 Starter.playgroundbook iPad学习开发</description></item><item><title>麦步第一天体验</title><link>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/%E9%BA%A6%E6%AD%A5%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%BD%93%E9%AA%8C/</link><pubDate>Fri, 02 Jun 2017 14:39:46 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/%E9%BA%A6%E6%AD%A5%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%BD%93%E9%AA%8C/</guid><description>开源 开发文档 gitHub源码库 效率 可用功能 滴答清单，同步神速，可以使用麦步来标记完成任务 表盘：纯黑背景比较适合，内置白底表盘无法卸载 工具：计</description></item><item><title>小米路由常用操作</title><link>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</link><pubDate>Fri, 25 Sep 2015 23:59:16 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</guid><description>&lt;h4 id="常用命令">常用命令&lt;/h4>
+&lt;ol>
+&lt;li>
+&lt;p>ssh登录&lt;/p>
+&lt;pre>&lt;code> 局域网登录:
+ ssh [user@]hostname [command]
+ 例如：ssh root@192.168.31.1 或 远程登录：ssh root@222.35.145.28 -p 2195
+ 回车
+ 输入密码
+
+ **修改密码：**
+ root@xiaoqiang:~#passwd 
+ 回车
+ 输入新密码
+ 回车
+ 再次输入新密码
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>远程拷贝数据&lt;/p>
+&lt;pre>&lt;code> scp Desktop/ar71xx/* root@192.168.31.1:/userdisk/myWorkspace/ar71xx
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>每次重启路由获取IP:&lt;/p>
+&lt;pre>&lt;code> vi /etc/rc.local
+ sh /etc/getIP.sh
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;/ol>
+&lt;p>//启动后，等待20秒，然后，获取当前时间作为文件名称
+//使用ifconfig 获取路由器的ip信息
+//使用 | grep 通道，和grep正则来过滤出，wan口的ip所在行
+// &amp;gt; 使用重定向，将过滤的ip行，写入路由硬盘/userdisk/data/my/ip目录中
+//通过小米路由手机客户端，找到该txt文件，并下载到手机sd卡中
+//查看该文件，既有路由重启后的当前IP&lt;/p></description></item></channel></rss>
