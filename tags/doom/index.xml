@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Doom on 习七</title><link>https://it-boyer.github.io/tags/doom/</link><description>Recent content in Doom on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Sun, 13 Sep 2020 22:40:23 +0800</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/doom/index.xml" rel="self" type="application/rss+xml"/><item><title>swift 的 doom 环境</title><link>https://it-boyer.github.io/post/old/swift-%E5%9C%A8-doom-%E4%B8%AD%E7%9A%84%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5/</link><pubDate>Sun, 13 Sep 2020 22:40:23 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/swift-%E5%9C%A8-doom-%E4%B8%AD%E7%9A%84%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5/</guid><description>&lt;h2 id="安装-swift-mode"&gt;安装 swift-mode&lt;/h2&gt;
+&lt;h4 id="swift-自动补齐相关插件-swift-mode"&gt;swift 自动补齐相关插件 swift-mode&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;State &amp;ldquo;DONE&amp;rdquo; from &amp;ldquo;DELEGATED&amp;rdquo; &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;[2019-12-11 三 09:30]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;
+[终端支持 swift 自动补齐](&lt;em&gt;post/shell/终端支持 swift 自动补齐&lt;/em&gt;)&lt;br&gt;
+&lt;a href="https://github.com/swift-emacs/flycheck-swift"&gt;flycheck-swift&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/nathankot/company-sourcekit"&gt;nathankot/company-sourcekit&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://github.com/swift-emacs/swift-mode"&gt;swift-emacs/swift-mode&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="创建可执行项目"&gt;创建可执行项目&lt;/h2&gt;
+&lt;p&gt;spi &amp;ndash;type executable&lt;br&gt;
+上述命令`spi`的区别是`Package.swift`不同，Source 中多一个 main.swift 文件。当 source 中存在 main.swift 时，`spx`生成的 xcodeproj 中 target 清单，会显示可执行图标。&lt;/p&gt;</description></item><item><title>emacs常用快捷键</title><link>https://it-boyer.github.io/post/old/emacs%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</link><pubDate>Tue, 20 Aug 2019 23:25:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/emacs%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</guid><description>&lt;h2 id="统计命令"&gt;统计命令&lt;/h2&gt;
+&lt;p&gt;org-insert-columns-dblock C-c C-x i 对任务列表生成列表视图.C-c C-x C-c 生成临时的任务列表
+org-clock-in C-x C-x C-i 统计实际任务执行时间
+org-clock-out C-c C-x C-o 统计任务结束的总时长
+org-clock-report C-c C-x C-r 统计光标的任务时间报告&lt;/p&gt;</description></item></channel></rss>
