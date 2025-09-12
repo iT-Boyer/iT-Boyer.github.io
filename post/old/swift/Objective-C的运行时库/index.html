@@ -1,0 +1,258 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Objective-C的运行时库 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="Objective-C 运行时 Objective-C 是一门基于运行时的编程语言，这意味着所有方法、变量、类之间的链接，都会推迟到应用实际运行的最后一刻才会建立。这将给开发人员极高的灵活性，因为我们可以修改这些链接。而不同的是，Swift 绝大多数时候是一门面向编译时的语言。因此在 Swift 当中，灵活性受到了限制，不过您会因此得到更多的安全性。
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/swift/Objective-C%E7%9A%84%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BA%93/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/swift/Objective-C%E7%9A%84%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BA%93/"><meta property="og:site_name" content="习七"><meta property="og:title" content="Objective-C的运行时库"><meta property="og:description" content="Objective-C 运行时 Objective-C 是一门基于运行时的编程语言，这意味着所有方法、变量、类之间的链接，都会推迟到应用实际运行的最后一刻才会建立。这将给开发人员极高的灵活性，因为我们可以修改这些链接。而不同的是，Swift 绝大多数时候是一门面向编译时的语言。因此在 Swift 当中，灵活性受到了限制，不过您会因此得到更多的安全性。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-09-25T20:01:36+00:00"><meta property="article:modified_time" content="2017-09-25T20:01:36+00:00"><meta property="article:tag" content="Swift"><meta itemprop=name content="Objective-C的运行时库"><meta itemprop=description content="Objective-C 运行时 Objective-C 是一门基于运行时的编程语言，这意味着所有方法、变量、类之间的链接，都会推迟到应用实际运行的最后一刻才会建立。这将给开发人员极高的灵活性，因为我们可以修改这些链接。而不同的是，Swift 绝大多数时候是一门面向编译时的语言。因此在 Swift 当中，灵活性受到了限制，不过您会因此得到更多的安全性。"><meta itemprop=datePublished content="2017-09-25T20:01:36+00:00"><meta itemprop=dateModified content="2017-09-25T20:01:36+00:00"><meta itemprop=wordCount content="3016"><meta itemprop=keywords content="Swift"><meta name=twitter:card content="summary"><meta name=twitter:title content="Objective-C的运行时库"><meta name=twitter:description content="Objective-C 运行时 Objective-C 是一门基于运行时的编程语言，这意味着所有方法、变量、类之间的链接，都会推迟到应用实际运行的最后一刻才会建立。这将给开发人员极高的灵活性，因为我们可以修改这些链接。而不同的是，Swift 绝大多数时候是一门面向编译时的语言。因此在 Swift 当中，灵活性受到了限制，不过您会因此得到更多的安全性。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>Objective-C的运行时库</h1><div class=post-meta><span class=post-time>2017-09-25</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 3016 字 </span><span class=more-meta>预计阅读 7 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>Objective-C 运行时</a><ul><li><a href=#>runtime.h开源库</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-09-25T20:01:36 title="September 25, 2017">September 25, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2>Objective-C 运行时</h2><p>Objective-C 是一门基于运行时的编程语言，这意味着所有方法、变量、类之间的链接，都会推迟到应用实际运行的最后一刻才会建立。这将给开发人员极高的灵活性，因为我们可以修改这些链接。而不同的是，Swift 绝大多数时候是一门面向编译时的语言。因此在 Swift 当中，灵活性受到了限制，不过您会因此得到更多的安全性。</p><h3>runtime.h开源库</h3><p>Objective-C 的运行时本质上是一个库。它负责了 “Objective” 这个部分，因此您所知、所爱的面向对象编程，都是在这里实现的。如果您想要访问里面的函数的话，只需要导入这个库即可：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=cp>#import &lt;objc/runtime.h&gt;
+</span></span></span></code></pre></td></tr></table></div></div><p><code>runtime.h</code>开源库主要由 C 和汇编编写而成，其实现了诸如类、对象、方法调度、协议等面向对象编程这个部分。</p><h4>成员结构体</h4><p>在运行时中<code>对象</code>和<code>类</code>本质上是一个非常简单的结构体，在运行时环境下，我们就可以创建，读取，修改这些属性方法等，例如：使用<code>allocateClassPair</code>函数创建类。</p><ol><li><strong>对象结构体</strong>
+对象结构体中仅提供一个**<code>isa</code>**属性，是关联<code>类引用</code>的指针。这也就是 Objective-C 当中的所有对象都需要实现的。
+在 <code>runtime.h</code> 当中对象的定义：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=k>typedef</span> <span class=k>struct</span> <span class=n>objc_class</span> <span class=o>*</span><span class=kt>Class</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>struct</span> <span class=n>objc_object</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>Class</span> <span class=n>isa</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li><strong>类结构体</strong></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=k>struct</span> <span class=n>objc_class</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>Class</span> <span class=n>isa</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>Class</span> <span class=n>super_class</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>long</span> <span class=n>version</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>long</span> <span class=n>info</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>long</span> <span class=n>instance_size</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>struct</span> <span class=n>objc_ivar_list</span> <span class=o>*</span><span class=n>ivars</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>struct</span> <span class=n>objc_method_list</span> <span class=o>**</span><span class=n>methodLists</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>struct</span> <span class=n>objc_cache</span> <span class=o>*</span><span class=n>cache</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>struct</span> <span class=n>objc_protocol_list</span> <span class=o>*</span><span class=n>protocols</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>isa</strong>属性：建立自身与 <code>super_class</code> 这个值进行关联。
+<strong>super_class</strong>:除了 NSObject 这个类之外，super_class 的值永远不会为 nil，因为 Objective-C 当中的其余类都是以某种方式继承自 NSObject 的。
+<strong>ivars</strong>：变量列表，<strong>methodLists</strong>：方法列表，<strong>protocols</strong>：协议列表，其他属性：<code>name</code>、<code>version</code>、<code>info</code> 之类的值。</p><ol start=3><li><strong>变量结构体</strong>
+包含了变量类型和变量名称。偏移量 (offset) 则是内存管理方面的内容。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=k>struct</span> <span class=n>objc_ivar</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=o>*</span><span class=n>ivar_name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=o>*</span><span class=n>ivar_type</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>ivar_offset</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li><strong>方法结构体</strong></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=k>struct</span> <span class=n>objc_method</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>SEL</span> <span class=n>method_name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=o>*</span><span class=n>method_types</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>IMP</span> <span class=n>method_imp</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>method_name</strong>： 方法名，使用<code>Selector</code>来表示方法编号，对应在 <code>performSelector</code> 当中所匹配的内容。
+<strong>method_types</strong>：方法类型，使用<code>char</code>字符来表示。
+<strong>method_imp</strong>：方法的实现，<code>IMP</code>是一个函数指针，方法实现的一种特定的表示方式，是方法混淆特性的根本所在。</p><h4>成员函数</h4><p>运行时库提供一系列运行时函数，实现在运行时动态的对成员结构体（类/对象）进行创建，修改等相关操作，例如：创建类，在<code>类别</code>中添加存储属性</p><h5>动态创建运行时类</h5><p>在制作库框架会大量运用使用到运行时函数。如果您无法知道用户将会创建什么样的数据，那么您就需要在运行时进行类的创建了。Core Data 就使用了这个功能。此外，如果您愿意的话，它还可以用在 JSON 解析当中。
+类的创建要用的 Objective-C 两个运行时函数：<code>allocateClassPair</code>和<code>objc_registerClassPair</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=c1>//类函数的构造器
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>Class</span> <span class=n>myClass</span> <span class=o>=</span> <span class=n>objc_allocateClassPair</span><span class=p>([</span><span class=n>NSObject</span> <span class=k>class</span><span class=p>],</span> <span class=s>&#34;MyClass&#34;</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=c1>// 在这里添加变量、方法和协议
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>objc_registerClassPair</span><span class=p>(</span><span class=n>myClass</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=c1>// 当类注册之后，变量列表将会被锁定
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>[[</span><span class=n>myClass</span> <span class=n>alloc</span><span class=p>]</span> <span class=n>init</span><span class=p>];</span>   <span class=c1>//可见这个运行时类和Objective-C创建的类毫无区别
+</span></span></span></code></pre></td></tr></table></div></div><p><strong>[NSObject class]</strong>：就是<code>类结构体</code>的属性<strong>isa</strong>要关联的类引用
+<strong>&ldquo;MyClass&rdquo;</strong>：指定<code>类结构体</code>的<strong>name</strong>属性值
+额外字节的定义：通常我们都直接赋值 0 即可
+2. 添加变量、方法以及协议
+3. <code>registerClassPair</code>注册这个 ClassPair,注册之后，我们就无法修改变量列表了，不过其余的内容仍然可以修改。</p><h5>为类别中新增存储属性</h5><p>类别可以在既有的类中添加函数、计算属性，无法添加存储属性。但是在运行时环境下，可以借助 <code>setAssociatedObject</code> 和 <code>getAssociatedObject</code>实现向既有的类当中添加存储属性。
+例如在<code>NSObject</code>新增一个<code>Name</code>存储属性：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>@implementation NSObject (Name)
+</span></span><span class=line><span class=cl>@dynamic Name;
+</span></span><span class=line><span class=cl>- (void)setName:(id)object {
+</span></span><span class=line><span class=cl>    objc_setAssociatedObject(self, @selector(Name), object,
+</span></span><span class=line><span class=cl>    OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>- (id)Name {
+</span></span><span class=line><span class=cl>    return objc_getAssociatedObject(self, @selector(Name));
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h5>内省机制</h5><p>内省机制是用来判别这个类是否实现具备某项功能。当我们使用了一个带有可选方法的协议时，为了避免崩溃发生，可以借助这个<strong>内省机制</strong>来判断这个对象是否可以调用此可选方法。
+内省机制提供了两个运行时函数
+<code>isMemberOfClass</code>: 对比两者的 <strong>isa</strong> 是否相同。
+<code>respondsToSelector</code>:则封装了一个运行时函数：<code>class_respondsToSelector</code>，两个参数<code>类</code>和 <code>Selector</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=c1>//类成员判断
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>[</span><span class=n>myObject</span> <span class=nl>isMemberOfClass</span><span class=p>:</span><span class=n>NSObject</span><span class=p>.</span><span class=k>class</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=c1>//类方法判断
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>[</span><span class=n>myObject</span> <span class=nl>respondsToSelector</span><span class=p>:</span><span class=k>@selector</span><span class=p>(</span><span class=nl>doStuff</span><span class=p>:)];</span>
+</span></span><span class=line><span class=cl><span class=c1>//等价上一句
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>class_respondsToSelector</span><span class=p>(</span><span class=n>myObject</span><span class=p>.</span><span class=k>class</span><span class=p>,</span> <span class=k>@selector</span><span class=p>(</span><span class=nl>doStuff</span><span class=p>:));</span>
+</span></span></code></pre></td></tr></table></div></div><h5>使用运行时实现单元测试</h5><p>当我们在编写 <code>XCTestCase</code> 的时候，需要完成 <code>setUp</code> 和 <code>tearDown</code> 的设定，随后才能编写相关的 <code>test</code> 函数。当测试运行的时候，系统会自行遍历所有的测试函数，并自动运行。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>unsigned</span> <span class=ne>int</span> <span class=n>count</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>Method</span> <span class=o>*</span><span class=n>methods</span> <span class=o>=</span> <span class=n>class_copyMethodList</span><span class=p>(</span><span class=n>myObject</span><span class=o>.</span><span class=k>class</span><span class=p>,</span><span class=o>&amp;</span><span class=n>count</span><span class=p>);</span>  <span class=o>//</span><span class=err>方法列表</span>
+</span></span><span class=line><span class=cl><span class=o>//</span><span class=n>Ivar</span> <span class=o>*</span><span class=n>list</span> <span class=o>=</span> <span class=n>class_copyIvarList</span><span class=p>(</span><span class=n>myObject</span><span class=o>.</span><span class=k>class</span><span class=p>,</span><span class=o>&amp;</span><span class=n>count</span><span class=p>);</span>       <span class=o>//</span><span class=err>变量列表</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span><span class=p>(</span><span class=n>unsigned</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>count</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>SEL</span> <span class=n>selector</span> <span class=o>=</span> <span class=n>method_getName</span><span class=p>(</span><span class=n>methods</span><span class=p>[</span><span class=n>i</span><span class=p>]);</span>                  <span class=o>//</span><span class=err>获取到方法名</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>selectorString</span> <span class=o>=</span> <span class=n>NSStringFromSelector</span><span class=p>(</span><span class=n>selector</span><span class=p>);</span>  <span class=o>//</span><span class=err>转为字符串</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>([</span><span class=n>selectorString</span> <span class=n>containsString</span><span class=p>:</span><span class=err>@</span><span class=s2>&#34;test&#34;</span><span class=p>])</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=p>[</span><span class=n>myObject</span> <span class=n>performSelector</span><span class=p>:</span><span class=n>selector</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>free</span><span class=p>(</span><span class=n>methods</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>单元测试的原理就是借助了运行时函数<code>class_copyMethodList</code>获取到方法名，然后将其转换为字符串，检查其是否包含有 “test”，如果有便可以运行。</p><h5>运行时方法调度</h5><p>动态的向对象当中添加方法并调用新增的方法。方法转发，方法混淆：替换或交换</p><ol><li><strong>动态的为类新增方法</strong>
+了解到运行时的方法的结构体组成：方法名，SEL和<code>IMP</code>实现，需要三个运行时函数来新建一个运行时方法</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=c1>//
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>Method</span> <span class=n>doStuff</span> <span class=o>=</span> <span class=n>class_getInstanceMethod</span><span class=p>(</span><span class=nb>self</span><span class=p>.</span><span class=k>class</span><span class=p>,</span> <span class=k>@selector</span><span class=p>(</span><span class=n>doStuff</span><span class=p>));</span>
+</span></span><span class=line><span class=cl><span class=c1>//获取方法的实现
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>IMP</span> <span class=n>doStuffImplementation</span> <span class=o>=</span> <span class=n>method_getImplementation</span><span class=p>(</span><span class=n>doStuff</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=c1>//获取方法的类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>types</span> <span class=o>=</span> <span class=n>method_getTypeEncoding</span><span class=p>(</span><span class=n>doStuff</span><span class=p>);</span> <span class=c1>//“v@:@&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=n>class_addMethod</span><span class=p>(</span><span class=n>myClass</span><span class=p>.</span><span class=k>class</span><span class=p>,</span> <span class=k>@selector</span><span class=p>(</span><span class=nl>doStuff</span><span class=p>:),</span> <span class=n>doStuffImplementation</span><span class=p>,</span> <span class=n>types</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>class_getInstanceMethod</code>:获取方法的<code>SEL</code>
+<code>method_getImplementation</code>:方法的实现<code>IMP</code>
+<code>method_getTypeEncoding</code>: 获取方法的类型，char字符表示
+<code>class_addMethod</code>: 向对象当中添加方法的运行时函数。它所需的参数，即上述方法结构体当中的那三个值：Selector、方法实现和方法类型。</p><ol start=2><li><strong>调用运行时方法</strong>
+我们可以使用 <code>[self doStuff]</code> 或者<code>[self performSelector:@selector(doStuff)]</code>来进行调用。
+实际上在运行时级别，它们都是借助 <code>objc_msgSend</code> 向对象发送了一个消息：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=n>objc_msgSend</span><span class=p>(</span><span class=nb>self</span><span class=p>,</span> <span class=k>@selector</span><span class=p>(</span><span class=n>message</span><span class=p>));</span>
+</span></span></code></pre></td></tr></table></div></div><p>但是如果调用方法所在的对象为 nil 的时候，我们就会得到一个异常，应用便会崩溃。但事实证明，在崩溃之前会预留几个步骤，从而允许我们对某个不存在的函数进行一些操作：方法转发/替换等。</p><ol start=3><li>方法转发
+当桥接两个不同的框架的时候，可以将方法转发给其它目标，或者，当我们调用某个未实现的方法时，运行时有如下处理步骤：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// 1添加实例方法/类方法，如果 return YES，就会调用原始方法
+</span></span><span class=line><span class=cl>+(BOOL)resolveInstanceMethod:(SEL)sel;
+</span></span><span class=line><span class=cl>+(BOOL)resolveClassMethod:(SEL)sel;
+</span></span><span class=line><span class=cl>// 2 返回可以处理 Selector 的对象
+</span></span><span class=line><span class=cl>- (id)forwardingTargetForSelector:(SEL)aSelector;
+</span></span><span class=line><span class=cl>// 3 创建 NSInvocation
+</span></span><span class=line><span class=cl>- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector;
+</span></span><span class=line><span class=cl>// 4 在您所选择的目标上调用 Selector
+</span></span><span class=line><span class=cl>- (void)forwardInvocation:(NSInvocation *)invocation {
+</span></span><span class=line><span class=cl>    [invocation invokeWithTarget:target];
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>3.1. 首先调用两个类方法：一个名为 <code>resolveInstanceMethod</code>/<code>resolveClassMethod</code>类方法，这时候我们便有机会来添加方法了，如果我们返回了 YES，就意味着原始方法将会再次被调用。
+3.2. <code>forwardingTargetForSelector</code>：当不要添加新方法时，可以直接返回需要调用方法的目标对象，之后这个对象就会调用 Selector。
+3.3. <code>forwardInvocation</code>：实现目标对象调用 Selector，所有的调用过程都被封装到 <code>NSInvocation</code> 对象当中。需要 通过<code>methodSignatureForSelector</code>函数创建。</p><ol start=4><li>动态特性方法混淆：替换或交换
+方法混淆是通过 <code>class_replaceMethod</code> 或者 <code>method_exchangeImplementations</code> 实现方法的替换。常用于日志记录和 Mock 测试。
+当类加载之后，会调用一个名为 <code>load</code> 的类函数。由于我们只打算混淆一次，因此我们需要使用 <code>dispatch_once</code>。接着我们便可以得到该方法，然后使用 <code>class_replaceMethod</code> 或者 <code>method_exchangeImplementations</code> 来替换方法。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=p>+</span> <span class=p>(</span><span class=kt>void</span><span class=p>)</span><span class=nf>load</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=n>dispatch_once_t</span> <span class=n>onceToken</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>dispatch_once</span><span class=p>(</span><span class=o>&amp;</span><span class=n>onceToken</span><span class=p>,</span> <span class=o>^</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kt>Class</span> <span class=k>class</span> <span class=o>=</span> <span class=p>[</span><span class=nb>self</span> <span class=k>class</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=kt>SEL</span> <span class=n>originalSelector</span> <span class=o>=</span> <span class=k>@selector</span><span class=p>(</span><span class=n>doSomething</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=kt>SEL</span> <span class=n>swizzledSelector</span> <span class=o>=</span> <span class=k>@selector</span><span class=p>(</span><span class=n>mo_doSomething</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>Method</span> <span class=n>originalMethod</span> <span class=o>=</span> <span class=n>class_getInstanceMethod</span><span class=p>(</span><span class=k>class</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>originalSelector</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Method</span> <span class=n>swizzledMethod</span> <span class=o>=</span> <span class=n>class_getInstanceMethod</span><span class=p>(</span><span class=k>class</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>swizzledSelector</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=kt>BOOL</span> <span class=n>didAddMethod</span> <span class=o>=</span> <span class=n>class_addMethod</span><span class=p>(</span><span class=k>class</span><span class=p>,</span> <span class=n>originalSelector</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                                <span class=n>method_getImplementation</span><span class=p>(</span><span class=n>swizzledMethod</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                                <span class=n>method_getTypeEncoding</span><span class=p>(</span><span class=n>swizzledMethod</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>didAddMethod</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>class_replaceMethod</span><span class=p>(</span><span class=k>class</span><span class=p>,</span><span class=n>swizzledSelector</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                                <span class=n>method_getImplementation</span><span class=p>(</span><span class=n>originalMethod</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                                <span class=n>method_getTypeEncoding</span><span class=p>(</span><span class=n>originalMethod</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>method_exchangeImplementations</span><span class=p>(</span><span class=n>originalMethod</span><span class=p>,</span> <span class=n>swizzledMethod</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-09-25</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/swift/>swift</a></div><nav class=post-nav><a class=prev href=/post/old/iOS/%E9%9A%90%E8%97%8F%E5%AF%BC%E8%88%AA%E6%9D%A1%E5%BA%95%E9%83%A8%E9%BB%91%E7%BA%BF/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">隐藏导航条底部黑线</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/iOS/MVVM%E4%BB%8B%E7%BB%8D/><span class="next-text nav-default">MVVM介绍</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-09-25 20:01:36 +0000 UTC",title:"Objective-C的运行时库",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

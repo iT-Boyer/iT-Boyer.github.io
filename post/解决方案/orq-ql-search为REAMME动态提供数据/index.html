@@ -1,0 +1,509 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>借助 org-ql 工具自动导出 agenda 待办任务 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="博客简介"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/orq-ql-search%E4%B8%BAREAMME%E5%8A%A8%E6%80%81%E6%8F%90%E4%BE%9B%E6%95%B0%E6%8D%AE/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/orq-ql-search%E4%B8%BAREAMME%E5%8A%A8%E6%80%81%E6%8F%90%E4%BE%9B%E6%95%B0%E6%8D%AE/"><meta property="og:site_name" content="习七"><meta property="og:title" content="借助 org-ql 工具自动导出 agenda 待办任务"><meta property="og:description" content="博客简介"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-05-31T01:07:00+08:00"><meta property="article:modified_time" content="2023-05-31T01:21:42+08:00"><meta property="article:tag" content="Reader"><meta itemprop=name content="借助 org-ql 工具自动导出 agenda 待办任务"><meta itemprop=description content="博客简介"><meta itemprop=datePublished content="2023-05-31T01:07:00+08:00"><meta itemprop=dateModified content="2023-05-31T01:21:42+08:00"><meta itemprop=wordCount content="2210"><meta itemprop=keywords content="Reader"><meta name=twitter:card content="summary"><meta name=twitter:title content="借助 org-ql 工具自动导出 agenda 待办任务"><meta name=twitter:description content="博客简介"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>借助 org-ql 工具自动导出 agenda 待办任务</h1><div class=post-meta><span class=post-time>2023-05-31</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 2210 字 </span><span class=more-meta>预计阅读 5 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by
+<a href=/authors/iTBoyer>iTBoyer</a></span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#基于-org-ql-search-实现获取查询-使用-org-ql-view-模板格式化结果数据>基于 org-ql-search 实现获取查询，使用 org-ql-view 模板格式化结果数据</a></li><li><a href=#基于-org-ql-select-获取查询结果-自定义-list-to-org-格式化结果内容>基于 org-ql-select 获取查询结果，自定义 list-to-org 格式化结果内容</a><ul><li><a href=#自定义保存-org-ql-views-模板>自定义保存 org-ql-views 模板</a></li><li><a href=#实现-org-ql-select-支持-org-ql-views-模板中的-query-查询>实现 org-ql-select 支持 org-ql-views 模板中的 query 查询</a></li></ul></li><li><a href=#替换-reame-dot-md-模块数据>替换 REAME.md 模块数据</a><ul><li><a href=#将上述方法翻译成-elisp-语法实现>将上述方法翻译成 elisp 语法实现</a></li><li><a href=#替换文本之后保存到-readme-dot-md-文件中>替换文本之后保存到 README.md 文件中</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2023-05-31T01:21:42 title="May 31, 2023">May 31, 2023</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>需求：在 github 的 README 中显示日常项目状态，显示本周主要的任务，列出项目清单和任务安排。设计：使用 org-ql 查询任务状态，列出项目和代办实现，导出 json 格式。</p><h2 id=基于-org-ql-search-实现获取查询-使用-org-ql-view-模板格式化结果数据>基于 org-ql-search 实现获取查询，使用 org-ql-view 模板格式化结果数据</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>build-readme-view</span> <span class=p>(</span><span class=nv>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Choose and display the </span><span class=ss>`org-ql-views&#39;</span><span class=s> view NAME.
+</span></span></span><span class=line><span class=cl><span class=s>Interactively, prompt for NAME.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>result</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>view</span> <span class=p>(</span><span class=nv>alist-get</span> <span class=nv>name</span> <span class=nv>org-ql-views</span> <span class=no>nil</span> <span class=no>nil</span> <span class=nf>#&#39;</span><span class=nv>string=</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>         <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nv>-let*</span> <span class=p>(((</span><span class=nv>&amp;plist</span> <span class=nb>:buffers-files</span> <span class=nb>:query</span> <span class=nb>:sort</span> <span class=nb>:narrow</span> <span class=nb>:super-groups</span> <span class=nb>:title</span><span class=p>)</span> <span class=nv>view</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nv>super-groups</span> <span class=p>(</span><span class=nb>cl-typecase</span> <span class=nv>super-groups</span>
+</span></span><span class=line><span class=cl>                            <span class=p>(</span><span class=nv>symbol</span> <span class=p>(</span><span class=nf>symbol-value</span> <span class=nv>super-groups</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                            <span class=p>(</span><span class=nf>list</span> <span class=nv>super-groups</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;step 1:+++++++ %s&#34;</span> <span class=nv>query</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>build-readme-search</span> <span class=nv>buffers-files</span> <span class=nv>query</span>
+</span></span><span class=line><span class=cl>        <span class=nb>:super-groups</span> <span class=nv>super-groups</span> <span class=nb>:narrow</span> <span class=nv>narrow</span> <span class=nb>:sort</span> <span class=nf>sort</span> <span class=nb>:title</span> <span class=nv>title</span>
+</span></span><span class=line><span class=cl>        <span class=nb>:buffer</span> <span class=nv>org-ql-view-buffer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>cl-defun</span> <span class=nv>build-readme-search</span> <span class=p>(</span><span class=nv>buffers-files</span> <span class=nv>query</span> <span class=kp>&amp;key</span> <span class=nv>narrow</span> <span class=nv>super-groups</span> <span class=nf>sort</span> <span class=nv>title</span>
+</span></span><span class=line><span class=cl>                                             <span class=p>(</span><span class=nv>buffer</span> <span class=nv>org-ql-view-buffer</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>declare</span> <span class=p>(</span><span class=nv>indent</span> <span class=nb>defun</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>interactive</span> <span class=p>(</span><span class=nf>list</span> <span class=p>(</span><span class=nv>org-ql-view--complete-buffers-files</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                     <span class=p>(</span><span class=nf>read-string</span> <span class=s>&#34;Query: &#34;</span> <span class=p>(</span><span class=nb>when</span> <span class=nv>org-ql-view-query</span>
+</span></span><span class=line><span class=cl>                                              <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;%S&#34;</span> <span class=nv>org-ql-view-query</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                     <span class=nb>:narrow</span> <span class=p>(</span><span class=nb>or</span> <span class=nv>org-ql-view-narrow</span> <span class=p>(</span><span class=nf>eq</span> <span class=nv>current-prefix-arg</span> <span class=o>&#39;</span><span class=p>(</span><span class=mi>4</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                     <span class=nb>:super-groups</span> <span class=p>(</span><span class=nv>org-ql-view--complete-super-groups</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                     <span class=nb>:sort</span> <span class=p>(</span><span class=nv>org-ql-view--complete-sort</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;; NOTE: Using `with-temp-buffer&#39; is a hack to work around the fact that `make-local-variable&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;; does not work reliably from inside a `let&#39; form when the target buffer is current on entry</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;; to or exit from the `let&#39;, even though `make-local-variable&#39; is actually done in</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;; `org-ql-view--display&#39;.  So we do all this within a temp buffer, which works around it.</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>with-temp-buffer</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>query</span> <span class=p>(</span><span class=nb>cl-etypecase</span> <span class=nv>query</span>
+</span></span><span class=line><span class=cl>                    <span class=p>(</span><span class=nf>string</span> <span class=p>(</span><span class=nb>if</span> <span class=p>(</span><span class=nb>or</span> <span class=p>(</span><span class=nv>string-prefix-p</span> <span class=s>&#34;(&#34;</span> <span class=nv>query</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                    <span class=p>(</span><span class=nv>string-prefix-p</span> <span class=s>&#34;\&#34;&#34;</span> <span class=nv>query</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                <span class=c1>;; Read sexp query.</span>
+</span></span><span class=line><span class=cl>                                <span class=p>(</span><span class=nf>read</span> <span class=nv>query</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                              <span class=c1>;; Parse non-sexp query into sexp query.</span>
+</span></span><span class=line><span class=cl>                              <span class=p>(</span><span class=nv>org-ql--query-string-to-sexp</span> <span class=nv>query</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                    <span class=p>(</span><span class=nf>list</span> <span class=nv>query</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>results</span> <span class=p>(</span><span class=nv>org-ql-select</span> <span class=nv>buffers-files</span> <span class=nv>query</span>
+</span></span><span class=line><span class=cl>                      <span class=nb>:action</span> <span class=ss>&#39;element-with-markers</span>
+</span></span><span class=line><span class=cl>                      <span class=nb>:narrow</span> <span class=nv>narrow</span>
+</span></span><span class=line><span class=cl>                      <span class=nb>:sort</span> <span class=nf>sort</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>strings</span> <span class=p>(</span><span class=nv>-map</span> <span class=nf>#&#39;</span><span class=nv>org-ql-view--format-element</span> <span class=nv>results</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>buffer</span> <span class=p>(</span><span class=nb>or</span> <span class=nv>buffer</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;%s %s*&#34;</span> <span class=nv>org-ql-view-buffer-name-prefix</span> <span class=p>(</span><span class=nb>or</span> <span class=nv>title</span> <span class=nv>query</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>header</span> <span class=p>(</span><span class=nv>org-ql-view--header-line-format</span>
+</span></span><span class=line><span class=cl>                    <span class=nb>:buffers-files</span> <span class=nv>buffers-files</span> <span class=nb>:query</span> <span class=nv>query</span> <span class=nb>:title</span> <span class=nv>title</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>           <span class=c1>;; Bind variables for `org-ql-view--display&#39; to set.</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>org-ql-view-buffers-files</span> <span class=nv>buffers-files</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>org-ql-view-query</span> <span class=nv>query</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>org-ql-view-sort</span> <span class=nf>sort</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>org-ql-view-narrow</span> <span class=nv>narrow</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>org-ql-view-super-groups</span> <span class=nv>super-groups</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>org-ql-view-title</span> <span class=nv>title</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>when</span> <span class=nv>super-groups</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nb>let</span> <span class=p>((</span><span class=nv>org-super-agenda-groups</span> <span class=p>(</span><span class=nb>cl-etypecase</span> <span class=nv>super-groups</span>
+</span></span><span class=line><span class=cl>                                         <span class=p>(</span><span class=nv>symbol</span> <span class=p>(</span><span class=nf>symbol-value</span> <span class=nv>super-groups</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                         <span class=p>(</span><span class=nf>list</span> <span class=nv>super-groups</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nb>setf</span> <span class=nv>strings</span> <span class=p>(</span><span class=nv>org-super-agenda--group-items</span> <span class=nv>strings</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>      <span class=c1>;;TODO no show view</span>
+</span></span><span class=line><span class=cl>      <span class=c1>;; insert buffer to coverto build readme</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;build readme file:\n %s &#34;</span> <span class=p>(</span><span class=nv>s-join</span> <span class=s>&#34;\n&#34;</span> <span class=nv>strings</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>      <span class=c1>;; (org-ql-view--display :buffer buffer :header header :string (s-join &#34;\n&#34; strings))</span>
+</span></span><span class=line><span class=cl>                <span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>build-readme-view</span> <span class=s>&#34;readme&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>build readme file:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  原则
+</span></span><span class=line><span class=cl>  TODO 诚信原则
+</span></span><span class=line><span class=cl>  TODO 成长原则
+</span></span><span class=line><span class=cl>  TODO 自我管理原则
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> 基于 org-super-agenda 定义 agenda 模板
+</span></span><span class=line><span class=cl>  TODO 快速导出 agenda 清单模板  9d ago  :@学习笔记:
+</span></span><span class=line><span class=cl>  TODO 每日安排  :@学习笔记:
+</span></span><span class=line><span class=cl>  TODO 每周安排  :@学习笔记:
+</span></span></code></pre></td></tr></table></div></div><h2 id=基于-org-ql-select-获取查询结果-自定义-list-to-org-格式化结果内容>基于 org-ql-select 获取查询结果，自定义 list-to-org 格式化结果内容</h2><p>借助 org-ql-search 和 org-ql-view 能够实现</p><h3 id=自定义保存-org-ql-views-模板>自定义保存 org-ql-views 模板</h3><p>保存不同查询的模板，保存之后，可以通过 org-ql-view 命令，快速查看模板列表。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>org-build-readme-save</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;create new view&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>interactive</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>name</span> <span class=p>(</span><span class=nf>read-string</span> <span class=s>&#34;Save view as: &#34;</span> <span class=nv>org-ql-view-title</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>         <span class=c1>;; Bind `org-ql-view-title&#39; to the name that was read, in case</span>
+</span></span><span class=line><span class=cl>         <span class=c1>;; it&#39;s different, which `org-ql-view--plist&#39; will pick up.</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>org-ql-view-title</span> <span class=nv>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>plist</span> <span class=p>(</span><span class=nf>list</span> <span class=nb>:buffers-files</span> <span class=p>(</span><span class=nv>org-agenda-files</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                      <span class=nb>:query</span> <span class=o>&#39;</span><span class=p>(</span><span class=nv>todo</span> <span class=s>&#34;TODO&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                      <span class=nb>:sort</span> <span class=o>&#39;</span><span class=p>(</span><span class=nv>date</span> <span class=nv>priority</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                      <span class=nb>:title</span> <span class=s>&#34;This week&#34;</span>
+</span></span><span class=line><span class=cl>                      <span class=nb>:super-groups</span> <span class=o>&#39;</span><span class=p>((</span><span class=nb>:auto-parent</span> <span class=no>t</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                      <span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nb>or</span> <span class=p>(</span><span class=nv>not</span> <span class=p>(</span><span class=nv>map-elt</span> <span class=nv>org-ql-views</span> <span class=nv>name</span> <span class=no>nil</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>              <span class=p>(</span><span class=nf>yes-or-no-p</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;Overwrite view \&#34;%s\&#34;?&#34;</span> <span class=nv>name</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>setf</span> <span class=p>(</span><span class=nv>map-elt</span> <span class=nv>org-ql-views</span> <span class=nv>name</span> <span class=no>nil</span> <span class=nf>#&#39;equal</span><span class=p>)</span> <span class=nv>plist</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>customize-set-variable</span> <span class=ss>&#39;org-ql-views</span> <span class=nv>org-ql-views</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>customize-mark-to-save</span> <span class=ss>&#39;org-ql-views</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>org-build-readme-save</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=实现-org-ql-select-支持-org-ql-views-模板中的-query-查询>实现 org-ql-select 支持 org-ql-views 模板中的 query 查询</h3><ol><li><code>org-readme-search</code> 参考 org-ql-view 和 org-ql-search 简化搜索逻辑，实现基于 org-ql-select 方法实现自定义查询的效果。通过传入 org-ql-views 模板的名称，利用模板的 <code>query</code> 属性的查询条件。结果还是 list 格式。想要输出格式的内容，需要自定义方法 <code>list-to-org</code> 打印。</li><li><code>list-to-org</code> 将 org-ql-select 查询到的 elisp list 列表格式，转为 org 格式。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>list-to-org</span> <span class=p>(</span><span class=nf>list</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Convert LIST to org-mode string.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nf>mapconcat</span>
+</span></span><span class=line><span class=cl>   <span class=p>(</span><span class=nb>lambda</span> <span class=p>(</span><span class=nv>elem</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nb>cond</span> <span class=p>((</span><span class=nf>stringp</span> <span class=nv>elem</span><span class=p>)</span> <span class=nv>elem</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>((</span><span class=nf>keywordp</span> <span class=nv>elem</span><span class=p>)</span> <span class=p>(</span><span class=nf>concat</span> <span class=s>&#34;:&#34;</span> <span class=p>(</span><span class=nf>symbol-name</span> <span class=nv>elem</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>           <span class=p>((</span><span class=nf>listp</span> <span class=nv>elem</span><span class=p>)</span> <span class=p>(</span><span class=nv>list-to-org</span> <span class=nv>elem</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=no>t</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;%S&#34;</span> <span class=nv>elem</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>   <span class=nf>list</span>
+</span></span><span class=line><span class=cl>   <span class=s>&#34;\n&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>org-readme-search</span> <span class=p>(</span><span class=nv>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Choose and display the </span><span class=ss>`org-ql-views&#39;</span><span class=s> view NAME.
+</span></span></span><span class=line><span class=cl><span class=s>Interactively, prompt for NAME.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>result</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>view</span> <span class=p>(</span><span class=nv>alist-get</span> <span class=nv>name</span> <span class=nv>org-ql-views</span> <span class=no>nil</span> <span class=no>nil</span> <span class=nf>#&#39;</span><span class=nv>string=</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>         <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nv>-let*</span> <span class=p>(((</span><span class=nv>&amp;plist</span> <span class=nb>:buffers-files</span> <span class=nb>:query</span> <span class=nb>:sort</span> <span class=nb>:narrow</span> <span class=nb>:super-groups</span> <span class=nb>:title</span><span class=p>)</span> <span class=nv>view</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nv>super-groups</span> <span class=p>(</span><span class=nb>cl-typecase</span> <span class=nv>super-groups</span>
+</span></span><span class=line><span class=cl>                            <span class=p>(</span><span class=nv>symbol</span> <span class=p>(</span><span class=nf>symbol-value</span> <span class=nv>super-groups</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                            <span class=p>(</span><span class=nf>list</span> <span class=nv>super-groups</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;step 1:+++++++ %s&#34;</span> <span class=nv>query</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>query</span> <span class=p>(</span><span class=nb>cl-etypecase</span> <span class=nv>query</span>
+</span></span><span class=line><span class=cl>                      <span class=p>(</span><span class=nf>string</span> <span class=p>(</span><span class=nb>if</span> <span class=p>(</span><span class=nb>or</span> <span class=p>(</span><span class=nv>string-prefix-p</span> <span class=s>&#34;(&#34;</span> <span class=nv>query</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                      <span class=p>(</span><span class=nv>string-prefix-p</span> <span class=s>&#34;\&#34;&#34;</span> <span class=nv>query</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                  <span class=c1>;; Read sexp query.</span>
+</span></span><span class=line><span class=cl>                                  <span class=p>(</span><span class=nf>read</span> <span class=nv>query</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                <span class=c1>;; Parse non-sexp query into sexp query.</span>
+</span></span><span class=line><span class=cl>                                <span class=p>(</span><span class=nv>org-ql--query-string-to-sexp</span> <span class=nv>query</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                      <span class=p>(</span><span class=nf>list</span> <span class=nv>query</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>             <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;step 2:_++++++_ %s&#34;</span> <span class=nv>query</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nb>setq</span> <span class=nv>result</span> <span class=p>(</span><span class=nv>org-ql-select</span> <span class=nv>buffers-files</span> <span class=nv>query</span>
+</span></span><span class=line><span class=cl>                      <span class=nb>:action</span> <span class=o>&#39;</span><span class=p>(</span><span class=nf>list</span>
+</span></span><span class=line><span class=cl>                               <span class=c1>;; (org-get-heading)</span>
+</span></span><span class=line><span class=cl>                               <span class=p>(</span><span class=nf>buffer-substring-no-properties</span> <span class=p>(</span><span class=nv>point-at-bol</span><span class=p>)</span> <span class=p>(</span><span class=nv>point-at-eol</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                               <span class=p>)</span>
+</span></span><span class=line><span class=cl>                      <span class=nb>:narrow</span> <span class=nv>narrow</span>
+</span></span><span class=line><span class=cl>                      <span class=nb>:sort</span> <span class=nf>sort</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;reuslts : %s&#34;</span> <span class=p>(</span><span class=nv>list-to-org</span> <span class=nv>result</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>org-readme-search</span> <span class=s>&#34;readme&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>reuslts : **** TODO 诚信原则
+</span></span><span class=line><span class=cl>**** TODO 成长原则
+</span></span><span class=line><span class=cl>**** TODO 自我管理原则
+</span></span><span class=line><span class=cl>*** TODO [#A] 二象限模式[0/3] :habit:
+</span></span><span class=line><span class=cl>*** TODO 健身模式 :habit:
+</span></span><span class=line><span class=cl>*** TODO [#B] 工作模式 :habit:
+</span></span><span class=line><span class=cl>*** TODO [#B] 阅读模式 :habit:
+</span></span><span class=line><span class=cl>*** TODO [#B] 饭桌礼仪 :habit:
+</span></span><span class=line><span class=cl>*** TODO [#B] 社交模式 :habit:
+</span></span><span class=line><span class=cl>* TODO 思考最重要的事情撰写使命宣言 :blue:
+</span></span><span class=line><span class=cl>* TODO [#B] 拓宽思路的过程 :anki:
+</span></span><span class=line><span class=cl>** TODO 开发 auto-gpt emacs 插件
+</span></span><span class=line><span class=cl>** TODO 捷径通过 emacsclient 命令，或 ifff 集成 Auto-GPT
+</span></span><span class=line><span class=cl>**** TODO 待完善的模板
+</span></span><span class=line><span class=cl>*** TODO ob-babel 导入第三库遇到的问题
+</span></span><span class=line><span class=cl>**** TODO Macro: =org-ql-defpred=
+</span></span><span class=line><span class=cl>**** TODO 每日安排
+</span></span><span class=line><span class=cl>**** TODO 每周安排
+</span></span><span class=line><span class=cl>**** TODO 快速导出 agenda 清单模板
+</span></span><span class=line><span class=cl>**** TODO cowuoshi
+</span></span><span class=line><span class=cl>**** TODO 开始计划
+</span></span><span class=line><span class=cl>**** TODO 明天到家
+</span></span></code></pre></td></tr></table></div></div><h2 id=替换-reame-dot-md-模块数据>替换 REAME.md 模块数据</h2><p>在 <code>README.md</code> 中有固定模式，使用 elisp 处理围绕文本的内容替换为自己的内容。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=nv>&lt;!--</span> <span class=nv>dairy</span> <span class=nv>starts</span> <span class=nv>--&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>&lt;!--</span> <span class=nv>dairy</span> <span class=nv>ends</span> <span class=nv>--&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>python 使用正则实现的替换方式 <code>replace_chunk</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>replace_chunk</span><span class=p>(</span><span class=n>content</span><span class=p>,</span> <span class=n>marker</span><span class=p>,</span> <span class=n>chunk</span><span class=p>,</span> <span class=n>inline</span><span class=o>=</span><span class=kc>False</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>r</span> <span class=o>=</span> <span class=n>re</span><span class=o>.</span><span class=n>compile</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=sa>r</span><span class=s2>&#34;&lt;!\-\- </span><span class=si>{}</span><span class=s2> starts \-\-&gt;.*&lt;!\-\- </span><span class=si>{}</span><span class=s2> ends \-\-&gt;&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>marker</span><span class=p>,</span> <span class=n>marker</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=n>re</span><span class=o>.</span><span class=n>DOTALL</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ow>not</span> <span class=n>inline</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>chunk</span> <span class=o>=</span> <span class=s2>&#34;</span><span class=se>\n</span><span class=si>{}</span><span class=se>\n</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>chunk</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>chunk</span> <span class=o>=</span> <span class=s2>&#34;&lt;!-- </span><span class=si>{}</span><span class=s2> starts --&gt;</span><span class=si>{}</span><span class=s2>&lt;!-- </span><span class=si>{}</span><span class=s2> ends --&gt;&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>marker</span><span class=p>,</span> <span class=n>chunk</span><span class=p>,</span> <span class=n>marker</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>r</span><span class=o>.</span><span class=n>sub</span><span class=p>(</span><span class=n>chunk</span><span class=p>,</span> <span class=n>content</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=将上述方法翻译成-elisp-语法实现>将上述方法翻译成 elisp 语法实现</h3><h4 id=使用-temp-buffer-实现文本替换>使用 temp-buffer 实现文本替换</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>build-readme-replace-chunk</span> <span class=p>(</span><span class=nv>content</span> <span class=nv>marker</span> <span class=nv>chunk</span> <span class=kp>&amp;optional</span> <span class=nv>inline</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Replace the chunk between &lt;--- MARKER starts --&gt; and
+</span></span></span><span class=line><span class=cl><span class=s>&lt;!--- MARKER ends --&gt; in CONTENT with CHUNK.
+</span></span></span><span class=line><span class=cl><span class=s>If INLINE is non-nil, do not add newlines around CHUNK.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>start</span> <span class=p>(</span><span class=nf>concat</span> <span class=s>&#34;&lt;!-- &#34;</span> <span class=nv>marker</span> <span class=s>&#34; starts --&gt;&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nv>end</span> <span class=p>(</span><span class=nf>concat</span> <span class=s>&#34;&lt;!-- &#34;</span> <span class=nv>marker</span> <span class=s>&#34; ends --&gt;&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nv>pattern</span> <span class=p>(</span><span class=nf>concat</span> <span class=nv>start</span> <span class=s>&#34;[^^]*?&#34;</span> <span class=nv>end</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>with-temp-buffer</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>insert</span> <span class=nv>content</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>goto-char</span> <span class=p>(</span><span class=nf>point-min</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>if</span> <span class=p>(</span><span class=nf>re-search-forward</span> <span class=nv>pattern</span> <span class=no>nil</span> <span class=no>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nb>progn</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nb>setq</span> <span class=nv>chunk</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;%s\n%s\n%s&#34;</span> <span class=nv>start</span> <span class=nv>chunk</span> <span class=nv>end</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>replace-match</span> <span class=nv>chunk</span> <span class=no>t</span> <span class=no>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>buffer-string</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=nv>content</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>setq</span> <span class=nv>readme-content</span> <span class=s>&#34;
+</span></span></span><span class=line><span class=cl><span class=s>Hello
+</span></span></span><span class=line><span class=cl><span class=s>&lt;!-- chunk starts --&gt;
+</span></span></span><span class=line><span class=cl><span class=s>world
+</span></span></span><span class=line><span class=cl><span class=s>&lt;!-- chunk ends --&gt;
+</span></span></span><span class=line><span class=cl><span class=s>!&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>build-readme-replace-chunk</span> <span class=nv>readme-content</span> <span class=s>&#34;chunk&#34;</span> <span class=s>&#34;there&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Hello
+</span></span><span class=line><span class=cl>&lt;!-- chunk starts --&gt;
+</span></span><span class=line><span class=cl>there
+</span></span><span class=line><span class=cl>&lt;!-- chunk ends --&gt;
+</span></span><span class=line><span class=cl>!
+</span></span></code></pre></td></tr></table></div></div><p>它的工作原理如下:</p><ul><li>它定义了 <code>start</code> 和 <code>end</code> 字符串,即起始和结束标记。</li><li>它定义了一个正则表达式模式,能匹配从起始标记到结束标记的内容。</li><li>它创建一个临时缓冲区并插入 <code>content</code> 内容。</li><li>它向前搜索第一个模式匹配。</li><li>如果找到匹配,它用 <code>chunk</code> 替换匹配内容,并可选地添加换行符。</li><li>然后它返回临时缓冲区的内容,替换了匹配内容。</li><li>否则它只返回原始的 <code>content</code> 不变。</li></ul><h4 id=使用-repace-regexp-in-string-方法替换>使用 repace-regexp-in-string 方法替换</h4><p>这是将 Python 方法 <code>replace_chunk</code> 翻译成 Emacs Lisp 语法的示例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-emacs-lisp data-lang=emacs-lisp><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>replace-chunk-regex</span> <span class=p>(</span><span class=nv>content</span> <span class=nv>marker</span> <span class=nv>chunk</span> <span class=kp>&amp;optional</span> <span class=nv>inline</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Replace content between markers denoted by MARKER with CHUNK.
+</span></span></span><span class=line><span class=cl><span class=s>If INLINE is non-nil, do not add extra newline characters around CHUNK.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let</span> <span class=p>((</span><span class=nv>regex</span> <span class=p>(</span><span class=nf>concat</span> <span class=s>&#34;&lt;!-- &#34;</span> <span class=nv>marker</span> <span class=s>&#34; starts --&gt;[^^]*&lt;!-- &#34;</span> <span class=nv>marker</span> <span class=s>&#34; ends --&gt;&#34;</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>setq</span> <span class=nv>chunk</span> <span class=p>(</span><span class=nb>if</span> <span class=nv>inline</span> <span class=nv>chunk</span> <span class=p>(</span><span class=nf>concat</span> <span class=s>&#34;\n&#34;</span> <span class=nv>chunk</span> <span class=s>&#34;\n&#34;</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>setq</span> <span class=nv>chunk</span> <span class=p>(</span><span class=nf>concat</span> <span class=s>&#34;&lt;!-- &#34;</span> <span class=nv>marker</span> <span class=s>&#34; starts --&gt;&#34;</span> <span class=nv>chunk</span> <span class=s>&#34;&lt;!-- &#34;</span> <span class=nv>marker</span> <span class=s>&#34; ends --&gt;&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nv>replace-regexp-in-string</span> <span class=nv>regex</span> <span class=nv>chunk</span> <span class=nv>content</span> <span class=no>t</span> <span class=no>t</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>replace-chunk-regex</span> <span class=nv>readme-content</span> <span class=s>&#34;chunk&#34;</span> <span class=s>&#34;there&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Hello
+</span></span><span class=line><span class=cl>&lt;!-- chunk starts --&gt;
+</span></span><span class=line><span class=cl>there
+</span></span><span class=line><span class=cl>&lt;!-- chunk ends --&gt;
+</span></span><span class=line><span class=cl>!
+</span></span></code></pre></td></tr></table></div></div><p>这个函数首先定义了一个正则表达式来匹配和找到要替换的文本。然后，根据 <code>inline</code> 参数，添加或去掉块的前后额外换行符。最后，使用 Emacs Lisp 内置函数 =replace-regexp-in-string=，将找到的文本块替换为新的文本块。</p><h3 id=替换文本之后保存到-readme-dot-md-文件中>替换文本之后保存到 README.md 文件中</h3><p>使用 elisp 脚本替换 README.md 文件中{{内容}} 格式的内容为变量A的值，然后保存文件。</p><p>定义一个入参 <code>readmeFile</code> 在 temp-buffer 中操作该文件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>build-readme-replace</span> <span class=p>(</span><span class=nv>readmeFile</span> <span class=nv>marker</span> <span class=nv>chunk</span> <span class=kp>&amp;optional</span> <span class=nv>inline</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Replace the chunk between &lt;--- MARKER starts --&gt; and
+</span></span></span><span class=line><span class=cl><span class=s>&lt;!--- MARKER ends --&gt; in CONTENT with CHUNK.
+</span></span></span><span class=line><span class=cl><span class=s>If INLINE is non-nil, do not add newlines around CHUNK.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>start</span> <span class=p>(</span><span class=nf>concat</span> <span class=s>&#34;&lt;!-- &#34;</span> <span class=nv>marker</span> <span class=s>&#34; starts --&gt;&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nv>end</span> <span class=p>(</span><span class=nf>concat</span> <span class=s>&#34;&lt;!-- &#34;</span> <span class=nv>marker</span> <span class=s>&#34; ends --&gt;&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nv>pattern</span> <span class=p>(</span><span class=nf>concat</span> <span class=nv>start</span> <span class=s>&#34;[^^]*?&#34;</span> <span class=nv>end</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>with-temp-file</span> <span class=nv>readmeFile</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>insert-file-contents</span> <span class=nv>readmeFile</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=c1>;;(insert-buffer-substring (current-buffer))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>goto-char</span> <span class=p>(</span><span class=nf>point-min</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>if</span> <span class=p>(</span><span class=nf>re-search-forward</span> <span class=nv>pattern</span> <span class=no>nil</span> <span class=no>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nb>progn</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nb>setq</span> <span class=nv>chunk</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;%s\n%s\n%s&#34;</span> <span class=nv>start</span> <span class=nv>chunk</span> <span class=nv>end</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>replace-match</span> <span class=nv>chunk</span> <span class=no>t</span> <span class=no>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nv>write-file</span> <span class=nv>readmeFile</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>build-readme-replace</span> <span class=s>&#34;~/hsg/iNotes/README.md&#34;</span> <span class=s>&#34;dairy&#34;</span> <span class=s>&#34; test text&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>t
+</span></span></code></pre></td></tr></table></div></div><p>这个函数的工作方式如下:</p><ul><li>它提示用户输入要保存的文件名,并将其存储在 <code>readmeFile</code> 变量中</li><li>它获取当前缓冲区,并将其存储在 <code>buffer</code> 变量中</li><li>它使用 <code>with-temp-buffer</code> 宏创建一个新的临时缓冲区</li><li>它使用 <code>insert-file-contents</code> 将 <code>readmeFile</code> 的内容插入临时缓冲区</li><li>它使用 <code>write-file</code> 将临时缓冲区内容写入 <code>readmeFile</code> 文件</li></ul><p>这里希望直接保存内容到文件中，不需要提示，在使用 <code>save-buffer</code> 方式保存时，会显示一条确认消息,确认已将缓冲区保存到指定的文件名</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2023-05-31</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/reader/>reader</a></div><nav class=post-nav><a class=prev href=/post/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E4%BD%BF%E7%94%A8org-ql%E5%90%8C%E6%AD%A5orgagenda%E5%88%B0readme/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">动态生成 README.md 四象限数据： org-ql 查询语法和分组规则</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/obsidianAI%E6%8F%92%E4%BB%B6/><span class="next-text nav-default">制作 Text Generator Plugin 的模板</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2023-05-31 01:07:00 +0800 +0800",title:"借助 org-ql 工具自动导出 agenda 待办任务",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

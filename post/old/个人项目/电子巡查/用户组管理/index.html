@@ -1,0 +1,546 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>用户组管理 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content=" 扫码登录业务,登录功能新增跳转申请加入业务 .5 配置管理入口:在个人主页添加“用户组管理”(支持修改名入口名)和隐藏显示逻辑 .5 分享二维码:分享组件调用 .5 添加人员:通过网页调用原生界面添加成员功能 .5 用户组管理页: 2 显示默认分组,支持分页 删除管理员用户条件(最后一个管理页不可删除) 三个菜单入口: 创建分组/编辑分组入口跳转逻辑 收到申请加入个数及跳转逻辑 bug联调 1.5天 "><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E7%94%B5%E5%AD%90%E5%B7%A1%E6%9F%A5/%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E7%94%B5%E5%AD%90%E5%B7%A1%E6%9F%A5/%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/"><meta property="og:site_name" content="习七"><meta property="og:title" content="用户组管理"><meta property="og:description" content="扫码登录业务,登录功能新增跳转申请加入业务 .5 配置管理入口:在个人主页添加“用户组管理”(支持修改名入口名)和隐藏显示逻辑 .5 分享二维码:分享组件调用 .5 添加人员:通过网页调用原生界面添加成员功能 .5 用户组管理页: 2 显示默认分组,支持分页 删除管理员用户条件(最后一个管理页不可删除) 三个菜单入口: 创建分组/编辑分组入口跳转逻辑 收到申请加入个数及跳转逻辑 bug联调 1.5天"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2019-07-05T08:26:09+08:00"><meta property="article:modified_time" content="2019-07-05T08:26:09+08:00"><meta property="article:tag" content="IOS"><meta itemprop=name content="用户组管理"><meta itemprop=description content="扫码登录业务,登录功能新增跳转申请加入业务 .5 配置管理入口:在个人主页添加“用户组管理”(支持修改名入口名)和隐藏显示逻辑 .5 分享二维码:分享组件调用 .5 添加人员:通过网页调用原生界面添加成员功能 .5 用户组管理页: 2 显示默认分组,支持分页 删除管理员用户条件(最后一个管理页不可删除) 三个菜单入口: 创建分组/编辑分组入口跳转逻辑 收到申请加入个数及跳转逻辑 bug联调 1.5天"><meta itemprop=datePublished content="2019-07-05T08:26:09+08:00"><meta itemprop=dateModified content="2019-07-05T08:26:09+08:00"><meta itemprop=wordCount content="2731"><meta itemprop=keywords content="IOS"><meta name=twitter:card content="summary"><meta name=twitter:title content="用户组管理"><meta name=twitter:description content="扫码登录业务,登录功能新增跳转申请加入业务 .5 配置管理入口:在个人主页添加“用户组管理”(支持修改名入口名)和隐藏显示逻辑 .5 分享二维码:分享组件调用 .5 添加人员:通过网页调用原生界面添加成员功能 .5 用户组管理页: 2 显示默认分组,支持分页 删除管理员用户条件(最后一个管理页不可删除) 三个菜单入口: 创建分组/编辑分组入口跳转逻辑 收到申请加入个数及跳转逻辑 bug联调 1.5天"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>用户组管理</h1><div class=post-meta><span class=post-time>2019-07-05</span><div class=post-category><a href=/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/>项目总结</a></div><span class=more-meta>约 2731 字 </span><span class=more-meta>预计阅读 6 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#>业务流程</a></li><li><a href=#>用户组管理类图结构</a></li></ul></li><li><a href=#>添加消息的脑图</a><ul><li><a href=#>替换接口域名</a></li><li><a href=#>域名获取三种方式</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2019-07-05T08:26:09 title="July 5, 2019">July 5, 2019</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><ol><li>扫码登录业务,登录功能新增跳转申请加入业务 .5</li><li>配置管理入口:在个人主页添加“用户组管理”(支持修改名入口名)和隐藏显示逻辑 .5</li><li>分享二维码:分享组件调用 .5</li><li>添加人员:通过网页调用原生界面添加成员功能 .5</li><li>用户组管理页: 2
+显示默认分组,支持分页
+删除管理员用户条件(最后一个管理页不可删除)
+三个菜单入口: 创建分组/编辑分组入口跳转逻辑
+收到申请加入个数及跳转逻辑</li><li>bug联调 1.5天</li></ol><p><img src=http://www.plantuml.com/plantuml/png/XP0zRzD06CTtVufdGGp8qgK8QBCnCJ5rj3ASx2TDaNMEV6Ua2Y45H4iCWb8e9CsBcj0M1Ih203J1XkJB-Cxsn5SWmMbLHMswFdf-_vU_M1SsWXRlzbHr48VFudutVhCb1qUgjQ_9QbE6WQgTfBKVVtytbaXkHITtT78Bo79-wNQUhDmWouI0XipwBwJPM1HGGcgXgwMLHZ9-7k_MO_-NR8xKn--PSlIdbOoRClWa-xvw_NOApuYowpn0Km0Nr1KSplnkWhRgCOjk07KHJDlXQ6chL7Zkt4tNer4x-VbXKYGAJrIlAzirNTSCvH_7dIVfqqhoRL00oi7W9cK5S1WyAl6rns1JFZ7CmKIFQwA438pvIJQFvFP11g-vZbU-ZynRh22hMr5md6LP_1a5WToffnLVlVmiztgpY6YZAT2z33LEkxvJxVq2b6YvZ8m35UVGwnoGJNUPQvE5qlMPVnhMa_xXv9XMmcIqa_bRMAIUBUvDorvLj9Fk7KR3XdpHFMLj57ZN5EiEkwBwq8-6NvBjbdpr_kmpdoFasiLMeqtPxwhEyBpRGtIB6mjX8nb_ZSA3YxRAu6oeVm00 alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>title 
+</span></span><span class=line><span class=cl>用户组管理工期
+</span></span><span class=line><span class=cl>创建时间：2019-07-05 08:26:09+0800 
+</span></span><span class=line><span class=cl>endtitle
+</span></span><span class=line><span class=cl>left header
+</span></span><span class=line><span class=cl>通过甘特图梳理工作进度安排
+</span></span><span class=line><span class=cl>endheader
+</span></span><span class=line><span class=cl>project starts 2019-07-03 
+</span></span><span class=line><span class=cl>Sunday are closed
+</span></span><span class=line><span class=cl>Saturday are closed
+</span></span><span class=line><span class=cl>--依赖组件模块--
+</span></span><span class=line><span class=cl>[扫码邀请] as [scan] on {hsg} lasts 1 days
+</span></span><span class=line><span class=cl>then [用户组管理入口] as [groupMenu] on {hsg} lasts 1 days
+</span></span><span class=line><span class=cl>then [分享组件] on {hsg} lasts 1 days
+</span></span><span class=line><span class=cl>then [人员选择器] as [selecter] on {hsg} lasts 1 days
+</span></span><span class=line><span class=cl>[依赖结束] happens at [selecter]&#39;s end
+</span></span><span class=line><span class=cl>--用户组管理组件--
+</span></span><span class=line><span class=cl>then [默认组逻辑] as [defaultGroup] on {hsg} lasts 1 days
+</span></span><span class=line><span class=cl>then [删除业务] as [deleteAction] on {hsg} lasts 1 days
+</span></span><span class=line><span class=cl>then [三个菜单] on {hsg:100%} lasts 1 days
+</span></span><span class=line><span class=cl>then [待审核业务] as [verfy] on {hsg:100%} lasts 1 days
+</span></span><span class=line><span class=cl>[迭代结束] happens at [verfy]&#39;s end
+</span></span></code></pre></td></tr></table></div></div><h3>业务流程</h3><p>活动图</p><p><img src=http://www.plantuml.com/plantuml/png/fL9Dpz904BxlhzXZYNcJlaQ3RtlsgWTF7gjifP60WKsyuWUaeWX4iQHgf8gHO08noaTeuTTqsks9l-3MnKqhyQ9xsfrvTfxdcHbgqGf1yUjfPAzZ_sayz-9-6peVs9DTj7mKJvz77x_p20BxBVZRo5abpez3u5vMpo_ErEAPUe7LedPUrAvUkQHUKrMCIBKaQbQ8IN6P62LIHz3w3BrFqSilOA-Ifi_sWqFm0co7ULFuDemds_Iv29WzYzvxhFSEkaCUuNha7VOjc7lHU1DkNEXuASsnTeCQTOeqQK57becLev71g81fcLInSllwhG96c1-DWmIt_kkTmc7YXfiPJsJXF2kE1dPRYX6VIAL1b1itCvZ47x7vXCC4W0kqJC47krVmh2ipPgr-NoJ-gFbNtP8aHHmJCYR87pVPOWsTCU-qA9RL7cw_SghGN-LJ9KADksKPIYrPfbB8Vu-3DtnSeW5w3fl7YGKvmSako8QTUladml-tBEN9cnmFDkuPbj2boSqJIoodcvdZGt8dyPOwaXwrnEqpf_VxHuFM7Y31a5v_0W00 alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>title
+</span></span><span class=line><span class=cl>用户组管理功能流程梳理
+</span></span><span class=line><span class=cl>创建时间：2019-07-09 07:17:54+0800 
+</span></span><span class=line><span class=cl>endtitle
+</span></span><span class=line><span class=cl>left header
+</span></span><span class=line><span class=cl>入口控制逻辑，列表展示，导航条菜单，组菜单，待审核业务
+</span></span><span class=line><span class=cl>endheader
+</span></span><span class=line><span class=cl>start
+</span></span><span class=line><span class=cl>:用户组;
+</span></span><span class=line><span class=cl>if (管理员) then (YES) 
+</span></span><span class=line><span class=cl>    :组列表;
+</span></span><span class=line><span class=cl>    if (多个组) then (YES)
+</span></span><span class=line><span class=cl>        :分组菜单;
+</span></span><span class=line><span class=cl>    else(NO)
+</span></span><span class=line><span class=cl>        :默认组;
+</span></span><span class=line><span class=cl>    endif
+</span></span><span class=line><span class=cl>    :当前组;
+</span></span><span class=line><span class=cl>    fork
+</span></span><span class=line><span class=cl>    :组菜单;
+</span></span><span class=line><span class=cl>    if (管理员) then (YES)
+</span></span><span class=line><span class=cl>        if () then 
+</span></span><span class=line><span class=cl>            :邀请加入;
+</span></span><span class=line><span class=cl>            :分享组件;
+</span></span><span class=line><span class=cl>            detach
+</span></span><span class=line><span class=cl>        elseif()
+</span></span><span class=line><span class=cl>            :编辑分组;
+</span></span><span class=line><span class=cl>        else
+</span></span><span class=line><span class=cl>            :创建分组;
+</span></span><span class=line><span class=cl>        endif
+</span></span><span class=line><span class=cl>    else(NO)
+</span></span><span class=line><span class=cl>        if () then
+</span></span><span class=line><span class=cl>            :编辑分组;
+</span></span><span class=line><span class=cl>        else
+</span></span><span class=line><span class=cl>            :邀请加入;
+</span></span><span class=line><span class=cl>            :分享组件;
+</span></span><span class=line><span class=cl>            detach
+</span></span><span class=line><span class=cl>        endif
+</span></span><span class=line><span class=cl>    endif
+</span></span><span class=line><span class=cl>    fork again
+</span></span><span class=line><span class=cl>    :待审核入口;
+</span></span><span class=line><span class=cl>    end fork
+</span></span><span class=line><span class=cl>    :web页;
+</span></span><span class=line><span class=cl>else(NO)
+</span></span><span class=line><span class=cl>:隐藏入口;
+</span></span><span class=line><span class=cl>stop
+</span></span><span class=line><span class=cl>endif
+</span></span><span class=line><span class=cl>stop
+</span></span></code></pre></td></tr></table></div></div><h3>用户组管理类图结构</h3><p><img src=http://www.plantuml.com/plantuml/png/jLTlKnl76NzTVOeTtWGm8eGCqqIqdi7or983c223NvBZRYMTSxexxzr1QOSPUt0SRFC7DoQuc49mqfesBY5ZrtPHDFumrTw9L_aAVNOVwQHJpi2O2I_GxZv_zdb-lsUVtNDrrw09_ydpOErEPg1si10ytEChEy73dUhX8N_mwEZcNV_-F_bVzn9yyJ4l7_eRBuysNlpyqsP_tmSV9_j-c-pxcFJtfVe_IdtuuRc-Z_hwI8AQ6derQDubHQfeb2MEDlQFdZnA9Jxe9PzTekv5Qhj3fZRXK9OryzPdTJ49ohU3yfV-zaj_-tQmUNjeB0l__VK3Vta_A7y5Y_mlItndXwyj1-K7V7-pXrU-mddrzJ9VMwgzUSWVRuFDTSSoqG85YVvUWdc56V7lDeExY_xMinH94FY3q1pgNcAMPmzf9TtKIGh0y1TVYQ3sTm6Wwkj_zypIQV_-F_p5Vu67uF43llPCHFZrV_tdwz8Bx7CvawC6LTrqUcoCMhP1KyJVU8fxuUw8BHYY1t0bKAj3bR2L0YNzV-nFl6ShwkSm-Vcd9TFIn4_UCa1539XI4WkgONaQ_6gAgqmh3dqlKRSX7PTriqWP1D5158V0B_bpGZKKno4TcG507eF422TrEfksJ9TPXa6PD2WEJAR1GkIKJF8Vj_sRJm486CkbSsH6OIILSvbk5dxVqV4RkJerHQuxG03K4K8oDOKEI6Vsmf3gwfRPfHgg_lcLJovuhckPgKvTwtAeAVAURqHtXHKKK_-J8jGno9ZmBAONTFCT0kHVLg2WG1DYcq-Obal9j0Mnb8YLbqbBHM2-UhXIZ9m8mTVwqj7VdiWQ9yAqtHwZmdeYHpStQ_i_yCewcgCjE46V253JqpmvAz-PQtGwRJ4gyO4whODJH_NQv4NTiHLNXQ90ZHcjhl4M2DyE8qA9v-2wCp4-NEUvplM5ArU6ko00GLlAALgUeULSXRd3bg9TqztYEBtXKSTDcSgCNf0qNvspQKgwc8_6d1c8dYLCJbNjua0OV9JMjuUIYqPIZs8mRjk9IoFH7Rr22T3z5RQK1IGxfPKNb8IUi0BzvtlypXAs2N_bxtprMr65FvQnnCBY4PEsKiI8w-xu_dQmSj3Qkw2NrLuzhrMUySM3jbOVDZH2OhQ16A50phVwno6imZeUeHP594kiuAXLRJvnnfeVrzLYJbNCONrQqkJ0E5hsbqS_7Ozf7pVOwRd42XwnPkXLA-VPb3LzDNKxHtCNTTdX53P7khk8hOZmNSf4nSCHIO467YCXzPZHNWIkPGlURZIT-dU_zrTNguTBGVb5yCqju0K2h9PVzWIFNuXYsDhZgylyGDG3qCaNx_1LSIdonPVLrvlytcwKlREZdO4JmHp8q1Y3kL77t1PhxQXd6fensAF1PFhaxfCK-1FTWUCeh-IJ67l__Q3o82XlrLPUyTMlyVQkljdrR_q0BnQSyZSB_i8N_xjvYt_tWY-imi1_z9_WwK4hwpCMt4e5wZQU9tzWLYb7sGnbBJlXQOItJDQ1KpuxCZTas_Bny0jF1fnyo23hO0wnj8UWXDQrfz_wssjs7SPHEYimxxKDtN5hgrjyUVteY-MWie_fzV1xtzGg5NvlfxPG2LtmUti-92f5QDDU46UzSI0jnOGnortyfD4d8vM0EZ5508gdgW0oaHNMfDlqIc8m615TLQODYd8NXn6D93uT_RrTldq_z1zn3oqP0XJOZW001kbcSg5r6tYFIERg2aeuRbKQpOruCeGXnfIvto4q3PFpf5l09qLH8xb4kWkYSDh5IJZH42vVtAZjxc7qaT2R_KJrc2ozh1Q51nzPW9qo0yDM6KGdBOOHFBc_6CRfr9FGQ5xn35SkHRV9bW0-TAGmPircIuMehwafJ0MVqLYA8HrJKp5ibomcFSRbWr8OnmjLHXMNoZ25JepplCuSpCFGJTggCJAKWpfrNARefjjm1LuoL2yKtMCqgQQxe7VLiji8h1v-ZqqxllnadK21PLrQgkDSceFvOEAaNdUEv3rJ9PsfdbHNqs6puo2zq2tYXAAplKqsIPcUdqjRdXahRfo6EDauBS4jAPodEgCdeCk3nPRMzqwDHnZALTBXRot31GUFbOwmXuGj9snAsBCRxSQHizCyUUL7IL5XL1jiMOM4neVn1GU44uQZmUDv2k41TRWhMh1D5HLJCm2f64tXEEGlSxmUP0jQnxeJbrHuXnwdsEHFN7aoWfGWBglzmcg-CS16tjjxFiIubUUpaOrgf0Elxh0NIaOdih7CDxkQr9ADRGPcf-4zRCVjpVhODw8ENK0nLUhEsRHBDtLNFFX2qX2Ak1ZJr32QCQemEpd6jfPS2c-Xk3rG3VSGxgNsgN08BnQuK6BNHu6rU0cyWjgDHhtID6NWpC7oZpVybAKXlfpbCPKUfo4kcuX2_OruINueKgq1X_XfeRyxwTd9yrYjKP6itP03b3LcGjQ2NMjXY-VqqDYO-9pHh5aJV8TFkEYo-2P9D6Ga6GO1_qb3Htoj_ny0 alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>title</span>
+</span></span><span class=line><span class=cl><span class=err>梳理</span><span class=n>H5调用原生人员选择器</span>
+</span></span><span class=line><span class=cl><span class=err>创建时间：</span><span class=mi>2019</span><span class=o>-</span><span class=mi>07</span><span class=o>-</span><span class=mi>09</span> <span class=mi>20</span><span class=p>:</span><span class=mi>28</span><span class=p>:</span><span class=mi>33</span><span class=o>+</span><span class=mi>0800</span> 
+</span></span><span class=line><span class=cl><span class=n>endtitle</span>
+</span></span><span class=line><span class=cl><span class=n>left</span> <span class=n>header</span>
+</span></span><span class=line><span class=cl><span class=err>问题</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=mf>1.</span> <span class=err>`</span><span class=n>GetDeptAndUserInfo</span><span class=err>`问题</span><span class=p>:</span> <span class=err>组织架构的</span><span class=n>API的数据结构和域名绑定</span><span class=p>,</span><span class=err>当域名不同返回的</span><span class=n>json结构不同</span>
+</span></span><span class=line><span class=cl><span class=mf>2.</span> <span class=err>原生选择器多版本</span><span class=p>:</span> 
+</span></span><span class=line><span class=cl>    <span class=mf>1.</span> <span class=n>setGroupAdmini</span> <span class=p>:</span><span class=err>用户组管理中</span><span class=p>,</span><span class=n>web拦截器监听的方法</span>
+</span></span><span class=line><span class=cl>    <span class=mf>2.</span> <span class=n>JHSelectCCPPeople</span><span class=p>:</span> <span class=err>旧版本选择人员的监听器</span>
+</span></span><span class=line><span class=cl><span class=n>endheader</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>page</span> <span class=mi>2</span><span class=n>x2</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;package，node，folder，frame，cloud，database&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=s2>&#34;JinherCCP&#34;</span> <span class=n>as</span> <span class=n>CCP</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=s2>&#34;H5UseSelectPeopleViewController&#34;</span> <span class=n>as</span> <span class=n>h5VC</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>    <span class=o>+</span> <span class=k>var</span> <span class=p>:</span><span class=ne>String</span><span class=o>=</span><span class=s2>&#34;&#34;</span>	
+</span></span><span class=line><span class=cl>    <span class=n>__</span> <span class=n>js回调方法__</span>
+</span></span><span class=line><span class=cl>    <span class=o>-</span> <span class=p>(</span><span class=n>IBAction</span><span class=p>)</span><span class=n>clcikOKButton</span><span class=p>:(</span><span class=n>id</span><span class=p>)</span><span class=n>sender</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=s2>&#34;OrganizationSelectViewController&#34;</span> <span class=n>as</span> <span class=n>origin</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>    <span class=o>+</span> <span class=k>var</span> <span class=p>:</span><span class=ne>String</span><span class=o>=</span><span class=s2>&#34;&#34;</span>	
+</span></span><span class=line><span class=cl>    <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>bottom</span> <span class=n>of</span> <span class=n>h5VC</span>
+</span></span><span class=line><span class=cl>    <span class=err>用于</span><span class=n>h5调用原生的界面</span> 
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>bottom</span> <span class=n>of</span> <span class=n>origin</span> 
+</span></span><span class=line><span class=cl>     <span class=err>通讯录原生界面的调用方法</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> 
+</span></span><span class=line><span class=cl><span class=s1>&#39;package，node，folder，frame，cloud，database&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=s2>&#34;JHWebCore&#34;</span> <span class=n>as</span> <span class=n>web</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=s2>&#34;WVDispatcher&#34;</span> <span class=n>as</span> <span class=n>wvd</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=k>var</span> <span class=p>:</span><span class=ne>String</span><span class=o>=</span><span class=s2>&#34;&#34;</span>	
+</span></span><span class=line><span class=cl>        <span class=n>__拦截jsURL__</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=p>(</span><span class=n>BOOL</span><span class=p>)</span><span class=n>webView</span><span class=p>:</span><span class=n>shouldStartLoadWithRequest</span><span class=p>:</span><span class=n>navigationType</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=s2>&#34;WVH5SelectCCPPeople&#34;</span> <span class=n>as</span> <span class=n>ccph5</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=p>(</span><span class=n>BOOL</span><span class=p>)</span><span class=n>webViewShouldStartLoadRequest</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=s2>&#34;WVUGMCCPPeople&#34;</span> <span class=n>as</span> <span class=n>ugmWeb</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=p>(</span><span class=n>BOOL</span><span class=p>)</span><span class=n>webViewShouldStartLoadRequest</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>note</span> <span class=n>left</span> <span class=n>of</span> <span class=n>wvd</span>
+</span></span><span class=line><span class=cl>        <span class=err>用于注册监听接口的类</span> 
+</span></span><span class=line><span class=cl>    <span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl>    <span class=n>note</span> <span class=n>bottom</span> <span class=n>of</span> <span class=n>ugmWeb</span>
+</span></span><span class=line><span class=cl>      <span class=err>实现</span><span class=n>web拦截器中跳转到人员选择器的方法</span>   
+</span></span><span class=line><span class=cl>    <span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl>    <span class=n>wvd</span> <span class=o>--&gt;</span> <span class=n>ugmWeb</span>
+</span></span><span class=line><span class=cl>    <span class=n>ugmWeb</span> <span class=o>----&gt;</span> <span class=n>h5VC</span>
+</span></span><span class=line><span class=cl>    <span class=n>wvd</span> <span class=o>--&gt;</span> <span class=n>ccph5</span>
+</span></span><span class=line><span class=cl>    <span class=n>ccph5</span> <span class=o>----&gt;</span> <span class=n>h5VC</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;package，node，folder，frame，cloud，database&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=s2>&#34;RichScanLib&#34;</span> <span class=n>as</span> <span class=n>scan</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=s2>&#34;JNQRViewController&#34;</span> <span class=n>as</span> <span class=n>qr</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=p>(</span><span class=n>BOOL</span><span class=p>)</span><span class=n>shouldMoveToSuperController</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=p>(</span><span class=n>NSDictionary</span> <span class=o>*</span><span class=p>)</span> <span class=n>parameterWithURL</span><span class=p>:(</span><span class=n>NSString</span> <span class=o>*</span><span class=p>)</span> <span class=n>url</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>note</span> <span class=n>top</span> <span class=n>of</span> <span class=n>qr</span>
+</span></span><span class=line><span class=cl>        <span class=err>扫描二维码的组件</span><span class=p>,</span><span class=err>直接在反射类中分发定制业务</span> 
+</span></span><span class=line><span class=cl>    <span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;package，node，folder，frame，cloud，database&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=s2>&#34;HPPersonalPagelib&#34;</span> <span class=n>as</span> <span class=n>person</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=s2>&#34;JHPersonalViewController&#34;</span> <span class=n>as</span> <span class=n>personVC</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=n>BOOL</span> <span class=n>isUGMAdmin</span>
+</span></span><span class=line><span class=cl>        <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span><span class=err>网络获取用户信息：用户心情、头像、昵称</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>getUserInfoFromServer</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span><span class=err>接口</span><span class=n>GetIsShowMyAppGroup</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadUGMIsAdmin</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>note</span> <span class=n>top</span> <span class=n>of</span> <span class=n>personVC</span>
+</span></span><span class=line><span class=cl>        <span class=err>解析</span><span class=n>personalNewPage</span><span class=o>.</span><span class=n>plist菜单配置信息</span><span class=p>,</span><span class=err>加载功能</span>
+</span></span><span class=line><span class=cl>        <span class=err>动态加载菜单</span>
+</span></span><span class=line><span class=cl>    <span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;package，node，folder，frame，cloud，database&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=s2>&#34;JHUGManagerSDK&#34;</span> <span class=n>as</span> <span class=n>ugm</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=s2>&#34;JHUGMViewController&#34;</span> <span class=n>as</span> <span class=n>ugmVC</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>UIView</span> <span class=o>*</span><span class=n>numView</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>UITableView</span> <span class=o>*</span><span class=n>tableView</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=err>数据模型属性组</span><span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>ReqUGMPageModel</span> <span class=o>*</span><span class=n>reqUGM</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>OrgAdminModel</span> <span class=o>*</span><span class=n>adminModel</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>NSMutableArray</span><span class=o>&lt;</span><span class=n>JHUGManModel</span> <span class=o>*&gt;</span> <span class=o>*</span><span class=n>dataArray</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>NSArray</span> <span class=o>*</span><span class=n>groupArray</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=err>分组列表属性</span><span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>curGroupId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>UIButton</span> <span class=o>*</span><span class=n>navBut</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>UGMGroupLView</span> <span class=o>*</span><span class=n>groupView</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>UGMGroupModel</span> <span class=o>*</span><span class=n>defaultGroup</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>UIImageView</span> <span class=o>*</span><span class=n>arrowImgView</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>__分组管理菜单属性组__</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>UIView</span> <span class=o>*</span><span class=n>moreView</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>UIButton</span> <span class=o>*</span><span class=n>moreBut</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>UIButton</span> <span class=o>*</span><span class=n>createGroupBut</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>UIView</span> <span class=o>*</span><span class=n>firstGroupline</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>MASConstraint</span> <span class=o>*</span><span class=n>createButHeight</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>MASConstraint</span> <span class=o>*</span><span class=n>editButTop</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=err>分享组件属性组</span><span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=n>JHUGMOrgItemModel</span> <span class=o>*</span><span class=n>myOrg</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=k>func</span> <span class=p>(:,:)</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadGroupList</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadUserList</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadVerifyCount</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadOrgAdmin</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadRemoveUser</span><span class=p>:(</span><span class=n>JHUGManModel</span> <span class=o>*</span><span class=p>)</span><span class=n>user</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;package，node，folder，frame，cloud，database&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>cloud</span> <span class=s2>&#34;服务器&#34;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>class</span> <span class=s2>&#34;UGManagerServer&#34;</span> <span class=n>as</span> <span class=n>ugmserver</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=p>(</span><span class=n>id</span><span class=p>)</span><span class=n>shared</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=n>JHURLRequest</span> <span class=o>*</span> <span class=n>request</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>reqGetVerifyCount</span><span class=p>:</span><span class=n>handler</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>requestGroupListHandler</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>requestUGMList</span><span class=p>:</span><span class=n>handler</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>reqGetIsUGMAdmin</span><span class=p>:</span><span class=n>handler</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>reqRemoveUserFromGroup</span><span class=p>:</span><span class=n>userId</span><span class=p>:</span><span class=n>handler</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>       <span class=p>}</span>
+</span></span><span class=line><span class=cl>       <span class=n>ugmVC</span> <span class=o>..&gt;</span> <span class=n>ugmserver</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;package，node，folder，frame，cloud，database&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>folder</span> <span class=s2>&#34;用户组列表&#34;</span> <span class=n>as</span> <span class=n>UI</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>class</span> <span class=s2>&#34;UGMGroupLView&#34;</span> <span class=n>as</span> <span class=n>groupview</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=n>NSArray</span> <span class=o>*</span><span class=n>dataArray</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl>        <span class=o>-</span> <span class=p>(</span><span class=n>instancetype</span><span class=p>)</span><span class=n>initWithHandler</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=s2>&#34;UGMGroupLCell&#34;</span> <span class=n>as</span> <span class=n>groupcell</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=n>UGMGroupModel</span> <span class=o>*</span><span class=n>model</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=s2>&#34;UGMGroupModel&#34;</span> <span class=n>as</span> <span class=n>cellmodel</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>Id</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>Name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>AppId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=n>NSNumber</span> <span class=o>*</span><span class=n>IsVerify</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>QrCodeSource</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>QrCodeImage</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=n>BOOL</span> <span class=n>isGSeleced</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>groupview</span> <span class=o>*-</span><span class=n>up</span><span class=o>-&gt;</span> <span class=n>ugmVC</span>
+</span></span><span class=line><span class=cl>    <span class=n>groupview</span> <span class=o>..&gt;</span> <span class=n>groupcell</span>
+</span></span><span class=line><span class=cl>    <span class=n>groupcell</span> <span class=o>..&gt;</span> <span class=n>cellmodel</span> 
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>APP</span> <span class=o>---</span><span class=n>down</span><span class=o>-&gt;</span> <span class=n>personVC</span>
+</span></span><span class=line><span class=cl><span class=n>APP</span> <span class=o>---</span><span class=n>down</span><span class=o>-&gt;</span> <span class=n>scan</span>
+</span></span><span class=line><span class=cl><span class=n>personVC</span> <span class=o>--&gt;</span> <span class=n>ugmVC</span>
+</span></span><span class=line><span class=cl><span class=n>ugm</span> <span class=o>-</span><span class=n>down</span><span class=o>-&gt;</span> <span class=n>web</span> 
+</span></span></code></pre></td></tr></table></div></div><h2>添加消息的脑图</h2><p><img src=https://it-boyer.github.io/iPictures/images/%E6%B7%BB%E5%8A%A0%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E6%B5%81%E7%A8%8B.png alt></p><h3>替换接口域名</h3><p>替换以下相关接口的域名:将<code>sns.iuoooo.com</code>替换为<code>api.iuoooo.com/ugm.api</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Jinher.AMP.SNS.SV.AppGroupUserQuerySV.svc/GetExistGroupsOfUser
+</span></span><span class=line><span class=cl>Jinher.AMP.SNS.SV.AppGroupUserQuerySV.svc/GetGroupsOfUser
+</span></span><span class=line><span class=cl>Jinher.AMP.SNS.SV.AppGroupUserQuerySV.svc/GetExistTypesOfUser
+</span></span><span class=line><span class=cl>Jinher.AMP.SNS.SV.AppGroupUserQuerySV.svc/UpdateUserGroup
+</span></span><span class=line><span class=cl>Jinher.AMP.SNS.SV.AppGroupUserQuerySV.svc/IsUserInGroup
+</span></span></code></pre></td></tr></table></div></div><h3>域名获取三种方式</h3><ol><li><code>配置文件方式</code>iPFile.plist 无需编译</li><li>宏定义方式 需要编译相关组件</li><li>主工程源码方式 无需编译</li></ol><h4>通过配置文件<code>iPFile.plist</code>获取:<code>api_host_GroupChat</code></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>[[</span><span class=n>HttpIpFileService</span> <span class=n>shareInstance</span><span class=p>]</span> <span class=nl>getIpFile</span><span class=p>:</span><span class=s>@&#34;api_host_GroupQuery&#34;</span><span class=p>];</span><span class=c1>//服务器地址
+</span></span></span></code></pre></td></tr></table></div></div><p>经排查分析,接口<code>Jinher.AMP.SNS.SV.AppSceneUserQuerySV.svc/ExistSceneUser</code>用到了上述方式:
+所以不能修改<code>iPfile.plist</code>的<code>api_host_GroupChat</code>的值.</p><p>采用替换方式解决问题:
+<code>JHLayoutParser</code>组件中的文件<code>LPUpdateView</code>读取plist文件:<code>api_host_GroupQuery</code>获取域名
+在<code>iPfile.plist</code>新增一个字段</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>api_host_GroupQuery:api.iuoooo.com/ugm.api
+</span></span></code></pre></td></tr></table></div></div><h4>依赖<code>JHAcrossNetEngin</code>组件的头文件<code>NetEngin.h</code>定义的宏方式</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=o>/</span><span class=n>AppGroupUser</span>
+</span></span><span class=line><span class=cl><span class=cp>#define AppGroupUserHttpHead [NSString stringWithFormat:@&#34;%@%@api.iuoooo.com/ugm.api/Jinher.AMP.SNS.SV.AppGroupUserQuerySV.svc&#34;, JHTWREQUESTPROTOCOL, NetFormat]
+</span></span></span></code></pre></td></tr></table></div></div><p>只需替换<code>JHAcrossNetEngin</code>组件<code>NetEngin.h</code>的宏定义,将<code>sns.iuoooo.com</code>替换为<code>api.iuoooo.com/ugm.api</code>
+然后,重新编译<code>JHAcrossNetEngin</code>组件库,并提交到主工程中.</p><p><strong>图文组件</strong>组件中的接口<code>GetExistTypesOfUser</code>引用<code>AppGroupUserHttpHead</code>,需要重新编译库,并提交到主工程中.</p><h4>主工程相关的域名替换</h4><p>无需编译,直接替换,提交源码即可<br>涉及到的相关文件:commitID <code>c0a320ec86bf612260028fec2e8b7b19646c83c7</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>modified:   JHUniversalApp/JHUniversalApp/Categories/AccessRelevantLayoutData.m
+</span></span><span class=line><span class=cl>modified:   JHUniversalApp/JHUniversalApp/Components/Libs/JH/AcrossNetEngin/NetEngine.h
+</span></span><span class=line><span class=cl>modified:   JHUniversalApp/JHUniversalApp/Components/Libs/JH/JinherUniversalStaticLib/ipFile.plist
+</span></span><span class=line><span class=cl>modified:   JHUniversalApp/JHUniversalApp/ViewControllers/HomePage/Controller/HomeChannelController.m
+</span></span><span class=line><span class=cl>modified:   JHUniversalApp/JHUniversalApp/ViewControllers/LayoutEngine/LayoutEngineViewController.m
+</span></span><span class=line><span class=cl>modified:   JHUniversalApp/JHUniversalApp/ViewControllers/LayoutEngine/LayoutSecondEngineViewController.m
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2019-07-05</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/iOS/>iOS</a></div><nav class=post-nav><a class=prev href=/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E4%BA%8C%E7%BA%A7%E5%B8%83%E5%B1%80%E5%99%A8%E6%B5%81%E7%A8%8B/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">二级布局器流程</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E7%94%B5%E5%AD%90%E5%B7%A1%E6%9F%A5/%E5%AE%9A%E5%88%B6%E5%BC%80%E6%BA%90%E7%9A%84CLImageEditor%E5%9B%BE%E7%89%87%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7/><span class="next-text nav-default">定制开源的CLImageEditor图片编辑工具</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2019-07-05 08:26:09 +0800 +0800",title:"用户组管理",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

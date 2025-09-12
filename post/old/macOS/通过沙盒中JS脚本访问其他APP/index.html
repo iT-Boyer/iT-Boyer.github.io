@@ -1,0 +1,232 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>通过沙盒中JS脚本访问其他APP - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="如何使用脚本字典里的命令和对象来与其他的应用进行通讯? 这个教程将向您展示现在使用 AppleScript 来控制别的应用的最佳方式。我也会告诉您一些小技巧以帮助您和您的用户用最小的努力就架设起 AppleScript。
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/macOS/%E9%80%9A%E8%BF%87%E6%B2%99%E7%9B%92%E4%B8%ADJS%E8%84%9A%E6%9C%AC%E8%AE%BF%E9%97%AE%E5%85%B6%E4%BB%96APP/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/macOS/%E9%80%9A%E8%BF%87%E6%B2%99%E7%9B%92%E4%B8%ADJS%E8%84%9A%E6%9C%AC%E8%AE%BF%E9%97%AE%E5%85%B6%E4%BB%96APP/"><meta property="og:site_name" content="习七"><meta property="og:title" content="通过沙盒中JS脚本访问其他APP"><meta property="og:description" content="如何使用脚本字典里的命令和对象来与其他的应用进行通讯? 这个教程将向您展示现在使用 AppleScript 来控制别的应用的最佳方式。我也会告诉您一些小技巧以帮助您和您的用户用最小的努力就架设起 AppleScript。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-02-14T18:25:29+00:00"><meta property="article:modified_time" content="2017-02-14T18:25:29+00:00"><meta property="article:tag" content="JS"><meta itemprop=name content="通过沙盒中JS脚本访问其他APP"><meta itemprop=description content="如何使用脚本字典里的命令和对象来与其他的应用进行通讯? 这个教程将向您展示现在使用 AppleScript 来控制别的应用的最佳方式。我也会告诉您一些小技巧以帮助您和您的用户用最小的努力就架设起 AppleScript。"><meta itemprop=datePublished content="2017-02-14T18:25:29+00:00"><meta itemprop=dateModified content="2017-02-14T18:25:29+00:00"><meta itemprop=wordCount content="2813"><meta itemprop=keywords content="JS"><meta name=twitter:card content="summary"><meta name=twitter:title content="通过沙盒中JS脚本访问其他APP"><meta name=twitter:description content="如何使用脚本字典里的命令和对象来与其他的应用进行通讯? 这个教程将向您展示现在使用 AppleScript 来控制别的应用的最佳方式。我也会告诉您一些小技巧以帮助您和您的用户用最小的努力就架设起 AppleScript。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>通过沙盒中JS脚本访问其他APP</h1><div class=post-meta><span class=post-time>2017-02-14</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 2813 字 </span><span class=more-meta>预计阅读 6 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>在自己的APP中编写</a><ul><li><a href=#>编写AppleScript代码</a></li><li><a href=#>创建事件描述符 (event descriptor)</a></li><li><a href=#>OC中加载 AppleScript</a></li><li><a href=#>调用事件描述符</a></li></ul></li><li><a href=#>调用沙盒中脚本代码与访问其他应用</a><ul><li><a href=#>了解APP沙盒限制</a></li><li><a href=#>开始安装运行脚本</a></li><li><a href=#>执行脚本任务</a></li></ul></li><li><a href=#>同步操作</a></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-02-14T18:25:29 title="February 14, 2017">February 14, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>如何使用脚本字典里的命令和对象来与其他的应用进行通讯?
+这个教程将向您展示现在使用 <code>AppleScript</code> 来控制别的应用的最佳方式。我也会告诉您一些小技巧以帮助您和您的用户用最小的努力就架设起 <code>AppleScript</code>。</p><h2>在自己的APP中编写</h2><h3>编写AppleScript代码</h3><p><a href=https://developer.apple.com/library/mac/documentation/applescript/conceptual/applescriptlangguide/introduction/ASLR_intro.html#//apple_ref/doc/uid/TP40000983-CH208-SW1>AppleScript 脚本指南</a>
+与其他应用进行通讯的脚本一般来说都很短，也容易理解。<code>AppleScript</code> 可以被想做一种传送的机制，而不是一种处理环境。
+典型脚本:
+{% codeblock lang:js %}
+on chockify(inputString)
+set resultString to ""</p><pre><code>    repeat with inputStringCharacter in inputString
+        set asciiValue to (ASCII number inputStringCharacter)
+        if (asciiValue &gt; 96 and asciiValue &lt; 123) then
+            set resultString to resultString &amp; (ASCII character (asciiValue - 32))
+        else
+            if ((asciiValue &gt; 64 and asciiValue &lt; 91) or (asciiValue = 32)) then
+                set resultString to resultString &amp; inputStringCharacter
+            else
+                if (asciiValue &gt; 47 and asciiValue &lt; 58) then
+                    set numberStrings to {&quot;ZERO&quot;, &quot;ONE&quot;, &quot;TWO&quot;, &quot;THREE&quot;, &quot;FOR&quot;, &quot;FIVE&quot;, &quot;SIX&quot;, &quot;SEVEN&quot;, &quot;EIGHT&quot;, &quot;NINE&quot;}
+                    set itemIndex to asciiValue - 47
+                    set numberString to item itemIndex of numberStrings
+                    set resultString to resultString &amp; numberString &amp; &quot; &quot;
+                else
+                    if (asciiValue = 33) then
+                        set resultString to resultString &amp; &quot; DUH&quot;
+                    else
+                        if (asciiValue = 63) then
+                            set resultString to resultString &amp; &quot; IF YOU KNOW WHAT I MEAN&quot;
+                        end if
+                    end if
+                end if
+            end if
+        end if
+    end repeat
+    resultString
+</code></pre><p>end chockify
+{% endcodeblock %}</p><h3>创建事件描述符 (event descriptor)</h3><ol><li>导入Carbon.h
+它有关于所有的 AppleEvent 的定义。
+{% codeblock lang:objc %}
+#import &lt;Carbon/Carbon.h> // for AppleScript definitions
+{% endcodeblock %}</li><li>OC中创建<code>chockify</code>事件描述符
+这是可以在你的脚本和应用之间互相传递的一个数据块。可以把它理解成一个封装好的会去执行某个事件的目标，一个将被调用的函数，以及这个函数的参数。使用一个 <code>NSString</code> 作为参数，创建<code>chockify</code>事件描述符：
+{% codeblock lang:objc %}</li></ol><ul><li><p>(NSAppleEventDescriptor *)chockifyEventDescriptorWithString:(NSString *)inputString
+{
+// parameter
+NSAppleEventDescriptor *parameter = [NSAppleEventDescriptor descriptorWithString:inputString];
+NSAppleEventDescriptor *parameters = [NSAppleEventDescriptor listDescriptor];
+[parameters insertDescriptor:parameter atIndex:1]; // you have to love a language with indices that start at 1 instead of 0</p><p>// target
+ProcessSerialNumber psn = {0, kCurrentProcess};
+NSAppleEventDescriptor *target = [NSAppleEventDescriptor descriptorWithDescriptorType:typeProcessSerialNumber bytes:&amp;psn length:sizeof(ProcessSerialNumber)];</p><p>// function
+NSAppleEventDescriptor *function = [NSAppleEventDescriptor descriptorWithString:@&ldquo;chockify&rdquo;];</p><p>// event
+NSAppleEventDescriptor *event = [NSAppleEventDescriptor appleEventWithEventClass:kASAppleScriptSuite eventID:kASSubroutineEvent targetDescriptor:target returnID:kAutoGenerateReturnID transactionID:kAnyTransactionID];
+[event setParamDescriptor:function forKeyword:keyASSubroutineName];
+[event setParamDescriptor:parameters forKeyword:keyDirectObject];</p><p>return event;
+}
+{% endcodeblock %}</p></li></ul><h3>OC中加载 AppleScript</h3><p>通过应用包(Application bundle)的一个 <code>URL</code> 可以创建 <code>NSAppleScript</code>的实例。而反过来，脚本也要和上面创建的 <code>chockify 事件描述符</code>一起使用。
+{% codeblock lang:objc %}
+NSURL *URL = [[NSBundle mainBundle] URLForResource:@&ldquo;Automation&rdquo; withExtension:@&ldquo;scpt&rdquo;];
+if (URL)
+{
+NSAppleScript *appleScript = [[NSAppleScript alloc] initWithContentsOfURL:URL error:NULL];</p><pre><code>NSAppleEventDescriptor *event = [self chockifyEventDescriptorWithString:[self.chockifyInputTextField stringValue]];
+NSDictionary *error = nil;
+NSAppleEventDescriptor *resultEventDescriptor = [appleScript executeAppleEvent:event error:&amp;error];
+if (! resultEventDescriptor) 
+{
+    NSLog(@&quot;%s AppleScript run error = %@&quot;, __PRETTY_FUNCTION__, error);
+}
+else
+{
+    NSString *string = [self stringForResultEventDescriptor:resultEventDescriptor];
+    [self updateChockifyTextFieldWithString:string];
+}
+</code></pre><p>}
+{% endcodeblock %}
+如果一切正常的话，你会得到另一个事件描述符。如果出错了，你会得到一个包含了描述错误信息的字典。虽说这个模式和很多其他 <code>Foundation 类</code>很相似，但是返回的错误并不是一个 <code>NSError</code> 的实例。</p><h3>调用事件描述符</h3><p>{% codeblock lang:objc %}</p><ul><li>(NSString *)stringForResultEventDescriptor:(NSAppleEventDescriptor *)resultEventDescriptor
+{
+NSString *result = nil;
+if (resultEventDescriptor)
+{
+if ([resultEventDescriptor descriptorType] != kAENullEvent)
+{
+if ([resultEventDescriptor descriptorType] == kTXNUnicodeTextData)
+{
+result = [resultEventDescriptor stringValue];
+}
+}
+}
+return result;
+}
+{% endcodeblock %}
+InputString 输入可以被正确整形输出，并且你现在也看到想在你的应用里运行 AppleScripts 的方法</li></ul><h2>调用沙盒中脚本代码与访问其他应用</h2><h3>了解APP沙盒限制</h3><p>如果一段脚本可以轻易地拿到浏览器当前页面上的内容，甚至是在任意标签和窗口运行<code>JavaScript</code>。想象一下如果这些页面里有你的银行账号，或者包含你的信用卡信息什么的。</p><p>对于沙盒应用，Apple 所提倡的是通过用户的需要来驱动安全策略。这意味着是否运行你的脚本完全取决于用户。这些脚本可能是来自互联网，也可能是你应用的一部分。一旦得到了权限，脚本就可以以一种受限的方式与系统其他部分进行交互了。<code>NSUserScriptTask</code>使这一切变得可能。
+由此：Apple 引入了一个新的抽象类 <code>NSUserScriptTask</code>,有三个具体的子类实现:</p><ol><li><code>NSUserUnixTask</code>: 执行 Unix shell 命令</li><li><code>NSUserAutomatorTask</code>: Automator 工作流</li><li><code>NSUserAppleScriptTask</code>:执行<code>AppleScript脚本</code>,脚本是异步执行的,所以脚本不能对用户界面做更新操作。</li></ol><h3>开始安装运行脚本</h3><p>怎么向用户请求运行脚本的许可，让你的应用与用户的其他应用更好地工作在一起？
+两种策略:</p><ol><li>帮助用户来存放运行脚本的位置</li><li>获取行脚本目录可读写</li></ol><h4>帮用户存放运行脚本的位置</h4><p>只能把把这些脚本放到用户的脚本文件夹(<code>User > Library > Application Scripts/bundle identifier/</code>)中，以只读的方式来运行你的脚本。
+脚本想要进入这个特定的文件夹的唯一方式就是用用户把它们复制到那里。再者<code>Library 文件夹</code>在 OS X 里默认还是隐藏的。这样对用户都很不友好。
+让代码来帮助用户打开这个隐藏文件夹：
+{% codeblock lang:objc %}
+NSError *error;
+NSURL *directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationScriptsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&amp;error];
+[[NSWorkspace sharedWorkspace] openURL:directoryURL];
+{% endcodeblock %}
+通过你的应用的某个控件打开这个文件夹，然后进行编辑。这对于用户自己写的脚本来说是个很好的解决方案。</p><h4>设置运行脚本目录的读写权限</h4><ol><li>在 Xcode 里，你需要更新 <code>Capabilities</code>，让其包括 <code>User Selected File to Read/Write</code>。在 <code>App Sandbox > File Access </code>里找到相关选项。</li><li>用户的意愿是关键，因为你需要获取权限以将脚本添加到文件夹：
+{% codeblock lang:objc %}
+NSError *error;
+NSURL *directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationScriptsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&amp;error];
+NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+[openPanel setDirectoryURL:directoryURL];
+[openPanel setCanChooseDirectories:YES];
+[openPanel setCanChooseFiles:NO];
+[openPanel setPrompt:@&ldquo;Select Script Folder&rdquo;];
+[openPanel setMessage:@&ldquo;Please select the User > Library > Application Scripts > com.iconfactory.Scriptinator folder&rdquo;];</li></ol><p>[openPanel beginWithCompletionHandler:^(NSInteger result) {
+if (result == NSFileHandlingPanelOKButton)
+{
+NSURL *selectedURL = [openPanel URL];
+if ([selectedURL isEqual:directoryURL])
+{
+NSURL *destinationURL = [selectedURL URLByAppendingPathComponent:@&ldquo;Automation.scpt&rdquo;];
+NSFileManager *fileManager = [NSFileManager defaultManager];
+NSURL *sourceURL = [[NSBundle mainBundle] URLForResource:@&ldquo;Automation&rdquo; withExtension:@&ldquo;scpt&rdquo;];
+NSError *error;
+BOOL success = [fileManager copyItemAtURL:sourceURL toURL:destinationURL error:&amp;error];
+if (success)
+{
+NSAlert *alert = [NSAlert alertWithMessageText:@&ldquo;Script Installed&rdquo; defaultButton:@&ldquo;OK&rdquo; alternateButton:nil otherButton:nil informativeTextWithFormat:@&ldquo;The Automation script was installed succcessfully.&rdquo;];
+[alert runModal];
+}
+else
+{
+NSLog(@"%s error = %@", <strong>PRETTY_FUNCTION</strong>, error);
+if ([error code] == NSFileWriteFileExistsError)
+{
+// this is where you could update the script, by removing the old one and copying in a new one
+}
+else
+{
+// the item couldn&rsquo;t be copied, try again
+[self performSelector:@selector(installAutomationScript:) withObject:self afterDelay:0.0];
+}
+}
+}
+else
+{
+// try again because the user changed the folder path
+[self performSelector:@selector(installAutomationScript:) withObject:self afterDelay:0.0];
+}
+}
+}];
+{% endcodeblock %}
+这么一来，应用包中的 <code>Automation.scpt</code> 文件现在暴露在常规的文件系统中了。</p><h3>执行脚本任务</h3><p>使用 <code>NSUserAppleScriptTask</code> 来替代 <code>NSAppleScript</code>，来运行上面创建的<code>事件描述符</code>。
+你大概会经常用到这些脚本任务。文档警告说对于给定的类的某个实例， <code>NSUserAppleScriptTask</code> 不应该被执行多次。所以写一个<code>工厂函数</code>来在需要的时候创建任务：
+{% codeblock 工厂函数 lang:objc %}</p><ul><li>(NSUserAppleScriptTask *)automationScriptTask
+{
+NSUserAppleScriptTask *result = nil;
+NSError *error;
+NSURL *directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationScriptsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&amp;error];
+if (directoryURL)
+{
+NSURL *scriptURL = [directoryURL URLByAppendingPathComponent:@&ldquo;Automation.scpt&rdquo;];
+result = [[NSUserAppleScriptTask alloc] initWithURL:scriptURL error:&amp;error];
+if (! result)
+{
+NSLog(@"%s no AppleScript task error = %@", <strong>PRETTY_FUNCTION</strong>, error);
+}
+}
+else
+{
+// NOTE: if you&rsquo;re not running in a sandbox, the directory URL will always be nil
+NSLog(@"%s no Application Scripts folder error = %@", <strong>PRETTY_FUNCTION</strong>, error);
+}
+return result;
+}
+{% endcodeblock %}</li></ul><blockquote><p>如果你正在写一个同时适用于沙盒和非沙盒的 Mac 应用的话，在获取 <code>directoryURL</code> 时你需要特别小心。<code>NSApplicationScriptsDirectory</code>只在沙盒中有效。</p></blockquote><p>在创建脚本任务后，你需要使用 <code>AppleEvent</code> 并提供一个结束处理来执行它：
+{% codeblock AppleEvent lang:objc %}
+NSUserAppleScriptTask *automationScriptTask = [self automationScriptTask];
+if (automationScriptTask)
+{
+NSAppleEventDescriptor *event = [self safariURLEventDescriptor];
+[automationScriptTask executeWithAppleEvent:event completionHandler:^(NSAppleEventDescriptor *resultEventDescriptor, NSError *error) {
+if (! resultEventDescriptor)
+{
+NSLog(@"%s AppleScript task error = %@", <strong>PRETTY_FUNCTION</strong>, error);
+}
+else
+{
+NSURL *URL = [self URLForResultEventDescriptor:resultEventDescriptor];
+// NOTE: The completion handler for the script is not run on the main thread. Before you update any UI, you&rsquo;ll need to get
+// on that thread by using libdispatch or performing a selector.
+[self performSelectorOnMainThread:@selector(updateURLTextFieldWithURL:) withObject:URL waitUntilDone:NO];
+}
+}];
+}
+{% endcodeblock %}
+对于用户写的脚本，用户可能期望你的应用只是简单地&rsquo;运行&rsquo;脚本 (而不去调用事件描述符中指定的函数)。在这种情况下，你可以为 <code>event</code> 传递一个 <code>nil</code>，脚本就会像用户在 <code>Finder</code> 中双击那样的行为进行执行。
+<code>NSUserAppleScriptTask</code>脚本是异步执行的，所以你的用户界面并不会被一个 (比较长) 的脚本锁住，在结束后会执行回调处理。</p><h2>同步操作</h2><p><code>NSAppleScript</code> 和 <code>NSUserAppleScriptTask</code> 有一个微妙的区别：新的机制是异步执行的。对于大部分情况，使用一个结束回调来处理会是一个好得多的方式，因为这样就不会因为执行脚本而阻碍你的应用。
+然而有时候如果你想带有依赖地来执行任务的时候，事情就变得有些取巧了。比方说一个任务需要在另一个任务开始之前必须完成。这种情况下你就会想念 <code>NSAppleScript</code> 的同步特性了。
+要获得传统方式的行为，一种简单的方法是使用一个<code>信号量(semaphore)</code> 来确保同时只有一个任务运行、在你的类或者应用的初始化方法中，使用 <code>libdispatch</code> 创建一个信号量：
+{% codeblock lang:objc %}
+self.appleScriptTaskSemaphore = dispatch_semaphore_create(1);
+{% endcodeblock %}
+接下来在初始化脚本任务之前，简单地等待信号量。当任务完成时，标记相同的这个信号量：
+{% codeblock lang:objc %}
+// wait for any previous tasks to complete before starting a new one — remember that you&rsquo;re blocking the main thread here!
+dispatch_semaphore_wait(self.appleScriptTaskSemaphore, DISPATCH_TIME_FOREVER);</p><p>// run the script task
+NSAppleEventDescriptor *event = [self openNetworkPreferencesEventDescriptor];
+[automationScriptTask executeWithAppleEvent:event completionHandler:^(NSAppleEventDescriptor *resultEventDescriptor, NSError *error) {
+if (! resultEventDescriptor)
+{
+NSLog(@"%s AppleScript task error = %@", <strong>PRETTY_FUNCTION</strong>, error);
+}
+else
+{
+[self performSelectorOnMainThread:@selector(showNetworkAlert) withObject:nil waitUntilDone:NO];
+}
+// the task has completed, so let any pending tasks proceed
+dispatch_semaphore_signal(self.appleScriptTaskSemaphore);
+}];
+{% endcodeblock %}
+再强调一下，除非确实有所需要，否则最好别这么做。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-02-14</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/JS/>JS</a></div><nav class=post-nav><a class=prev href=/post/old/macOS/macOS%E6%94%AF%E6%8C%81JavaScript%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">macOS支持JavaScript自动化组件基础</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/macOS/macOS%E4%B9%8BPDFKit%E5%9F%BA%E7%A1%80/><span class="next-text nav-default">macOS之PDFKit基础</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-02-14 18:25:29 +0000 UTC",title:"通过沙盒中JS脚本访问其他APP",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

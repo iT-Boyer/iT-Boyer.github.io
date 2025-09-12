@@ -1,0 +1,187 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>扩展 org-capture 基于 TAGS 功能动态设置 prompt - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="博客简介"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%89%A9%E5%B1%95capture%E4%B8%ADtag%E8%AE%BE%E7%BD%AE%E6%94%AF%E6%8C%81prompt/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%89%A9%E5%B1%95capture%E4%B8%ADtag%E8%AE%BE%E7%BD%AE%E6%94%AF%E6%8C%81prompt/"><meta property="og:site_name" content="习七"><meta property="og:title" content="扩展 org-capture 基于 TAGS 功能动态设置 prompt"><meta property="og:description" content="博客简介"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-05-20T09:47:00+08:00"><meta property="article:modified_time" content="2023-05-20T09:50:31+08:00"><meta property="article:tag" content="灵感"><meta itemprop=name content="扩展 org-capture 基于 TAGS 功能动态设置 prompt"><meta itemprop=description content="博客简介"><meta itemprop=datePublished content="2023-05-20T09:47:00+08:00"><meta itemprop=dateModified content="2023-05-20T09:50:31+08:00"><meta itemprop=wordCount content="1576"><meta itemprop=keywords content="灵感"><meta name=twitter:card content="summary"><meta name=twitter:title content="扩展 org-capture 基于 TAGS 功能动态设置 prompt"><meta name=twitter:description content="博客简介"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>扩展 org-capture 基于 TAGS 功能动态设置 prompt</h1><div class=post-meta><span class=post-time>2023-05-20</span><div class=post-category><a href=/categories/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/>日志随笔 </a><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 1576 字 </span><span class=more-meta>预计阅读 4 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by
+<a href=/authors/iTBoyer>iTBoyer</a></span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#使用-org-ql-解析-prompt-dot-org-数据>使用 org-ql 解析 prompt.org 数据</a><ul><li></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2023-05-20T09:50:31 title="May 20, 2023">May 20, 2023</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>在 capture 中支持 tag 的选择，tag 可以分类，扩展AI分类，以 prompt 的 title 作为 tag 值。在调用 gpt 之前，只需要设定 tag 就行了。</p><p>例如：想使用 写作助理的角色，完成一下操作</p><ol><li>现在 tag 分组中添加角色名称</li><li>再添加 tag 到 headline 上</li><li>在请求之前，使用 tag 值匹配 prompt 模块的名称，然后就可以为 gptel 设置 system 了。</li></ol><p>难点： 如何通过 tag 获取 prompt，有几种方案</p><ol><li>依赖 json 文件，通过解析 json 文件，匹配到 prompt</li><li>直接从 prompt.org 文件中获取<ol><li>手动解析 org-element 数据，在进行匹配操作</li><li>借助第三方库 org-ql 实现快速检索 org 文件的内容，获取到 prompt</li></ol></li></ol><p>在支持 tag 功能之后，将很大的改进 gptel 使用场景：</p><ol><li>在 capture 中，就可以通过 tag 方式,设置 prompt 。</li><li>在 org 文件时，当前光标的位置调用 gptel ，只要设置 tag , gptel 就以设置的 prompt 方式回答问题。</li></ol><p>需要做那些工作</p><ul><li><p><input checked disabled type=checkbox> 使用 org-ql 查询 tag 匹配的 prompt</p></li><li><p><input checked disabled type=checkbox> 使用 org-ql 获取 prompt 库中内容</p></li><li><p><input disabled type=checkbox> 替换 gptel 自定义方法中，调试功能</p><p>在继承过程中发现遗留问题：</p><ol><li>org-ql query 的 where 语法中, 例如：提示type格式问题。<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>       <span class=p>(</span><span class=nb>setq</span> <span class=nv>type</span> <span class=s>&#34;hello world&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nv>org-ql-query</span> <span class=nb>:from</span> <span class=s>&#34;file&#34;</span>
+</span></span><span class=line><span class=cl>                     <span class=nb>:where</span> <span class=o>&#39;</span><span class=err>（</span><span class=nv>heading</span> <span class=nv>type</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div></li><li>使用 <code>org-get-entry</code> 获取条目内容职能得到第一行的内容</li><li>从 capture 中无法拿到 tags ,目前通过添加 org-capture 属性的传递模板类型。意味着无法在 capture 过程中，使用 tag 设置的机制，设置 prompt。</li></ol></li></ul><h2 id=使用-org-ql-解析-prompt-dot-org-数据>使用 org-ql 解析 prompt.org 数据</h2><p>以下面格言书 prompt 格式为例子，获取 prompt 子目录 system 条目中的内容</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-org data-lang=org><span class=line><span class=cl><span class=gh>*</span><span class=gs> 格言书 :文本:AI:</span>
+</span></span><span class=line><span class=cl><span class=c>:PROPERTIES:
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=cs>:remark: 根据问题输出鼓舞人心的名言和有意义的格言。
+</span></span></span><span class=line><span class=cl><span class=cs></span><span class=c>:END:</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gu>**</span> system
+</span></span><span class=line><span class=cl>我希望你能充当一本箴言书。对于我的问题，你会提供明智的建议、鼓舞人心的名言和有意义的谚语，以帮助指导我的日常决策。此外，如果有必要，你可以提出将这些建议付诸行动的实际方法或其他相关主题。
+</span></span><span class=line><span class=cl><span class=gu>**</span> user
+</span></span><span class=line><span class=cl>我的问题是:
+</span></span></code></pre></td></tr></table></div></div><p><a href=https://github.com/alphapapa/org-ql//tree/3d24146ddaa47e1ae3ca6cae89b8bb3d143cc9ec/READ-zh.org>org-ql/READ-zh.org</a></p><p><a href=https://github.com/alphapapa/org-ql//tree/3d24146ddaa47e1ae3ca6cae89b8bb3d143cc9ec/examples.org>org-ql/examples.org</a></p><p>在学习 org-ql 的基本用法，需要使用 org-ql 的 ancestors 特性：</p><p>子节点条件语法： (ancestors (heading &ldquo;tag名称&rdquo;)),该表达式是要求匹配的条目必须有父级条目，使用嵌套语法要求父条目名称为 tag 的名称。</p><p>这样 select 返回的是 system 条目的 org-element 元数据。</p><p>再通过 select 语句明确要返回条目的内容类型,例如获取 system 条目下的文本类型: <code>:select '(org-get-entry)</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nv>org-ql-query</span>
+</span></span><span class=line><span class=cl>  <span class=nb>:select</span> <span class=o>&#39;</span><span class=p>(</span><span class=nv>org-get-entry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nb>:from</span> <span class=s>&#34;~/hsg/iNotes/content-org/prompt/prompt.org&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>:where</span> <span class=o>&#39;</span><span class=p>(</span><span class=nb>and</span> <span class=p>(</span><span class=nv>tags</span> <span class=s>&#34;AI&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>               <span class=p>(</span><span class=nv>ancestors</span> <span class=p>(</span><span class=nv>heading</span> <span class=s>&#34;内容总结&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>               <span class=p>(</span><span class=nv>heading</span> <span class=s>&#34;system&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>               <span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><table><thead><tr><th></th></tr></thead><tbody><tr><td>请将我提供的每篇文字都概括为 100 个字，使其易于阅读和理解。避免使用复杂的句子结构或技术术语。</td></tr></tbody></table><p>下面根据具体场景,将上面的查询方法，封装一下获取 prompt 目录下 system 和 user 的内容.</p><h4 id=获取字符串一级条目的-ai-标签>获取字符串一级条目的 AI 标签</h4><p>在实际需求中，需要先从 capture 的字符串的内容中获取用户设置的 AI 标签，然后提供给处理 prompt.org 使用。</p><p>这个方法主要两个参数：</p><ol><li>org-str 是 capture 过程中的 org 字符串。</li><li>tagregex 是 org-ql 查询用户设置的 tag 正则，匹配到 AI 标签，并返回。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>get-element-tag-by-ql</span> <span class=p>(</span><span class=nv>org-str</span> <span class=nv>tagregex</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let</span> <span class=p>(</span><span class=nv>result</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>with-current-buffer</span> <span class=p>(</span><span class=nf>get-buffer-create</span> <span class=s>&#34;*gpteltagtemp*&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>erase-buffer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>insert</span> <span class=nv>org-str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>org-mode</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;buffer内容： %s \n buffer 名称： %s&#34;</span> <span class=p>(</span><span class=nf>buffer-string</span><span class=p>)</span> <span class=p>(</span><span class=nf>current-buffer</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>setq</span> <span class=nv>tags</span> <span class=p>(</span><span class=nv>org-ql-query</span>
+</span></span><span class=line><span class=cl>                   <span class=nb>:select</span> <span class=o>&#39;</span><span class=p>(</span><span class=nv>org-entry-get</span> <span class=p>(</span><span class=nf>point</span><span class=p>)</span> <span class=s>&#34;TAGS&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                   <span class=nb>:from</span> <span class=p>(</span><span class=nf>current-buffer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                   <span class=nb>:where</span> <span class=o>&#39;</span><span class=p>(</span><span class=nb>and</span>
+</span></span><span class=line><span class=cl>                            <span class=p>(</span><span class=nv>tags*</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;^%s.*$&#34;</span> <span class=nv>tagregex</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                            <span class=p>(</span><span class=nv>not</span> <span class=p>(</span><span class=nv>parent</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                            <span class=p>)</span>
+</span></span><span class=line><span class=cl>                   <span class=p>))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;数组1111：%s&#34;</span> <span class=nv>tags</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>setq</span> <span class=nv>result</span> <span class=p>(</span><span class=nb>catch</span> <span class=ss>&#39;tag-found</span>
+</span></span><span class=line><span class=cl>                     <span class=p>(</span><span class=nb>dolist</span> <span class=p>(</span><span class=nv>tag</span> <span class=nv>tags</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                       <span class=p>(</span><span class=nb>setq</span> <span class=nv>tag</span> <span class=p>(</span><span class=nf>substring</span> <span class=nv>tag</span> <span class=mi>1</span> <span class=mi>-1</span><span class=p>))</span>   <span class=c1>; 去除首尾:</span>
+</span></span><span class=line><span class=cl>                       <span class=p>(</span><span class=nb>setq</span> <span class=nv>tagarr</span> <span class=p>(</span><span class=nv>split-string</span> <span class=nv>tag</span> <span class=s>&#34;:&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                       <span class=p>(</span><span class=nb>dolist</span> <span class=p>(</span><span class=nv>item</span> <span class=nv>tagarr</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                       <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;匹配中：%s&#34;</span> <span class=nv>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                       <span class=p>(</span><span class=nb>setq</span> <span class=nv>reg</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;^%s.*$&#34;</span> <span class=nv>tagregex</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                       <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;正则：%s&#34;</span> <span class=nv>reg</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nf>string-match</span> <span class=nv>reg</span> <span class=nv>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                           <span class=p>(</span><span class=nb>setq</span> <span class=nv>item</span> <span class=p>(</span><span class=nf>substring</span> <span class=nv>item</span> <span class=mi>2</span><span class=p>))</span> <span class=c1>;;去除AI前缀</span>
+</span></span><span class=line><span class=cl>                           <span class=p>(</span><span class=nb>throw</span> <span class=ss>&#39;tag-found</span> <span class=nv>item</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                       <span class=p>)))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;结果：%s&#34;</span> <span class=nv>result</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>)))</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>setq</span> <span class=nv>org-string</span> <span class=s>&#34;* Hello world :AI内容总结: \nThis is the body of first-level headline.\n\n** Subheadline \nTest text.Test text.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>get-element-tag-by-ql</span> <span class=nv>org-string</span> <span class=s>&#34;AI&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>结果：内容总结
+</span></span></code></pre></td></tr></table></div></div><h4 id=通过-ai-标签从-prompt-dot-org-文件中获取-prompt>通过 AI 标签从 prompt.org 文件中获取 prompt</h4><p>使用 org-ql 从 prompt.org 文件中获取 prompt，封装了如下方法，为了便于测试，使用 with-temp-buffer</p><p>方法的作用和参数</p><ol><li>第一参数，为 prompt.org 文件路径</li><li>第二参数，来自 capture 中用户设置的 AI 标签，对应 prompt.org 条目中一级条目的标题。</li><li>第三参数，设置 prompt 的类型，支持 system 和 user 类型，对应 prompt.org 中的子条目的title。定义 ptype 过程中，遇到 (heading ptype) 报错的问题，没有排查到原因，展示使用 1 和 其他标识来区分要获取的类型。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>get-element-prompt-by-ql</span> <span class=p>(</span><span class=nv>org-str</span> <span class=nv>title</span> <span class=nv>ptype</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let</span> <span class=p>(</span><span class=nv>prompt</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>with-current-buffer</span> <span class=p>(</span><span class=nf>get-buffer-create</span> <span class=s>&#34;*gpteltemp*&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>erase-buffer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>insert</span> <span class=nv>org-str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>org-mode</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>if</span> <span class=p>(</span><span class=nf>=</span> <span class=nv>ptype</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nb>setq</span> <span class=nv>prompt</span> <span class=p>(</span><span class=nv>org-ql-query</span>
+</span></span><span class=line><span class=cl>                         <span class=nb>:select</span> <span class=o>&#39;</span><span class=p>(</span><span class=nv>org-get-entry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                         <span class=nb>:from</span> <span class=p>(</span><span class=nf>current-buffer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                         <span class=nb>:where</span> <span class=o>&#39;</span><span class=p>(</span><span class=nb>and</span>
+</span></span><span class=line><span class=cl>                                  <span class=p>(</span><span class=nv>ancestors</span> <span class=p>(</span><span class=nv>heading</span> <span class=nv>title</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                  <span class=p>(</span><span class=nv>heading</span> <span class=s>&#34;system&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                  <span class=p>)))</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nb>setq</span> <span class=nv>prompt</span> <span class=p>(</span><span class=nv>org-ql-select</span>  <span class=p>(</span><span class=nf>current-buffer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                       <span class=o>&#39;</span><span class=p>(</span><span class=nb>and</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nv>ancestors</span> <span class=p>(</span><span class=nv>heading</span> <span class=nv>title</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nv>heading</span> <span class=s>&#34;user&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                         <span class=p>)</span>
+</span></span><span class=line><span class=cl>                       <span class=nb>:action</span> <span class=o>&#39;</span><span class=p>(</span><span class=nv>org-get-entry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                       <span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=c1>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;当前获取的类型：%s&#34;</span> <span class=p>(</span><span class=nf>car</span> <span class=nv>prompt</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>      <span class=p>)))</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>setq</span> <span class=nv>org-string</span> <span class=s>&#34;* Hello world :AI:\nThis is the body of first-level headline.\n** user\n\nTest text.Test text.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>;; (setq file &#34;~/hsg/iNotes/content-org/prompt/prompt.org&#34;)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>setq</span> <span class=nv>file</span> <span class=s>&#34;~/hsg/iNotes/content-org/test.org&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>get-element-prompt-by-ql</span> <span class=nv>org-string</span> <span class=s>&#34;Hello world&#34;</span> <span class=mi>0</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>当前获取的类型：
+</span></span><span class=line><span class=cl>Test text.Test text.
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2023-05-20</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/%E7%81%B5%E6%84%9F/>灵感</a></div><nav class=post-nav><a class=prev href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/org-ql%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E7%9A%84%E7%BF%BB%E8%AF%91/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">介绍 org-ql 常用命令</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/org-element/><span class="next-text nav-default">org-element.el API 联调文档</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2023-05-20 09:47:00 +0800 +0800",title:"扩展 org-capture 基于 TAGS 功能动态设置 prompt",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

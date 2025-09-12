@@ -1,0 +1,99 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>整理iOS中几种常用的展示型视图控制器 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="开始项目 完整项目
+UIAlertController 在iOS8中，提供UIAlertController控制器代替UIAlertView和UIActionSheet两个控件。给用户展示提示信息的新的一种方式。
+"><meta name=keywords content="动画,转场,UI"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/iOS/iOS%E4%B8%AD%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E5%B1%95%E7%A4%BA%E6%8E%A7%E5%88%B6%E5%99%A8%E4%BD%BF%E7%94%A8/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/iOS/iOS%E4%B8%AD%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E5%B1%95%E7%A4%BA%E6%8E%A7%E5%88%B6%E5%99%A8%E4%BD%BF%E7%94%A8/"><meta property="og:site_name" content="习七"><meta property="og:title" content="整理iOS中几种常用的展示型视图控制器"><meta property="og:description" content="开始项目 完整项目
+UIAlertController 在iOS8中，提供UIAlertController控制器代替UIAlertView和UIActionSheet两个控件。给用户展示提示信息的新的一种方式。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-02-16T17:53:18+00:00"><meta property="article:modified_time" content="2017-02-16T17:53:18+00:00"><meta property="article:tag" content="转场"><meta itemprop=name content="整理iOS中几种常用的展示型视图控制器"><meta itemprop=description content="开始项目 完整项目
+UIAlertController 在iOS8中，提供UIAlertController控制器代替UIAlertView和UIActionSheet两个控件。给用户展示提示信息的新的一种方式。"><meta itemprop=datePublished content="2017-02-16T17:53:18+00:00"><meta itemprop=dateModified content="2017-02-16T17:53:18+00:00"><meta itemprop=wordCount content="2344"><meta itemprop=keywords content="动画,转场,UI"><meta name=twitter:card content="summary"><meta name=twitter:title content="整理iOS中几种常用的展示型视图控制器"><meta name=twitter:description content="开始项目 完整项目
+UIAlertController 在iOS8中，提供UIAlertController控制器代替UIAlertView和UIActionSheet两个控件。给用户展示提示信息的新的一种方式。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>整理iOS中几种常用的展示型视图控制器</h1><div class=post-meta><span class=post-time>2017-02-16</span><div class=post-category><a href=/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/>项目总结</a></div><span class=more-meta>约 2344 字 </span><span class=more-meta>预计阅读 5 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>UIAlertController</a><ul><li><a href=#>优势</a></li><li><a href=#>创建使用UIAlertController</a></li><li><a href=#>UIAlertControllerStyle枚举：<code>Alert</code>切换<code>ActionSheet</code></a></li><li><a href=#>popoverPresentationController锚点：sourceView/sourceRect</a></li></ul></li><li><a href=#>UIPopoverPresentationController</a><ul><li><a href=#>在compact和regular两种屏幕中显示模态视图</a></li><li><a href=#>在iPhone设备上dissmiss模态视图</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-02-16T17:53:18 title="February 16, 2017">February 16, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p><a href="https://www.dropbox.com/s/4gj6levvlav2xzc/PresentationsDemoStart.zip?dl=0">开始项目</a>
+<a href=https://github.com/appcoda/Presentation-Controllers-Demo>完整项目</a></p><h2>UIAlertController</h2><p>在iOS8中，提供<code>UIAlertController</code>控制器代替<code>UIAlertView</code>和<code>UIActionSheet</code>两个控件。给用户展示提示信息的新的一种方式。</p><h3>优势</h3><ol><li>能够自适应的（在iPad上，an <code>action sheet</code> style alert will present itself in a popover），</li><li>显示方式：可以轻松切换<code>Action sheets</code>和<code>alert view</code>两种显示样式<code>alert view</code>被以modal态显示presenting视图控制器上，<code>Action sheets</code>被固定在以屏幕底部。</li><li>按钮事件实现：使用闭包的方式来处理，相较之前通过实现代理的方式要简单很多。</li><li>子控件支持：<code>Alert view</code>支持按钮和输入框两种，Action sheets仅支持按钮一种控件。</li><li>不同于以往的两类<code>UIAlertController</code>继承自<code>UIViewController</code>。这意味着可以使用视图控制器提供展示信息的功能。</li></ol><h3>创建使用UIAlertController</h3><p>用<code>title</code>，<code>message</code>参数来实例化<code>alertController</code>实例，然后在实例中添加两个闭包的按钮
+{% codeblock showAlertWasTapped lang:swift %}
+@IBAction func showAlertWasTapped(sender: UIButton)
+{
+let alertController = UIAlertController(title: &ldquo;Appcoda&rdquo;, message: &ldquo;Message in alert dialog&rdquo;, preferredStyle: UIAlertControllerStyle.Alert)</p><pre><code>let deleteAction = UIAlertAction(title: &quot;Delete&quot;, style: UIAlertActionStyle.Destructive, handler: {(alert :UIAlertAction!) in
+    println(&quot;Delete button tapped&quot;)
+})
+alertController.addAction(deleteAction)
+
+let okAction = UIAlertAction(title: &quot;OK&quot;, style: UIAlertActionStyle.Default, handler: {(alert :UIAlertAction!) in
+    println(&quot;OK button tapped&quot;)
+})
+alertController.addAction(okAction)
+
+presentViewController(alertController, animated: true, completion: nil)
+</code></pre><p>}
+{% endcodeblock %}
+运行效果：</p><h3>UIAlertControllerStyle枚举：<code>Alert</code>切换<code>ActionSheet</code></h3><p>在<code>UIAlertController</code>之前，切换<code>alert</code>和<code>action sheet</code>需要重写大量的代码，但现在只需要改变一个枚举值<code>UIAlertControllerStyle.Alert</code>为<code>UIAlertControllerStyle.ActionSheet</code>.
+{% codeblock UIAlertControllerStyle.ActionSheet lang:swift %}
+let alertController = UIAlertController(title: &ldquo;Appcoda&rdquo;, message: &ldquo;Message in alert dialog&rdquo;, preferredStyle: UIAlertControllerStyle.ActionSheet)
+{% endcodeblock %}
+在iPhone上，屏幕底部显示一个<code>action sheet</code>。
+问题：在iPad上，点击上面的按钮崩溃，需要定义锚点位置。</p><h3>popoverPresentationController锚点：sourceView/sourceRect</h3><p><code>popover controller</code>在<code>alertController</code>视图内展示，需要一个<code>popover箭头</code>指向<code>alertController</code>视图的某一位置。
+通过设置<code>sourceView</code>来确定<code>popover箭头</code>位置，这个<code>popover</code>以及<code>popover箭头</code>指向的矩形区域都在这个<code>sourceView</code>上。
+在调用<code>presentViewController()</code>之前添加代码：
+{% codeblock lang:swift %}
+alertController.popoverPresentationController?.sourceView = view
+alertController.popoverPresentationController?.sourceRect = sender.frame
+{% endcodeblock %}</p><h2>UIPopoverPresentationController</h2><p><code>Alert</code>主要用于显示用户的提示信息，当展示的信息很多时，就需要借助<code>popover presentation controller</code>。</p><h3>在compact和regular两种屏幕中显示模态视图</h3><p>在<code>storyboard</code>文件，设置视图的<code>storyboard ID</code>:<code>PopoverViewController</code>，设置模态视图展示样式，展示在<code>compact-width</code>和<code>regular-width</code>的两种设备屏幕上。
+实现如下：
+{% codeblock actionWasTapped lang:swift %}
+@IBAction func actionWasTapped(sender: UIBarButtonItem)
+{
+let storyboard : UIStoryboard = UIStoryboard(name: &ldquo;Main&rdquo;, bundle: nil)
+let vc = storyboard.instantiateViewControllerWithIdentifier(&ldquo;PopoverViewController&rdquo;) as! UIViewController
+vc.modalPresentationStyle = UIModalPresentationStyle.Popover
+let popover: UIPopoverPresentationController = vc.popoverPresentationController!
+popover.barButtonItem = sender //<code>popover箭头</code>锚的位置
+presentViewController(vc, animated: true, completion:nil)
+}
+{% endcodeblock %}</p><h4>设置锚点四种方式</h4><ol><li>barButtonItem
+先获取该视图控制器的<code>popoverPresentationController</code>控制器，通过<code>popover</code>控制器的<code>barButtonItem</code>属性来设置锚点控件。当弹出时<code>popover箭头</code>就指向这个barButtonItem控件。</li><li>通过指定<code>sourceView</code>和<code>sourceRect</code>两个属性，就像前面例子中一样来指定锚点位置。</li><li>通过其他属性来实现，例如：<code>permittedArrowDirections</code>，也能够指定锚点。</li><li>如果在在展示过程中，无法确定箭头的方向时，就是用默认值：<code>UIPopoverArrowDirection.Any</code>.
+在iPad显示：</li></ol><p>在iPhone上以模态显示：</p><h3>在iPhone设备上dissmiss模态视图</h3><p>要在iPhone设备上，实现模态视图dissmiss功能，需要借助导航控制器，同时这个模态视图需要遵循<code>UIPopoverPresentationController</code>协议，实现两个代理方法</p><h4>实现<code>UIPopoverPresentationController</code>协议</h4><ol><li><code>PopoverViewController</code>类定义修改如下:
+{% codeblock lang:swift %}
+class PopoverViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+{% endcodeblock %}</li><li>在actionWasTapped()函数中调用<code>presentViewController()</code>之前添加：
+{% codeblock lang:swift %}
+popover.delegate = self
+{% endcodeblock %}</li></ol><h4>方法一：返回自适应设备的视图展示样式</h4><p>当APP在<code>compact-width</code>设备上弹出一个视图时调用.这个方法告诉OS系统使用的视图展示样式。
+这里OS系统被告知在<code>compact-width</code>设备上，使用全屏的样式展示视图。
+{% codeblock adaptivePresentationStyleForPresentationController() lang:swift %}
+func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
+{
+return UIModalPresentationStyle.FullScreen
+}
+{% endcodeblock %}</p><h4>方法二：返回自定义的视图控制器</h4><p>当前展现的视图和原来的展示方式不同时调用.我们设置这个视图的<code>Popover presentation</code>展示方式，但是我们指定在<code>compact-width</code>设备上，这样它会以full screen样式展示。在这个函数中，样式切换发生时，会return自定义的视图控制器。
+{% codeblock presentationController(_:viewControllerForAdaptivePresentationStyle) lang:swift %}
+func presentationController(controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController?
+{
+let navigationController = UINavigationController(rootViewController: controller.presentedViewController)
+let btnDone = UIBarButtonItem(title: &ldquo;Done&rdquo;, style: .Done, target: self, action: &ldquo;dismiss&rdquo;)
+navigationController.topViewController.navigationItem.rightBarButtonItem = btnDone
+return navigationController
+}
+{% endcodeblock %}</p><h4><code>Done</code>按钮的dismiss事件</h4><p>在导航控制器中国封装这个视图，在导航条上添加一个<code>Done</code>按钮，点击<code>Done</code>dismiss这个视图
+{% codeblock dismiss lang:swift %}
+func dismiss()
+{
+self.dismissViewControllerAnimated(true, completion: nil)
+}
+{% endcodeblock %}</p><p>在iPhone上，显示修改后的视图控制器，多出带按钮的导航栏。
+在iPad上，视图控制器显示没有导航控制器，因为它不使用全屏幕显示。
+如果想让iPhone像iPad一样显示一个Popover，只<code>adaptivePresentationStyleForPresentationController</code>返回：
+{% codeblock lang:swift %}
+return UIModalPresentationStyle.None
+{% endcodeblock %}</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-02-16</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/%E8%BD%AC%E5%9C%BA/>转场</a></div><nav class=post-nav><a class=prev href=/post/old/iOS/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%95%E7%A4%BA%E5%9E%8B%E6%8E%A7%E5%88%B6%E5%99%A8/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">自定义展示型控制器</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/macOS/JavaScript%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BB%84%E4%BB%B6OC%E6%A1%A5%E6%8E%A5/><span class="next-text nav-default">JavaScript自动化组件OC桥接</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-02-16 17:53:18 +0000 UTC",title:"整理iOS中几种常用的展示型视图控制器",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

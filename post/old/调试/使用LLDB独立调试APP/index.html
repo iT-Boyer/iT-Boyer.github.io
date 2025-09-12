@@ -1,0 +1,157 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>使用LLDB独立调试APP - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="参考 lldb官方文档 苹果文档 LLDB调试器使用简介 南峰子译 调试：案例学习 系统翻译文章 Debugging iOS binaries with LLDB 高级LLDB调试 LLDB中使用python概览
+善用LLDB 如果想断点到某种场景，不是先随意打个断点然后一直单步到出问题的那行代码，最佳的做法是充分利用LLDB的特性以一次性定位到你所感兴趣的代码。
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/%E8%B0%83%E8%AF%95/%E4%BD%BF%E7%94%A8LLDB%E7%8B%AC%E7%AB%8B%E8%B0%83%E8%AF%95APP/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/%E8%B0%83%E8%AF%95/%E4%BD%BF%E7%94%A8LLDB%E7%8B%AC%E7%AB%8B%E8%B0%83%E8%AF%95APP/"><meta property="og:site_name" content="习七"><meta property="og:title" content="使用LLDB独立调试APP"><meta property="og:description" content="参考 lldb官方文档 苹果文档 LLDB调试器使用简介 南峰子译 调试：案例学习 系统翻译文章 Debugging iOS binaries with LLDB 高级LLDB调试 LLDB中使用python概览
+善用LLDB 如果想断点到某种场景，不是先随意打个断点然后一直单步到出问题的那行代码，最佳的做法是充分利用LLDB的特性以一次性定位到你所感兴趣的代码。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2018-09-05T14:03:39+00:00"><meta property="article:modified_time" content="2018-09-05T14:03:39+00:00"><meta property="article:tag" content="调试"><meta property="article:tag" content="Lldb"><meta itemprop=name content="使用LLDB独立调试APP"><meta itemprop=description content="参考 lldb官方文档 苹果文档 LLDB调试器使用简介 南峰子译 调试：案例学习 系统翻译文章 Debugging iOS binaries with LLDB 高级LLDB调试 LLDB中使用python概览
+善用LLDB 如果想断点到某种场景，不是先随意打个断点然后一直单步到出问题的那行代码，最佳的做法是充分利用LLDB的特性以一次性定位到你所感兴趣的代码。"><meta itemprop=datePublished content="2018-09-05T14:03:39+00:00"><meta itemprop=dateModified content="2018-09-05T14:03:39+00:00"><meta itemprop=wordCount content="6379"><meta itemprop=keywords content="调试,Lldb"><meta name=twitter:card content="summary"><meta name=twitter:title content="使用LLDB独立调试APP"><meta name=twitter:description content="参考 lldb官方文档 苹果文档 LLDB调试器使用简介 南峰子译 调试：案例学习 系统翻译文章 Debugging iOS binaries with LLDB 高级LLDB调试 LLDB中使用python概览
+善用LLDB 如果想断点到某种场景，不是先随意打个断点然后一直单步到出问题的那行代码，最佳的做法是充分利用LLDB的特性以一次性定位到你所感兴趣的代码。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>使用LLDB独立调试APP</h1><div class=post-meta><span class=post-time>2018-09-05</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 6379 字 </span><span class=more-meta>预计阅读 13 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>参考</a></li><li><a href=#>善用LLDB</a><ul><li><a href=#>正确的调试过程</a></li><li><a href=#>LLDB的使用时机和作用</a></li><li><a href=#>LLDB的正确打开方式</a></li><li><a href=#>省时的命令</a></li><li><a href=#>条件断点</a></li><li><a href=#>通过watchpoint监控特定内存空间</a></li><li><a href=#>避免不断单步的高招</a></li><li><a href=#>LLDB中手动执行代码</a></li></ul></li><li><a href=#>检查数据以找寻事情的缘由</a><ul><li><a href=#>在LLDB命令行中检查数据</a></li><li><a href=#>LLDB实用数据格式</a></li></ul></li><li><a href=#>扩展LLDB</a><ul><li><a href=#>自定义LLDB命令</a></li><li><a href=#>LLDB 对象模型</a></li><li><a href=#>断点操作</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2018-09-05T14:03:39 title="September 5, 2018">September 5, 2018</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2>参考</h2><p><a href=http://lldb.llvm.org>lldb官方文档</a>
+<a href=https://developer.apple.com/library/content/documentation/IDEs/Conceptual/gdb_to_lldb_transition_guide/document/lldb-terminal-workflow-tutorial.html#//apple_ref/doc/uid/TP40012917-CH4-SW2>苹果文档</a>
+<a href=https://southpeak.github.io/2015/01/25/tool-lldb/>LLDB调试器使用简介 南峰子译</a>
+<a href=http://www.cocoachina.com/ios/20150330/11435.html>调试：案例学习</a>
+<a href=http://www.jianshu.com/p/09a4c1f7c732>系统翻译文章</a>
+<a href=http://codedigging.com/blog/2016-04-27-debugging-ios-binaries-with-lldb/>Debugging iOS binaries with LLDB</a>
+<a href=https://www.jianshu.com/p/2d4083d27653>高级LLDB调试</a>
+<a href=https://www.jianshu.com/p/381d2d232ec1>LLDB中使用python概览</a></p><h2>善用LLDB</h2><p>如果想断点到某种场景，不是先随意打个断点然后一直单步到出问题的那行代码，最佳的做法是充分利用LLDB的特性以一次性定位到你所感兴趣的代码。</p><ol><li>自定义数据类型
+因为LLDB默认是只输出系统类型的，而并不认识自定义的数据类型，所以需要告诉LLDB你所关注的自定义数据类型及其数据，实现对数据的查看。</li><li>合理开销
+为了避免重新构建所带来的时间开销，你需要学会编写调试代码，以改变应用的执行路径，并修改数据，比如初始化还未初始代的数据。你所输入并执行的表达式会改变应用原本的执行路径，所以对此所带来的副作用你需要有清晰的把控。</li></ol><h3>正确的调试过程</h3><ol><li>想通过LLDB获取什么信息？</li><li>断点到可疑的代码块</li><li>在正在执行的代码中一步步执行</li><li>观察数据并验证猜想</li></ol><h3>LLDB的使用时机和作用</h3><p>什么时候用LLDB,LLDB能在调试的时候怎样帮助你</p><ol><li>debug-Only assertion
+它能帮助你知道应用中的运行异常，以及各组件之间传递的参数是否与约定的一致。但是不要在assertion中做对应用逻辑有影响的操作，因为一旦构建发布版本，这些assertion都会被屏幕，你在其中执行的操作也就不会进行了。
+所以，当发现bug时，LLDB并不是你的第一选择，而应该是debug-Only assertion。</li><li>log apple system log(ASL)
+而对于在运行中各处都看起来很正常，最终却呈现了错误的结果的情况，log会是一个非常有用的工具。而此处的log指的并不是NSLog，而是apple system log(ASL)，其可以通过console观察到。</li></ol><ul><li>level
+ASL可以通过log的level来区分log的严重程序，比如<code>ASL_LEVEL_EMERG</code>和<code>ASL_LEVEL_DEBUG</code>。</li><li>tag
+同时还可以附带使用hash tag以方便log的查找，比如为特定的业务添加特定的业务字符串等。而鉴于log可能被滥用，所以ASL可以通过开关提供某些log是否应该进行。
+正常的开关方式可以是可以使用NSUserDefaults等，或者也可以在shell中设置一个变量，程序在运行的时候读取此值以决定是否进行log。</li></ul><ol start=3><li>Xcode 静态代码分析器
+Xcode可以为程序做的，<code>-Weverything</code>和静态代码分析器可以在代码运行前的编译阶段即发现可能存在的问题。可以在之前的session： What&rsquo;s New In LLVM和What&rsquo;s New In the LLVM Compiler中找到相关内容。而在运行期间可以通过Guard Malloc发现堆上缓存overrun的问题，通过zombie objects获取对释放了的对象进行方法调用的问题。具体可以参见Advanced Memory Analysis with Instruments</li></ol><h3>LLDB的正确打开方式</h3><ol><li>两种启模式：一种是通过Xcode上的按钮，另一种是通过console中的lldb调试语言。</li><li>三种命令表达式：discoverable,abbreviated及alias形式，
+<code>discoverable</code>格式: expression &ndash;object-description &ndash; foo
+<code>abbreviated</code>格式: e -0 &ndash; foo
+<code>alias</code>格式: po foo
+同一个命令三种方式，书写繁琐程度递减，而且可以定义自己的alias 形式的命令。</li><li>设置断点
+行号断点：<code>b MyCode.m:4（breakpoint set --file MyCode.m --line 4）</code>
+方法断点：<code>b "-[MyClass method:]"（breakpoint set --name "-MyClass method:]"）</code>
+selector断点: <code>b method:（breakpoint set --selector method:）</code></li></ol><h3>省时的命令</h3><p>鉴于在app及Xcode之间因为多次中断而进行的多次切换，可以在断点发生之后执行特定的命令，比如希望查看的数据之后再立即恢复执行</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>b &#34;-[MyClass method:]&#34;
+</span></span><span class=line><span class=cl>br co a/breakpoint command add
+</span></span><span class=line><span class=cl>&gt;p rect/expression rect
+</span></span><span class=line><span class=cl>&gt;bt/thread backtrace
+</span></span><span class=line><span class=cl>&gt;c/process continue
+</span></span><span class=line><span class=cl>&gt;DONE
+</span></span></code></pre></td></tr></table></div></div><p>这些命令也可以在Xcode面板中通过点击及输入完成同样的功能。</p><h3>条件断点</h3><p>如果不希望断点频繁触发，可以通过条件断点来达到此目的，比如想在某个特定对象析构的消息处断点，可以这样：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>p id $myModel = self/expression id $myModel = self
+</span></span><span class=line><span class=cl>b &#34;-[MyClass dealloc]&#34;/breakpoint set  &#34;-[MyClass dealloc]&#34;
+</span></span><span class=line><span class=cl>br m -c &#34;self == $myModel&#34;/breakpoint modify --condition &#34;self == $myModel&#34;
+</span></span></code></pre></td></tr></table></div></div><h3>通过watchpoint监控特定内存空间</h3><p><code>watchpoint</code>的应用场景在于有人会修改某个变量值，你对此很关心但只知道变量的地址，其行为方式是如果变量被访问则watchpoint会暂停app的运行，设置watchpoint的方式是</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>w</span> <span class=n>s</span> <span class=n>v</span> <span class=bp>self</span><span class=o>-&gt;</span><span class=n>_needsSynchronization</span><span class=o>/</span><span class=n>watchpoint</span> <span class=n>set</span> <span class=n>variable</span> <span class=bp>self</span><span class=o>-&gt;</span><span class=n>_needsSynchronization</span>
+</span></span></code></pre></td></tr></table></div></div><p>受限于CPU的支持程度，在intel平台上，提供了4个slot供watchpoint使用，所以同时只可设置最多4个watchpoint，arm上是2个
+watchpoint也可以在Xcode的控制面板中进行操作，只需要在变量区域中右击某变量选择菜单中的watchpoint选项即可</p><h3>避免不断单步的高招</h3><p>LLDB可以在两种场景下暂停程序的执行：</p><ol><li>执行到程序的具体某行代码的时候
+这种场景的实用命令是<code>thread until linenum</code>，避免一步步单步执行到希望的行，在xcode中这个功能对应的操作是右击代码行选择<code>continue to this line</code>。</li><li>函数返回之后</li></ol><h3>LLDB中手动执行代码</h3><p>很多时候你可能会发现，要想让你希望执行的代码执行一遍会很困难，比如单元测试的时候某个用例就是无法进行测试，这种情况下你需要用Clang([&lsquo;kl^n])直接调用这份代码，调用方式是直接在命令行表达式中输入你希望执行的代码并执行，比如</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>b &#34;-[ModelDerived removeDuplicates]&#34;
+</span></span><span class=line><span class=cl>e -i false -- [self removeDuplicates]/expression --ignore-breakpoints false -- [self removeDuplicates]
+</span></span></code></pre></td></tr></table></div></div><p>先在方法上打断点，然后在LLDB中执行此函数，选择不要忽略断点，你会发现执行此<code>expression</code>之后会断点到<code>removeDuplicates</code>，接着即可对其进行执行。
+然而有一点需要特别注意的是，通过LLDB执行的表达式代码是在你的进程中执行的，所以需要对此所带来的后果有自己的认知。</p><h2>检查数据以找寻事情的缘由</h2><p>在上述的操作之后，我们已经可以断点到我们希望断点的位置了，接着就是检查数据寻找事情发生的原因了，这部分有3方面内容：</p><h3>在LLDB命令行中检查数据</h3><p>查看局部变量：<code> frame variable</code>
+执行任意代码： <code>expression (x+35)</code> 其会通过app使用的编译器进行编译并在你的app中执行
+<code>p @"hello"</code> 兼容expression的语法，执行表达式并输出结果
+<code>po @"hello"</code> 执行任意代码并输出结果的description</p><h3>LLDB实用数据格式</h3><p>需要先搞清楚<code>raw data</code>和<code>data</code>的区别，
+<code>raw data</code>:是内存中所存储的数据，但它并不易读，对你来说可能太复杂，或者并不是你理解的数据类型，又或者它的数据量很大。
+解析：如果想对raw data有个直观的印象，只需要在Xcode的变量区域选择show raw values就可以在观察任意一个栈帧的时候看到raw data了，而此时切换到show types就可以看到规整而有意义的数据呈现形式了，这就是 LLDB 数据格式所要达到的目的。
+对于内置的系统库STL,CoreFoundation,Foundation，其中的数据都已经添加了<code>Data formatter</code>，在调试的时候显示都很规整
+对于程序员自定义的数据类型的data formatter，苹果构建了可扩展的data formatter子系统，这意味着程序员也可以为自定义的类型添加data formatter。</p><h4>自定义data formatter</h4><p>数据类型的data formatter包括两部分：综述summary，用于呈现数据的关键描述；所组成的子数据即synthetic children
+以使用python定义summary为例，summary会将一种数据类型与一个python函数映射起来，基础的映射是通过类型名，更多其它规则可以<a href=http://lldb.llvm.org/varformats.html>参见</a>
+这个python函数会在此类型的数据在展示的时候被调用，LLDB会将一个<code>SBValue</code>传递给它，SBValue是LLDB对象模型的一部分，可以将其简单地想象成为一个变量，这个python函数最终会返回一个字符串，这个字符串即会被当做summary</p><h4>SBValue</h4><p>之前提到SBValue可以当做一个变量来对待，可以询问其name,data type,summary(如果有的话),是否有children,有多少children,是否可以详述每个child的信息,每个child的信息其实也是一个SBvalue，所以整个是一个递归的过程。如果值是一个比如数字这样的标量，整数，浮点数等，也可以询问其value。
+对自定义类进行summary</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>def MyClass_Summary(value,unused)://其中value是一个SBValue
+</span></span><span class=line><span class=cl>//由于是自己定义的数据，可先获取其中的成员变量，成员变量也是SBValue
+</span></span><span class=line><span class=cl>member1 = value.GetChildMemberWithName(&#34;_member1&#34;)
+</span></span><span class=line><span class=cl>member2 = value.GetChildMemeberWithName(&#34;_member2&#34;)
+</span></span><span class=line><span class=cl>member1Summary = member1.GetSummary()
+</span></span><span class=line><span class=cl>member2Summary = member2.GetSummary()
+</span></span><span class=line><span class=cl>#当然也可以做任何你想做的事情，这里仅仅只是简单地组合两个成员的summary
+</span></span><span class=line><span class=cl>return member1Summary + &#34; &#34; + member2Summary
+</span></span></code></pre></td></tr></table></div></div><p>完成了这个python函数之后，变量区域中仍然不能正确显示MyClass的自定义数据类型，因为你还需要在LLDB中执行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ty su a MyClass -F MyClass_Summary/type summary add MyClass --python-function MyClass_Summary
+</span></span></code></pre></td></tr></table></div></div><h4>审视不透明的数据</h4><p>先介绍下用于数据分析的expression，可以通过如下形式定义一个持久有效的结构体：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>expression struct $NotOpaque{int item1;float item2;char* item3;}
+</span></span></code></pre></td></tr></table></div></div><p>对于第3方库提供的对象，你可能连其数据类型都不知道，更不会知道其中成员变量的定义，可能通过google之后，可以发现其具体的定义，这时候，就需要使用上述expression再结合summary，即可以在展示的时候使用自定义的data formatter了.
+ 
+ </p><h2>扩展LLDB</h2><h3>自定义LLDB命令</h3><p>通过python脚本，可以为调试器添加新特性，实现自定义的操作/自动化的操作过程
+比如计算递归的层数，想想LLDB怎么也算是个强大的程序，数数对它来说应该不是什么难事，更加说相比于你手工一个栈帧一个栈帧地数了。</p><h3>LLDB 对象模型</h3><p>LLDB的强大在于它所使用的LLDB对象模型，我们称其为"SB"(scripting bridge)，这是个<code>python API</code>，xcode用其来构建debugger的UI，这意味着对你可以完全地通过LLDB脚本使用SB的所有功能，同时其也有一套对调试session的描述：
+对于上述调试界面相信大家都比较熟悉，LLDB对象模型对其的描述是这样：<code>SBTarget</code>即是调试中的target，接着在点击了xcode中的运行按钮之后，这个target成为了一个活着的实体，对这个实体，你可以输入，点哪，点哪，点，这即是在机器底层上运行的进程称为SBProcess，进程有着很多用来完成任务的thread，即SBThread，而SBThread会不停地执行function，每个function都会而每次function调用都会对应栈上的一帧，即SBFrame，现在我们已经了解到了描述程序运行中的所有对象，接下来看看怎样完成我们想完成的任务。
+首先需要知道的是python命令是如何执行的呢，python函数是与LLDB中的命令一一对应的，LLDB看到这个命令的时候即会调用相应的python命令，python命令的原型是这样:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>def MyCommand_Impl(debugger,user_input,result,unused):
+</span></span></code></pre></td></tr></table></div></div><p><code>debugger</code>:是一个SBDebugger
+<code>user_input</code>:是用户输入的python字符串
+<code>result</code>:是SBCommandReturnObject，是用来反馈给LLDB的，反馈执行成功与否等信息
+添加自定义的命令的方式如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>co sc a foo -f foo/command script add foo --python-function foo
+</span></span></code></pre></td></tr></table></div></div><h3>断点操作</h3><p>断点的痛点在于它会不停在中断程序的执行，条件断点会好一点，有了断点action，我们可以只在自己关注的场景停下来
+断点action是将断点与一个python函数联系起来，断点命中的时候会调用此python函数，而其可以返回false以勾选断点编辑界面中的continue选择框以让LLDB继续运行
+此python函数的原型是</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>def break_on_deep_traversal(frame,bp_loc,unused):
+</span></span></code></pre></td></tr></table></div></div><p><code>frame</code>类型:为SBFrame
+<code>bp_loc</code>类型:为SBBreakpointLocation
+绑定python函数的命令是</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>br co a -s p -F foo 1 /breakpoint command add --script python --python-function foo 1
+</span></span></code></pre></td></tr></table></div></div><p>首先需要注意的是WWDC中python代码样例的函数function中常看到<code>unused</code>作为结尾参数，在实际使用python函数时如果未理解其深意，可能会不知其所以然。
+断点中的全局变量<code>frame</code>和<code>bp_loc</code>分别是断点栈帧的指针及断点处的代码描述信息，<code>bp_lo</code>c打印出来类似于这样：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>2.1: where = YourApp`-[SomeViewController onDynamicMethod:paraList:] + 117 at SomeViewController.m:109, address = 0x000000010f9cf3d5, resolved, hit count = 4
+</span></span></code></pre></td></tr></table></div></div><p>在将function作为python命令添加时，命中断点之后lldb会为指定的断点命令函数传入3个参数即<code>frame</code>,<code>bp_loc</code>和<code>internal_dict</code>。</p><p>LLDB在设计之初即提供了两种范畴的脚本化方式：
+即可以在Unix环境的python应用中使用LLDB开启并进行一段不能进行交互的调试session；
+在LLDB中使用python脚本进行诸如监视数据，遍历容器或者决定断点是该暂停程序执行还是继续程序的执行。</p><h4>在python中操作程序中的变量</h4><p>在实现这个目标之前，需要解决的一个问题是，程序中的<code>变量</code>需要转换成python可以访问的形式，这个时候就需要用到<code>LLDB API</code>，它是作为python的LLDB模块提供的。
+在LLDB中运行python时，LLDB会自动将当前帧对象通过<code>lldb.frame</code>这个python变量提供出来，其类型是SBFrame，可以通过<code>FindVariable</code>方法向帧对象询问其本地变量，通过此方法获得的对象是SBValue对象，可以通过SBValue.h中的方法，比如 <code>GetChildMemberWithName()</code>, <code>GetSummary()</code>, 及<code>GetValue()</code>等方法获取具体的信息。
+<strong>程序中的变量值最终是如何转换成python中任意取用的信息的呢？</strong>
+原来LLDB在捕获到程序作用域中的变量之后都是将其封装在SBValue对象中，通过SBValue的API即可获取到封装在其中的变量值的具体信息，对于对象类型的变量，可以通过<code>GetChildMemberWithName</code>获取其成员变量的值，若原本是一个字符串，则使用<code>GetSummary</code>获取字符串，通过<code>GetValue</code>获取数值相关的值等。</p><h4>用断点命令script完成最终的临门一脚</h4><p>有了操作局部变量的神技，实战操作的时候就可以这么玩了，在可疑处打断点，读取临时变量的值检查与预期是否相符，此处的一个小tip是:
+将python脚本操作编写在一个python文件里面的function里面，通过import的形式导入并调用其中的function，以免在lldb中输入起来繁琐。
+<strong>断点命令script的奥义</strong>
+如果在lldb命令行中为某断点添加python脚本，比如通常是这样<code>breakpoint command add -s python breakpointnum</code> ，输入一到数行python脚本，则LLDB会自行将这数行代码封装成一个python函数并传递两个参数，即frame和bp_loc，断点命中时，即会调用此函数，并传入断点时当前帧对象<code>frame</code>及断点位置信息对象<code>bp_loc</code>。
+由此可知，在实际编写断点命令的时候，需要注意这样两点：</p><ol><li>如果想访问你脚本之外创建的python变量，需要将其声明为<code>global</code>，否则其会被当做局部变量，即需要在断点命令脚本中显式声明，比如<code>global variable</code></li><li>所有python断点命令脚本都能够访问到frame和bp_loc</li></ol><p>举例在断点处的当前栈帧位于特定帧中时命中断点
+<img src=https://upload-images.jianshu.io/upload_images/268750-fd4dea29302d79d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000 alt>
+第一步通过import导入本地的脚本文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>command script import ~/lldb/inGivenFrame.py
+</span></span></code></pre></td></tr></table></div></div><p>第二步通过codeline添加断点，
+第三步添加断点命令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>br comm add --script-type python -o &#34;inGivenFrame.inGivenFrame(frame,location,&#39;-[NSObjec givenfuncname]&#39;)&#34; 1
+</span></span></code></pre></td></tr></table></div></div><p>如果不需要传入第三个参数，则也可以使用<code>-F</code>选项，此时命令形式</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>br comm add --script-type python -F inGivenFrame.inGivenFrameF 1
+</span></span></code></pre></td></tr></table></div></div><p>此时在断点命中时，lldb传给<code>inGivenFrameF</code>函数的第三个参数的意义也有所变更，此时传入的是名为<code>internal_dict</code>的变量，包含额外的信息
+<img src=https://upload-images.jianshu.io/upload_images/268750-1d39bf553e26bac3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000 alt>
+使用<code>inGivenFrameF</code>作为断点命令的操作步骤及执行结果如下：
+<img src=https://upload-images.jianshu.io/upload_images/268750-1ef6878f7a3a72ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000 alt></p><p><strong>问题</strong>
+现在想通过lldb来调试自己的iOS项目，官方提供了</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ lldb /Projects/Sketch/build/Debug/Sketch.app     
+</span></span><span class=line><span class=cl>(lldb) process launch
+</span></span></code></pre></td></tr></table></div></div><p>当按照这种方式指定到路径iOS项目时,打印：</p><p>(lldb) target create &ldquo;/Users/admin/Desktop/Recommend.app&rdquo;<br>Current executable set to &lsquo;/Users/admin/Desktop/Recommend.app&rsquo; (arm64).</p><p>但是启动时出现问题：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(lldb) run     
+</span></span><span class=line><span class=cl>error: the platform is not currently connected
+</span></span></code></pre></td></tr></table></div></div><p>大神，有没有解决办法？</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2018-09-05</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/%E8%B0%83%E8%AF%95/>调试</a>
+<a href=/tags/lldb/>lldb</a></div><nav class=post-nav><a class=prev href=/post/old/hexo/heroku%E7%9A%84SSH%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">heroku的SSH终端命令</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/shadowrocket%E6%97%A0%E9%9C%80%E8%B6%8A%E7%8B%B1%E9%87%8D%E7%AD%BE%E7%BF%BB%E5%A2%99/><span class="next-text nav-default">shadowrocket无需越狱重签翻墙</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2018-09-05 14:03:39 +0000 UTC",title:"使用LLDB独立调试APP",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

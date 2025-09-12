@@ -1,0 +1,120 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>CoreML机器学习初级教程 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="资源 Core ML开发文档 ML模型资源页面 在Working with Models中包含有几个常用的模型模板，例如用于在图片中检测物体——树、动物、人等等。 Integrating a Core ML Model into Your App
+官方Core ML文档示例 App MarsHabitatPricePredictor 模型的输入只是数字，因此代码直接使用生成的 MarsHabitatPricer 方法和属性，而不是将模型包装在 Vision 模型中。每次都改一下参数，很容易看出模型只是一个线性回归： 137 * solarPanels + 653.50 * greenHouses + 5854 * acres
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/iOS/CoreML%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%88%9D%E7%BA%A7%E6%95%99%E7%A8%8B/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/iOS/CoreML%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%88%9D%E7%BA%A7%E6%95%99%E7%A8%8B/"><meta property="og:site_name" content="习七"><meta property="og:title" content="CoreML机器学习初级教程"><meta property="og:description" content="资源 Core ML开发文档 ML模型资源页面 在Working with Models中包含有几个常用的模型模板，例如用于在图片中检测物体——树、动物、人等等。 Integrating a Core ML Model into Your App
+官方Core ML文档示例 App MarsHabitatPricePredictor 模型的输入只是数字，因此代码直接使用生成的 MarsHabitatPricer 方法和属性，而不是将模型包装在 Vision 模型中。每次都改一下参数，很容易看出模型只是一个线性回归： 137 * solarPanels + 653.50 * greenHouses + 5854 * acres"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-06-24T22:10:44+00:00"><meta property="article:modified_time" content="2017-06-24T22:10:44+00:00"><meta property="article:tag" content="CoreML"><meta itemprop=name content="CoreML机器学习初级教程"><meta itemprop=description content="资源 Core ML开发文档 ML模型资源页面 在Working with Models中包含有几个常用的模型模板，例如用于在图片中检测物体——树、动物、人等等。 Integrating a Core ML Model into Your App
+官方Core ML文档示例 App MarsHabitatPricePredictor 模型的输入只是数字，因此代码直接使用生成的 MarsHabitatPricer 方法和属性，而不是将模型包装在 Vision 模型中。每次都改一下参数，很容易看出模型只是一个线性回归： 137 * solarPanels + 653.50 * greenHouses + 5854 * acres"><meta itemprop=datePublished content="2017-06-24T22:10:44+00:00"><meta itemprop=dateModified content="2017-06-24T22:10:44+00:00"><meta itemprop=wordCount content="2247"><meta itemprop=keywords content="CoreML"><meta name=twitter:card content="summary"><meta name=twitter:title content="CoreML机器学习初级教程"><meta name=twitter:description content="资源 Core ML开发文档 ML模型资源页面 在Working with Models中包含有几个常用的模型模板，例如用于在图片中检测物体——树、动物、人等等。 Integrating a Core ML Model into Your App
+官方Core ML文档示例 App MarsHabitatPricePredictor 模型的输入只是数字，因此代码直接使用生成的 MarsHabitatPricer 方法和属性，而不是将模型包装在 Vision 模型中。每次都改一下参数，很容易看出模型只是一个线性回归： 137 * solarPanels + 653.50 * greenHouses + 5854 * acres"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>CoreML机器学习初级教程</h1><div class=post-meta><span class=post-time>2017-06-24</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 2247 字 </span><span class=more-meta>预计阅读 5 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#>资源</a></li><li><a href=#>配置 ：将 Core ML 模型集成到你的 App</a></li><li><a href=#>实现Vision工作流程</a></li><li><a href=#>创建并运行VNImageRequestHandler请求处理程序</a></li><li><a href=#>使用模型来自动识别场景</a></li><li><a href=#>什么是深度学习</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-06-24T22:10:44 title="June 24, 2017">June 24, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h3>资源</h3><p><a href=https://developer.apple.com/documentation/coreml>Core ML开发文档</a>
+<a href=https://developer.apple.com/machine-learning/>ML模型资源页面</a>
+在Working with Models中包含有几个常用的模型模板，例如用于在图片中检测物体——树、动物、人等等。
+<a href=https://developer.apple.com/documentation/coreml/integrating_a_core_ml_model_into_your_app>Integrating a Core ML Model into Your App</a></p><p><a href=https://docs-assets.developer.apple.com/published/51ff0c1668/IntegratingaCoreMLModelintoYourApp.zip>官方Core ML文档示例 App</a>
+MarsHabitatPricePredictor 模型的输入只是数字，因此代码直接使用生成的 MarsHabitatPricer 方法和属性，而不是将模型包装在 Vision 模型中。每次都改一下参数，很容易看出模型只是一个线性回归：
+137 * solarPanels + 653.50 * greenHouses + 5854 * acres</p><h3>配置 ：将 Core ML 模型集成到你的 App</h3><p>本教程使用 Places205-GoogLeNet 模型，可以从苹果的<a href=https://developer.apple.com/machine-learning/>ML</a>页面下载。往下滑找到 Working with Models，下载第一个。还在这个页面，注意一下其它三个模型，它们都用于在图片中检测物体——树、动物、人等等。</p><blockquote><p>注意：如果你有一个训练过的模型，并且是使用受支持的机器学习工具训练的，例如 Caffe、Keras 或 scikit-learn，Converting Trained Models to Core ML 介绍了如何将其转换为 Core ML 格式。</p></blockquote><ol><li>添加模型
+下载 GoogLeNetPlaces.mlmodel 后，把它从 Finder 拖到项目导航器的 Resources 组里：
+<img src=http://upload-images.jianshu.io/upload_images/861914-5425960c41207b82.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt></li><li>生成模型类
+选择该文件，然后等一会儿。Xcode 生成了模型类后会显示一个箭头：
+<img src=http://upload-images.jianshu.io/upload_images/861914-e00a802f64f0ae13.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt></li><li>查看模型类
+点击箭头，查看生成的类：
+<img src=http://upload-images.jianshu.io/upload_images/861914-1268b5b918fccf07.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt>
+三个类：
+<code>GoogLeNetPlaces</code>: 主类，包含一个 model 属性和两个 prediction 方法
+<code>GoogLeNetPlacesInput</code>: 输入类,包含一个 CVPixelBuffer 类型的 sceneImage 属性，Vision 框架会负责把我们熟悉的图片格式转换成正确的输入类型。
+<code>GoogLeNetPlacesOutput</code>：输出属性,Vision 框架会将 <code>GoogLeNetPlacesOutput</code> 属性转换为自己的 <code>results</code> 类型.</li></ol><h3>实现Vision工作流程</h3><p>标准的 Vision 工作流程是创建模型，创建一或多个请求，然后创建并运行请求处理程序。
+并管理对 <code>prediction </code>方法的调用，所以在所有生成的代码中，我们只会使用 <code>model</code> 属性。</p><ol><li>创建模型：在 <code>Vision Model</code> 中包装 <code>Core ML Model</code>
+CoreML模型 是用于 Vision 请求的 Core ML 模型的容器
+打开 ViewController.swift，并在 import UIKit 下面 import 两个框架：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl><span class=kd>import</span> <span class=nc>CoreML</span>
+</span></span><span class=line><span class=cl><span class=kd>import</span> <span class=nc>Vision</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>创建<code>VNCoreMLRequest</code>图像分析请求
+<code>VNCoreMLRequest</code> 是一个图像分析请求，它使用 Core ML 模型来完成工作。它的 completion handler 接收 request 和 error 对象。
+Core ML 模型<code>GoogLeNetPlaces</code> 是一个分类器，因为它仅预测一个特征：图像的场景分类。这时request.results 是 <code>VNClassificationObservation</code> 对象数组。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// 创建一个带有 completion handler 的 Vision 请求
+</span></span><span class=line><span class=cl>let request = VNCoreMLRequest(model: model) { [weak self] request, error in
+</span></span><span class=line><span class=cl>    guard let results = request.results as? [VNClassificationObservation],
+</span></span><span class=line><span class=cl>    let topResult = results.first else {
+</span></span><span class=line><span class=cl>    fatalError(&#34;unexpected result type from VNCoreMLRequest&#34;)
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>// 在主线程上更新 UI
+</span></span><span class=line><span class=cl>let article = (self?.vowels.contains(topResult.identifier.first!))! ? &#34;an&#34; : &#34;a&#34;
+</span></span><span class=line><span class=cl>    DispatchQueue.main.async { [weak self] in
+</span></span><span class=line><span class=cl>        self?.answerLabel.text = &#34;\(Int(topResult.confidence * 100))% it&#39;s \(article) \(topResult.identifier)&#34;
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>VNClassificationObservation 有两个属性：identifier - 一个 String，以及 confidence - 介于0和1之间的数字，这个数字是是分类正确的概率。使用对象检测模型时，你可能只会看到那些 confidence 大于某个阈值的对象，例如 30％ 的阈值。
+然后取第一个结果，它会具有最高的 confidence 值，然后根据 identifier 的首字母把不定冠词设置为“a”或“an”。最后，dispatch 回到主线程来更新 label。你很快会明白分类工作为什么不在主线程，因为它会很慢。</p><h3>创建并运行VNImageRequestHandler请求处理程序</h3><p><code>VNImageRequestHandler</code> 是标准的 Vision 框架请求处理程序；不特定于 Core ML 模型。给它 image 作为 detectScene(image:) 的参数。然后调用它的 perform 方法来运行处理程序，传入请求数组。在这个例子里，我们只有一个请求。
+把下面几行添加到 <code>detectScene(image:)</code> 的末尾：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl><span class=c1>// 在主线程上运行 Core ML GoogLeNetPlaces 分类器</span>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nv>handler</span> <span class=p>=</span> <span class=n>VNImageRequestHandler</span><span class=p>(</span><span class=n>ciImage</span><span class=p>:</span> <span class=n>image</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>DispatchQueue</span><span class=p>.</span><span class=n>global</span><span class=p>(</span><span class=n>qos</span><span class=p>:</span> <span class=p>.</span><span class=n>userInteractive</span><span class=p>).</span><span class=n>async</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>do</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span> <span class=n>handler</span><span class=p>.</span><span class=n>perform</span><span class=p>([</span><span class=n>request</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>catch</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=bp>print</span><span class=p>(</span><span class=n>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3>使用模型来自动识别场景</h3><p>在两个地方调用 <code>detectScene(image:) </code>把下面几行添加到 viewDidLoad() 的末端和 imagePickerController(_:didFinishPickingMediaWithInfo:) 的末端：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>guard let ciImage = CIImage(image: image) else {
+</span></span><span class=line><span class=cl>    fatalError(&#34;couldn&#39;t convert UIImage to CIImage&#34;)
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>detectScene(image: ciImage)
+</span></span></code></pre></td></tr></table></div></div><p>现在构建并运行。</p><ol><li>场景一:
+机器识别出了50%的概率是摩天大厦
+<img src=http://upload-images.jianshu.io/upload_images/861914-bb5bec38118f91ff.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt></li><li>场景二
+机器人识别出了75%的概率是水族池
+<img src=http://upload-images.jianshu.io/upload_images/861914-e194482f995324a1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 alt></li></ol><h3>什么是深度学习</h3><p>自20世纪50年代以来，AI 研究人员开发了许多机器学习方法。苹果的 Core ML 框架支持神经网络、树组合、支持向量机、广义线性模型、特征工程和流水线模型。但是，神经网络最近已经取得了很多极为神奇的成功，开始于 2012 年谷歌使用 YouTube 视频训练 AI 来识别猫和人。仅仅五年后，谷歌正在赞助一场确定 5000 种植物和动物的比赛。像 Siri 和 Alexa 这样的 App 也存在它们自己的神经网络。
+神经网络尝试用节点层来模拟人脑流程，并将节点层用不同的方式连接在一起。每增加一层都需要增加大量计算能力：Inception v3，一个对象识别模型，有48层以及大约2000万个参数。但计算基本上都是矩阵乘法，GPU 来处理会非常有效。GPU 成本的下降使我们能够创建多层深度神经网络，此为深度学习。
+神经网络，circa 2016
+神经网络需要大量的训练数据，这些训练数据理想化地代表了全部可能性。用户生成的数据爆炸性地产生也促成了机器学习的复兴。
+训练模型意味着给神经网络提供训练数据，并让它计算公式，此公式组合输入参数以产生输出。训练是离线的，通常在具有多个 GPU 的机器上。
+要使用这个模型，就给它新的输入，它就会计算输出：这叫做推论。推论仍然需要大量计算，以从新的输入计算输出。因为有了 Metal 这样的框架，现在可以在手持设备上进行这些计算。
+在本教程的结尾你会发现，深度学习远非完美。真的很难建立具有代表性的训练数据，很容易就会过度训练模型，以至于它会过度重视一些古怪的特征。
+苹果提供了什么？
+苹果在 iOS 5 里引入了 NSLinguisticTagger 来分析自然语言。iOS 8 出了 Metal，提供了对设备 GPU 的底层访问。
+去年，苹果在 Accelerate 框架添加了 Basic Neural Network Subroutines (BNNS)，使开发者可以构建用于推理（不是训练）的神经网络。
+今年，苹果给了我们 Core ML 和 Vision！
+Core ML 让我们更容易在 App 中使用训练过的模型。
+Vision 让我们轻松访问苹果的模型，用于面部检测、面部特征点、文字、矩形、条形码和物体。
+你还可以在 Vision 模型中包装任意的图像分析 Core ML 模型，我们在这篇教程中就干这个。由于这两个框架是基于 Metal 构建的，它们能在设备上高效运行，所以不需要把用户的数据发送到服务器。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-06-24</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/CoreML/>CoreML</a></div><nav class=post-nav><a class=prev href=/post/old/%E9%98%85%E8%AF%BB/%E6%90%9E%E5%AE%9A2%E6%8F%90%E5%8D%87%E5%B7%A5%E4%BD%9C%E4%B8%8E%E7%94%9F%E6%B4%BB%E6%95%88%E7%8E%87%E7%9A%8452%E9%A1%B9%E5%8E%9F%E5%88%99/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">搞定2提升工作与生活效率的52项原则</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/%E5%AF%BC%E5%9B%BE/plantuml%E8%AF%AD%E6%B3%95%E6%A6%82%E8%A7%88/><span class="next-text nav-default">plantuml语法概览</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-06-24 22:10:44 +0000 UTC",title:"CoreML机器学习初级教程",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

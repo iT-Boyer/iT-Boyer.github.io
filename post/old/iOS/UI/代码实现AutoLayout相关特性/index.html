@@ -1,0 +1,173 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>代码实现AutoLayout相关特性 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="按比例缩放 按比例缩放，这是在Interface Builder中无法设置的内容。
+而在代码中，有如下两种实现方式:
+使用NSLayoutConstraint类型的初始化函数中的multiplier参数就可以非常简单的设置按比例缩放。 同时也可以设置不同NSLayoutAttribute参数来达到意想不到的效果，比如“A的Width等于B的Height的2倍”这样的效果。 现在就拿一个简单的**UIButton**做示例，在ViewController中创建一个UIButton字段：
+{%codeblock lang:objc%} UIButton *btn;
+{%endcodeblock%}
+需求 1： 要求**UIButton水平居中，始终距离父View底部20**单位，其高度是父View高度的三分之一。 使用KVO来监控**UIButton**的大小并实时输出到屏幕上。
+{%codeblock lang:objc%} (void)viewDidLoad { [super viewDidLoad];
+//创建UIButton，不需要设置frame btn = [UIButton buttonWithType:UIButtonTypeRoundedRect]; [btn setTitle:@&ldquo;mgen&rdquo; forState:UIControlStateNormal]; btn.backgroundColor = [UIColor greenColor]; [self.view addSubview:btn];
+//禁止自动转换AutoresizingMask btn.translatesAutoresizingMaskIntoConstraints = NO;
+//居中 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+//距离底部20单位 //注意NSLayoutConstraint创建的constant是加在toItem参数的，所以需要-20。 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-20]];
+//定义高度是父View的三分之一 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.3 constant:0]];
+//注册KVO方法 [btn addObserver:self forKeyPath:@&ldquo;bounds&rdquo; options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil]; }
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/iOS/UI/%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0AutoLayout%E7%9B%B8%E5%85%B3%E7%89%B9%E6%80%A7/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/iOS/UI/%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0AutoLayout%E7%9B%B8%E5%85%B3%E7%89%B9%E6%80%A7/"><meta property="og:site_name" content="习七"><meta property="og:title" content="代码实现AutoLayout相关特性"><meta property="og:description" content="按比例缩放 按比例缩放，这是在Interface Builder中无法设置的内容。
+而在代码中，有如下两种实现方式:
+使用NSLayoutConstraint类型的初始化函数中的multiplier参数就可以非常简单的设置按比例缩放。 同时也可以设置不同NSLayoutAttribute参数来达到意想不到的效果，比如“A的Width等于B的Height的2倍”这样的效果。 现在就拿一个简单的**UIButton**做示例，在ViewController中创建一个UIButton字段：
+{%codeblock lang:objc%} UIButton *btn;
+{%endcodeblock%}
+需求 1： 要求**UIButton水平居中，始终距离父View底部20**单位，其高度是父View高度的三分之一。 使用KVO来监控**UIButton**的大小并实时输出到屏幕上。
+{%codeblock lang:objc%} (void)viewDidLoad { [super viewDidLoad];
+//创建UIButton，不需要设置frame btn = [UIButton buttonWithType:UIButtonTypeRoundedRect]; [btn setTitle:@“mgen” forState:UIControlStateNormal]; btn.backgroundColor = [UIColor greenColor]; [self.view addSubview:btn];
+//禁止自动转换AutoresizingMask btn.translatesAutoresizingMaskIntoConstraints = NO;
+//居中 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+//距离底部20单位 //注意NSLayoutConstraint创建的constant是加在toItem参数的，所以需要-20。 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-20]];
+//定义高度是父View的三分之一 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.3 constant:0]];
+//注册KVO方法 [btn addObserver:self forKeyPath:@“bounds” options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil]; }"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2014-09-02T15:53:11+08:00"><meta property="article:modified_time" content="2014-09-02T15:53:11+08:00"><meta itemprop=name content="代码实现AutoLayout相关特性"><meta itemprop=description content="按比例缩放 按比例缩放，这是在Interface Builder中无法设置的内容。
+而在代码中，有如下两种实现方式:
+使用NSLayoutConstraint类型的初始化函数中的multiplier参数就可以非常简单的设置按比例缩放。 同时也可以设置不同NSLayoutAttribute参数来达到意想不到的效果，比如“A的Width等于B的Height的2倍”这样的效果。 现在就拿一个简单的**UIButton**做示例，在ViewController中创建一个UIButton字段：
+{%codeblock lang:objc%} UIButton *btn;
+{%endcodeblock%}
+需求 1： 要求**UIButton水平居中，始终距离父View底部20**单位，其高度是父View高度的三分之一。 使用KVO来监控**UIButton**的大小并实时输出到屏幕上。
+{%codeblock lang:objc%} (void)viewDidLoad { [super viewDidLoad];
+//创建UIButton，不需要设置frame btn = [UIButton buttonWithType:UIButtonTypeRoundedRect]; [btn setTitle:@“mgen” forState:UIControlStateNormal]; btn.backgroundColor = [UIColor greenColor]; [self.view addSubview:btn];
+//禁止自动转换AutoresizingMask btn.translatesAutoresizingMaskIntoConstraints = NO;
+//居中 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+//距离底部20单位 //注意NSLayoutConstraint创建的constant是加在toItem参数的，所以需要-20。 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-20]];
+//定义高度是父View的三分之一 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.3 constant:0]];
+//注册KVO方法 [btn addObserver:self forKeyPath:@“bounds” options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil]; }"><meta itemprop=datePublished content="2014-09-02T15:53:11+08:00"><meta itemprop=dateModified content="2014-09-02T15:53:11+08:00"><meta itemprop=wordCount content="2644"><meta itemprop=keywords content="解决方案"><meta name=twitter:card content="summary"><meta name=twitter:title content="代码实现AutoLayout相关特性"><meta name=twitter:description content="按比例缩放 按比例缩放，这是在Interface Builder中无法设置的内容。
+而在代码中，有如下两种实现方式:
+使用NSLayoutConstraint类型的初始化函数中的multiplier参数就可以非常简单的设置按比例缩放。 同时也可以设置不同NSLayoutAttribute参数来达到意想不到的效果，比如“A的Width等于B的Height的2倍”这样的效果。 现在就拿一个简单的**UIButton**做示例，在ViewController中创建一个UIButton字段：
+{%codeblock lang:objc%} UIButton *btn;
+{%endcodeblock%}
+需求 1： 要求**UIButton水平居中，始终距离父View底部20**单位，其高度是父View高度的三分之一。 使用KVO来监控**UIButton**的大小并实时输出到屏幕上。
+{%codeblock lang:objc%} (void)viewDidLoad { [super viewDidLoad];
+//创建UIButton，不需要设置frame btn = [UIButton buttonWithType:UIButtonTypeRoundedRect]; [btn setTitle:@“mgen” forState:UIControlStateNormal]; btn.backgroundColor = [UIColor greenColor]; [self.view addSubview:btn];
+//禁止自动转换AutoresizingMask btn.translatesAutoresizingMaskIntoConstraints = NO;
+//居中 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+//距离底部20单位 //注意NSLayoutConstraint创建的constant是加在toItem参数的，所以需要-20。 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-20]];
+//定义高度是父View的三分之一 [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.3 constant:0]];
+//注册KVO方法 [btn addObserver:self forKeyPath:@“bounds” options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil]; }"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>代码实现AutoLayout相关特性</h1><div class=post-meta><span class=post-time>2014-09-02</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 2644 字 </span><span class=more-meta>预计阅读 6 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>按比例缩放</a><ul><li></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2014-09-02T15:53:11 title="September 2, 2014">September 2, 2014</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2>按比例缩放</h2><p>按比例缩放，这是在Interface Builder中无法设置的内容。<br>而在代码中，有如下两种实现方式:</p><ol><li>使用<code>NSLayoutConstraint</code>类型的初始化函数中的<code>multiplier</code>参数就可以非常简单的设置按比例缩放。</li><li>同时也可以设置不同<code>NSLayoutAttribute</code>参数来达到意想不到的效果，比如“A的Width等于B的Height的2倍”这样的效果。</li></ol><p>现在就拿一个简单的**<code>UIButton</code>**做示例，在ViewController中创建一个UIButton字段：<br>{%codeblock lang:objc%}
+UIButton *btn;<br>{%endcodeblock%}</p><h4>需求 1：</h4><ol><li>要求**<code>UIButton</code><strong>水平居中，始终距离父View底部</strong>20**单位，其高度是父View高度的三分之一。</li><li>使用<strong>KVO</strong>来监控**<code>UIButton</code>**的大小并实时输出到屏幕上。<br>{%codeblock lang:objc%}</li></ol><ul><li><p>(void)viewDidLoad
+{
+[super viewDidLoad];</p><p>//创建UIButton，不需要设置frame
+btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+[btn setTitle:@&ldquo;mgen&rdquo; forState:UIControlStateNormal];
+btn.backgroundColor = [UIColor greenColor];
+[self.view addSubview:btn];</p><p>//禁止自动转换AutoresizingMask
+btn.translatesAutoresizingMaskIntoConstraints = NO;</p><p>//居中
+[self.view addConstraint:[NSLayoutConstraint
+constraintWithItem:btn
+attribute:NSLayoutAttributeCenterX
+relatedBy:NSLayoutRelationEqual
+toItem:self.view
+attribute:NSLayoutAttributeCenterX
+multiplier:1
+constant:0]];</p><p>//距离底部20单位
+//注意NSLayoutConstraint创建的constant是加在toItem参数的，所以需要-20。
+[self.view addConstraint:[NSLayoutConstraint
+constraintWithItem:btn
+attribute:NSLayoutAttributeBottom
+relatedBy:NSLayoutRelationEqual
+toItem:self.view
+attribute:NSLayoutAttributeBottom
+multiplier:1
+constant:-20]];</p><p>//定义高度是父View的三分之一
+[self.view addConstraint:[NSLayoutConstraint
+constraintWithItem:btn
+attribute:NSLayoutAttributeHeight
+relatedBy:NSLayoutRelationEqual
+toItem:self.view
+attribute:NSLayoutAttributeHeight
+multiplier:0.3
+constant:0]];</p><p>//注册KVO方法
+[btn addObserver:self forKeyPath:@&ldquo;bounds&rdquo; options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];<br>}</p></li></ul><p>//KVO回调</p><ul><li>(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+if (object == btn && [keyPath isEqualToString:@&ldquo;bounds&rdquo;])
+{
+[btn setTitle:NSStringFromCGSize(btn.bounds.size) forState:UIControlStateNormal];
+}
+}
+{%endcodeblock%}<br>运行结果：</li></ul><h4>需求 2：</h4><ol><li>在横向的显示中，Button的高度只有96，所以要求Button的最小高度为150。</li></ol><p>涉及到的相关特性：</p><ul><li><strong>优先级</strong>：当两个**<code>Constraint</code><strong>同时作用在一个控件时，在某些情况下是有冲突的，可以通过设置</strong><code>Constraint</code><strong>的优先级来解决。
+优先级对应</strong><code>NSLayoutConstraint</code><strong>类型的</strong><code>priority</code><strong>属性，默认值是</strong><code>UILayoutPriorityRequired</code><strong>，数值上等于</strong>1000**. 设置一个低的值代表更低的优先级。</li><li><strong>最小值的定义</strong>：使用**<code>NSLayoutRelationGreaterThanOrEqual</code><strong>作为</strong><code>NSLayoutConstraint</code><strong>类型创建时的</strong><code>relatedBy</code>**参数。</li></ul><p>修改上面的比例Constraint，并在下方加入一个新的限制最小值的Constraint，代码：<br>{%codeblock lang:objc%}
+//定义高度是父View的三分之一
+//设置优先级低于UILayoutPriorityRequired(1000)，UILayoutPriorityDefaultHigh是750
+NSLayoutConstraint *con = [NSLayoutConstraint
+constraintWithItem:btn
+attribute:NSLayoutAttributeHeight
+relatedBy:NSLayoutRelationEqual
+toItem:self.view
+attribute:NSLayoutAttributeHeight
+multiplier:0.3
+constant:0];
+con.priority = UILayoutPriorityDefaultHigh;
+[self.view addConstraint:con];</p><p>//设置btn最小高度为150
+[btn addConstraint:[NSLayoutConstraint
+constraintWithItem:btn
+attribute:NSLayoutAttributeHeight
+relatedBy:NSLayoutRelationGreaterThanOrEqual
+toItem:nil
+attribute:NSLayoutAttributeNotAnAttribute
+multiplier:1
+constant:150]];
+{%endcodeblock%}<br>运行后，横向屏幕中的Button高度成了150：</p><h4>intrinsicContentSize 控件的内置大小</h4><p>控件的内置大小是由控件本身的内容所决定的，比如一个<code>UILabel</code>的文字很长，那么该<code>UILabel</code>的内置大小自然会很长。<br>在代码中获取控件的内置大小的方法：</p><ol><li>通过<code>UIView</code>的<code>intrinsicContentSize</code>属性来获取；</li><li>通过<code>invalidateIntrinsicContentSize</code>方法来在下次UI规划事件中重新计算<code>intrinsicContentSize</code>。</li></ol><p>注意：如果直接创建一个原始的UIView对象，它的内置大小为0。</p><p>先写一个辅助方法来快速设置UIView的边距限制：<br>{%codeblock lang:objc%}
+//设置Autolayout中的边距辅助方法</p><ul><li>(void)setEdge:(UIView*)superview view:(UIView*)view attr:(NSLayoutAttribute)attr constant:(CGFloat)constant
+{
+[superview addConstraint:[NSLayoutConstraint constraintWithItem:view
+attribute:attr
+relatedBy:NSLayoutRelationEqual
+toItem:superview
+attribute:attr
+multiplier:1.0
+constant:constant]
+];
+}
+{%endcodeblock%}<br>接下来，创建一个UIView，利用上面的辅助方法快速设置其在父控件的左，上，右边距为20单位。如下代码：<br>{%codeblock lang:objc%}
+//view1
+UIView <em>view1 = [UIView new];
+view1.backgroundColor = [UIColor yellowColor];
+//不允许AutoresizingMask转换成Autolayout
+view1.translatesAutoresizingMaskIntoConstraints = NO;
+[self.view addSubview:view1];
+//设置左，上，右边距为20.
+[self setEdge:self.view view:view1 attr:NSLayoutAttributeLeft constant:20];
+[self setEdge:self.view view:view1 attr:NSLayoutAttributeTop constant:20];
+[self setEdge:self.view view:view1 attr:NSLayoutAttributeRight constant:-20];
+{%endcodeblock%}<br>但是运行后会发现，界面上不会显示任何东西。原因就是上面讲的，<code>UIView</code>默认是没有</em>*<code>intrinsicContentSize</code>**的。</li></ul><p>创建一个自定义的<code>UIView</code>来改写**<code>intrinsicContentSize</code><strong>：MyView:<br>然后在.m文件中改写</strong>intrinsicContentSize**方法，并返回有效值，比如这样：<br>{%codeblock lang:objc%}
+//改写UIView的intrinsicContentSize</p><ul><li>(CGSize)intrinsicContentSize
+{
+return CGSizeMake(70, 40);
+}<br>{%endcodeblock%}<br>接着修改最上面的代码，把上面view1变量的类型从UIView替换成我们自定义的View：MyView类型：<br>{%codeblock lang:objc%}
+MyView *view1 = [MyView new];<br>{%endcodeblock%}<br>再次运行代码，View会按照要求显示在屏幕上：<br>按照同样的方式，在下方添加另一个<code>MyView</code>，要求其距离父控件边距左，下，右各为<strong>20</strong>，代码：<br>{%codeblock lang:objc%}
+//view2<br>MyView *view2 = [MyView new];<br>view2.backgroundColor = [UIColor yellowColor];<br>//不允许AutoresizingMask转换成Autolayout<br>view2.translatesAutoresizingMaskIntoConstraints = NO;<br>[self.view addSubview:view2];<br>//设置左，下，右边距为20.<br>[self setEdge:self.view view:view2 attr:NSLayoutAttributeLeft constant:20];<br>[self setEdge:self.view view:view2 attr:NSLayoutAttributeBottom constant:-20];<br>[self setEdge:self.view view:view2 attr:NSLayoutAttributeRight constant:-20];<br>{%endcodeblock%}</li></ul><h4>需求：</h4><ol><li><p>通过代码加入Autolayout中的间距，命令view1和view2上下必须间隔20个单位。
+2. - 这里要求view2在view1之下的<strong>20</strong>单位，所以创建<strong>NSLayoutConstraint</strong>中view2参数在前面。<br>2. - view2的**<code>attribute</code><strong>参数是</strong><code>NSLayoutAttributeTop</code><strong>，而view1的</strong><code>attribute</code><strong>参数是</strong><code>NSLayoutAttributeBottom</code>**</p></li><li><p>拉伸view2,而不拉伸view1。</p><ol><li><ul><li>控件的**<code>Content Hugging Priority</code>**拒绝拉伸的优先级，优先级越高，控件会越不容易被拉伸。</li></ul></li><li><ul><li>控件的**<code>Content Compression Resistance Priority</code>**拒绝压缩内置空间(<code>intrinsicContentSize</code>)的优先级。优先级越高，控件的内置空间(<code>intrinsicContentSize</code>)会越不容易被压缩。</li></ul></li></ol></li></ol><p>{%codeblock lang:objc%}
+//设置两个View上下间距为20
+[self.view addConstraint:[NSLayoutConstraint constraintWithItem:view2
+attribute:NSLayoutAttributeTop
+relatedBy:NSLayoutRelationEqual
+toItem:view1
+attribute:NSLayoutAttributeBottom
+multiplier:1.0
+constant:20]
+];
+{%endcodeblock%}</p><p>OK，的确，此时view1和view2相互间隔20单位，但是view1被拉伸了。</p><p>使用控件的**<code>Content Hugging Priority</code><strong>，如下图：<br>如图,把view1（上图中被拉伸的，在上面的View）的</strong><code>Content Hugging Priority</code><strong>设置一个更高的值，那么当<code>Autolayout</code>遇到这种决定谁来拉伸的情况时，view1不会被优先拉伸，而优先级稍低的view2才会被拉伸。<br>可以直接通过UIView的<code>setContentHuggingPriority:forAxis</code>方法来设置控件的</strong><code>Content Hugging Priority</code><strong>，其中<code>forAxis</code>参数代表横向和纵向，本例中只需要设置纵向，所以传入</strong><code>UILayoutConstraintAxisVertical</code>**。整句代码：<br>{%codeblock lang:objc%}
+//提高view1的Content Hugging Priority
+[view1 setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
+{%endcodeblock%}</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2014-09-02</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><nav class=post-nav><a class=prev href=/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/XMPP%E7%AE%80%E5%8D%95%E7%A0%94%E7%A9%B6%E8%BD%AC/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">XMPP简单研究[转]</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/iOS/%E5%9C%A8IOS%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89URLSchemes%E6%95%99%E7%A8%8B/><span class="next-text nav-default">在IOS中自定义URLSchemes教程</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2014-09-02 15:53:11 +0800 +0800",title:"代码实现AutoLayout相关特性",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

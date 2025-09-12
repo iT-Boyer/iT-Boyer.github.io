@@ -1,0 +1,187 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>使用 ChatGPT 分析优化 agenda 日程安排 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="博客简介"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%8E%B0agenda%E5%92%8Cai%E5%AF%B9%E8%AF%9D%E5%88%86%E6%9E%90%E5%B7%A5%E4%BD%9C%E5%AE%89%E6%8E%92/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%8E%B0agenda%E5%92%8Cai%E5%AF%B9%E8%AF%9D%E5%88%86%E6%9E%90%E5%B7%A5%E4%BD%9C%E5%AE%89%E6%8E%92/"><meta property="og:site_name" content="习七"><meta property="og:title" content="使用 ChatGPT 分析优化 agenda 日程安排"><meta property="og:description" content="博客简介"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-05-27T20:08:00+08:00"><meta property="article:modified_time" content="2023-05-27T20:10:52+08:00"><meta itemprop=name content="使用 ChatGPT 分析优化 agenda 日程安排"><meta itemprop=description content="博客简介"><meta itemprop=datePublished content="2023-05-27T20:08:00+08:00"><meta itemprop=dateModified content="2023-05-27T20:10:52+08:00"><meta itemprop=wordCount content="1304"><meta itemprop=keywords content=",学习笔记"><meta name=twitter:card content="summary"><meta name=twitter:title content="使用 ChatGPT 分析优化 agenda 日程安排"><meta name=twitter:description content="博客简介"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>使用 ChatGPT 分析优化 agenda 日程安排</h1><div class=post-meta><span class=post-time>2023-05-27</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 1304 字 </span><span class=more-meta>预计阅读 3 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by
+<a href=/authors/iTBoyer>iTBoyer</a></span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#使用-org-ql-获取todo数据实现-ai-对话>使用 org-ql 获取TODO数据实现 AI 对话</a></li><li><a href=#介绍-org-agenda-内置导出工具>介绍 org-agenda 内置导出工具</a><ul><li><a href=#org-batch-agenda-的用法>org-batch-agenda 的用法</a></li><li><a href=#org-batch-store-agenda-views>org-batch-store-agenda-views</a></li><li><a href=#org-agenda-list-stuck-projects>org-agenda-list-stuck-projects</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2023-05-27T20:10:52 title="May 27, 2023">May 27, 2023</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>借助 AI 帮助分析日程安排的也将是非常有力的工具。</p><ol><li>如何获取 agenda 的内容,直接返回构建的视图内容字符串,而不跳转到 agenda 缓冲区<ul><li><input disabled type=checkbox> 通过 org-agenda 内置命令导出文本格式使用自带命令，会跳转到 org-agenda-view 中无法在 elisp 中拿到列表数据</li><li><input checked disabled type=checkbox> 通过 org-ql 查询命令获取 agenda 列表</li></ul></li><li><input checked disabled type=checkbox> 将内容投喂给 gptel 获取分析报告和建议借助 org-roam-capture 通过 tag 设定 prompt 角色，在完成 capture 时，自动对话AI。</li><li><input checked disabled type=checkbox> 优化 prompt 对话模板:<ol><li>基于 capture 模板: <code>内容总结</code> ， <code>写作助理</code></li><li>基于 snippet 模板： <code>agd</code> 调用自定义方法，实现查询 org 内容，插入到当前 buffer</li></ol></li></ol><h2 id=使用-org-ql-获取todo数据实现-ai-对话>使用 org-ql 获取TODO数据实现 AI 对话</h2><p>获取 org-agenda 的清单数据。在获取到数据之后，就可以为其他自定义方法提供数据支持。</p><p>例如，想要将查询到的数据，插入当前 buffer，先将列表数据以换行的方式格式化为字符串,然后插入当前位置 buffer。</p><p>还可以结合 gptel 接口，将查询的内容投喂给 AI ，实现和 AI 的对话，例如帮助分析 agenda 任务安排的合理性，获取 AI 专业的建议。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>org-ql-week-todo</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let</span> <span class=p>((</span><span class=nv>result</span> <span class=s>&#34;&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>setq</span> <span class=nv>result</span> <span class=p>(</span><span class=nv>org-ql-query</span>
+</span></span><span class=line><span class=cl>                   <span class=nb>:select</span> <span class=o>&#39;</span><span class=p>(</span><span class=nv>org-get-heading</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                   <span class=c1>;; :from (org-agenda-files)</span>
+</span></span><span class=line><span class=cl>                   <span class=nb>:where</span> <span class=o>&#39;</span><span class=p>(</span><span class=nv>todo</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>setq</span> <span class=nv>content</span> <span class=p>(</span><span class=nv>s-join</span> <span class=s>&#34;\n&#34;</span> <span class=p>(</span><span class=nf>mapcar</span> <span class=nf>#&#39;</span><span class=p>(</span><span class=nb>lambda</span> <span class=p>(</span><span class=nv>x</span><span class=p>)</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;%s&#34;</span> <span class=nv>x</span><span class=p>))</span> <span class=nv>result</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;搜索结果：\n%s&#34;</span> <span class=nv>content</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>insert-org-ql-todo</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>搜索结果：
+</span></span><span class=line><span class=cl>TODO 思考最重要的事情撰写使命宣言 :blue:
+</span></span><span class=line><span class=cl>TODO [#B] 拓宽思路的过程 :anki:
+</span></span><span class=line><span class=cl>TODO 开发 auto-gpt emacs 插件
+</span></span><span class=line><span class=cl>TODO 捷径通过 emacsclient 命令，或 ifff 集成 Auto-GPT
+</span></span><span class=line><span class=cl>TODO 使用 gptel 分析 agenda 优化日程安排
+</span></span><span class=line><span class=cl>TODO org-batch-store-agenda-views
+</span></span><span class=line><span class=cl>TODO org-agenda-list-stuck-projects
+</span></span><span class=line><span class=cl>TODO 每日安排
+</span></span><span class=line><span class=cl>TODO 每周安排
+</span></span><span class=line><span class=cl>TODO 快速导出 agenda 清单模板
+</span></span></code></pre></td></tr></table></div></div><h2 id=介绍-org-agenda-内置导出工具>介绍 org-agenda 内置导出工具</h2><p>org-agenda 提供三个宏函数：</p><ol><li><code>org-batch-agenda</code> : 为命令行设计，能够执行 org-agenda 模板命令 , <code>org-batch-agenda-csv</code> 支持导出 csv 格式</li><li><code>org-batch-store-agenda-views</code> : 基于 org-agenda 模板中设置的导出文件格式，批量导出并生成相关文件。</li><li><code>org-agenda-list-stuck-projects</code> : 导出阻塞的任务清单。</li></ol><p><code>elisp</code> 不执行宏调用的参数;所以不支持函数类型的入参。</p><p>用户如果 <code>emacsclient</code> 从命令中获取 agenda 的日程清单。例如，导出7天的议程:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>emacs -batch -l ~/.emacs -eval <span class=s1>&#39;(org-batch-agenda &#34;a&#34; org-agenda-span 7)&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果想把 <code>org-batch-agenda</code> 作为常规函数调用，则必须使用单引号 <code>'</code> 包括。</p><p>此外:使用符号作为参数值，则必须对该符号加双引号。</p><p><a href=https://orgmode.org/manual/Extracting-Agenda-Information.html>Extracting Agenda Information (The Org Manual)</a></p><h3 id=org-batch-agenda-的用法>org-batch-agenda 的用法</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nv>org-batch-agenda</span> <span class=s>&#34;a&#34;</span> <span class=nv>org-agenda-span</span> <span class=mi>7</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl> 2:00      S-42  TODO 思考最重要的事情撰写使命宣言 :@Inbox::blue:
+</span></span><span class=line><span class=cl> 2:00      S-42  TODO [#B] 拓宽思路的过程 :@Inbox::anki:
+</span></span><span class=line><span class=cl> 2:00      D-42  TODO 思考最重要的事情撰写使命宣言 :@Inbox::blue:
+</span></span><span class=line><span class=cl> 2:00      D-42  TODO [#B] 拓宽思路的过程 :@Inbox::anki:
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=c1>;; (org-batch-agenda &#34;E&#34; org-agenda-span 7)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>setq</span> <span class=nv>agenda-result</span> <span class=p>(</span><span class=nv>org-batch-agenda</span> <span class=s>&#34;E&#34;</span> <span class=nv>org-agenda-span</span> <span class=mi>7</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nf>message</span> <span class=s>&#34;每日安排： %s&#34;</span> <span class=nv>agenda-result</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>每日安排： 
+</span></span><span class=line><span class=cl>--------重要紧急----------
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  habit:      TODO [#A] 二象限模式[0/3] :habit:
+</span></span><span class=line><span class=cl>  project:    TODO [#A] hackingWithSwift
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>--------重要不紧急---------
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  inbox:      TODO [#B] 拓宽思路的过程 :@Inbox::anki:
+</span></span><span class=line><span class=cl>  inbox:      TODO 开发 auto-gpt emacs 插件 :@Inbox:灵感::
+</span></span><span class=line><span class=cl>  inbox:      TODO 捷径结合 emacsclient 命令，或使用 ifff 集成 Auto-GPT :@Inbox:灵感::
+</span></span><span class=line><span class=cl>  inbox:      TODO 使用 gptel 分析 agenda 优化日程安排 :@Inbox::
+</span></span><span class=line><span class=cl>  inbox:      TODO org-agenda-list-stuck-projects :@Inbox::
+</span></span><span class=line><span class=cl>  inbox:      TODO org-batch-store-agenda-views :@Inbox::
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>-------紧急不重要-----------
+</span></span></code></pre></td></tr></table></div></div><h3 id=org-batch-store-agenda-views>org-batch-store-agenda-views</h3><p>基于 org-agenda 模板中设置的导出文件格式，批量导出并生成相关文件。</p><p>定时导出agenda view</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=c1>;; https://mudan.wiki/Emacs/The_Org_Manual/The_Org_Manual.html</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>after!</span> <span class=nv>org-agenda</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>setq</span> <span class=nv>org-agenda-exporter-settings</span>
+</span></span><span class=line><span class=cl>        <span class=o>&#39;</span><span class=p>((</span><span class=nv>ps-number-of-columns</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nv>ps-landscape-mode</span> <span class=no>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nv>org-agenda-add-entry-text-maxlines</span> <span class=mi>0</span><span class=p>)</span> <span class=c1>;;设置导出时，显示任务的内容最大行数</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nv>org-agenda-prefix-format</span> <span class=s>&#34; [ ] &#34;</span><span class=p>)</span>     <span class=c1>;; 设置任务title的前缀</span>
+</span></span><span class=line><span class=cl>          <span class=c1>;;(org-agenda-with-colors nil)   ; 默认值t:显示颜色</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nv>org-agenda-remove-tags</span> <span class=no>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=c1>;;(org-agenda-tag-filter-preset (list &#34;+personal&#34;))</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nv>htmlize-output-type</span> <span class=ss>&#39;css</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>;; 定时导出agenda view.</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;;  (file-expand-wildcards &#34;~/org/*.org&#34;)</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;;  (setq org-agenda-files (file-expand-wildcards &#34;~/org/*.org&#34;))</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>defun</span> <span class=nv>progo-run-agenda-store</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;定时导出agenda&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;Agenda to be exported... &#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nv>org-batch-store-agenda-views</span>
+</span></span><span class=line><span class=cl>     <span class=nv>org-agenda-span</span> <span class=p>(</span><span class=nb>quote</span> <span class=nv>month</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=c1>;;org-agenda-start-day &#34;2007-11-01&#34;</span>
+</span></span><span class=line><span class=cl>     <span class=c1>;;org-agenda-include-diary nil</span>
+</span></span><span class=line><span class=cl>     <span class=nv>org-agenda-files</span> <span class=p>(</span><span class=nv>file-expand-wildcards</span> <span class=s>&#34;~/hsg/iNotes/content-org/Orgzly/*.org&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;Agenda exported!&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;; 从现在开始，每5分钟：5*60s 执行一次。</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;;(run-at-time nil 300 &#39;progo-run-agenda-store)</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=org-agenda-list-stuck-projects>org-agenda-list-stuck-projects</h3><p>导出阻塞的任务清单</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nv>org-agenda-list-stuck-projects</span>
+</span></span><span class=line><span class=cl> <span class=mi>7</span>                     <span class=c1>; Next 7 days</span>
+</span></span><span class=line><span class=cl> <span class=no>nil</span>                 <span class=c1>; No specific files</span>
+</span></span><span class=line><span class=cl> <span class=no>nil</span>                 <span class=c1>; No custom command</span>
+</span></span><span class=line><span class=cl> <span class=s>&#34;Tasks&#34;</span>             <span class=c1>; Heading for first view</span>
+</span></span><span class=line><span class=cl> <span class=o>&#39;</span><span class=p>(</span><span class=s>&#34;PROJECT&#34;</span><span class=p>)</span>        <span class=c1>; Only PROJECT todos</span>
+</span></span><span class=line><span class=cl> <span class=no>nil</span> <span class=no>nil</span>             <span class=c1>; Default time range</span>
+</span></span><span class=line><span class=cl> <span class=s>&#34;Projects&#34;</span><span class=p>)</span>         <span class=c1>; Heading for second view</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2023-05-27</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><nav class=post-nav><a class=prev href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/org-super-agenda%E4%BD%9C%E4%B8%BA%E6%97%A5%E5%B8%B8%E5%B7%A5%E4%BD%9C%E8%B0%83%E5%BA%A6%E5%8F%B0/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">定制 org-super-agenda 视图作为任务调度台</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/org-super-agenda%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91/><span class="next-text nav-default">org-super-agenda 语法说明</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2023-05-27 20:08:00 +0800 +0800",title:"使用 ChatGPT 分析优化 agenda 日程安排",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

@@ -1,0 +1,154 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>XcodeHeaderDoc教程 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="HeaderDoc 是在Xcode 5 和 iOS7 发布时，新增的一个命令行工具，功能：可以从代码中自动生成格式良好的HTML文档——当然，必须依赖于特定格式的注释来完成的。
+另外，Xcode 还会在 quick look 面板中以HeaderDoc风格显示你的注释。
+通过本教程，将学习如下几点：
+如何书写 HeaderDoc 风格的注释 分如何在 Xcode 中预览文档 如何生成 HTML 文档 如何使用 VVDocumenter-Xcode(一个易于使用的第3方文档制作工具) 准备工作 下载本教程中用到的 示例项目
+这个简单的示例程序只包含了两个类：
+Car: 包含几个属性及一个 “drive” 方法以及一个 completion 块。 MathAPI: 包含了1个方法，用于累加两个数。 现在，这两个类还没有任何注释。以便演示如何通过 HeaderDoc 为这两个类创建文档。 "><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/xcode/XcodeHeaderDoc%E6%95%99%E7%A8%8B/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/xcode/XcodeHeaderDoc%E6%95%99%E7%A8%8B/"><meta property="og:site_name" content="习七"><meta property="og:title" content="XcodeHeaderDoc教程"><meta property="og:description" content="HeaderDoc 是在Xcode 5 和 iOS7 发布时，新增的一个命令行工具，功能：可以从代码中自动生成格式良好的HTML文档——当然，必须依赖于特定格式的注释来完成的。
+另外，Xcode 还会在 quick look 面板中以HeaderDoc风格显示你的注释。
+通过本教程，将学习如下几点：
+如何书写 HeaderDoc 风格的注释 分如何在 Xcode 中预览文档 如何生成 HTML 文档 如何使用 VVDocumenter-Xcode(一个易于使用的第3方文档制作工具) 准备工作 下载本教程中用到的 示例项目
+这个简单的示例程序只包含了两个类：
+Car: 包含几个属性及一个 “drive” 方法以及一个 completion 块。 MathAPI: 包含了1个方法，用于累加两个数。 现在，这两个类还没有任何注释。以便演示如何通过 HeaderDoc 为这两个类创建文档。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2014-08-28T15:18:41+08:00"><meta property="article:modified_time" content="2014-08-28T15:18:41+08:00"><meta property="article:tag" content="工具"><meta property="article:tag" content="文档"><meta itemprop=name content="XcodeHeaderDoc教程"><meta itemprop=description content="HeaderDoc 是在Xcode 5 和 iOS7 发布时，新增的一个命令行工具，功能：可以从代码中自动生成格式良好的HTML文档——当然，必须依赖于特定格式的注释来完成的。
+另外，Xcode 还会在 quick look 面板中以HeaderDoc风格显示你的注释。
+通过本教程，将学习如下几点：
+如何书写 HeaderDoc 风格的注释 分如何在 Xcode 中预览文档 如何生成 HTML 文档 如何使用 VVDocumenter-Xcode(一个易于使用的第3方文档制作工具) 准备工作 下载本教程中用到的 示例项目
+这个简单的示例程序只包含了两个类：
+Car: 包含几个属性及一个 “drive” 方法以及一个 completion 块。 MathAPI: 包含了1个方法，用于累加两个数。 现在，这两个类还没有任何注释。以便演示如何通过 HeaderDoc 为这两个类创建文档。"><meta itemprop=datePublished content="2014-08-28T15:18:41+08:00"><meta itemprop=dateModified content="2014-08-28T15:18:41+08:00"><meta itemprop=wordCount content="4559"><meta itemprop=keywords content="工具,文档"><meta name=twitter:card content="summary"><meta name=twitter:title content="XcodeHeaderDoc教程"><meta name=twitter:description content="HeaderDoc 是在Xcode 5 和 iOS7 发布时，新增的一个命令行工具，功能：可以从代码中自动生成格式良好的HTML文档——当然，必须依赖于特定格式的注释来完成的。
+另外，Xcode 还会在 quick look 面板中以HeaderDoc风格显示你的注释。
+通过本教程，将学习如下几点：
+如何书写 HeaderDoc 风格的注释 分如何在 Xcode 中预览文档 如何生成 HTML 文档 如何使用 VVDocumenter-Xcode(一个易于使用的第3方文档制作工具) 准备工作 下载本教程中用到的 示例项目
+这个简单的示例程序只包含了两个类：
+Car: 包含几个属性及一个 “drive” 方法以及一个 completion 块。 MathAPI: 包含了1个方法，用于累加两个数。 现在，这两个类还没有任何注释。以便演示如何通过 HeaderDoc 为这两个类创建文档。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>XcodeHeaderDoc教程</h1><div class=post-meta><span class=post-time>2014-08-28</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 4559 字 </span><span class=more-meta>预计阅读 10 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2014-08-28T15:18:41 title="August 28, 2014">August 28, 2014</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>HeaderDoc 是在Xcode 5 和 iOS7 发布时，新增的一个命令行工具，功能：可以从代码中自动生成格式良好的HTML文档——当然，必须依赖于特定格式的注释来完成的。</p><p>另外，Xcode 还会在 quick look 面板中以<strong>HeaderDoc</strong>风格显示你的注释。</p><p>通过本教程，将学习如下几点：</p><ul><li>如何书写 HeaderDoc 风格的注释</li><li>分如何在 Xcode 中预览文档</li><li>如何生成 HTML 文档</li><li>如何使用 VVDocumenter-Xcode(一个易于使用的第3方文档制作工具)</li></ul><h4>准备工作</h4><p>下载本教程中用到的 <a href=http://cdn2.raywenderlich.com/wp-content/uploads/2014/03/DocumentationExamples_Starter.zip>示例项目</a></p><p>这个简单的示例程序只包含了两个类：</p><ul><li>Car: 包含几个属性及一个 “drive” 方法以及一个 completion 块。</li><li>MathAPI: 包含了1个方法，用于累加两个数。
+现在，这两个类还没有任何注释。以便演示如何通过 <strong>HeaderDoc</strong> 为这两个类创建文档。</li></ul><h4>HeaderDoc 注释</h4><p><strong>HeaderDoc</strong> 可以从命令行中运行，也可以通过 Xcode 运行。它扫描文件中以某种格式书写的注释,包括这3种形式：
+这3中语法在 Xcode 中产生同样效果的文档</p><pre><code>注释 1. 一般用于单行注释
+	/// Your documentation comment will go here
+注释 2.
+	/**  * Your documentation comment will go here  */
+注释 3: 一般用于较长的注释块
+	/*!  * Your documentation comment will go here  */
+
+注意：在注释2和注释3中，在每一行开头都会有一个额外的*，直至结尾的 */。这仅仅是为了美观，而不是必须的。
+</code></pre><h4>HeaderDoc 标签</h4><p>当 <strong>HeaderDoc</strong> 发现上述3种注释，它就开始寻找其中的<strong>HeaderDoc 标签</strong>。<strong>HeaderDoc 标签</strong> 用来修饰<strong>HeaderDoc 注释</strong>。</p><p><strong>HeaderDoc 标签</strong>以 <strong>@</strong> 符号开头，然后是关键字，然后是一个空格，最后才是相应的文本（例如 @param foo）。
+HeaderDoc 标签可以分为两种：</p><ol><li><p>顶级标签: 这些标签声明所要注释的对象的类型（例如头部声明、类、方法等等）。</p><ul><li>顶级标签，例如 @typedef，用于表示 <strong>typedef</strong> 定义的类型，比如枚举、结构体和函数指针。</li><li><strong>HeaderDoc</strong> 能够根据上下文自动产生顶级标签，因此通常不是必须的。</li></ul></li><li><p>二级标签:这些标签才是具体的注释内容。</p><ul><li>@brief: 简单描述你准备文档化的数据的类型，方法等等。</li><li>@abstract: 等于 @brief。</li><li>@discussion: 类似 @abstract 和 @brief，但允许多行。它不是必须的，仅仅是为了使描述更清晰。</li><li>@param: 描述方法、回调或函数的参数名称。</li><li>@return: 描述方法或函数的返回值。（等同于 @result）</li></ul></li></ol><h4>具体实现</h4><ul><li><h6>属性的文档化</h6></li></ul><p>用 Xcode 打开<strong>DocumentationExamples</strong> 项目, 打开<strong>ViewController.h</strong>,
+在** car **属性的前面，加入一行注释:</p><pre><code>	/*!  * @brief The ViewController class' car object.  */
+
+	@property (nonatomic) Car *car;
+</code></pre><p>编译项目。编译结束，按住 alt/option 键，点击<strong>car</strong> 变量名。你将看到<strong>pop菜单</strong>中显示了刚才的注释内容。
+另一种方法:切换到Utitlities 面板的<strong>Quick Help</strong> 检查器窗口。点击 <strong>car</strong> 变量名，通过<strong>Quick Help</strong>,你将看到如下效果：</p><ul><li><h6>方法的文档化</h6></li></ul><p><strong>MathAPI</strong>包含一个方法需要文档化。打开<strong>MathAPI.h</strong>,找到<code>addNumber:toNumber:</code>。</p><p>这个方法有两个参数及一个返回值。因此需要一个 @description 标签、两个@param标签，以及一个@return 标签，如下面所示：</p><pre><code>/*!  * @discussion A really simple way to calculate the sum of two numbers.
+
+ 	 * @param firstNumber An NSInteger to be used in the summation of two numbers
+
+ 	 * @param secondNumber The second half of the equation.
+
+  	 * @return The sum of the two numbers passed in.
+
+*/
+
++ (NSInteger)addNumber:(NSInteger)firstNumber toNumber:(NSInteger)secondNumber;
+</code></pre><p>编译，再 <strong>alt + 左键</strong>：</p><p>问题: 在 Xcode 文本编辑窗口，很多地方都支持 <strong>alt+左键</strong>。请确保你点击在正确的地方。在上面的例子里，你应当在addNumber: 和 toNumber: 两处使用 alt+左键。</p><p>你也许不知道，这个方法的实现真的很恶心。它只能使用非负数作为参数。为了让用户明白这一点，你应当在注释中添加更多的说明。因此，我们可以在 @return 前面加入一个 @warning 标签。</p><pre><code>* @warning Please make note that this method is only good for adding non-negative numbers.
+</code></pre><p>编译项目，然后使用 alt+左键。我们添加的 @warning 标签效果如下：</p><h4>Code Snippets，让一切变得更简单:</h4><p>一个<strong>snippet</strong> 是一个可以重用的代码块（存储在 snippet 库中）。<strong>Snippets</strong> 甚至可以包含一些需要你去填充的占位符。
+这意味着, 可以用 <strong>snipppet</strong>来进行文档化。</p><p>在 <strong>MathAPI.h</strong> 中，在原有的注释上面加入以下内容：</p><pre><code>/*!  * @discussion 
+
+     * @param 
+
+     * @return 
+*/
+</code></pre><p>注意，当粘贴上述代码时，“”之间的内容会变成一个<strong>token</strong>,意味着可以通过 <strong>tab 键</strong>在 <strong>token</strong> 之间来回切换。就像编写代码时的自动完成功能。</p><h6>学习使用Code Snippets工具</h6><p>打开 <strong>Utilities 面板</strong>中的 <strong>CodeSnippets Library 检查器</strong>窗口，选中上述注释块，将它拖到该检查器窗口中（从某个 token 例如开始拖）:
+将会弹出一个编辑窗口让输入 snippet 的某些信息，并以此来创建一个<strong>自动完成快捷方式</strong>。要修改某个<strong>snippet</strong>时,直接点击 <strong>Code Snippet Library</strong> 中的 snippet，然后点 Edit 按钮。按照如下形式填写：</p><p>要想让 <strong>snippet</strong> 生效，首先删除原有注释，然后将鼠标放到addNumber:toNumber: 方法的 + 号前面,输入<strong>doccomment</strong>，然后回车，该<strong>snippet</strong> 将自动生成。然后，通过 Tab 键在3个 token 间移动，并填充它们。最终完成的文档化结果如下:</p><pre><code>/*!  * @discussion A really simple way to calculate the sum of two numbers.
+
+	 * @param firstNumber An NSInteger to be used in the summation of two numbers.
+
+	 * @param secondNumber The second half of the equation.
+
+	 * @warning Please make note that this method is only good for adding non-negative numbers.
+
+     * @return The sum of the two numbers passed in.
+*/
+</code></pre><p><strong>@param 标签</strong>和 <strong>@warning 标签</strong>需要手动书写。</p><h4>Typedefs的文档化</h4><p>打开 Car.h，在 class 之,有一个NS_ENUM，即 typedef enum，一个块，几个属性，一个空方法等，需要文档化。</p><p>还记得 @typedef 标签吗？
+这个顶级标签稍微特殊一点。它可以对<strong>typedef enum</strong> 或者 <strong>typedef struct</strong> 的类型进行注释。
+根据注释的对象的不同，它会包含与定义的类型相关的二级标签。</p><p>以 enum 为例，它会包含 @constant 标签，用于每个常量（对于struct，则会是 @field 标签）。</p><p>找到 <strong>enum OldCarType</strong>。它包含两个常量，是用于古典汽车的。在<strong>typedef</strong> 声明之上，将原来的注释替换为：</p><pre><code>/*!  * @typedef OldCarType
+
+	 * @brief A list of older car types.
+
+	 * @constant OldCarTypeModelT A cool old car.
+
+	 * @constant OldCarTypeModelA A sophisticated old car.
+*/
+
+typedef enum {
+		/// A cool, old car.
+
+ 		OldCarTypeModelT,
+
+		/// A sophisticated older car.
+
+		OldCarTypeModelA
+
+} OldCarType;
+</code></pre><p>编译，然后在 <strong>OldCarType</strong> 或上<strong>OldCarTypeModelT</strong>使用<strong>alt + 左键</strong>。</p><p>在这个类中只有一个 <strong>NS_ENUM</strong>，因此接下来进行进行文档化。常量已经注释了，只要对整个<strong>NS_ENUM</strong> 进行一个总体的注释就可以了。</p><pre><code>/*!  * @typedefCarType
+
+	 * @brief Alist of newer car types.
+
+	 * @constantCarTypeHatchback Hatchbacks are fun, but small.
+
+	 * @constantCarTypeSedan Sedans should have enough room to put your kids, and your golfclubs
+
+	 * @constantCarTypeEstate Estate cars should hold your kids, groceries, sport equipment,etc.
+
+	 * @constantCarTypeSport Sport cars should be fast, fun, and hard on the back.
+*/
+</code></pre><p>注意:这个enum 是通过宏来声明的，悲催的 Xcode 不能完全支持和 <strong>typedef enum</strong> 一样的文档特性，虽然<strong>NS_ENUM</strong> 实际上是声明 enums 的推荐的方法。</p><h4>typedef block 文档化</h4><pre><code>/*!  * @brief A block that makes the car drive.
+	 * @param distance The distance is equal to a distance driven when the block is ready to execute. It could be miles, or kilometers, but not both. Just pick one and stick with it. ;]
+*/
+
+typedef void(^driveCompletion)(CGFloat distance);
+</code></pre><p><strong>typedef block</strong> 的文档化和之前的并无多少不同，它包含了：</p><ul><li>一个 @brief 标签，简单说明了一下这个块的作用。</li><li>一个 @param 标签，说明调用块时需要传递的参数。</li></ul><h4>添加格式化代码到文档中</h4><p>例如，Car 类的 <strong>driveCarWithComplete:</strong> 方法。</p><p>这个方法以块作为参数，因为块对于新手来说一般比较困难，因此最好是告诉程序员如何使用这个方法。</p><p>这需要使用 <strong>@code 标签</strong>。在 <strong>driveCarWithCompletion</strong>方法声明之前添加如下内容：</p><pre><code>/*!  * @brief The car will drive, and then execute the drive block
+
+	 * @param completion A driveCompletion block
+
+	 * @code [car driveCarWithCompletion:^(CGFloat distance){
+
+	 					   NSLog(@&quot;Distance driven %f&quot;, distance);
+
+	 					}];
+*/
+</code></pre><p>编译，在方法名上使用<strong>alt+左键</strong>。如下图所示：</p><h4>检查文档</h4><p>学会了如何添加注释，如果 <strong>Xcode</strong> 能帮你检查你的工作，就像Xcode会自动检查代码中的语法错误，那岂不是更好？有一个好消息，Clang 有一个标志，叫做“<strong>CLANG_WARN_DOCUMENTATION_COMMENTS</strong>”,可以用于检查 <strong>HeaderDoc</strong> 格式的注释。</p><p>打开 <strong>DocumentationExamples</strong>的项目设置，点击 <strong>Build Settings</strong>，找到 <strong>DocumentationComments</strong>, 将值设置为 <strong>YES</strong>。
+如下，打开 <strong>MathAPI.h</strong>，将第一个 @param 标签的参数名由<strong>firstNumber</strong> 修改为 <strong>thirdNumber</strong>,然后编译。
+有一个警告发生，甚至提出了修改建议。它不会影响任何事情，但有助于检查文档中的错误。</p><h4>特殊注释</h4><p><strong>Xcode</strong> 还支持几种特殊注释，对于你或者使用你代码的人非常有用。</p><p>打开 Car.m，在 <strong>driveCarWithCompletion:</strong> 方法中，在调用<strong>completion</strong> 块之前添加下列注释：</p><pre><code>// FIXME: This is broken
+
+// !!!: Holy cow, it should be checked!
+
+// ???: Perhaps check if the block is not nil first?
+</code></pre><p>这里出现了3中注释：</p><ul><li>FIXME: 某个地方需要修正</li><li>!!!: 某个地方需要注意。</li><li>???: 代码中有问题，或者代码是可疑的。</li></ul><p>这些注释不但有助于浏览代码，而且 Xcode 绘制 <strong>Jump Bar</strong> 中显示它们。点击<strong>Jump Bar</strong>，如下图所示：</p><p>你将看到这3个注释以粗体显示：</p><p>到此，你已经完全掌握了如何对项目进行文档化。花一些时间对项目的其他属性和方法操作一番，并加入一些自己的东西。看看在注释块中改变一些东西或者删除某个标签会发生什么。这将让你明白注释格式如何对文档造成影响的。</p><p>#用headerdoc2html 创建 HTML文档
+文档化是由一个 <strong>HeaderDoc 工具</strong>完成的。当 Xcode 安装时，它就已经安装好了。
+它除了解释已添加的注释，显示一个弹出菜单以及将注释在<strong>Quick Help</strong> 中显示之外，还可以在文档化之后创建 HTML、XML 以及联机帮助手册。</p><p>本节介绍 HTML 文件的制作。如果你对用 HeaderDoc 如何创建在线文档感兴趣，请参考<a href=https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/HeaderDoc/usage/usage.html>HeaderDoc 用户指南</a>.</p><p>打开终端，转到 DocumentationExamples 项目目录：</p><pre><code>	cd /path/to/your/folder
+
+	确保该路径下包含了 Xcodeproject  文件(“DocumentationExamples.xcodeproj”)。
+</code></pre><p>然后用下列命令创建 HTML 文档：</p><pre><code>	headerdoc2html -o ~/Desktop/documentation DocumentationExamples/
+</code></pre><p>此时终端会有许多输出。当创建完毕，返回桌面，出现一个名为documentation 的目录。双击打开，找到 Car_h 目录，打开 index.html：</p><p><strong>headerdoc2html 脚本</strong>有两个参数：</p><p>So what justhappened? Well, you ran the headerdoc2htmlscript with 2 options:</p><ul><li>-o ~/Desktop/documentation – 这个参数指定输出的 Html 文件路径——即桌面的 documentation 目录。</li><li>DocumentationExamples/ – 该参数指定要解析的源文件位于 DocumentationExamples 目录（不包含项目目录下的其他目录，因为它们并不包含源代码）</li></ul><p>问题:</p><ol><li>最新版本<strong>headerdoc2html</strong>有个问题，用 google chrome打开 index.html后，左边的目录显示不正常，但 Safari打开正常。</li><li>最新版本的<strong>headerdoc2html</strong> 不能正确解析 /// 类的注释，可以使用 /*! 类型的注释代替。</li></ol><p>这很酷，但还可以更进一步。除了手动进入到输出目录中进行导航，<strong>HeaderDoc</strong>还会创建一个主目录索引。
+返回终端，导航至新建的 <strong>documentation</strong> 目录，输入：</p><pre><code>cd ~/Desktop/documentation
+</code></pre><p>然后输入命令，创建内容索引:</p><pre><code>gatherheaderdoc .
+</code></pre><p><strong>gatherheaderdoc</strong>自动查找目录，为 <strong>.</strong> 目录（表示当前目录）创建索引。
+用 Finder 打开 documentation 目录。你会发现多出一个 <strong>masterTOC.html</strong> 文件。打开它，它将列出所有已文档化的属性、方法、枚举和块的链接。
+你可以将所有 HTML 文件放到 web 服务器上，然后所有人都可以访问你的文档！</p><p>#VVDocumenter-Xcode</p><p>最后的内容是 <strong>VVDocumenter-Xcode</strong>，一个第三方 Xcode插件，它能让你的文档化工作简单至比使用早先介绍的 <strong>Code Snippet</strong> 更容易。</p><p>首先，从 <a href=https://github.com/onevcat/VVDocumenter-Xcode>Github</a> 下载插件。</p><p>你所需要做的全部工作就是打开项目，然后 <strong>Build</strong>。它会将插件自动安装到~/Library/ApplicationSupport/Developer/Shared/Xcode/Plug-ins 目录。</p><p>然后重启 Xcode。再次打开 DocumentationExamples项目。在 MathAPI.h，删除 <strong><code>addNumber:toNumber</code></strong> 方法的注释块，然后在方法声明上面输入：</p><pre><code>///
+</code></pre><p><strong>VVDocumenter-Xcode</strong> 将自动创建注释块，包括所有必要的 <strong>@param</strong> 标签以及自动完成 <strong>token</strong>。</p><p>打开 Car.h，删除 <strong>NS_ENUM CarType</strong> 的注释，以及每个常量的注释。在<strong>NS_ENUM</strong> 声明之上，输入：</p><pre><code>///
+</code></pre><p>这回，它会在 enum 之上创建 <strong>discussion</strong> 标签，甚至还每个常量上面放入了必要的注释！</p><p><strong>VVDocumenter-Xcode</strong> 使你的生活更加轻松。如果你想定制<strong>VVDocumenter-Xcode</strong>，在Xcode中，使用 <strong>Window>VVDocumenter菜单</strong>。</p><p>这里，你可以改变自动完成关键字、注释风格以及其他。你想怎样定制 VVDocumenter-Xcode都行。VVDocumenter-Xcode 为我省下了大量的时间！
+接下来做什么？</p><p>最终完成的示例项目在 这里<a href=http://cdn2.raywenderlich.com/wp-content/uploads/2014/03/DocumentationExamples_Final.zip>下载</a>。</p><p>在你自己的代码中进行文档化。尝试自己编写 <strong>code snippet</strong> 并使用<strong>VVDocumentor</strong>。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2014-08-28</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/%E5%B7%A5%E5%85%B7/>工具</a>
+<a href=/tags/%E6%96%87%E6%A1%A3/>文档</a></div><nav class=post-nav><a class=prev href=/post/old/iOS/%E5%9C%A8IOS%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89URLSchemes%E6%95%99%E7%A8%8B/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">在IOS中自定义URLSchemes教程</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/iOS/UI/Storyboard%E4%B9%8BSegue/><span class="next-text nav-default">Storyboard之Segue</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2014-08-28 15:18:41 +0800 +0800",title:"XcodeHeaderDoc教程",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

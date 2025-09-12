@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>管理 on 习七</title><link>https://it-boyer.github.io/tags/%E7%AE%A1%E7%90%86/</link><description>Recent content in 管理 on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Wed, 21 Jul 2021 16:50:15 +0800</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml"/><item><title>解决appstore安装app过程进度停止问题</title><link>https://it-boyer.github.io/post/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E4%BF%AE%E5%A4%8D/</link><pubDate>Wed, 21 Jul 2021 00:00:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E4%BF%AE%E5%A4%8D/</guid><description>&lt;div class="ox-hugo-toc toc"&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div class="heading"&gt;&amp;#30446;&amp;#24405;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#%E9%97%AE%E9%A2%98%E6%83%85%E5%86%B5%E6%8F%8F%E8%BF%B0"&gt;问题情况描述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"&gt;解决办法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;!--endtoc--&gt;
+&lt;h2 id="问题情况描述"&gt;问题情况描述&lt;/h2&gt;
+&lt;p&gt;在appstore安装过程中，有可能因为网络异常导致安装异常中止，但是进度依然显示安装中，此时无法通过appstore撤销安装。&lt;/p&gt;
+&lt;p&gt;在这种异常中止的情况下，我尝试安装几种方式，都会出现阻塞，无法正常安装。&lt;/p&gt;</description></item><item><title>敏捷管理规范</title><link>https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%8F%E6%8D%B7%E7%AE%A1%E7%90%86%E7%9A%84%E8%A7%84%E8%8C%83%E5%92%8C%E6%89%A7%E8%A1%8C%E5%BB%BA%E8%AE%AE/</link><pubDate>Thu, 13 May 2021 11:44:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%8F%E6%8D%B7%E7%AE%A1%E7%90%86%E7%9A%84%E8%A7%84%E8%8C%83%E5%92%8C%E6%89%A7%E8%A1%8C%E5%BB%BA%E8%AE%AE/</guid><description>&lt;p&gt;本敏捷规范是在现有正在运行的敏捷实践上的体系化，重点明确项目过程各阶段的动作细节，让整个团队的敏捷管理动作标准化，提升团队敏捷开发的能力.&lt;br&gt;
+&lt;a href="https://note.youdao.com/ynoteshare1/index.html?id=fa0b981000a417ad6dbc7ef7852573a9&amp;amp;type=note"&gt;笔记原文&lt;/a&gt;&lt;/p&gt;</description></item><item><title>2019 项目总结</title><link>https://it-boyer.github.io/post/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/2019-%E9%A1%B9%E7%9B%AE%E6%B1%87%E6%80%BB%E6%80%BB%E7%BB%93/</link><pubDate>Thu, 13 May 2021 11:33:25 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/2019-%E9%A1%B9%E7%9B%AE%E6%B1%87%E6%80%BB%E6%80%BB%E7%BB%93/</guid><description>&lt;ul&gt;
+&lt;li&gt;State &amp;ldquo;DONE&amp;rdquo; from &amp;ldquo;TODO&amp;rdquo; &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;[2020-01-07 Tue 09:58]&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;叙述几个比较深刻的项目&lt;/p&gt;
+&lt;h2 id="拍枪杆"&gt;拍枪杆&lt;/h2&gt;
+&lt;p&gt;19 年是一个自省年，项目组重组之后，在团队协作上都是一种新的挑战，从拍抢干项目第一次接触新的开发模式，本着学习的心态勤奋努力敲代码，在领导的培训下，给出了设计是第一生产力，努着劲自学类图、用例、流程图和时序图来提升开发效率，从根本上弥补自己的短板，在拍抢干中着实挑战了自我，在开发实践中，有意识的摸索提高考虑的开发流程中，明显对产品需求分析更加积极，理解的更加透彻，在自我提升的同时，就着对项目负责的态度，多次在会议上提出产品的设计缺陷和尝试商讨出一个弥补缺陷的方案.&lt;/p&gt;</description></item><item><title>搞定1无压工作的艺术</title><link>https://it-boyer.github.io/post/old/%E9%98%85%E8%AF%BB/%E6%90%9E%E5%AE%9A1%E6%97%A0%E5%8E%8B%E5%B7%A5%E4%BD%9C%E7%9A%84%E8%89%BA%E6%9C%AF/</link><pubDate>Tue, 13 Jun 2017 10:34:26 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E9%98%85%E8%AF%BB/%E6%90%9E%E5%AE%9A1%E6%97%A0%E5%8E%8B%E5%B7%A5%E4%BD%9C%E7%9A%84%E8%89%BA%E6%9C%AF/</guid><description>&lt;h2&gt;前言&lt;/h2&gt;
+&lt;h2&gt;第一部分 通向从容之道&lt;/h2&gt;
+&lt;h3&gt;第1章 新情况，新做法&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;如何回归“心如止水”的境界
+在知识工作的环境下（信息大爆炸，事物繁杂的特点），传统时间管理法逐渐无法达到心如止水的境界，&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;第2章 掌控生活：横向管理工作流程的5个步骤&lt;/h3&gt;
+&lt;p&gt;横向管理的5个步骤&lt;/p&gt;</description></item><item><title>搞定书籍目录</title><link>https://it-boyer.github.io/post/old/%E9%98%85%E8%AF%BB/%E6%90%9E%E5%AE%9A%E4%B9%A6%E7%B1%8D%E7%9B%AE%E5%BD%95/</link><pubDate>Sun, 28 May 2017 12:04:28 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E9%98%85%E8%AF%BB/%E6%90%9E%E5%AE%9A%E4%B9%A6%E7%B1%8D%E7%9B%AE%E5%BD%95/</guid><description>&lt;h2&gt;《搞定I》&lt;/h2&gt;
+&lt;h3&gt;前言&lt;/h3&gt;
+&lt;h3&gt;第一部分 通向从容之道？&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;第1章 新情况，新做法？ 
+ 收集存档清空大脑，万物皆于此，
+ 2分钟法则整理可立刻执行的有效清单，不做材料清单
+第2章 掌控生活：横向管理工作流程的5个阶段
+ 
+第3章 控制项目：纵向管理项目计划的5个阶段
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;第二部分 远离压力，提高效率&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;第4章 准备工作：确定时间、空间和工具
+第5章 收集阶段：归拢材料
+第6章 处理阶段：清空工作篮
+第7章 组织整理：建立好清单
+第8章 检查回顾：保障系统的有效运行
+第9章 执行阶段：选择最合适的行动
+第10章 学会控制项目
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;第三部分 三个关键原则&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;第11章 原则一：养成收集的习惯
+第12章 原则二：确定“下一步行动”
+第13章 原则三：学会关注结果
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;结语&lt;/h3&gt;</description></item><item><title>痛定思痛的项目管理弊病</title><link>https://it-boyer.github.io/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E7%97%9B%E5%AE%9A%E6%80%9D%E7%97%9B%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E5%BC%8A%E7%97%85/</link><pubDate>Sat, 27 May 2017 15:06:17 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E7%97%9B%E5%AE%9A%E6%80%9D%E7%97%9B%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E5%BC%8A%E7%97%85/</guid><description>&lt;h3&gt;问题&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;现状：两个项目源码存在八成为同样的代码，管理在两个SVN库中。
+背景：从一个SVN项目分裂成两个独立项目（PBB_2/Reader_v2）对应延伸出来SVN库，随后在两个库中开发不同的功能版本（PBB_7/Reader_v9）。 &lt;br&gt;
+需求：现在准备将两项目中新增的功能重新合并起来，即将PBB_v7合并到Reader_v9中。
+分析：需要把PBB_v3&amp;ndash;PBB_v7的5个提交，合并到Reader_v9中&lt;/p&gt;</description></item><item><title>升职必备的技能修炼二 以道御术</title><link>https://it-boyer.github.io/post/old/%E9%98%85%E8%AF%BB/%E4%BF%AE%E7%82%BC%E5%8D%87%E8%81%8C%E5%BF%85%E5%A4%87%E7%9A%84%E6%8A%80%E8%83%BD%E4%BA%8C/</link><pubDate>Thu, 25 May 2017 18:09:00 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E9%98%85%E8%AF%BB/%E4%BF%AE%E7%82%BC%E5%8D%87%E8%81%8C%E5%BF%85%E5%A4%87%E7%9A%84%E6%8A%80%E8%83%BD%E4%BA%8C/</guid><description>&lt;p&gt;“老付”谈论的是目标，所有的方法都是为目标服务的，目标统率人的行为。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;怎样规划自己的人生？&lt;/li&gt;
+&lt;li&gt;怎样树立自己的目标？&lt;/li&gt;
+&lt;li&gt;怎样把目标转化成实际的行动？&lt;/li&gt;
+&lt;li&gt;怎样提高自己实现目标的能力？&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>修炼升职必备的技能</title><link>https://it-boyer.github.io/post/old/%E9%98%85%E8%AF%BB/%E4%BF%AE%E7%82%BC%E5%8D%87%E8%81%8C%E5%BF%85%E5%A4%87%E7%9A%84%E6%8A%80%E8%83%BD/</link><pubDate>Thu, 25 May 2017 16:40:42 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E9%98%85%E8%AF%BB/%E4%BF%AE%E7%82%BC%E5%8D%87%E8%81%8C%E5%BF%85%E5%A4%87%E7%9A%84%E6%8A%80%E8%83%BD/</guid><description>&lt;p&gt;焦虑是由于缺乏控制力，以及组织管理、准备和行动不足所造成的。&lt;/p&gt;
+&lt;h2&gt;四象限&lt;/h2&gt;
+&lt;p&gt;走出第三象限，将工作重心放进第二象限&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;第二象限法则&lt;/li&gt;
+&lt;li&gt;猴子法则：屏蔽干扰的伎俩&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;项目与行动的区别&lt;/h3&gt;
+&lt;p&gt;项目需要分解为可执行的行动&lt;/p&gt;</description></item><item><title>思维导图之开发实践篇</title><link>https://it-boyer.github.io/post/old/%E5%AF%BC%E5%9B%BE/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E4%B9%8B%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E7%AF%87/</link><pubDate>Mon, 13 Feb 2017 17:11:26 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%AF%BC%E5%9B%BE/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E4%B9%8B%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E7%AF%87/</guid><description>&lt;h2&gt;阅读书籍&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;5种图表解决工作中的12大难题&lt;/li&gt;
+&lt;li&gt;你的第一本思维导图操作书&lt;/li&gt;
+&lt;li&gt;5分钟手绘彩色圆珠笔涂鸦集&lt;/li&gt;
+&lt;li&gt;如果阅读一本书&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用思维导图的场景无处不在，无论是做产品还是做设计，我们都需要清晰的思路，明确自己需要做些什么，最后需要达到什么效果，这时候，如果有一张清晰的思维导图，就能很快的理清自己的思路。作为互联网公司自称是产品型设计师（也就是既需要帮助老板整理需求梳理产品，也要设计漂亮的界面）的我更是如此。&lt;/p&gt;</description></item><item><title>GTD任务清单整理技巧</title><link>https://it-boyer.github.io/post/old/%E5%AF%BC%E5%9B%BE/GTD%E4%BB%BB%E5%8A%A1%E6%B8%85%E5%8D%95%E6%95%B4%E7%90%86%E6%8A%80%E5%B7%A7/</link><pubDate>Thu, 07 Jan 2016 16:00:53 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%AF%BC%E5%9B%BE/GTD%E4%BB%BB%E5%8A%A1%E6%B8%85%E5%8D%95%E6%95%B4%E7%90%86%E6%8A%80%E5%B7%A7/</guid><description>&lt;p&gt;什么是GTD？
+GTD 的基本理论是把一个人所要要完成的任务和事件全部从大脑中移出来，记录到纸上。这样，大脑便会不被多余的事情打搅而集中于现在所需完成的事情上面。&lt;/p&gt;</description></item></channel></rss>

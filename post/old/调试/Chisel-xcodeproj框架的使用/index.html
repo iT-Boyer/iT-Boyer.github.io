@@ -1,0 +1,130 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Chisel-xcodeproj框架的使用 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content=" {% github it-boyer chisel f331dc6 width = 30% %} 这个pull请求添加findinstances命令，该命令完成Add findinstances, and new support framework in Chisel.xcodeproj 和Add Makefile for installing framework的工作。 用户可以运行help findinstances获取findinstances的详细信息。简要总结一下，findinstances可以找到给定class类或protocol协议的所有实例，并使用谓词表达式过滤这些结果。 如果您有一个名为XXSocialUser的类，那么您可以通过运行findinstances XXSocialUser == 'curry'来找到一个特定的用户。
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/%E8%B0%83%E8%AF%95/Chisel-xcodeproj%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/%E8%B0%83%E8%AF%95/Chisel-xcodeproj%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8/"><meta property="og:site_name" content="习七"><meta property="og:title" content="Chisel-xcodeproj框架的使用"><meta property="og:description" content="{% github it-boyer chisel f331dc6 width = 30% %} 这个pull请求添加findinstances命令，该命令完成Add findinstances, and new support framework in Chisel.xcodeproj 和Add Makefile for installing framework的工作。 用户可以运行help findinstances获取findinstances的详细信息。简要总结一下，findinstances可以找到给定class类或protocol协议的所有实例，并使用谓词表达式过滤这些结果。 如果您有一个名为XXSocialUser的类，那么您可以通过运行findinstances XXSocialUser == 'curry'来找到一个特定的用户。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2018-11-09T13:05:46+00:00"><meta property="article:modified_time" content="2018-11-09T13:05:46+00:00"><meta property="article:tag" content="IOS"><meta property="article:tag" content="调试"><meta itemprop=name content="Chisel-xcodeproj框架的使用"><meta itemprop=description content="{% github it-boyer chisel f331dc6 width = 30% %} 这个pull请求添加findinstances命令，该命令完成Add findinstances, and new support framework in Chisel.xcodeproj 和Add Makefile for installing framework的工作。 用户可以运行help findinstances获取findinstances的详细信息。简要总结一下，findinstances可以找到给定class类或protocol协议的所有实例，并使用谓词表达式过滤这些结果。 如果您有一个名为XXSocialUser的类，那么您可以通过运行findinstances XXSocialUser == 'curry'来找到一个特定的用户。"><meta itemprop=datePublished content="2018-11-09T13:05:46+00:00"><meta itemprop=dateModified content="2018-11-09T13:05:46+00:00"><meta itemprop=wordCount content="1109"><meta itemprop=keywords content="IOS,调试"><meta name=twitter:card content="summary"><meta name=twitter:title content="Chisel-xcodeproj框架的使用"><meta name=twitter:description content="{% github it-boyer chisel f331dc6 width = 30% %} 这个pull请求添加findinstances命令，该命令完成Add findinstances, and new support framework in Chisel.xcodeproj 和Add Makefile for installing framework的工作。 用户可以运行help findinstances获取findinstances的详细信息。简要总结一下，findinstances可以找到给定class类或protocol协议的所有实例，并使用谓词表达式过滤这些结果。 如果您有一个名为XXSocialUser的类，那么您可以通过运行findinstances XXSocialUser == 'curry'来找到一个特定的用户。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>Chisel-xcodeproj框架的使用</h1><div class=post-meta><span class=post-time>2018-11-09</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 1109 字 </span><span class=more-meta>预计阅读 3 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#>开发使用</a></li><li><a href=#>安装</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2018-11-09T13:05:46 title="November 9, 2018">November 9, 2018</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>{% github it-boyer chisel f331dc6 width = 30% %}
+这个pull请求添加<code>findinstances命令</code>，该命令完成<a href=https://github.com/facebook/chisel/pull/197>Add findinstances, and new support framework in Chisel.xcodeproj </a>和<a href=https://github.com/facebook/chisel/pull/214>Add Makefile for installing framework</a>的工作。
+用户可以运行<code>help findinstances</code>获取<code>findinstances</code>的详细信息。简要总结一下，<code>findinstances</code>可以找到给定<code>class</code>类或<code>protocol</code>协议的所有实例，并使用谓词表达式过滤这些结果。
+如果您有一个名为<code>XXSocialUser</code>的类，那么您可以通过运行<code>findinstances XXSocialUser == 'curry'</code>来找到一个特定的用户。</p><p><code>Chisel.xcodeproj</code>为新建<code>findinstance</code>提供了凿子框架支持。
+使用<code>Chisel.xcodeproj</code>支持新建<code>chisel Framework</code>通过本地代码实现<code>command</code>,<code>findinstances</code>等功能。也可以通过这种方式来实现更多<code>chisel命令</code>。</p><p><code>findinstance</code>命令通过扫描<strong>iOS/macOS</strong><code>malloc API</code>。对于每个<code>allocation</code>分配，都会使用<code>heuristics</code>来识别可能的<code>Objective-C实例</code>。<code>heuristics</code>不调用对象上的method，而是依赖<code>objc runtime</code>运行时函数,基于<code>class metadata</code>类元数据来匹配到<code>oc实例</code>。这避免了在<code>objc运行时</code>机制下分配和有状态副作用。
+在第一次传递之后，候选对象将通过第二次传递，检查它们是否与可选的<code>NSPredicate</code>匹配。如果没有谓词，则输出对象的信息最少。如果有谓词，并且对象传递谓词，那么对象将输出更多细节，特别是谓词中查询的细节。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>findinstances UIView
+</span></span><span class=line><span class=cl>findinstances *UIView
+</span></span><span class=line><span class=cl>findinstances UIScrollViewDelegate
+</span></span><span class=line><span class=cl>findinstances UIView window == nil || hidden == true || alpha == 0 || layer.bounds.#size.width == 0 ||  layer.bounds.#size.height == 0 
+</span></span><span class=line><span class=cl>findinstances UIView subviews.@count == 0
+</span></span><span class=line><span class=cl>findinstances NSDictionary any @allKeys beginswith &#39;perf_&#39;
+</span></span><span class=line><span class=cl>findinstances NSArray @count &gt; 100
+</span></span></code></pre></td></tr></table></div></div><h3>开发使用</h3><p>构建Xcode项目，并获得到<code>Chisel Framework</code>的路径。:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>/Users/&lt;me&gt;/Library/Developer/Xcode/DerivedData/Chisel-&lt;stuff&gt;/Build/Products/Debug-iphonesimulator/Chisel.framework/Chisel
+</span></span></code></pre></td></tr></table></div></div><p>在lldb环境下执行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ lldb
+</span></span><span class=line><span class=cl>&gt;&gt;&gt; expr -l objc -- (void*)dlopen(&#34;/path/to/Chisel.framework/Chisel&#34;, 2)
+</span></span><span class=line><span class=cl>script o=lldb.SBExpressionOptions(); o.SetLanguage(lldb.eLanguageTypeObjC); o.SetTrapExceptions(False); o.SetTryAllThreads(False); o.SetTimeoutInMicroSeconds(10*1000000); lldb.frame.EvaluateExpression(&#39;(void)PrintInstances(&#34;&lt;classname&gt;&#34;, &#34;&lt;predicate&gt;&#34;)&#39;, o)
+</span></span></code></pre></td></tr></table></div></div><p><code>&lt;classname></code>:可以是<code>class</code>类名或<code>protocol</code>协议名
+<code>&lt;predicate></code>:是一个可由<code>NSPredicate</code>解析的字符串
+可以使用<code>regex command 命令</code>:
+(注意，<code>findinstance</code>后面必须换行)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>command regex findinstances
+</span></span><span class=line><span class=cl>s/(\S+) *(.*)/script o=lldb.SBExpressionOptions(); o.SetLanguage(lldb.eLanguageTypeObjC); o.SetTrapExceptions(False); o.SetTryAllThreads(False); o.SetTimeoutInMicroSeconds(10*1000000); lldb.frame.EvaluateExpression(&#39;(void)PrintInstances(&#34;%1&#34;, &#34;%2&#34;)&#39;, o)/
+</span></span></code></pre></td></tr></table></div></div><p>或者，作为<code>python命令</code>，存储在<code>path/to/findinstances.py</code>中:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>import lldb
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>def findinstances(debugger, command, exe_ctx, result, _):
+</span></span><span class=line><span class=cl>options = lldb.SBExpressionOptions()
+</span></span><span class=line><span class=cl>options.SetTrapExceptions(False)
+</span></span><span class=line><span class=cl>options.SetTryAllThreads(False)
+</span></span><span class=line><span class=cl>options.SetTimeoutInMicroSeconds(10*1000000)
+</span></span><span class=line><span class=cl>options.SetLanguage(lldb.eLanguageTypeObjC)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>frame = exe_ctx.frame
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>if not exe_ctx.target.module[&#39;Chisel&#39;]:
+</span></span><span class=line><span class=cl>frame.EvaluateExpression(&#39;(void*)dlopen(&#34;/path/to/Chisel.framework/Chisel&#34;, 2)&#39;, options)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>args = command.split(&#39; &#39;, 1)
+</span></span><span class=line><span class=cl>typeName = args[0]
+</span></span><span class=line><span class=cl>predicate = args[1] if len(args) &gt; 1 else &#39;&#39;
+</span></span><span class=line><span class=cl>frame.EvaluateExpression(&#39;(void)PrintInstances(&#34;{}&#34;, &#34;{}&#34;)&#39;.format(typeName, predicate), options)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>def __lldb_init_module(debugger, _):
+</span></span><span class=line><span class=cl>debugger.HandleCommand(&#39;command script add -f findinstances.findinstances findinstances&#39;)
+</span></span></code></pre></td></tr></table></div></div><h3>安装</h3><p><a href=https://github.com/facebook/chisel/pull/214>Add Makefile for installing framework</a>
+This allows you to run make install with optional environment variables
+in order to build and install Chisel.framework.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>PREFIX</span> <span class=err>?</span><span class=o>=</span> <span class=o>/</span><span class=n>usr</span><span class=o>/</span><span class=n>local</span><span class=o>/</span><span class=n>lib</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>export</span> <span class=n>INSTALL_NAME</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl><span class=n>ifneq</span> <span class=p>(</span><span class=o>$</span><span class=p>(</span><span class=n>LD_DYLIB_INSTALL_NAME</span><span class=p>),)</span>
+</span></span><span class=line><span class=cl>    <span class=n>INSTALL_NAME</span> <span class=o>=</span> <span class=s2>&#34;LD_DYLIB_INSTALL_NAME=$(LD_DYLIB_INSTALL_NAME)&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>endif</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>install</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>xcodebuild</span> \
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=n>scheme</span> <span class=n>Chisel</span> \
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=n>configuration</span> <span class=n>Release</span> \
+</span></span><span class=line><span class=cl>        <span class=o>-</span><span class=n>sdk</span> <span class=n>iphonesimulator</span> \
+</span></span><span class=line><span class=cl>        <span class=n>install</span> \
+</span></span><span class=line><span class=cl>        <span class=o>$</span><span class=p>(</span><span class=n>INSTALL_NAME</span><span class=p>)</span> \
+</span></span><span class=line><span class=cl>        <span class=n>DSTROOT</span><span class=o>=/</span> \
+</span></span><span class=line><span class=cl>        <span class=n>INSTALL_PATH</span><span class=o>=</span><span class=s2>&#34;$(PREFIX)&#34;</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2018-11-09</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/iOS/>iOS</a>
+<a href=/tags/%E8%B0%83%E8%AF%95/>调试</a></div><nav class=post-nav><a class=prev href=/post/old/swift/Swift%E7%9A%84%E5%8A%A8%E6%80%81%E6%80%A7/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Swift的动态性</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/shell/makefile%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7/><span class="next-text nav-default">makefile自动化编译工具</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2018-11-09 13:05:46 +0000 UTC",title:"Chisel-xcodeproj框架的使用",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

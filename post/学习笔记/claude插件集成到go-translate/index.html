@@ -1,0 +1,253 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>写一个 claude emacs 翻译工具客户端 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="博客简介"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/claude%E6%8F%92%E4%BB%B6%E9%9B%86%E6%88%90%E5%88%B0go-translate/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/claude%E6%8F%92%E4%BB%B6%E9%9B%86%E6%88%90%E5%88%B0go-translate/"><meta property="og:site_name" content="习七"><meta property="og:title" content="写一个 claude emacs 翻译工具客户端"><meta property="og:description" content="博客简介"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-05-25T02:29:00+08:00"><meta property="article:modified_time" content="2023-05-25T16:17:37+08:00"><meta itemprop=name content="写一个 claude emacs 翻译工具客户端"><meta itemprop=description content="博客简介"><meta itemprop=datePublished content="2023-05-25T02:29:00+08:00"><meta itemprop=dateModified content="2023-05-25T16:17:37+08:00"><meta itemprop=wordCount content="2169"><meta itemprop=keywords content=",学习笔记"><meta name=twitter:card content="summary"><meta name=twitter:title content="写一个 claude emacs 翻译工具客户端"><meta name=twitter:description content="博客简介"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>写一个 claude emacs 翻译工具客户端</h1><div class=post-meta><span class=post-time>2023-05-25</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 2169 字 </span><span class=more-meta>预计阅读 5 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by
+<a href=/authors/iTBoyer>iTBoyer</a></span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#按照思路简单模式实现接口逻辑>按照思路简单模式实现接口逻辑</a></li><li><a href=#借助-babel-实现简单的逻辑>借助 babel 实现简单的逻辑</a></li><li><a href=#在使用-elisp-闭包嵌套出现的问题>在使用 elisp 闭包嵌套出现的问题</a></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2023-05-25T16:17:37 title="May 25, 2023">May 25, 2023</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>目标：借助claude 的结构，请求结果，然后插入到当前位置。</p><p>现在已经在 go-translate 找到了最佳的交互方式，只要通过 elisp 调用 slack api 就可以实现翻译工具的扩展。</p><p>现在要做的几件事情</p><ol><li>阅读 org-translate 翻译引擎的扩展方法</li><li>使用 elisp 实现 slack api ，获取 claude 的回答。</li><li>后续：不仅翻译，还可以通过 prompt 设置不同的角色，和 capture 整合，和 agenda 整合的，都迎刃而解了。</li></ol><p>实现 claude 基于 web api 使用轮询的方式获取 claude 的回复内容，然后给 gts render 中。</p><p>过程中需要了解 elisp 语法，了解 go-translate 源码,根据 readme 基本了解设计思路之后，开始开发 claude 引擎。</p><p>先参考已实现的引擎，在作者的实现中找灵感，思路。可以先从 youdao 半成品来了解基本的架构。</p><p>以开发引擎为主，主要包含几个方面</p><ol><li>引擎类属性： 是定义参数，暴漏给用户，设置必要的个人信息和权限的内容。</li><li>引擎解析器：需要先声明类，在通过 gts 框架中提供的模型，实行对元数据的分析。</li><li>引擎本体：主要和 api 交互，难道数据源，交付给解析器，然后渲染操作。</li></ol><h2 id=按照思路简单模式实现接口逻辑>按照思路简单模式实现接口逻辑</h2><p>使用 elisp 实现 http API 调用，返回值为实现slack 接口调用</p><p>在写引擎本体的过程中，面对的挑战：</p><ol><li><p>获取用户的输入,存在task中： 获取方式 <code>(oref task text)</code> ，具体要了解 task 结构，它提供了很多重要的信息。解析完成的内容最终存在这里。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=p>(</span><span class=nb>defclass</span> <span class=nv>gts-task</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>     <span class=p>((</span><span class=nv>id</span>         <span class=nb>:initform</span> <span class=p>(</span><span class=nv>gensym</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>text</span>       <span class=nb>:initarg</span> <span class=nb>:text</span> <span class=nb>:documentation</span> <span class=s>&#34;Text that sent to engines. It maybe contains delimiters&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>from</span>       <span class=nb>:initarg</span> <span class=nb>:from</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>to</span>         <span class=nb>:initarg</span> <span class=nb>:to</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>raw</span>        <span class=nb>:initform</span> <span class=no>nil</span> <span class=nb>:documentation</span> <span class=s>&#34;raw result responsed by the http-client&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>parsed</span>     <span class=nb>:initform</span> <span class=no>nil</span> <span class=nb>:initarg</span> <span class=nb>:parsed</span> <span class=nb>:documentation</span> <span class=s>&#34;result parsed by parser, string or list&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>err</span>        <span class=nb>:initform</span> <span class=no>nil</span> <span class=nb>:initarg</span> <span class=nb>:err</span>    <span class=nb>:documentation</span> <span class=s>&#34;error info&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>meta</span>       <span class=nb>:initform</span> <span class=no>nil</span> <span class=nb>:initarg</span> <span class=nb>:meta</span>   <span class=nb>:documentation</span> <span class=s>&#34;extra info passed from parser to render. tbeg/tend&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>engine</span>     <span class=nb>:initarg</span> <span class=nb>:engine</span>     <span class=nb>:initform</span> <span class=no>nil</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>render</span>     <span class=nb>:initarg</span> <span class=nb>:render</span>     <span class=nb>:initform</span> <span class=no>nil</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>translator</span> <span class=nb>:initarg</span> <span class=nb>:translator</span> <span class=nb>:initform</span> <span class=no>nil</span><span class=p>)))</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>claude API 集成因为是基于 claude web api 聊天接口，这个过程设计到两个接口，一个是发送用户信息给claude，开启一次聊天。然后，通过一个获取聊天历史记录的接口中获取 claude 的聊天记录。</p><p>claude 回复是断续的，就像 chatgpt 在聊天过程中，不断输入的状态，所以从聊天记录接口中获取的内容也就是不断更新的。需要用到轮询的方式，等待 claude 输入完成，之后，表示一次聊天成功。</p><p>基于这种状态，就需要用到聊个前嵌套的接口来实现接口调用。</p><p>先说思路：第一先使用发送用户信息的接口，创建会话，等会话回调成功，再调用聊天历史接口，开始定时轮询，等待回复完成。</p></li><li><p>封装请求方法, 支持 对话，和 获取回复的两个接口。</p><ol><li>认证方式：Authorization ，需要新建机器人，获取相关权限和 token</li><li>新建对话 API 和 入参是 <code>chat.postMessage?channel=SlackChannel&amp;as_user=true&amp;text=Text</code></li><li>通过历史记录获取回复的借口： <code>?channel=SlackChannel&amp;limit=limit&amp;pretty=1&amp;oldest=oldest</code></li></ol></li></ol><h2 id=借助-babel-实现简单的逻辑>借助 babel 实现简单的逻辑</h2><p>在 elisp 中声明一个请求 http API的接口，该接口返回一个字符串，前三次返回的内容以“__typeing…“结尾，第四次返回不含“__typeing…“。请一个实现http请求，递归发出请求，直到接口返回的内容不含“__typeing…“字符时，停止，然后返回最后一次响应的结果。</p><p>函数1 作为 API 入口，函数2 作为第一次请求的数据 函数3 作为第二次请求的数据 让后调用API 处理结果返回。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=c1>;; 函数1 实现作为API 入口</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>cl-defmethod</span> <span class=nv>translate1</span> <span class=p>(</span><span class=nv>text</span> <span class=nv>task</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;;拿到初始数据，返回翻译结果</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;启动翻译引擎&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>talkaction</span> <span class=nv>text</span>
+</span></span><span class=line><span class=cl>              <span class=p>(</span><span class=nb>lambda</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>                <span class=c1>;;talk完成回调</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;talk 完成回调--&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;开始下一个任务%s&#34;</span> <span class=nv>task</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>talkaction</span><span class=p>(</span><span class=nv>text</span> <span class=nb>block</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;创建对话&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;;开始请求服务器，处理业务</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>requestServer</span> <span class=nv>text</span>
+</span></span><span class=line><span class=cl>                 <span class=p>(</span><span class=nb>lambda</span> <span class=p>(</span><span class=nv>result</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                   <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;原始数据：%s \n 处理数据%s&#34;</span> <span class=nv>text</span> <span class=nv>result</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                   <span class=p>(</span><span class=nf>funcall</span> <span class=nb>block</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                   <span class=c1>;; (funcall translateblock)</span>
+</span></span><span class=line><span class=cl>                   <span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>requestServer</span> <span class=p>(</span><span class=nv>text</span>  <span class=nv>blocke</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;服务器---&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let</span> <span class=p>((</span><span class=nv>result</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;%s成功&#34;</span> <span class=nv>text</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=c1>;;在执行回调闭包</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nf>funcall</span> <span class=nv>blocke</span> <span class=nv>result</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>translate1</span> <span class=s>&#34;你好&#34;</span> <span class=s>&#34;订阅监听&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>开始下一个任务订阅监听
+</span></span></code></pre></td></tr></table></div></div><h2 id=在使用-elisp-闭包嵌套出现的问题>在使用 elisp 闭包嵌套出现的问题</h2><p>在两个定义两个函数相互调用，通过闭包的方式传递上下文环境过程中，出现在网络回调的闭包中无法访问入参闭包的情况。</p><p>代码如下：</p><ol><li><p>新建对话的函数，入参包含从引擎中传递的 <code>done</code> 闭包，在回调中 <code>(funcall done)</code> ,就会出现上述的问题，出现对话失败的提示。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=p>(</span><span class=nb>defun</span> <span class=nv>new-claude-talk</span> <span class=p>(</span><span class=nv>engine</span> <span class=nv>done</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nb>with-slots</span> <span class=p>(</span><span class=nv>talkurl</span> <span class=nv>auth-key</span> <span class=nv>channel</span> <span class=nv>user</span> <span class=nv>talk-time</span><span class=p>)</span> <span class=nv>engine</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nb>setq</span> <span class=nv>turl</span> <span class=p>(</span><span class=nf>format</span> <span class=nv>talkurl</span> <span class=nv>channel</span> <span class=p>(</span><span class=nv>url-hexify-string</span> <span class=nv>user</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nb>setf</span> <span class=nv>talk-time</span> <span class=p>(</span><span class=nf>float-time</span> <span class=p>(</span><span class=nf>car</span> <span class=p>(</span><span class=nf>current-time</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nv>gts-do-request</span> <span class=nv>turl</span>
+</span></span><span class=line><span class=cl>                       <span class=nb>:headers</span> <span class=o>`</span><span class=p>((</span><span class=s>&#34;Authorization&#34;</span> <span class=o>.</span> <span class=o>,</span><span class=p>(</span><span class=nf>format</span> <span class=s>&#34;Bearer %s&#34;</span> <span class=nv>auth-key</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                       <span class=nb>:done</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>                               <span class=p>(</span><span class=nf>funcall</span> <span class=nv>done</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                               <span class=p>)</span>
+</span></span><span class=line><span class=cl>                       <span class=nb>:fail</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>(</span><span class=nv>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                               <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;对话失败:%s&#34;</span> <span class=nv>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                               <span class=p>))</span>
+</span></span><span class=line><span class=cl>       <span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>引擎中的代码实现这是引擎的实现入口，调用上一步的网络请求，发起会话。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=p>(</span><span class=nv>cl-defmethod</span> <span class=nv>gts-translate-old</span> <span class=p>((</span><span class=nv>engine</span> <span class=nv>gts-claude-engine</span><span class=p>)</span> <span class=nv>task</span> <span class=nv>rendercb</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nb>with-slots</span> <span class=p>(</span><span class=nv>user</span> <span class=nv>talk-time</span><span class=p>)</span> <span class=nv>engine</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nb>setf</span>  <span class=nv>user</span> <span class=p>(</span><span class=nb>oref</span> <span class=nv>task</span> <span class=nv>text</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;用户正式输入：%s&#34;</span> <span class=p>(</span><span class=nb>oref</span> <span class=nv>engine</span> <span class=nv>user</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nv>gts-with-token</span> <span class=nv>engine</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nb>lambda</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;user对话内容&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nb>with-slots</span> <span class=p>(</span><span class=nv>text</span><span class=p>)</span> <span class=nv>task</span>
+</span></span><span class=line><span class=cl>             <span class=c1>;; 获取时间戳</span>
+</span></span><span class=line><span class=cl>             <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;对话时间：%s&#34;</span> <span class=p>(</span><span class=nb>oref</span> <span class=nv>engine</span> <span class=nv>talk-time</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>             <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;对话内容：%s&#34;</span> <span class=nv>text</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>             <span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>subscribe-claude-request</span> <span class=nv>engine</span> <span class=nv>talk-time</span>
+</span></span><span class=line><span class=cl>                                     <span class=p>(</span><span class=nb>lambda</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>                                       <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;完成开始绘制 -- &#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                       <span class=p>(</span><span class=nv>gts-update-raw</span> <span class=nv>task</span> <span class=p>(</span><span class=nf>buffer-string</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                       <span class=p>(</span><span class=nv>gts-parse</span> <span class=p>(</span><span class=nb>oref</span> <span class=nv>engine</span> <span class=nv>parser</span><span class=p>)</span> <span class=nv>task</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                       <span class=p>(</span><span class=nf>funcall</span> <span class=nv>rendercb</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                       <span class=p>)</span>
+</span></span><span class=line><span class=cl>                                     <span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nb>lambda</span> <span class=p>(</span><span class=nv>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>gts-render-fail</span> <span class=nv>task</span>
+</span></span><span class=line><span class=cl>             <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;获取令牌密钥时出错，请检查您的网络和代理，或稍后重试\n\n%s&#34;</span> <span class=nv>err</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>       <span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>轮询接口的实现，在第一步新建会话完成时，会触发方法的调用。主要依赖第一个接口回调回来的时间戳，其实在分析之口，为了避免传参问题，时间戳完全可以获取当前时间。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=p>(</span><span class=nb>defun</span> <span class=nv>subscribe-claude-request</span> <span class=p>(</span><span class=nv>engine</span> <span class=nv>time</span> <span class=nv>done</span> <span class=nv>fail</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=s>&#34;Request an HTTP API and return response when it does not end with &#39;__typing...&#39;.&#34;</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nb>with-slots</span> <span class=p>(</span><span class=nv>subscribeurl</span> <span class=nv>auth-key</span> <span class=nv>channel</span><span class=p>)</span> <span class=nv>engine</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;获取时间戳：%s&#34;</span> <span class=nv>time</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nb>let</span> <span class=p>((</span><span class=nv>json</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>             <span class=p>(</span><span class=nv>subscribe</span> <span class=p>(</span><span class=nf>format</span> <span class=nv>subscribeurl</span> <span class=nv>channel</span> <span class=nv>time</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>gts-do-request</span> <span class=nv>subscribe</span>
+</span></span><span class=line><span class=cl>                         <span class=nb>:headers</span> <span class=o>`</span><span class=p>((</span><span class=s>&#34;Authorization&#34;</span> <span class=o>.</span> <span class=o>,</span><span class=p>(</span><span class=nf>format</span> <span class=s>&#34;Bearer %s&#34;</span> <span class=nv>auth-key</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                         <span class=nb>:done</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>                                 <span class=p>(</span><span class=nb>let</span> <span class=p>(</span><span class=nv>beg</span> <span class=nv>end</span> <span class=nv>json</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                   <span class=p>(</span><span class=nf>re-search-forward</span> <span class=s>&#34;^[0-9]+$&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                   <span class=p>(</span><span class=nb>setq</span> <span class=nv>beg</span> <span class=p>(</span><span class=nf>point</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                   <span class=p>(</span><span class=nf>re-search-forward</span> <span class=s>&#34;^\\([0-9]+\\)$&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                   <span class=p>(</span><span class=nb>setq</span> <span class=nv>end</span> <span class=p>(</span><span class=nf>-</span> <span class=p>(</span><span class=nf>point</span><span class=p>)</span> <span class=p>(</span><span class=nf>length</span> <span class=p>(</span><span class=nv>match-string</span> <span class=mi>1</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>                                   <span class=p>(</span><span class=nb>setq</span> <span class=nv>json</span> <span class=p>(</span><span class=nv>json-read-from-string</span> <span class=p>(</span><span class=nv>string-trim</span> <span class=p>(</span><span class=nf>buffer-substring-no-properties</span> <span class=nv>beg</span> <span class=nv>end</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>                                   <span class=nv>json</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                         <span class=nb>:fail</span> <span class=nv>fail</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nb>dolist</span> <span class=p>(</span><span class=nv>object</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>json</span> <span class=nb>:messages</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nb>setq</span> <span class=nv>oldest</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>object</span> <span class=nb>:ts</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nb>setq</span> <span class=nv>result</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>object</span> <span class=nb>:text</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nb>if</span> <span class=p>(</span><span class=nb>or</span> <span class=p>(</span><span class=nf>=</span> <span class=p>(</span><span class=nf>length</span> <span class=nv>result</span><span class=p>)</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                 <span class=p>(</span><span class=nf>string-match</span> <span class=s>&#34;_Typing\\.\\.\\._&#34;</span> <span class=nv>result</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>             <span class=c1>;; 如果响应以 _typing..._ 结尾,递归调用</span>
+</span></span><span class=line><span class=cl>             <span class=p>(</span><span class=nv>subscribe-claude-request</span> <span class=nv>engine</span> <span class=nv>time</span> <span class=nv>done</span> <span class=nv>fail</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=c1>;; 否则直接返回响应</span>
+</span></span><span class=line><span class=cl>           <span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nf>funcall</span> <span class=nv>done</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>)))</span>
+</span></span></code></pre></td></tr></table></div></div><p>获取当前时间戳的脚本</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=p>(</span><span class=nv>time-to-seconds</span> <span class=p>(</span><span class=nf>current-time</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>1684952067.575853
+</span></span></code></pre></td></tr></table></div></div></li></ol><p>该代码将返回从Unix纪元（1970年1月1日UTC）开始到当前时间的秒数。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2023-05-25</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><nav class=post-nav><a class=prev href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/org-clock-budget%E6%8F%92%E4%BB%B6%E7%BF%BB%E8%AF%91/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">翻译 org-clock-budget 时间管理插件的用法</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/org-ql%E5%87%BD%E6%95%B0%E5%92%8C%E5%AE%8F%E5%86%85%E5%AE%B9%E7%BF%BB%E8%AF%91/><span class="next-text nav-default">介绍org-ql函数和宏的用法</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2023-05-25 02:29:00 +0800 +0800",title:"写一个 claude emacs 翻译工具客户端",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

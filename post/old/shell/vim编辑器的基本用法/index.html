@@ -1,0 +1,151 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>vim编辑器的基本用法 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="参考
+基本操作 基本概念 动作：是指移动光标的操作，你肯定很熟悉 h、j、k 和 l，以及 w 和 b。但其实，/ 也是一个动作。
+1 :h navigation 操作符： 对某个区域文本执行的操作。比如，d、~、gU 和 > 都是操作符。这些操作符既可以在普通模式下使用，也可以在可视模式下使用。
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/shell/vim%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/shell/vim%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/"><meta property="og:site_name" content="习七"><meta property="og:title" content="vim编辑器的基本用法"><meta property="og:description" content="参考
+基本操作 基本概念 动作：是指移动光标的操作，你肯定很熟悉 h、j、k 和 l，以及 w 和 b。但其实，/ 也是一个动作。
+1 :h navigation 操作符： 对某个区域文本执行的操作。比如，d、~、gU 和 > 都是操作符。这些操作符既可以在普通模式下使用，也可以在可视模式下使用。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-07-04T10:09:29+00:00"><meta property="article:modified_time" content="2017-07-04T10:09:29+00:00"><meta property="article:tag" content="Shell"><meta itemprop=name content="vim编辑器的基本用法"><meta itemprop=description content="参考
+基本操作 基本概念 动作：是指移动光标的操作，你肯定很熟悉 h、j、k 和 l，以及 w 和 b。但其实，/ 也是一个动作。
+1 :h navigation 操作符： 对某个区域文本执行的操作。比如，d、~、gU 和 > 都是操作符。这些操作符既可以在普通模式下使用，也可以在可视模式下使用。"><meta itemprop=datePublished content="2017-07-04T10:09:29+00:00"><meta itemprop=dateModified content="2017-07-04T10:09:29+00:00"><meta itemprop=wordCount content="2863"><meta itemprop=keywords content="Shell"><meta name=twitter:card content="summary"><meta name=twitter:title content="vim编辑器的基本用法"><meta name=twitter:description content="参考
+基本操作 基本概念 动作：是指移动光标的操作，你肯定很熟悉 h、j、k 和 l，以及 w 和 b。但其实，/ 也是一个动作。
+1 :h navigation 操作符： 对某个区域文本执行的操作。比如，d、~、gU 和 > 都是操作符。这些操作符既可以在普通模式下使用，也可以在可视模式下使用。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>vim编辑器的基本用法</h1><div class=post-meta><span class=post-time>2017-07-04</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 2863 字 </span><span class=more-meta>预计阅读 6 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#>基本操作</a></li><li><a href=#>基本概念</a></li><li><a href=#>缓冲区列表</a></li><li><a href=#>参数列表</a></li><li><a href=#>跳转历史和变更历史</a></li><li><a href=#>常用命令</a></li><li><a href=#>markdown插件命令</a></li><li><a href=#>git插件命令</a></li><li><a href=#>unite</a></li><li><a href=#>用法</a></li><li><a href=#>模式</a></li><li><a href=#>单行操作</a></li><li><a href=#>多行范围</a></li><li><a href=#>可视化区域选择并编辑文本</a></li><li><a href=#>文本编辑</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-07-04T10:09:29 title="July 4, 2017">July 4, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p><a href=https://github.com/it-boyer/vim-galore-zh_cn>参考</a></p><h3>基本操作</h3><h3>基本概念</h3><p>动作：是指移动光标的操作，你肯定很熟悉 h、j、k 和 l，以及 w 和 b。但其实，/ 也是一个动作。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>:h navigation 
+</span></span></code></pre></td></tr></table></div></div><p>操作符：
+对某个区域文本执行的操作。比如，d、~、gU 和 > 都是操作符。这些操作符既可以在普通模式下使用，也可以在可视模式下使用。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>    :h operator
+</span></span></code></pre></td></tr></table></div></div><p>文本对象：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>:h text-objects
+</span></span></code></pre></td></tr></table></div></div><h3>缓冲区列表</h3><p>缓冲区的几种状态：已激活，已载入，已列出，已命名</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>:ls  #列出所有可以列出的缓冲区
+</span></span><span class=line><span class=cl>:ls! #命令可以显示被放入缓冲区列表的和未被放入列表的缓冲区
+</span></span></code></pre></td></tr></table></div></div><p>创建一个无名临时缓冲区</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>:enew
+</span></span></code></pre></td></tr></table></div></div><p>激活一个缓冲区</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>:e file2 
+</span></span></code></pre></td></tr></table></div></div><p>命名一个缓冲区</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>:w /path/file #存储位置
+</span></span></code></pre></td></tr></table></div></div><h3>参数列表</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>:h argument-list
+</span></span></code></pre></td></tr></table></div></div><p>操作命令范围概念
+关键字符：,|;|数字|$|%</p><h3>跳转历史和变更历史</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>:jumps
+</span></span><span class=line><span class=cl>:changes
+</span></span><span class=line><span class=cl>:h changelist
+</span></span><span class=line><span class=cl>:h jumplist
+</span></span></code></pre></td></tr></table></div></div><h3>常用命令</h3><p><a href=http://vim.liuchengxu.org/docs/org/tutorial_cn.html#orgheadline26>space-Vim使用文档</a>
+<code>空格 f t</code> 打开/关闭树型栏
+<code>SPC f R</code> 刷新文件结构目录
+<code>, f c</code> unite命令集合快速查找命令集
+<code>SPC b h</code> 返回vim主页
+<code>SPC f r</code> 最近打开过的文件清单</p><h3>markdown插件命令</h3><p><code>,1..3</code> 快速标题格式<code>###</code>生成章节
+<code>,ct</code> 在当前位置插入所有章节的清单
+<code>,cs</code> 新建窗口显示博客章节目录清单,支持编辑时跳转到指定的章节位置
+<code>,cp</code> 预览博客发布的效果</p><h3>git插件命令</h3><p><code>SPC g s</code> git status
+<code>SPC g d</code> git diff
+<code>AsyncRun git add file</code> git add file
+<code>SPC g c</code> git commit
+<code>SPC g p</code> git push</p><h3>unite</h3><p><a href=http://www.cnblogs.com/pigzhu/p/3159161.html>Vim插件：Unite新手指导(译)</a>
+Unite可以在一个项目中快速浏览文件。但是它不仅限于文件，其他任何可以列出的东西都可以很好的被显示和搜索。这个开放式的特性很可能是人们找到它的原因</p><h3>用法</h3><p>Unite命令采用的格式为:Unite source，其中"source"是buffer，file和file_rec其中之一。</p><p><code>buffer</code>: 浏览当前打开的buffer列表
+<code>file</code>: 浏览当前目录的文件列表
+<code>file_rec</code>: 递归的列出当前目录的文件
+当一个命令被使用，一个新的水平分割窗口会被打开。
+比如，命令:<code>Unite file</code>将会显示当前目录的文件列表。在这个窗口中，标准的Vim命令模式下的命令可以使用。可以使用“<code>j</code>”和“<code>k</code>”浏览该列表，可以使用“<code>/</code>”来查询。如果你在一个文件上按下<code>enter</code>键，Unite将会打开它。如果光标是在一个目录上，Unite将会进入该目录，并且更新该文件列表。
+使用NERO Tree命令
+查看帮助命令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>?
+</span></span></code></pre></td></tr></table></div></div><p>将选中的目录变为根目录：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>C  # change tree root to the selected dir
+</span></span></code></pre></td></tr></table></div></div><h3>模式</h3><h4>插入搜索模式</h4><p>如果你在Unite窗口进入插入模式，光标将会移到该窗口的最上方，并显示“>”提示符。输入字符会搜索该列表&ndash;这里和FuzzyFinder相似。和常规vim一样，按<esc>键可以退出插入模式回到命令模式。</p><h4>命令模式</h4><p>在命令模式下，当光标在一个文件上，按下a，Unite会显示一个可以操作该文件命令的列表。这个命令列表被称为actions，这个列表可以像Unite其他部分一样被搜索和调用。</p><h4>操作</h4><p>actions可以组合通配符。如果输入:Unite file, 然后按下*将会标记所有文件，再输入a将会列出所有actions，最后选择above，Unite将会打开所有被标记的文件。</p><h3>单行操作</h3><h4>光标移动</h4><p>hjkl (强例推荐使用其移动光标，但不必需) →你也可以使用光标键 (←↓↑→). 注: j 就像下箭头。</p><ol><li>单词移动：
+1.一个单词由字母，数字和下划线组成，那么就用小写的e和w。即：程序变量移动。
+2.单词是由blank字符分隔符，那么就用大写的E和W。 即：程序语句移动。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>  w → 到下一个单词的开头。
+</span></span><span class=line><span class=cl>  e → 到下一个单词的结尾。
+</span></span><span class=line><span class=cl>  b → 到前一个单词的开头。
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>本行移动：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>0 → 数字零，到行头
+</span></span><span class=line><span class=cl>^ → 到本行第一个不是blank字符的位置（所谓blank字符就是空格，tab，换行，回车等）
+</span></span><span class=line><span class=cl>$ → 到本行行尾
+</span></span><span class=line><span class=cl>g_ → 到本行最后一个不是blank字符的位置。
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>行间移动：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>NG → 到第 N 行 （陈皓注：注意命令中的G是大写的，另我一般使用 : N 到第N行，如 :137 到第137行）
+</span></span><span class=line><span class=cl>gg → 到第一行。（陈皓注：相当于1G，或 :1）
+</span></span><span class=line><span class=cl>G 到最后一行
+</span></span></code></pre></td></tr></table></div></div><h3>多行范围</h3><p>范围 (Ranges) 其实很好理解，但很多 Vim 用户的理解不到位。</p><ul><li>很多命令都可以加一个数字，用于指明操作范围</li><li>范围可以是一个行号，用于指定某一行</li><li>范围也可以是一对通过 <code>,</code> 或 <code>;</code> 分割的行号</li><li>大部分命令，默认只作用于当前行</li><li>只有 <code>:write</code> 和 <code>:global</code> 是默认作用于所有行的</li></ul><p>范围的使用是十分直观的。以下为一些例子（其中，<code>:d</code> 为 <code>:delete</code> 的缩写）：</p><table><thead><tr><th>命令</th><th>操作的行</th></tr></thead><tbody><tr><td><code>:d</code></td><td>当前行</td></tr><tr><td><code>:.d</code></td><td>当前行</td></tr><tr><td><code>:1d</code></td><td>第一行</td></tr><tr><td><code>:$d</code></td><td>最后一行</td></tr><tr><td><code>:1,$d</code></td><td>所有行</td></tr><tr><td><code>:%d</code></td><td>所有行（这是 <code>1,$</code> 的语法糖）</td></tr><tr><td><code>:.,5d</code></td><td>当前行至第 5 行</td></tr><tr><td><code>:,5d</code></td><td>同样是当前行至第 5 行</td></tr><tr><td><code>:,+3d</code></td><td>当前行及接下来的 3 行</td></tr><tr><td><code>:1,+3d</code></td><td>第一行至当前行再加 3 行</td></tr><tr><td><code>:,-3d</code></td><td>当前行及向上的 3 行（Vim 会弹出提示信息，因为这是一个保留的范围）</td></tr><tr><td><code>:3,'xdelete</code></td><td>第三行至<a href=#%E6%A0%87%E6%B3%A8>标注</a> 为 x 的那一行</td></tr><tr><td><code>:/^foo/,$delete</code></td><td>当前行以下，以字符 &ldquo;foo&rdquo; 开头的那一行至结尾</td></tr><tr><td><code>:/^foo/+1,$delete</code></td><td>当前行以下，以字符 &ldquo;foo&rdquo; 开头的那一行的下一行至结尾</td></tr></tbody></table><p>需要注意的是，<code>;</code> 也可以用于表示范围。区别在于，<code>a,b</code> 的 <code>b</code> 是以当前行作为参考的。而 <code>a;b</code> 的 <code>b</code> 是以 <code>a</code> 行作为参考的。举个例子，现在你的光标在第 5 行。这时 <code>:1,+1d</code> 会删除第 1 行至第 6 行，而 <code>:1;+1d</code> 会删除第 1 行和第 2 行。</p><h3>可视化区域选择并编辑文本</h3><p>1.区域选择其命令格式：</p><pre><code>  &lt;action&gt;a&lt;object&gt; 或 &lt;action&gt;i&lt;object&gt;
+</code></pre><p>在visual 模式下，这些命令很强大。</p><p><code>action</code>可以是任何的命令，如 <code>d (删除)</code>, <code>y (拷贝)</code>,<code>v (可以视模式选择)</code>。
+<code>object</code> 可能是： w 一个单词， W 一个以空格为分隔的单词， s 一个句字， p 一个段落。也可以是一个特别的字符："、 &lsquo;、 )、 }、 ]。</p><p>示例：
+假设你有一个字符串 (map (+) (&ldquo;foo&rdquo;)).而光标键在第一个 o 的位置。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>  vi&#34; → 会选择 foo.
+</span></span><span class=line><span class=cl>  va&#34; → 会选择 &#34;foo&#34;.
+</span></span><span class=line><span class=cl>  vi) → 会选择 &#34;foo&#34;.
+</span></span><span class=line><span class=cl>  va) → 会选择(&#34;foo&#34;).
+</span></span><span class=line><span class=cl>  v2i) → 会选择 map (+) (&#34;foo&#34;)
+</span></span><span class=line><span class=cl>  v2a) → 会选择 (map (+) (&#34;foo&#34;))
+</span></span></code></pre></td></tr></table></div></div><p>2.可视化选择： v,V,<c-v></p><p>前面，我们看到了 <c-v>的示例 （在Windows下应该是<c-q>），我们可以使用 v 和 V。一但被选好了，你可以做下面的事：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>J → 把所有的行连接起来（变成一行）
+</span></span><span class=line><span class=cl>&lt; 或 &gt; → 左右缩进
+</span></span><span class=line><span class=cl>= → 自动给缩进 （陈皓注：这个功能相当强大，我太喜欢了）
+</span></span></code></pre></td></tr></table></div></div><p>3.在所有被选择的行后加上点东西：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>选中相关的行 (可使用 j 或 &lt;C-d&gt; 或是 /pattern 或是 % 等……)
+</span></span><span class=line><span class=cl>$ 到行最后
+</span></span><span class=line><span class=cl>A, 输入字符串，按 ESC。
+</span></span></code></pre></td></tr></table></div></div><h3>文本编辑</h3><p>插入光标位置</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>i → Insert 模式，按 ESC 回到 Normal 模式.
+</span></span><span class=line><span class=cl>a → 在光标后插入
+</span></span><span class=line><span class=cl>o → 在当前行后插入一个新行
+</span></span><span class=line><span class=cl>O → 在当前行前插入一个新行
+</span></span></code></pre></td></tr></table></div></div><p>操作文本：</p><p>1.删除：字符，单词，行</p><pre><code>x → 删当前光标所在的一个字符。
+cw → 替换从光标所在位置后到一个单词结尾的字符【准确的说是删除从光标位置到一个单词结尾的字符并进入插入模式】
+dd → 删除当前行，并把删除的行存到剪贴板里
+</code></pre><p>通过行号确定你要删除的行；</p><pre><code>set nu → 显示行号；
+:32,65d → 32-65行就被删除了
+</code></pre><p>2.拷贝：单词，行，段</p><pre><code>  ye → 当前位置拷贝到本单词的最后一个字符。
+  yy → 拷贝当前行相当于 ddP（dd删除当前行，再粘贴）
+  0y$ → 拷贝当前行，即：光标移动组合操作格式：&lt;start position&gt;&lt;command&gt;&lt;end position&gt;
+  y2/foo → 拷贝2个 “foo” 之间的字符串。
+</code></pre><p>还有很多时候并不一定你就一定要按y才会拷贝，下面的命令也会被拷贝：</p><pre><code>d (删除 )
+v (可视化的选择)
+gU (变大写)
+gu (变小写)
+等等
+</code></pre><blockquote><p>注：可视化选择是一个很有意思的命令，你可以先按v，然后移动光标，你就会看到文本被选择，然后，你可能d，也可y，也可以变大写等</p></blockquote><p>3.粘帖：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>p/P → p是表示在当前位置之后，P表示在当前位置之前
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-07-04</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/shell/>shell</a></div><nav class=post-nav><a class=prev href=/post/old/shell/vim%E7%BC%96%E8%BE%91%E5%99%A8%E9%94%AE%E7%9B%98%E6%98%A0%E5%B0%84%E5%91%BD%E4%BB%A4map/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">vim编辑器键盘映射命令map</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/shell/SourceKittenSwift%E8%AF%AD%E6%B3%95%E8%87%AA%E5%8A%A8%E8%A1%A5%E9%BD%90%E5%B7%A5%E5%85%B7/><span class="next-text nav-default">SourceKittenSwift语法自动补齐工具</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-07-04 10:09:29 +0000 UTC",title:"vim编辑器的基本用法",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

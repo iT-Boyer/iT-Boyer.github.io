@@ -1,0 +1,160 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>使用Cocoapods创建私有podspec - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="创建一个版本库来托管pod索引:pod repo add命令 第一步：在github登录个人账号，创建一个库作为pod索引托管库。也可根据具体情况可以选择：github、CODING、开源中国、Bitbucket以及CSDN等，代码托管平台。 当索引库托管在github私有的仓库时，如果有其他同事共同开发维护，则需要配置Git仓库的权限。 第二步：pod化版本库，使其专门用户管理个人的*podspec索引文件 {% codeblock repo add命令 lang:ruby %}
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/macOS/%E4%BD%BF%E7%94%A8Cocoapods%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89podspec/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/macOS/%E4%BD%BF%E7%94%A8Cocoapods%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89podspec/"><meta property="og:site_name" content="习七"><meta property="og:title" content="使用Cocoapods创建私有podspec"><meta property="og:description" content="创建一个版本库来托管pod索引:pod repo add命令 第一步：在github登录个人账号，创建一个库作为pod索引托管库。也可根据具体情况可以选择：github、CODING、开源中国、Bitbucket以及CSDN等，代码托管平台。 当索引库托管在github私有的仓库时，如果有其他同事共同开发维护，则需要配置Git仓库的权限。 第二步：pod化版本库，使其专门用户管理个人的*podspec索引文件 {% codeblock repo add命令 lang:ruby %}"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-02-28T15:46:16+00:00"><meta property="article:modified_time" content="2017-02-28T15:46:16+00:00"><meta property="article:tag" content="Pod"><meta itemprop=name content="使用Cocoapods创建私有podspec"><meta itemprop=description content="创建一个版本库来托管pod索引:pod repo add命令 第一步：在github登录个人账号，创建一个库作为pod索引托管库。也可根据具体情况可以选择：github、CODING、开源中国、Bitbucket以及CSDN等，代码托管平台。 当索引库托管在github私有的仓库时，如果有其他同事共同开发维护，则需要配置Git仓库的权限。 第二步：pod化版本库，使其专门用户管理个人的*podspec索引文件 {% codeblock repo add命令 lang:ruby %}"><meta itemprop=datePublished content="2017-02-28T15:46:16+00:00"><meta itemprop=dateModified content="2017-02-28T15:46:16+00:00"><meta itemprop=wordCount content="3817"><meta itemprop=keywords content="Pod"><meta name=twitter:card content="summary"><meta name=twitter:title content="使用Cocoapods创建私有podspec"><meta name=twitter:description content="创建一个版本库来托管pod索引:pod repo add命令 第一步：在github登录个人账号，创建一个库作为pod索引托管库。也可根据具体情况可以选择：github、CODING、开源中国、Bitbucket以及CSDN等，代码托管平台。 当索引库托管在github私有的仓库时，如果有其他同事共同开发维护，则需要配置Git仓库的权限。 第二步：pod化版本库，使其专门用户管理个人的*podspec索引文件 {% codeblock repo add命令 lang:ruby %}"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>使用Cocoapods创建私有podspec</h1><div class=post-meta><span class=post-time>2017-02-28</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 3817 字 </span><span class=more-meta>预计阅读 8 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>创建一个版本库来托管pod索引:pod repo add命令</a></li></ul><ul><li><a href=#>使用模板命令创建Pod工程项目 lib create</a><ul><li><a href=#>添加库文件和资源</a></li><li><a href=#>配置podspec文件及验证命令lib lint</a></li></ul></li></ul><ul><li><ul><li></li><li><a href=#>将源码托管到远程仓库</a></li></ul></li><li><a href=#>手动配置Pod私库项目支持：spec create</a></li><li><a href=#>:path => 在新项目配置检测podspec文件</a></li><li><a href=#>万事具备，向私有索引库中提交podspec文件：repo push</a></li><li><a href=#>trunk push 添加到Cocoapods的官方索引库</a><ul><li><a href=#>注册trunk，邮箱验证</a></li><li><a href=#>通过trunk推送podspec文件</a></li></ul></li><li><a href=#>使用远程的私有Pod库</a></li><li><a href=#>更新维护podspec文件配置，升级库版本</a><ul><li><a href=#>添加模块库文件和资源</a></li><li><a href=#>打tag号作为podspec版本号</a></li><li><a href=#>更新podspec配置文件</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-02-28T15:46:16 title="February 28, 2017">February 28, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2>创建一个版本库来托管pod索引:pod repo add命令</h2><p>第一步：在github登录个人账号，创建一个库作为pod索引托管库。也可根据具体情况可以选择：<code>github</code>、<code>CODING</code>、<code>开源中国</code>、<code>Bitbucket</code>以及<code>CSDN</code>等，代码托管平台。
+当索引库托管在github私有的仓库时，如果有其他同事共同开发维护，则需要配置Git仓库的权限。
+第二步：pod化版本库，使其专门用户管理个人的<code>*podspec</code>索引文件
+{% codeblock repo add命令 lang:ruby %}</p><h1>pod repo add [Private Repo Name] [GitHub HTTPS clone URL]</h1><p>$ pod repo add PodRepo <a href=https://github.com/it-boyer/PodRepo.git>https://github.com/it-boyer/PodRepo.git</a>
+#输出：</p><blockquote><p>Cloning spec repo <code>PodRepo</code> from <code>https://github.com/it-boyer/PodRepo.git</code>
+{% endcodeblock %}
+此时在本地会生成<code>~/.cocoapods/repos/PodRepo</code>目录，这个目录就可以用来存储你所有的开源包。
+每当一个或多个<code>*.podspec</code>文件测试无误时，就可以使用<code>pod repo push</code>命令向私有索引库中提交该文件。
+{% codeblock lib create命令 lang:ruby %}
+$ pod repo push PodRepo LogSwift.podspec #PodRepo是本地Repo名字 后面是podspec名字
+{% endcodeblock %}
+完成之后这个组件库就添加到私有索引库中，自动生成的<code>pod 库</code>标准结构：</p></blockquote><p>同时<code>push命令</code>会将新增的索引目录推送至自己的远程仓库中，即索引托管库<code>PodRepo.git</code>中。</p><p>下面详述<code>podspec文件</code>的配置，检测，使用的过程。</p><h2>使用模板命令创建Pod工程项目 lib create</h2><p>初始化Pod模板项目：
+{% codeblock lib create命令 lang:ruby %}
+pod lib create LogSwift
+{% endcodeblock %}
+有以下五步命令行交互：
+{% codeblock 交互 lang:ruby %}
+What is your email?</p><blockquote></blockquote><p>What language do you want to use?? [ Swift / ObjC ]</p><blockquote><p>Swift
+Would you like to include a demo application with your library? [ Yes / No ]
+Yes
+Which testing frameworks will you use? [ Quick / None ]
+Quick
+Would you like to do view based testing? [ Yes / No ]</p></blockquote><p>{% endcodeblock %}
+会自动执行<code>pod install</code>命令创建项目并生成依赖。</p><h3>添加库文件和资源</h3><p>例如：把一个网络模块的共有组件放入<code>Pod/Classes</code>中，然后进入<code>Example</code>文件夹执行<code>pod update</code>命令，再打开项目工程可以看到，刚刚添加的组件已经在<code>Pods</code>子工程下<code>Development Pods/PodTestLibrary</code>中了，然后编辑demo工程，测试组件。
+测试无误后需要将该项目添加并推送到远端仓库，并编辑podspec文件。</p><h3>配置podspec文件及验证命令lib lint</h3><h4>打tag号作为podspec版本号</h4><p>因为<code>podspec文件</code>中获取<code>Git版本控制</code>的项目还需要<code>tag号</code>，所以我们要打上一个<code>tag</code>
+{% codeblock 打标签 lang:ruby %}
+$ git tag -m &ldquo;first release&rdquo; 0.1.0
+$ git push &ndash;tags #推送tag到远端仓库
+{% endcodeblock %}</p><h4>编辑podspec文件</h4><p><code>podspec文件</code>是一个Ruby格式：
+{% codeblock podspec文件 lang:ruby %}
+Pod::Spec.new do |s|
+s.name = &ldquo;PodTestLibrary&rdquo; #名称
+s.version = &ldquo;0.1.0&rdquo; #版本号
+s.summary = &ldquo;Just Testing.&rdquo; #简短介绍，下面是详细介绍
+s.description = &#171;-DESC
+Testing Private Podspec.</p><ul><li>Markdown format.</li><li>Don&rsquo;t worry about the indent, we strip it!
+DESC
+s.homepage = &ldquo;<a href=https://coding.net/u/boyers/p/podTestLibrary%22>https://coding.net/u/boyers/p/podTestLibrary"</a> #主页,这里要填写可以访问到的地址，不然验证不通过</li></ul><h1>s.screenshots = &ldquo;<a href=https://www.example.com/screenshots_1%22>www.example.com/screenshots_1"</a>, &ldquo;<a href=https://www.example.com/screenshots_2%22>www.example.com/screenshots_2"</a> #截图</h1><p>s.license = &lsquo;MIT&rsquo; #开源协议
+s.author = { &ldquo;boyers&rdquo; => &ldquo;<a href=mailto:boyers@foxmail.com>boyers@foxmail.com</a>&rdquo; } #作者信息
+s.source = { :git => &ldquo;<a href=https://coding.net/boyers/podTestLibrary.git%22>https://coding.net/boyers/podTestLibrary.git"</a>, :tag => &ldquo;0.1.0&rdquo; } #项目地址，这里不支持ssh的地址，验证不通过，只支持HTTP和HTTPS，最好使用HTTPS</p><h1>s.social_media_url = &lsquo;<a href=https://twitter.com/>https://twitter.com/</a>&lt;TWITTER_USERNAME>&rsquo; #多媒体介绍地址</h1><p>s.platform = :ios, &lsquo;7.0&rsquo; #支持的平台及版本
+s.requires_arc = true #是否使用ARC，如果指定具体文件，则具体的问题使用ARC</p><p>s.source_files = &lsquo;Pod/Classes/<strong>/*&rsquo; #代码源文件地址，</strong>/<em>表示Classes目录及其子目录下所有文件，如果有多个目录下则用逗号分开，如果需要在项目中分组显示，这里也要做相应的设置
+s.resource_bundles = {
+&lsquo;PodTestLibrary&rsquo; => [&lsquo;Pod/Assets/</em>.png&rsquo;]
+} #资源文件地址</p><p>s.public_header_files = &lsquo;Pod/Classes/**/*.h&rsquo; #公开头文件地址
+s.frameworks = &lsquo;UIKit&rsquo; #所需的framework，多个用逗号隔开
+s.dependency &lsquo;AFNetworking&rsquo;, &lsquo;~> 2.3&rsquo; #依赖关系，该项目所依赖的其他库，如果有多个需要填写多个s.dependency
+end
+{% endcodeblock %}</p><h4>验证podspec文件可用性</h4><p>{% codeblock lang:ruby %}
+$ pod lib lint</p><p>输出：
+-> PodTestLibrary (0.1.0)
+PodTestLibrary passed validation.
+{% endcodeblock %}
+说明验证通过了，不过这只是这个<code>podspec文件</code>是合格的，不一定说明这个Pod是可以用的，Pod需要在本地做一下验证。</p><h3>将源码托管到远程仓库</h3><p>通过<code>Cocoapods</code>创建出来的目录本身就在本地的<code>Git</code>管理下，我们需要做的就是给它添加远端仓库，同样去<code>GitHub</code>或其他的Git服务提供商那里创建一个<code>私有的仓库</code>，拿到<code>SSH地址</code>，然后<code>cd</code>到<code>LogSwift</code>目录
+{% codeblock 添加到远程仓库 lang:ruby %}
+$ git add .
+$ git commit -s -m &ldquo;Initial Commit of Library&rdquo;
+$ git remote add origin <a href=https://coding.net/git/LogSwift.git>https://coding.net/git/LogSwift.git</a> #添加远端仓库
+$ git push origin master #提交到远端仓库
+{% endcodeblock %}</p><h2>手动配置Pod私库项目支持：spec create</h2><p>{% codeblock lang:ruby %}
+$ pod spec create LogSwift <a href=mailto:git@coding.net>git@coding.net</a>:boyers/LogSwift.git
+{% endcodeblock %}
+执行完之后，就创建了一个<code>podspec文件</code>，他其中会包含很多内容，可以按照我之前介绍的进行编辑，没用的删掉。编辑完成之后使用验证命令<code>pod lib lint</code>验证一下。</p><h2>:path => 在新项目配置检测podspec文件</h2><p>在这个项目的<code>Podfile</code>文件中直接指定刚才创建编辑好的<code>podspec文件</code>，看是否可用。</p><ol><li>指定本地依赖的两种方式:
+{% codeblock Podfile lang:ruby %}
+platform :ios, &lsquo;7.0&rsquo;
+pod &lsquo;LogSwift&rsquo;, :path => &lsquo;<del>/code/Cocoapods/podTest/LogSwift&rsquo; # 指定路径
+pod &lsquo;LogSwift&rsquo;, :podspec => &lsquo;</del>/code/Cocoapods/podTest/LogSwift/LogSwift.podspec&rsquo; # 指定podspec文件
+{% endcodeblock %}</li><li>指定源码的远程仓库作为依赖
+前提时索引文件中指定的tag版本的源码必须推送到远程仓库
+{% codeblock Podfile lang:ruby %}
+platform :ios, &lsquo;7.0&rsquo;
+pod &lsquo;MusicLrc&rsquo;, :git => &lsquo;<a href="https://github.com/it-boyer/MusicLrcTest.git'">https://github.com/it-boyer/MusicLrcTest.git'</a>
+{% endcodeblock %}</li></ol><p>然后执行<code>pod install</code>命令安装依赖，打开项目工程，可以看到<code>库文件</code>和<code>资源</code>都被加载到<code>Pods子项目</code>中了，不过它们并没有在<code>Pods目录</code>下，而是跟测试项目一样存在于<code>Development Pods/LogSwift</code>中，这是因为我们是在本地测试，而没有把<code>podspec文件</code>添加到<code>Spec Repo</code>中的缘故。</p><h2>万事具备，向私有索引库中提交podspec文件：repo push</h2><p>每当一个或多个<code>*.podspec</code>文件测试无误时，就可以使用<code>pod repo push</code>命令向私有索引库中提交该文件。
+{% codeblock lib create命令 lang:ruby %}
+$ pod repo push PodRepo LogSwift.podspec #PodRepo是本地Repo名字 后面是podspec名字
+{% endcodeblock %}
+完成之后这个组件库就添加到私有索引库中，自动生成的<code>pod 库</code>标准结构：</p><p>同时<code>push命令</code>会将新增的索引目录推送至自己的远程仓库中，即索引托管库<code>PodRepo.git</code>中。</p><h2>trunk push 添加到Cocoapods的官方索引库</h2><h3>注册trunk，邮箱验证</h3><p>在注册trunk之前，我们需要确认当前的CocoaPods版本是否足够新:
+sudo gem install cocoapods
+开始注册trunk：
+{% codeblock lang:bash %}
+pod trunk register <a href=mailto:boyer@163.com>boyer@163.com</a> &lsquo;boyers1250&rsquo; &ndash;verbose
+{% endcodeblock %}
+<code>-verbose</code>参数是为了便于输出注册过程中的调试信息。
+执行上面的语句后，你的邮箱将会受到一封带有验证链接的邮件，如果没有请去垃圾箱找找，有可能被屏蔽了。点击邮件的链接就完成了trunk注册流程。
+使用下面的命令可以向trunk服务器查询自己的注册信息：
+{% codeblock lang:bash %}
+pod trunk me
+{% endcodeblock %}</p><h3>通过trunk推送podspec文件</h3><p>现在我们已经有了自己的podspec文件，但是在推送podspec文件之前你需要确认以下几点：</p><ol><li>确保你的源码已经push到Github上。</li><li>确保你所push的代码已经打上"version tag"版本号标签：
+只有确保了以上两点，CocoaPods才能更准确地找到你的repo。
+现在我们开始通过trunk上传你的podspec文件。先cd到podspec文件所在目录，执行：
+{% codeblock lang:bash %}
+pod trunk push WZLBadge.podspec
+{% endcodeblock %}
+执行上面的push操作，就相当于你把你的源代码提交给CocoaPods团队审核了，CocoaPods审核只需要几秒钟或者几分钟就可以完成。</li></ol><h2>使用远程的私有Pod库</h2><p>我们的这个组件库就已经制作添加完成了，现在可以<code>pod search</code>命令查到这个库，当使用时配置Podfile依赖文件即可。</p><ol><li>pod search 查找库
+{% codeblock 查找库 lang:ruby %}
+$ pod search PodTestLibrary</li></ol><p>-> PodTestLibrary (0.1.0)
+Just Testing.
+pod &lsquo;PodTestLibrary&rsquo;, &lsquo;~> 0.1.0&rsquo;</p><ul><li>Homepage: <a href=https://coding.net/u/boyers/p/podTestLibrary>https://coding.net/u/boyers/p/podTestLibrary</a></li><li>Source: <a href=https://coding.net/boyers/podTestLibrary.git>https://coding.net/boyers/podTestLibrary.git</a></li><li>Versions: 0.1.0 [WTSpecs repo]
+{% endcodeblock %}</li></ul><ol start=2><li>在Podfile文件中配置库依赖
+{% codeblock 配置库依赖 lang:ruby %}
+pod &lsquo;PodTestLibrary&rsquo;, &lsquo;~> 0.1.0&rsquo;
+{% endcodeblock %}</li></ol><h2>更新维护podspec文件配置，升级库版本</h2><p><code>subspec</code>特性，可以在库原有基础上，添加更多的模块，相应创建了多个子目录。现在尝试添加包括<code>工具类</code>，底层<code>Model</code>及<code>UIKit</code>扩展等。</p><h3>添加模块库文件和资源</h3><p>具体做法是先将源文件添加到<code>Pod/Classes</code>中，然后按照不同的模块对文件目录进行整理，因为我有四个模块，所以在<code>Pod/Classes</code>下有创建了四个子目录</p><h3>打tag号作为podspec版本号</h3><p>因为<code>podspec文件</code>中获取<code>Git版本控制</code>的项目还需要<code>tag号</code>，所以我们要打上一个<code>tag</code>
+{% codeblock 打标签 lang:ruby %}
+$ git tag -m &ldquo;first release&rdquo; 0.1.0
+$ git push &ndash;tags #推送tag到远端仓库
+{% endcodeblock %}</p><h3>更新podspec配置文件</h3><p>当创建了<code>subspec</code>，之前项目整体的依赖<code>dependency</code>:</p><ol><li><p>源文件:<code>source_files</code></p></li><li><p>头文件:<code>public_header_files</code></p></li><li><p>资源文件:<code>resource</code>
+都移动到了各自的<code>subspec</code>中，每个<code>subspec</code>之间也可以有相互的依赖关系，比如<code>UIKitAdditio</code>n就依赖于<code>CommonTools</code>。
+{% codeblock 更新podspec配置文件 lang:ruby %}
+Pod::Spec.new do |s|
+s.name = &ldquo;PodTestLibrary&rdquo;
+s.version = &ldquo;1.0.0&rdquo;
+s.summary = &ldquo;Just Testing.&rdquo;
+s.description = &#171;-DESC
+Testing Private Podspec.</p><pre><code>                 * Markdown format.
+                 * Don't worry about the indent, we strip it!
+             DESC
+</code></pre></li></ol><p>s.homepage = &ldquo;<a href=https://coding.net/u/boyers/p/podTestLibrary%22>https://coding.net/u/boyers/p/podTestLibrary"</a></p><h1>s.screenshots = &ldquo;<a href=https://www.example.com/screenshots_1%22>www.example.com/screenshots_1"</a>, &ldquo;<a href=https://www.example.com/screenshots_2%22>www.example.com/screenshots_2"</a></h1><p>s.license = &lsquo;MIT&rsquo;
+s.author = { &ldquo;boyers&rdquo; => &ldquo;<a href=mailto:boyers@foxmail.com>boyers@foxmail.com</a>&rdquo; }
+s.source = { :git => &ldquo;<a href=https://coding.net/boyers/podTestLibrary.git%22>https://coding.net/boyers/podTestLibrary.git"</a>, :tag => &ldquo;1.0.0&rdquo; }</p><h1>s.social_media_url = &lsquo;<a href=https://twitter.com/>https://twitter.com/</a>&lt;TWITTER_USERNAME>&rsquo;</h1><p>s.platform = :ios, &lsquo;7.0&rsquo;
+s.requires_arc = true</p><p>#s.source_files = &lsquo;Pod/Classes/<strong>/<em>&rsquo;
+#s.resource_bundles = { &lsquo;PodTestLibrary&rsquo; => [&lsquo;Pod/Assets/</em>.png&rsquo;] }
+#s.public_header_files = &lsquo;Pod/Classes/</strong>/*.h&rsquo;</p><p>s.subspec &lsquo;NetWorkEngine&rsquo; do |networkEngine|
+networkEngine.source_files = &lsquo;Pod/Classes/NetworkEngine/<strong>/*&rsquo;
+networkEngine.public_header_files = &lsquo;Pod/Classes/NetworkEngine/</strong>/*.h&rsquo;
+networkEngine.dependency &lsquo;AFNetworking&rsquo;, &lsquo;~> 2.3&rsquo;
+end</p><p>s.subspec &lsquo;DataModel&rsquo; do |dataModel|
+dataModel.source_files = &lsquo;Pod/Classes/DataModel/<strong>/*&rsquo;
+dataModel.public_header_files = &lsquo;Pod/Classes/DataModel/</strong>/*.h&rsquo;
+end</p><p>s.subspec &lsquo;CommonTools&rsquo; do |commonTools|
+commonTools.source_files = &lsquo;Pod/Classes/CommonTools/<strong>/*&rsquo;
+commonTools.public_header_files = &lsquo;Pod/Classes/CommonTools/</strong>/*.h&rsquo;
+commonTools.dependency &lsquo;OpenUDID&rsquo;, &lsquo;~> 1.0.0&rsquo;
+end</p><p>s.subspec &lsquo;UIKitAddition&rsquo; do |ui|
+ui.source_files = &lsquo;Pod/Classes/UIKitAddition/<strong>/*&rsquo;
+ui.public_header_files = &lsquo;Pod/Classes/UIKitAddition/</strong>/*.h&rsquo;
+ui.resource = &ldquo;Pod/Assets/MLSUIKitResource.bundle&rdquo;
+ui.dependency &lsquo;PodTestLibrary/CommonTools&rsquo;
+end</p><p>s.frameworks = &lsquo;UIKit&rsquo;
+#s.dependency &lsquo;AFNetworking&rsquo;, &lsquo;<del>> 2.3&rsquo;
+#s.dependency &lsquo;OpenUDID&rsquo;, &lsquo;</del>> 1.0.0&rsquo;
+end
+{% endcodeblock %}
+编辑完成之后，在测试项目里<code>pod update</code>一下，几个子项目都被加进项目工程了，写代码验证无误之后，就可以将这个工程push到远端仓库，并打上新的<code>tag->1.0.0</code>。</p><blockquote><p>但是如果你的代码版本号没变(podspec里的version自然也没变)就会提示push失败，即使你更改了podspec的其他地方，pod也会认为这两个文件是同一个。 我目前为止找不到trunk的相关update接口，所以只能顺水推舟，更新源代码版本号（如：1.1.1->1.1.2），重新push version tag，然后再执行pod trunk push操作。</p></blockquote></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-02-28</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/pod/>pod</a></div><nav class=post-nav><a class=prev href=/post/old/swift/%E4%BA%92%E5%8A%A8%E6%80%A7%E7%9A%84%E6%95%99%E5%AD%A6%E5%B7%A5%E5%85%B7XCPlayground/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">互动性的教学工具XCPlayground</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/iOS/UI/UIStackView%E6%95%99%E7%A8%8B%E4%BA%86%E8%A7%A3StackView/><span class="next-text nav-default">UIStackView教程了解StackView</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-02-28 15:46:16 +0000 UTC",title:"使用Cocoapods创建私有podspec",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

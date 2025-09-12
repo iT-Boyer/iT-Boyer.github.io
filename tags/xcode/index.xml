@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Xcode on 习七</title><link>https://it-boyer.github.io/tags/xcode/</link><description>Recent content in Xcode on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Sun, 19 Jul 2020 21:31:04 +0800</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/xcode/index.xml" rel="self" type="application/rss+xml"/><item><title>Xcode 快捷键使用</title><link>https://it-boyer.github.io/post/old/xcode/Xcode%E5%BF%AB%E6%8D%B7%E9%94%AE%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</link><pubDate>Sun, 19 Jul 2020 21:31:04 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/xcode/Xcode%E5%BF%AB%E6%8D%B7%E9%94%AE%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</guid><description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;State &amp;ldquo;DONE&amp;rdquo; from &amp;ldquo;TODO&amp;rdquo; &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;[2020-05-16 六 20:45]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;State &amp;ldquo;TODO&amp;rdquo; from &amp;ldquo;DONE&amp;rdquo; &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;[2020-05-16 六 20:45]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;State &amp;ldquo;DONE&amp;rdquo; from &amp;ldquo;CANCEL&amp;rdquo; &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;[2020-03-07 六 10:21]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;新建 Tab 页： command + t&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;关闭 tab 页： command + w&lt;/li&gt;
+&lt;li&gt;左右切换 tab 页： shift + command + [ 或 ]&lt;/li&gt;
+&lt;li&gt;预览所有 tab 页： shift + command + \&lt;/li&gt;
+&lt;li&gt;选中激活 tab 页： command + .&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;editer 编辑器&lt;/p&gt;</description></item><item><title>自定义Xcode支持Vim快捷键</title><link>https://it-boyer.github.io/post/old/xcode/%E8%87%AA%E5%AE%9A%E4%B9%89Xcode%E6%94%AF%E6%8C%81Vim%E5%BF%AB%E6%8D%B7%E9%94%AE/</link><pubDate>Thu, 20 Sep 2018 21:12:51 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/xcode/%E8%87%AA%E5%AE%9A%E4%B9%89Xcode%E6%94%AF%E6%8C%81Vim%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid><description>&lt;p&gt;使用了Vim之后，被其强大的文本编辑能力吸引, 于是每天都在寻找 Vim 插件, 试图用 Vim 代替 Xcode 进行日常开发. 直到有一天突然发现, 我想要的就是一个&lt;strong&gt;拥有强大文本编辑能力的 Xcode.&lt;/strong&gt;
+分享一个&lt;a href="https://github.com/Scyano/XcodeKeyBindingSet.git"&gt;自定义快捷键完整版&lt;/a&gt;&lt;/p&gt;</description></item><item><title>解决Xcode代码高亮提示功能失效</title><link>https://it-boyer.github.io/post/old/xcode/%E8%A7%A3%E5%86%B3Xcode%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E6%8F%90%E7%A4%BA%E5%8A%9F%E8%83%BD%E5%A4%B1%E6%95%88/</link><pubDate>Fri, 31 Aug 2018 16:20:20 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/xcode/%E8%A7%A3%E5%86%B3Xcode%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E6%8F%90%E7%A4%BA%E5%8A%9F%E8%83%BD%E5%A4%B1%E6%95%88/</guid><description>&lt;h3&gt;方法一&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;打开失效的项目，选择菜单：Xcode-&amp;gt;File-&amp;gt;Project Settings -&amp;gt; Advanced..，&lt;/li&gt;
+&lt;li&gt;删除图上所示的位置目录，重启xcode。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;方式二&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;cd进入~/Library/Developer/Xcode/DerivedData&lt;/li&gt;
+&lt;li&gt;找到你的项目所用的目录（一般以你的项目名开头）&lt;/li&gt;
+&lt;li&gt;cd 目录名&lt;/li&gt;
+&lt;li&gt;rm -r Index 删除掉你的项目所用的索引文件夹&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;方法三&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;退出 Xcode&lt;/li&gt;
+&lt;li&gt;重启电脑&lt;/li&gt;
+&lt;li&gt;找到 这个 DerivedData 文件夹 删除 (路径: ~/Library/Developer/Xcode/DerivedData)&lt;/li&gt;
+&lt;li&gt;删除这个 com.apple.dt.Xcode 文件 (路径: ~/Library/Caches/com.apple.dt.Xcode)&lt;/li&gt;
+&lt;li&gt;运行 Xcode 就好了~~&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(1) 原文表示删除 ~/Library/Developer/Xcode/DerivedData下所有的文件，我尝试发现只需要删除当前项目相关的索引文件即可
+(2) DerivedData从字面上理解应该是收集到的数据，应该是Xcode针对这个项目缓存的一些数据，不会影响项目本身的完整性&lt;/p&gt;</description></item><item><title>Otherlinkerflags设置ld命令执行的参数</title><link>https://it-boyer.github.io/post/old/xcode/Otherlinkerflags%E8%AE%BE%E7%BD%AEld%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%9A%84%E5%8F%82%E6%95%B0/</link><pubDate>Wed, 11 Apr 2018 16:42:57 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/xcode/Otherlinkerflags%E8%AE%BE%E7%BD%AEld%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%9A%84%E5%8F%82%E6%95%B0/</guid><description>&lt;p&gt;Other linker flags设置的值实际上就是ld命令执行时后面所加的参数。&lt;/p&gt;
+&lt;p&gt;3个常用参数：
+&lt;code&gt;-ObjC&lt;/code&gt;：加了这个参数后，链接器就会把静态库中所有的Objective-C类和分类都加载到最后的可执行文件中
+&lt;code&gt;-all_load&lt;/code&gt;：会让链接器把所有找到的目标文件都加载到可执行文件中，但是千万不要随便使用这个参数！假如你使用了不止一个静态库文件，然后又使用了这个参数，那么你很有可能会遇到&lt;code&gt;ld: duplicate symbol&lt;/code&gt;错误，因为不同的库文件里面可能会有相同的目标文件，所以建议在遇到&lt;code&gt;-ObjC&lt;/code&gt;失效的情况下使用&lt;code&gt;-force_load&lt;/code&gt;参数。
+&lt;code&gt;-force_load&lt;/code&gt;：所做的事情跟&lt;code&gt;-all_load&lt;/code&gt;其实是一样的，但是&lt;code&gt;-force_load&lt;/code&gt;需要指定要进行全部加载的库文件的路径，这样的话，你就只是完全加载了一个库文件，不影响其余库文件的按需加载.&lt;/p&gt;</description></item><item><title>Xcode8中SB适配横竖屏按钮VaryforTraits</title><link>https://it-boyer.github.io/post/old/xcode/Xcode8%E4%B8%ADSB%E9%80%82%E9%85%8D%E6%A8%AA%E7%AB%96%E5%B1%8F%E6%8C%89%E9%92%AEVaryforTraits/</link><pubDate>Tue, 13 Jun 2017 17:33:59 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/xcode/Xcode8%E4%B8%ADSB%E9%80%82%E9%85%8D%E6%A8%AA%E7%AB%96%E5%B1%8F%E6%8C%89%E9%92%AEVaryforTraits/</guid><description>&lt;p&gt;升级xcode8之后，打开storyboard发现xcode7适配界面的size class被Trait Variations所取代:
+Trait Variations只是size class的直观表现方式，改善了原本九宫格选取过于抽象的问题，直接选机型很清晰直观，但本质未变。&lt;/p&gt;</description></item><item><title>在OC和swift中区分多个targets</title><link>https://it-boyer.github.io/post/old/iOS/%E5%9C%A8OC%E5%92%8Cswift%E4%B8%AD%E5%8C%BA%E5%88%86%E5%A4%9A%E4%B8%AAtargets/</link><pubDate>Wed, 11 Jan 2017 13:49:33 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/iOS/%E5%9C%A8OC%E5%92%8Cswift%E4%B8%AD%E5%8C%BA%E5%88%86%E5%A4%9A%E4%B8%AAtargets/</guid><description>&lt;h2&gt;build setting预编译位置&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Preprocessor Macros&lt;/li&gt;
+&lt;li&gt;Other Swift Flags&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为生产和开发target配置预处理宏/编译器标识。之后我们就可以使用该标识在我们的代码来检测应用程序正在运行的版本。&lt;/p&gt;</description></item></channel></rss>

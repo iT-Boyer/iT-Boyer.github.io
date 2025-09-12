@@ -1,0 +1,183 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>PBBReader阅读器解析 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="支持OS X浏览PDF简单视图 运行scheme： PDFReaderForOSX 即可
+支持iOS pageViewController: pdf翻页效果视图控制器 startingViewController:DataViewController,翻页视图控制器的视图源 modelController:ModelController:NSObject,数据视图数据源的model模型。
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/iOS/PBBReader%E9%98%85%E8%AF%BB%E5%99%A8%E8%A7%A3%E6%9E%90/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/iOS/PBBReader%E9%98%85%E8%AF%BB%E5%99%A8%E8%A7%A3%E6%9E%90/"><meta property="og:site_name" content="习七"><meta property="og:title" content="PBBReader阅读器解析"><meta property="og:description" content="支持OS X浏览PDF简单视图 运行scheme： PDFReaderForOSX 即可
+支持iOS pageViewController: pdf翻页效果视图控制器 startingViewController:DataViewController,翻页视图控制器的视图源 modelController:ModelController:NSObject,数据视图数据源的model模型。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-06-26T17:02:18+00:00"><meta property="article:modified_time" content="2017-06-26T17:02:18+00:00"><meta property="article:tag" content="IOS"><meta itemprop=name content="PBBReader阅读器解析"><meta itemprop=description content="支持OS X浏览PDF简单视图 运行scheme： PDFReaderForOSX 即可
+支持iOS pageViewController: pdf翻页效果视图控制器 startingViewController:DataViewController,翻页视图控制器的视图源 modelController:ModelController:NSObject,数据视图数据源的model模型。"><meta itemprop=datePublished content="2017-06-26T17:02:18+00:00"><meta itemprop=dateModified content="2017-06-26T17:02:18+00:00"><meta itemprop=wordCount content="762"><meta itemprop=keywords content="IOS"><meta name=twitter:card content="summary"><meta name=twitter:title content="PBBReader阅读器解析"><meta name=twitter:description content="支持OS X浏览PDF简单视图 运行scheme： PDFReaderForOSX 即可
+支持iOS pageViewController: pdf翻页效果视图控制器 startingViewController:DataViewController,翻页视图控制器的视图源 modelController:ModelController:NSObject,数据视图数据源的model模型。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>PBBReader阅读器解析</h1><div class=post-meta><span class=post-time>2017-06-26</span><div class=post-category><a href=/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/>项目总结</a></div><span class=more-meta>约 762 字 </span><span class=more-meta>预计阅读 2 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>支持OS X浏览PDF简单视图</a></li><li><a href=#>支持iOS</a></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-06-26T17:02:18 title="June 26, 2017">June 26, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2>支持OS X浏览PDF简单视图</h2><p>运行scheme： <code>PDFReaderForOSX</code> 即可</p><h2>支持iOS</h2><p>pageViewController: pdf翻页效果视图控制器
+startingViewController:DataViewController,翻页视图控制器的视图源
+modelController:ModelController:NSObject,数据视图数据源的model模型。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>title 阅读器的内部结构图
+</span></span><span class=line><span class=cl>center header
+</span></span><span class=line><span class=cl>解析PDF目录，显示PDF页面
+</span></span><span class=line><span class=cl>endheader
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>class FileViewController&lt;UIViewController&gt;{
+</span></span><span class=line><span class=cl>-- 属性组 --
+</span></span><span class=line><span class=cl>+IBOutlet UIView *pdfView;
+</span></span><span class=line><span class=cl>+UIPageViewController *pageViewController;
+</span></span><span class=line><span class=cl>-startingViewController;
+</span></span><span class=line><span class=cl>__ 函数组 __
+</span></span><span class=line><span class=cl>- (IBAction)ibaBookmarks:(UIButton *)sender;
+</span></span><span class=line><span class=cl>- (IBAction)ibaOutline:(UIButton *)sender;
+</span></span><span class=line><span class=cl>- (IBAction)ibSearchBtn:(id)sender;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>class UIPageViewController&lt;pageView&gt;{
+</span></span><span class=line><span class=cl>-- 属性组 --
+</span></span><span class=line><span class=cl>+delegate;
+</span></span><span class=line><span class=cl>+dataSource;
+</span></span><span class=line><span class=cl>+view.frame;
+</span></span><span class=line><span class=cl>+gestureRecognizers;
+</span></span><span class=line><span class=cl>__ 函数组 __
+</span></span><span class=line><span class=cl>+init()
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>class startingViewController&lt;dataSource&gt;{
+</span></span><span class=line><span class=cl>__ 函数组 __
+</span></span><span class=line><span class=cl>-(init)viewControllerAtIndex:storyboard:
+</span></span><span class=line><span class=cl>-- 搜索模块 --
+</span></span><span class=line><span class=cl>-(void)restSearchResultColor:(NSString *)searchStr;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&#39;关系层&#39;
+</span></span><span class=line><span class=cl>startingViewController .left.&gt; UIPageViewController:model聚合数据源
+</span></span><span class=line><span class=cl>UIPageViewController ..&gt;FileViewController:手势传递
+</span></span><span class=line><span class=cl>note on link #red: 把翻页控制器的手势事件\n传递给阅读器的PdfView中
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>FileViewController &#34;1&#34; *-[#blue]- &#34;1&#34;UIPageViewController
+</span></span><span class=line><span class=cl>note on link #blue: 构造实例为阅读器添加翻页功能
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>startingViewController .left[#gray].&gt; &#34;1&#34;FileViewController:pageViewController的数据源
+</span></span><span class=line><span class=cl>note on link #gray: 仅用于初始化第一次显示的PDF阅读器界面内容
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>FileViewController --&gt; startingViewController: 搜索bar传递字符串 &gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>note right of startingViewController #white: 1. 为翻页提供数据源\n 2. 更新搜索字段颜色
+</span></span><span class=line><span class=cl>note left of FileViewController #red : PDF阅读器主页面
+</span></span><span class=line><span class=cl>note left of UIPageViewController : 实现翻页效果的控制器
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>class PDFParser&lt;工具类&gt;{
+</span></span><span class=line><span class=cl>__ 函数组 __
+</span></span><span class=line><span class=cl>-(id)initWithFileName:(NSString *)filename;
+</span></span><span class=line><span class=cl>-(id)initWithPDFDoc:(CGPDFDocumentRef)doc;
+</span></span><span class=line><span class=cl>-(NSArray *)getPDFContents;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>class OutLine&lt;UIViewController&gt;{
+</span></span><span class=line><span class=cl>__ 属性组 __
+</span></span><span class=line><span class=cl>NSMutableArray *outlineEntries;
+</span></span><span class=line><span class=cl>NSMutableArray *openOutlineEntries;
+</span></span><span class=line><span class=cl>IBOutlet UITableView *outlineTableView;
+</span></span><span class=line><span class=cl>NSObject&lt;MyOutlineViewControllerDelegate&gt; *delegate;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>&#39;关系图&#39;
+</span></span><span class=line><span class=cl>PDFParser --&gt; OutLine:解析PDF文档获取目录结构
+</span></span><span class=line><span class=cl>OutLine -.&gt; FileViewController: 提供目录界面
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>note left of PDFParser #green
+</span></span><span class=line><span class=cl>解析pdf目录结构的核心工具包
+</span></span><span class=line><span class=cl>end note
+</span></span><span class=line><span class=cl>note right of OutLine #white : 创建目录界面\n显示解析PDF目录工具中得到的数据
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>center footer
+</span></span><span class=line><span class=cl>了解具体的项目结构
+</span></span><span class=line><span class=cl>endfooter
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-06-26</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/iOS/>iOS</a></div><nav class=post-nav><a class=prev href=/post/old/%E5%AF%BC%E5%9B%BE/%E5%9C%A8slack%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%AE%9E%E6%97%B6%E7%BB%98UML%E5%9B%BE/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">在slack上实现实时绘UML图</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/macOS/Perfect%E5%BC%80%E5%8F%91%E5%A4%A9%E6%B0%94%E6%8E%A5%E5%8F%A3API/><span class="next-text nav-default">Perfect开发天气接口API</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-06-26 17:02:18 +0000 UTC",title:"PBBReader阅读器解析",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

@@ -1,0 +1,16 @@
+.org-todo {
+    font-size: 0.8em;
+    font-weight: 700;
+}
+/* *** Org TODO set to TODO state */
+.org-todo.todo {
+    color: #e60000;
+}
+/* *** Org TODO set to DONE state */
+.org-todo.done {
+    color: green;
+}
+
+.org-todo.cancel {
+    color: blue;
+}

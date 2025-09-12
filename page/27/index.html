@@ -1,0 +1,429 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="不物喜,不己悲;善假物,易参行."><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/><link href=https://it-boyer.github.io/index.xml rel=alternate type=application/rss+xml title=习七><link href=https://it-boyer.github.io/index.xml rel=feed type=application/rss+xml title=习七><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/"><meta property="og:site_name" content="习七"><meta property="og:title" content="习七"><meta property="og:description" content="不物喜,不己悲;善假物,易参行."><meta property="og:locale" content="zh_cn"><meta property="og:type" content="website"><meta itemprop=name content="习七"><meta itemprop=description content="不物喜,不己悲;善假物,易参行."><meta itemprop=datePublished content="2024-04-02T10:16:00+08:00"><meta itemprop=dateModified content="2024-04-02T10:16:00+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="习七"><meta name=twitter:description content="不物喜,不己悲;善假物,易参行."><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><section id=posts class=posts><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/xcode/Xcode10%E6%96%B0%E7%89%B9%E6%80%A7/>Xcode10新特性</a></h1><div class=post-meta><span class=post-time>2018-10-02</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 1973 字 </span><span class=more-meta>预计阅读 4 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p>Xcode 10
+Xcode 10在macOS Mojave的黑暗模式下看起来非常棒，也让你很容易在macOS应用程序中采用新的外观。Xcode 10测试版包括Swift 4.2和beta sdk，适用于iOS 12、watchOS 5、tvOS 12和macOS Mojave。</p></div><div class=read-more><a href=/post/old/xcode/Xcode10%E6%96%B0%E7%89%B9%E6%80%A7/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/macOS/SPM%E6%90%AD%E5%BB%BAPerfect%E6%A8%A1%E7%89%88%E6%9C%8D%E5%8A%A1%E5%99%A8/>SPM搭建Perfect模版服务器</a></h1><div class=post-meta><span class=post-time>2018-10-02</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 1708 字 </span><span class=more-meta>预计阅读 4 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><h2>Perfect简介</h2><p>{% github PerfectlySoft Perfect 60e44e4 width = 30% %}
+目前比较流行服务端框架主要有<code>Vapor</code>、<code>Perfect</code>、<code>Kitura</code>和<code>Zewo</code>，他们各有长短，本人这次主要是使用<code>Perfect</code>来写的，因为<code>Perfect</code>的功能比较完善，在GitHub上具有1W+的星，而且有一个非常重要的原因提供了<a href=https://github.com/PerfectlySoft/PerfectDocs/blob/master/README.zh_CN.md>Perfect 中文文档</a>。</p></div><div class=read-more><a href=/post/old/macOS/SPM%E6%90%AD%E5%BB%BAPerfect%E6%A8%A1%E7%89%88%E6%9C%8D%E5%8A%A1%E5%99%A8/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/swift/%E4%BD%BF%E7%94%A8SPM%E7%AE%A1%E7%90%86%E4%BE%9D%E8%B5%96%E5%BA%93/>使用SPM管理依赖库</a></h1><div class=post-meta><span class=post-time>2018-10-01</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 3009 字 </span><span class=more-meta>预计阅读 7 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><h2>概念概述</h2><p><a href=https://swift.org/package-manager/#conceptual-overview>Package Manager</a>
+{% github it-boyer PerfectTemplate 20294e56 width = 30% %}</p><h3>Modules模块</h3><p>在 Swift 中我们使用模块来管理代码，每个模块指定一个命名空间并强制指定模块外哪些部分的代码是可以被访问控制的。</p></div><div class=read-more><a href=/post/old/swift/%E4%BD%BF%E7%94%A8SPM%E7%AE%A1%E7%90%86%E4%BE%9D%E8%B5%96%E5%BA%93/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/swift/Swift%E5%8D%95%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/>Swift单文件相关命令行工具</a></h1><div class=post-meta><span class=post-time>2018-10-01</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 497 字 </span><span class=more-meta>预计阅读 1 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><h2>直接用 swift 命令执行</h2><p><code>xcrun swift</code>可以直接将一个 <code>.swift</code>文件作为命令行工具的输入，这样里面的代码也会被自动地编译和执行。我们甚至还可以在 <code>.swift</code> 文件最上面加上命令行工具的路径，然后将文件权限改为可执行，之后就可以直接执行这个 .swift 文件了：</p></div><div class=read-more><a href=/post/old/swift/Swift%E5%8D%95%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/swift/swift%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8LLDB%E8%B0%83%E8%AF%95/>swift在终端使用LLDB调试</a></h1><div class=post-meta><span class=post-time>2018-10-01</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 788 字 </span><span class=more-meta>预计阅读 2 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p><a href=https://swift.org/getting-started/#using-the-lldb-debugger>Using the LLDB Debugger</a>
+使用LLDB调试器一步一步地运行Swift程序，通过设置<code>断点</code>调试运行状态。</p><ol><li>创建一个名<code>Factorial.swift</code>，定义了一个<code>factorial(n:)</code>函数，并打印调用该函数的结果:</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>func factorial<span class=o>(</span>n: Int<span class=o>)</span> -&gt; Int <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> n &lt;<span class=o>=</span> <span class=m>1</span> <span class=o>{</span> <span class=k>return</span> n <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> n * factorial<span class=o>(</span>n: n - 1<span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>let</span> <span class=nv>number</span> <span class=o>=</span> <span class=m>4</span>
+</span></span><span class=line><span class=cl>print<span class=o>(</span><span class=s2>&#34;\(number)! is equal to \(factorial(n: number))&#34;</span><span class=o>)</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>swiftc命令
+运行swiftc命令<code>-g</code>选项生成<code>swift</code>调试信息,在目录中生存可执行的Factorial文件：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ swiftc -g Factorial.swift
+</span></span><span class=line><span class=cl>$ ls
+</span></span><span class=line><span class=cl>Factorial.dSYM
+</span></span><span class=line><span class=cl>Factorial.swift
+</span></span><span class=line><span class=cl>Factorial*
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>使用lldb启动Factorial文件
+通过LLDB调试器命令<code>lldb</code>运行:</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ lldb Factorial
+</span></span><span class=line><span class=cl><span class=o>(</span>lldb<span class=o>)</span> target create <span class=s2>&#34;Factorial&#34;</span>
+</span></span><span class=line><span class=cl>Current executable <span class=nb>set</span> to <span class=s1>&#39;Factorial&#39;</span> <span class=o>(</span>x86_64<span class=o>)</span>.
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>设置断点
+使用<code>breakpoint set</code> (<code>b</code>) 命令在<code>factorial(n:)</code>函数的第2行中设置一个断点，每次执行函数时中断进程:</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=o>(</span>lldb<span class=o>)</span> b <span class=m>2</span>
+</span></span><span class=line><span class=cl>Breakpoint 1: <span class=nv>where</span> <span class=o>=</span> Factorial<span class=sb>`</span>Factorial.factorial <span class=o>(</span>Swift.Int<span class=o>)</span> -&gt; Swift.Int + <span class=m>12</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=5><li>运行调试
+使用<code>run</code> (<code>r</code>)命令运行进程。进程在<code>factorial(n:)</code>函数的调用位置停止。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=o>(</span>lldb<span class=o>)</span> r
+</span></span><span class=line><span class=cl>Process <span class=m>40246</span> resuming
+</span></span><span class=line><span class=cl>Process <span class=m>40246</span> stopped
+</span></span><span class=line><span class=cl>* thread <span class=c1>#1: tid = 0x14dfdf, 0x0000000100000e7c Factorial`Factorial.factorial (n=4) -&gt; Swift.Int + 12 at Factorial.swift:2, queue = &#39;com.apple.main-thread&#39;, stop reason = breakpoint 1.1</span>
+</span></span><span class=line><span class=cl>frame <span class=c1>#0: 0x0000000100000e7c Factorial`Factorial.factorial (n=4) -&gt; Swift.Int + 12 at Factorial.swift:2</span>
+</span></span><span class=line><span class=cl>   <span class=m>1</span>    func factorial<span class=o>(</span>n: Int<span class=o>)</span> -&gt; Int <span class=o>{</span>
+</span></span><span class=line><span class=cl>-&gt; <span class=m>2</span>        <span class=k>if</span> n &lt;<span class=o>=</span> <span class=m>1</span> <span class=o>{</span> <span class=k>return</span> n <span class=o>}</span>
+</span></span><span class=line><span class=cl>   <span class=m>3</span>        <span class=k>return</span> n * factorial<span class=o>(</span>n: n - 1<span class=o>)</span>
+</span></span><span class=line><span class=cl>   <span class=m>4</span>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>   <span class=m>5</span>
+</span></span><span class=line><span class=cl>   <span class=m>6</span>    <span class=nb>let</span> <span class=nv>number</span> <span class=o>=</span> <span class=m>4</span>
+</span></span><span class=line><span class=cl>   <span class=m>7</span>    print<span class=o>(</span><span class=s2>&#34;\(number)! is equal to \(factorial(n: number))&#34;</span><span class=o>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>Use the print (p) command to inspect the value of the n parameter.</p></div><div class=read-more><a href=/post/old/swift/swift%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8LLDB%E8%B0%83%E8%AF%95/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/swift/SPM%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7/>SPM相关命令工具</a></h1><div class=post-meta><span class=post-time>2018-10-01</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 1034 字 </span><span class=more-meta>预计阅读 3 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><h2>概念概述</h2><p><a href=https://swift.org/getting-started>getting-started</a>
+{% github it-boyer PerfectTemplate 20294e56 width = 30% %}</p><h2>使用Swift编译系统</h2><p>Swift 编译系统为编译库、可执行文件和在不同工程之间共享代码提供了基本的约定。</p><h3>swift 工具</h3><ul><li>swift package</li><li>swift package generate-xcodeproj</li><li>swift run</li><li>swift build</li><li>swift test</li></ul><h3><code>swift package</code>创建一个<code>Hello</code>SPM</h3><ol><li>创建<code>Hello</code>目录，目录名会作为SPM名称：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ mkdir Hello
+</span></span><span class=line><span class=cl>$ cd Hello
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li><code>swift package</code>初始化为SPM工程</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ swift package init
+</span></span><span class=line><span class=cl>├── Package.swift   // 依赖清单文件
+</span></span><span class=line><span class=cl>├── README.md
+</span></span><span class=line><span class=cl>├── Sources         // 源码目录
+</span></span><span class=line><span class=cl>│   └── Hello
+</span></span><span class=line><span class=cl>│       └── Hello.swift
+</span></span><span class=line><span class=cl>└── Tests
+</span></span><span class=line><span class=cl>├── HelloTests
+</span></span><span class=line><span class=cl>│   └── HelloTests.swift
+</span></span><span class=line><span class=cl>└── LinuxMain.swift
+</span></span></code></pre></td></tr></table></div></div><p>每个包在其根目录下都必须拥有一个命名为<code>Package.swift</code>清单文件。如果清单文件为空，那包管理器将会使用常规默认的方式来编译包。
+3. <code>swift build</code>编译SPM
+编译会先解析<code>Package.swift</code>项目配置和下载依赖库等环境，然后编译源码</p></div><div class=read-more><a href=/post/old/swift/SPM%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/macOS/%E5%88%A9%E7%94%A8JavaScript%E6%9E%84%E5%BB%BAOSX%E5%8E%9F%E7%94%9F%E5%BA%94%E7%94%A8/>利用JavaScript构建OSX原生应用</a></h1><div class=post-meta><span class=post-time>2018-09-29</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 169 字 </span><span class=more-meta>预计阅读 1 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p><a href=https://segmentfault.com/a/1190000002504649>利用JavaScript构建OSX应用</a>
+<a href=https://github.com/tylergaw/js-osx-app-examples>Example OS X applications written in JavaScript.</a>
+<a href=https://github.com/JXA-Cookbook/JXA-Cookbook>JavaScript for Automation Cookbook</a>
+<a href=https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000>廖雪峰的JavaScript教程</a>
+<a href=https://www.w3cschool.cn/javascript/>W3Cschool javascript教程</a>
+<a href=https://www.jianshu.com/p/4b236af8745c>JavaScript快速入门</a></p><h3>使用场景</h3><p><a href=https://www.jianshu.com/p/37c3fac40be2>UIAutomation的简单使用方法</a>
+<a href=http://www.cnblogs.com/vowei/archive/2012/08/10/2631949.html>如何使用UIAutomation进行iOS 自动化测试（Part I）</a>
+<a href=https://developer.telerik.com/featured/javascript-os-x-automation-example/>JavaScript for OS X Automation by Example</a>
+<a href=https://developer.apple.com/library/archive/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html>JavaScript For Automation</a>
+<a href=http://www.cocoachina.com/ios/20180402/22865.html>iOS 程序员效率提升利器之 AppleScript</a>
+<a href=https://www.jianshu.com/p/816667ee92ce>Numbers入门 &mdash; 附录：脚本 AppleScript 与 Numbers</a></p></div><div class=read-more><a href=/post/old/macOS/%E5%88%A9%E7%94%A8JavaScript%E6%9E%84%E5%BB%BAOSX%E5%8E%9F%E7%94%9F%E5%BA%94%E7%94%A8/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/macOS/%E4%BF%AE%E6%94%B9Mac%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%BC%E8%87%B4%E4%B8%A2%E5%A4%B1%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E4%BF%AE%E5%A4%8D/>修改Mac用户名导致丢失管理员权限问题修复</a></h1><div class=post-meta><span class=post-time>2018-09-25</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 342 字 </span><span class=more-meta>预计阅读 1 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><h2>出现的问题主要有两点</h2><ol><li>数据恢复问题
+1）修改用户名后，mac系统认为是创建了一个新的用户，这时候，之前管理员账号的数据在当前用户的finder里是看不到的。这时候可以去到桌面，点击又上角的“前往” 。</li><li>管理员权限问题
+虽然数据问题恢复了，但是另外一个更严重的问题又出现了。新的用户名账号只是一个普通用户账号，没有管理员权限没有管理员权限了。在需要管理员权限的操作中输入具有管理员权限的前用户名和密码也不认了。
+解决办法：</li><li>创建一个新的具有管理员权限的用户
+第一步：重启电脑，并长按组合键：<code>command+s</code>进入Single User Model模式，出现像DOS一样的提示符 。
+第二步：在命令行顺序输入命令：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>fsck</span> <span class=o>-</span><span class=n>y</span>
+</span></span><span class=line><span class=cl><span class=n>mount</span> <span class=o>-</span><span class=n>uaw</span> <span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=n>rm</span> <span class=o>/</span><span class=k>var</span><span class=o>/</span><span class=n>db</span><span class=o>/.</span><span class=n>AppleSetupDone</span>
+</span></span><span class=line><span class=cl><span class=n>reboot</span>
+</span></span></code></pre></td></tr></table></div></div><p>苹果电脑会重启，并且在开机后出现新装机时的欢迎界面。重新建立一个新的管理员账号。</p></div><div class=read-more><a href=/post/old/macOS/%E4%BF%AE%E6%94%B9Mac%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%BC%E8%87%B4%E4%B8%A2%E5%A4%B1%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98%E4%BF%AE%E5%A4%8D/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/xcode/%E8%87%AA%E5%AE%9A%E4%B9%89Xcode%E6%94%AF%E6%8C%81Vim%E5%BF%AB%E6%8D%B7%E9%94%AE/>自定义Xcode支持Vim快捷键</a></h1><div class=post-meta><span class=post-time>2018-09-20</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 646 字 </span><span class=more-meta>预计阅读 2 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p>使用了Vim之后，被其强大的文本编辑能力吸引, 于是每天都在寻找 Vim 插件, 试图用 Vim 代替 Xcode 进行日常开发. 直到有一天突然发现, 我想要的就是一个<strong>拥有强大文本编辑能力的 Xcode.</strong>
+分享一个<a href=https://github.com/Scyano/XcodeKeyBindingSet.git>自定义快捷键完整版</a></p></div><div class=read-more><a href=/post/old/xcode/%E8%87%AA%E5%AE%9A%E4%B9%89Xcode%E6%94%AF%E6%8C%81Vim%E5%BF%AB%E6%8D%B7%E9%94%AE/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E5%B7%A1%E6%9F%A5%E8%87%AA%E6%9F%A5%E6%95%B4%E5%90%88%E7%B1%BB%E5%9B%BE/>巡查自查整合类图</a></h1><div class=post-meta><span class=post-time>2018-09-13</span><div class=post-category><a href=/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/>项目总结</a></div><span class=more-meta>约 1132 字 </span><span class=more-meta>预计阅读 3 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p><img src=http://www.plantuml.com/plantuml/png/bLTjKnDP5lxUl-8ML9a4kqdjxhUWL4bstMKBMSk0MxjREwackIHTjcccqnd7GgV04I6yruYYKS08JXX78XOMBqJ8dyczdNpoByovVJelhKJBQqdtlVVSvxpSSvxJiJHBfuGTvFd6AxOqoxRksyiF-AFtR7ccMjwfb3Qb64rPr2H9giQfAQ4apnRutgDFvOkdrMAU5TVjnLtsx5IYgRXxIF9ruI3sknBRtELF5lbsdgsj4dVT9_d4plfSAAQhwRIiZgGjKurPiYPqZwenAgkfb66fbcQaP9hAt8GJrMAvjbfa6niXlnAm2vFyULRsTmOgvJK-koNxVmgm-Qdwyla0cte3Rpv9SZIG8JKHTXmRbnI5e1Xxjyud2Z3riPa7jToA_UPNHP6xk-MB5-Ler2Vrz_qh0z6oo71_96OQkdvTexT8bnF2va9FExcO0VfILglaOEHAnb97T7h9DDNRBjI0EaBrT0lCLTM28n6gch5adsgIBcsaCV5e4w1Yzs-cQPYeuHhz_hAcWvyHop3f5IDETT8rwgmuanuf6cKpQwmmn-OV4rxAiTbj_cAwzl89Vtm4TnoDIi4WQKYqUYGfnF-3eSK3QMeDZxMimm5-K6ApBtXsGeHrPval5jZCFdkwpTuUiUCLLE0zFzHm_KldlMV2IKsF2vLX2ArG3xbsLnfJOpVK12NLyZGlRR63LspgW5ouSDdG8HTxUyVT3FZdFo071hIq9G145e3dzagfdWJDk0v61jJRHiO29I8h8IL5Z8V4jOcZGyO07RLSAp9MpzSEHf9G4qC6tahBCKN1Y8DgfU5ZPgmf5_8FHjmy2SHLItNUU-h2kg76_mghmgEGFwwbnrGhbemcJ2Cp5hK2phCXd4uQj-gkzq38FB4WNOe2qMb9cw7ROpHCTLqQxW-BACT46JgY_a0RKO9HFdjJH9il0jziDg8z68bOffPAG0s0qA1wa_P83NSjDG5lNpOKYsH8kucMelOpDq4z89szvK126Eabo2NhgXQxGSrcShbEjHSO1s2WAKfqI0bYZBQNbFZgVctrVMqYo-T-WyIsS_VPxcHrSqhG9X4O26HgYQH0QkSdA-OgHra4Yy42Vt70FYmrGH35CiO0eysb8aJbCCSd9f65Fm4XaWYOZpyvjRUEWxNSSdLr2GHb-8yfYxTexsG9czghhHJPpYfVUSld9v7DcoIEp2tv51W46m60m25xhsGVbzdMDD_RbjdIsqhf5Jjvo2PpzifsvNIEhq6otAiSBhAPNPIkbjSXWog7EmIWVEXb1_OUhFlXVcXFu1IRpKDiGKi7KTC4cIyipCBm-3gTGK00jMDZQcbKptzdkwULap9O4dBKL4uMx9DYYA1yPttul3VVQ32aqwHn2LfavV0rpp_Ww_jWJ-MmL3bv-F533deKdtl3bv_Rxr_2RX2DvslvIccVpQnMyzl11YdREwSj5-ixvmnXgLsw3_stQRdxTWu7j4esjMCN5b0CBpSq2EmlNuDILbC9dSh8Zl9b4ofF3kj69YuBDXbHqzJNO5GBQ-yCCeMTFX1rckdNsgXRmIB_I2nZmbIyzf1W47t47FoiDpOf3oGnDFpHBbyeykDbQ68aGIs8TZ3jF1hDI_5xS3pS2JYrYHn4l5MlspMcZqN-PHTG4TnOKrUpmx2DOpi_0UTQ8a8y_QLFJGreJgCTb-BnE9prRkeQ4fAp1_yQqAtVMPvukv4c5-uuJAK126Aw4t453LO5OK6d4cHWqh30N_lufNtl22kvjUDOzMu6DdWq_4TWNW-Jkc6uS4O6k8BW2lfIFzXL1n6EEXgylgCQZmJncl3tZ915DUxaB2VRk4F0bjQFWkdNV7C2_a9qsyOLpFblEAcYIdVo3IgzMF-chM0m-qOqp0jVhpD8WoxX2ni83cdGmrozxX1bZrGvUm_k7AemvB_J6x1B1Pujo_wkWE22cMKY-ur0TJ87CndeUxzIUjmf_oZVbS_Btn601rfsZYfAW1N5Z7pyCE_lxWvKd-PWvfEQHDVnfmwuxhXnA_K_mNd_LqZ7Nyx_kSEDHWXB2Mf654nlArkcYAwbRf3EX4bfIgeMDjcaItv0-SYDR7QZ-lE9_UmGV89g17R_PHxPlK69NxG4LZpV3g7FYHPimX53a573W8S4refOOsl1dpZuumRt_m00 alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>title</span> <span class=err>巡查及处理整合迭代</span>
+</span></span><span class=line><span class=cl><span class=n>center</span> <span class=n>header</span>
+</span></span><span class=line><span class=cl><span class=err>巡查执法及处理整合设计实现图</span>
+</span></span><span class=line><span class=cl><span class=n>endheader</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;******* 类声明模块 *******&#39;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;类型:class,abstract,interface,annotation,enum&#39;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;访问域:(-)私有,(#)保护,(~)包私有,(+)公有&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>TagCenter</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span> <span class=err>私有属性</span><span class=o>--</span> <span class=s1>&#39;分隔符--,..,==,__&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>IBOutlet</span> <span class=n>UIScrollView</span> <span class=o>*</span><span class=n>titleScrollView</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>IBOutlet</span> <span class=n>UIScrollView</span> <span class=o>*</span><span class=n>contentScrollView</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>NSMutableArray</span> <span class=o>*</span><span class=n>titleLabels</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>IBOutlet</span> <span class=n>PatrolSearchBar</span> <span class=o>*</span><span class=n>ibSearchBar</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>IBOutlet</span> <span class=n>UIView</span> <span class=o>*</span><span class=n>ibErrorView</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>ReqFilterStoreModel</span> <span class=o>*</span><span class=n>filterModel</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>__初始化</span> <span class=err>滚动标题方法</span><span class=n>__</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=err>初始化</span><span class=n>UIScrollView</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>setUpScrollView</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=err>添加所有子控制器对应标题</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>setUpTitleLabel</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=err>添加所有子控制器</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>setUpChildViewController</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=err>过滤工具</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>JHTagListView</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>动画属性</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>IBOutlet</span> <span class=n>NSLayoutConstraint</span> <span class=o>*</span><span class=n>ibTableViewToLeftViewConut</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>IBOutlet</span> <span class=n>NSLayoutConstraint</span> <span class=o>*</span><span class=n>ibShadeToFilterViewConut</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>setupFilterView</span><span class=p>:(</span><span class=n>NSArray</span> <span class=o>*</span><span class=p>)</span><span class=n>dataArray</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadDataList</span><span class=p>:(</span><span class=n>dispatch_group_t</span><span class=p>)</span><span class=n>group</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>showListView</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>JHTagListView</span> <span class=o>*--</span> <span class=n>JHFilterStoreTypeCell</span>
+</span></span><span class=line><span class=cl><span class=n>UICollectionView</span> <span class=p>()</span><span class=o>-</span> <span class=n>JHFilterStoreTypeCell</span> 
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>JHFilterStoreTypeCell</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>接口属性</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>NSString</span> <span class=o>*</span><span class=n>typeName</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>NSArray</span> <span class=o>*</span><span class=n>tagArr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>JHTagListView</span> <span class=o>*--</span> <span class=n>JHFilterPatrolTimeCell</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>JHFilterPatrolTimeCell</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>JHFilterPatrolTimeCell</span> <span class=o>*--</span> <span class=n>DateAlertPickerController</span> 
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>DateAlertPickerController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>left</span> <span class=n>of</span> <span class=n>DateAlertPickerController</span>
+</span></span><span class=line><span class=cl><span class=err>时间选择器的封装</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>of</span> <span class=n>JHFilterPatrolTimeCell</span>
+</span></span><span class=line><span class=cl><span class=err>定义时间</span><span class=n>cell样式</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>top</span> <span class=n>of</span> <span class=n>JHFilterStoreTypeCell</span>
+</span></span><span class=line><span class=cl><span class=err>定义业态类型样式</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;显示/隐藏类,类方法属性等 关键字支持class,interface,enum&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;---- 声明类关系线备注,可以当做用例来参与到关系连接中 ---&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=s2>&#34;实现过滤UI及业务的类&#34;</span> <span class=n>as</span> <span class=n>filterClassnote</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;###### 类备注模块 类声明末尾使用:note 位置: 备注#########&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>left</span> <span class=n>of</span> <span class=n>TagCenter</span> <span class=c1>#red</span>
+</span></span><span class=line><span class=cl><span class=err>整个框架的主体：包括搜索框</span><span class=o>/</span><span class=err>过滤条件列表</span><span class=o>/</span><span class=err>滚动标签</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;&amp;&amp;&amp;&amp;&amp;&amp; 类组合模块 类模块 &amp;&amp;&amp;&amp;&amp;&amp;&amp;&#39;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;六种组合样式:Node,Rectangle,Folder,Frame,Cloud,Database&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=n>tagList</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>tagBase</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span> <span class=err>属性</span><span class=o>--</span> <span class=s1>&#39;分隔符--,..,==,__&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>TagListType</span> <span class=n>curTagType</span><span class=p>;</span> <span class=o>//</span><span class=err>标签类型</span>
+</span></span><span class=line><span class=cl><span class=n>NSMutableArray</span> <span class=o>*</span><span class=n>dataArray</span><span class=p>;</span> <span class=o>//</span><span class=err>列表数据源</span>
+</span></span><span class=line><span class=cl><span class=n>__</span> <span class=n>getter</span><span class=o>/</span><span class=n>setter方法__</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>NSMutableArray</span> <span class=o>*</span><span class=p>)</span><span class=n>dataArray</span> <span class=o>//</span><span class=err>通过标签类型过滤出当前列表的数据源</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=err>基础类</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>JHTagBanLiModel</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>ddd</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>JHTagBanliCell</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>ddd</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=err>巡查执法</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>tagBase</span> <span class=o>&lt;|--</span> <span class=n>DaiBan</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>DaiBan</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>属性</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>tagtype</span>
+</span></span><span class=line><span class=cl><span class=n>redhot</span> <span class=o>//</span><span class=err>红点显示</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>tableView</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>tagBase</span> <span class=o>&lt;|--</span> <span class=n>YiBanVC</span> 
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=n>YiBan</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>YiBanVC</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>dddd</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>YiBanVC</span> <span class=o>*--</span> <span class=n>YiBanCellView</span>
+</span></span><span class=line><span class=cl><span class=n>JHTagBanliCell</span> <span class=o>&lt;|--</span> <span class=n>YiBanCellView</span> 
+</span></span><span class=line><span class=cl><span class=n>tagBase</span> <span class=o>&lt;|--</span> <span class=n>Guanli</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>Guanli</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>属性</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>tagtype</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>tableView</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=err>自检自查</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>tagBase</span> <span class=o>&lt;|--</span> <span class=n>YiZCha</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>YiZCha</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>属性</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>tagtype</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>tableView</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>tagBase</span> <span class=o>&lt;|--</span> <span class=n>WeiZCha</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>WeiZCha</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>属性</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>tagtype</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>tableView</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;&gt;&gt;&gt;&gt;&gt;&gt; 类关系图及连接备注模块 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&#39;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;关系节点符:(|&gt;)继承,(*)合成 ,(o)聚合, 其他#,x,},+,^ 连线符:(--)实线 ，(..)虚线&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>TagCenter</span> <span class=s2>&#34;1&#34;</span> <span class=o>*-</span><span class=n>down</span><span class=p>[</span><span class=c1>#red]- &#34;3+2&#34;tagBase:列表基类 &gt;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>left</span> <span class=n>on</span> <span class=n>link</span> <span class=c1>#green</span>
+</span></span><span class=line><span class=cl><span class=err>解偶列表与搜索功能相关的</span><span class=n>UI和业务</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>TagCenter</span> <span class=s2>&#34;1&#34;</span> <span class=o>*-</span><span class=n>down</span><span class=p>[</span><span class=c1>#red]- &#34;1&#34;JHTagListView:过滤条件列表 &gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>center</span> <span class=n>footer</span>
+</span></span><span class=line><span class=cl><span class=err>类图实现设计图</span>
+</span></span><span class=line><span class=cl><span class=n>endfooter</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=read-more><a href=/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E5%B7%A1%E6%9F%A5%E8%87%AA%E6%9F%A5%E6%95%B4%E5%90%88%E7%B1%BB%E5%9B%BE/ class=read-more-link>阅读更多</a></div></div></article></section><nav class=pagination><a class=prev href=/page/26/><i class="iconfont icon-left"></i>
+<span class=prev-text>上一页</span>
+</a><a class=next href=/page/28/><span class=next-text>下一页</span>
+<i class="iconfont icon-right"></i></a></nav></div></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a><link href=https://it-boyer.github.io/index.xml rel=feed type=application/rss+xml class="iconfont icon-rss" title=习七></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

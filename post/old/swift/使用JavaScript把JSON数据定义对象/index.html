@@ -1,0 +1,152 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>使用JavaScript把JSON数据定义对象 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="将JSON数据序列化为代码实例 定义一个继承自 JSExport 子协议 PersonJSExports 定义一个遵守PersonJSExports协议的Person数据模 使用 JavaScript 把JSON转为类并实例化对象 都有一个完整的 JVM 在那儿了，谁还需要 NSJSONSerialization？ JSExport语言互通协议 JavaScript可以脱离prototype继承完全用JSON来定义对象，但是Objective-C编程不能脱离类和继承。所以JavaScriptCore就提供了JSExport作为两种语言的互通协议。 JSExport中没有预定义任何方法，但是所有继承JSExport的协议中定义的方法即协议方法，都可以在JSContext中被调用。
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/swift/%E4%BD%BF%E7%94%A8JavaScript%E6%8A%8AJSON%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/swift/%E4%BD%BF%E7%94%A8JavaScript%E6%8A%8AJSON%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1/"><meta property="og:site_name" content="习七"><meta property="og:title" content="使用JavaScript把JSON数据定义对象"><meta property="og:description" content="将JSON数据序列化为代码实例 定义一个继承自 JSExport 子协议 PersonJSExports 定义一个遵守PersonJSExports协议的Person数据模 使用 JavaScript 把JSON转为类并实例化对象 都有一个完整的 JVM 在那儿了，谁还需要 NSJSONSerialization？ JSExport语言互通协议 JavaScript可以脱离prototype继承完全用JSON来定义对象，但是Objective-C编程不能脱离类和继承。所以JavaScriptCore就提供了JSExport作为两种语言的互通协议。 JSExport中没有预定义任何方法，但是所有继承JSExport的协议中定义的方法即协议方法，都可以在JSContext中被调用。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-02-12T14:41:35+00:00"><meta property="article:modified_time" content="2017-02-12T14:41:35+00:00"><meta property="article:tag" content="Swift"><meta itemprop=name content="使用JavaScript把JSON数据定义对象"><meta itemprop=description content="将JSON数据序列化为代码实例 定义一个继承自 JSExport 子协议 PersonJSExports 定义一个遵守PersonJSExports协议的Person数据模 使用 JavaScript 把JSON转为类并实例化对象 都有一个完整的 JVM 在那儿了，谁还需要 NSJSONSerialization？ JSExport语言互通协议 JavaScript可以脱离prototype继承完全用JSON来定义对象，但是Objective-C编程不能脱离类和继承。所以JavaScriptCore就提供了JSExport作为两种语言的互通协议。 JSExport中没有预定义任何方法，但是所有继承JSExport的协议中定义的方法即协议方法，都可以在JSContext中被调用。"><meta itemprop=datePublished content="2017-02-12T14:41:35+00:00"><meta itemprop=dateModified content="2017-02-12T14:41:35+00:00"><meta itemprop=wordCount content="2187"><meta itemprop=keywords content="Swift"><meta name=twitter:card content="summary"><meta name=twitter:title content="使用JavaScript把JSON数据定义对象"><meta name=twitter:description content="将JSON数据序列化为代码实例 定义一个继承自 JSExport 子协议 PersonJSExports 定义一个遵守PersonJSExports协议的Person数据模 使用 JavaScript 把JSON转为类并实例化对象 都有一个完整的 JVM 在那儿了，谁还需要 NSJSONSerialization？ JSExport语言互通协议 JavaScript可以脱离prototype继承完全用JSON来定义对象，但是Objective-C编程不能脱离类和继承。所以JavaScriptCore就提供了JSExport作为两种语言的互通协议。 JSExport中没有预定义任何方法，但是所有继承JSExport的协议中定义的方法即协议方法，都可以在JSContext中被调用。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>使用JavaScript把JSON数据定义对象</h1><div class=post-meta><span class=post-time>2017-02-12</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 2187 字 </span><span class=more-meta>预计阅读 5 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>将JSON数据序列化为代码实例</a></li><li><a href=#>JSExport语言互通协议</a></li><li><a href=#>JSExportAs 宏: 指定方法在JS中调用的名称</a><ul><li><a href=#>定义PersonJSExports协议和create协议方法（类方法）</a></li><li><a href=#>定义Person模型</a></li><li><a href=#>JSContext 配置</a></li><li><a href=#>JavaScript 数据和进程</a></li><li><a href=#>使用Mustache 模板 渲染</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-02-12T14:41:35 title="February 12, 2017">February 12, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2>将JSON数据序列化为代码实例</h2><ol><li>定义一个继承自 <code>JSExport</code> 子协议 <code>PersonJSExports</code></li><li>定义一个遵守<code>PersonJSExports</code>协议的<code>Person</code>数据模</li><li>使用 <code>JavaScript</code> 把<code>JSON</code>转为<code>类</code>并实例化<code>对象</code>
+都有一个完整的 <code>JVM</code> 在那儿了，谁还需要 <code>NSJSONSerialization</code>？</li></ol><h2>JSExport语言互通协议</h2><p><code>JavaScript</code>可以脱离<code>prototype继承</code>完全用<code>JSON</code>来定义对象，但是<code>Objective-C</code>编程不能脱离<code>类</code>和<code>继承</code>。所以<code>JavaScriptCore</code>就提供了<code>JSExport</code>作为两种语言的互通协议。
+<code>JSExport</code>中没有预定义任何方法，但是所有继承<code>JSExport</code>的协议中定义的方法即协议方法，都可以在<code>JSContext</code>中被调用。</p><h2>JSExportAs 宏: 指定方法在JS中调用的名称</h2><p>对于多参数的方法，<code>JavaScriptCore</code>的转换方式将<code>Objective-C</code>的方法每个部分都合并在一起，冒号后的字母变为大写并移除冒号。比如下边协议中的方法，在JavaScript调用就是：doFooWithBar(foo, bar);
+{% codeblock lang:objc %}
+@protocol MultiArgs <jsexport></p><ul><li>(void)doFoo:(id)foo withBar:(id)bar;
+@end
+{% endcodeblock %}
+如果希望方法在JavaScript中有一个比较短的名字，就需要用的JSExport.h中提供的宏：
+{% codeblock JSExport.h lang:objc %}
+JSExportAs(PropertyName, Selector)
+{% endcodeblock %}</li></ul><p>{% codeblock JSExportAs的官方宏定义 lang:objc xcdoc://?url=developer.apple.com/library/etc/redirect/xcode/ios/1151/documentation/JavaScriptCore/Reference/JSExport_Ref/index.html %}
+#define JSExportAs(PropertyName, Selector)<br>@optional Selector <strong>JS_EXPORT_AS</strong>##PropertyName:(id)argument; @required Selector
+#endif
+{% endcodeblock %}
+如 <code>setX:Y:Z</code>方法，我们可以给他重命名，让 JS 中通过 <code>set3D(x,y,z)</code> 来调用
+{% codeblock 使用方法 lang:objc %}
+JSExportAs(set3D,</p><ul><li>(void)setX:(id)x Y:(id)y Z:(id)z
+);
+//调用
+set3D(x,y,z)
+{% endcodeblock %}</li></ul><h3>定义PersonJSExports协议和create协议方法（类方法）</h3><p><code>Person 类</code>实现了<code> PersonJSExports 协议</code>，该协议规定哪些属性可以在 <code>JavaScript</code>中可用。
+在<code>JavaScript</code>语境中，不能像：<code>var person = new Person()</code>来初始化实例，可以在定义<code>PersonJSExports</code>协议方法时，添加一个协议方法来弥补这一点。见下例<code>create...</code>类方法：
+{% codeblock lang:swift %}
+// Custom protocol must be declared with <code>@objc</code>
+@objc protocol PersonJSExports : JSExport {
+//属性
+var firstName: String { get set }
+var lastName: String { get set }
+var birthYear: NSNumber? { get set }
+//方法
+func getFullName() -> String</p><pre><code>/// 在JavaScript中调用这个类方法
+class func createWithFirstName(firstName: String, lastName: String) -&gt; Person
+</code></pre><p>}</p><h3>定义Person模型</h3><p>定义一个遵守<code>PersonJSExports</code>协议的<code>Person</code>数据模
+// Custom class must inherit from <code>NSObject</code>
+@objc class Person : NSObject, PersonJSExports {
+// JS协议属性必须声明为<code>dynamic</code>
+dynamic var firstName: String
+dynamic var lastName: String
+dynamic var birthYear: NSNumber?</p><pre><code>init(firstName: String, lastName: String)   
+{
+    self.firstName = firstName
+    self.lastName = lastName
+}
+//JS协议类方法
+class func createWithFirstName(firstName: String, lastName: String) -&gt; Person 
+{
+    return Person(firstName: firstName, lastName: lastName)
+}
+//JS协议方法
+func getFullName() -&gt; String 
+{
+    return &quot;\(firstName) \(lastName)&quot;
+}
+</code></pre><p>}
+{% endcodeblock %}</p><h3>JSContext 配置</h3><p>之前，我们可以用我们已经创建的 Person 类，我们需要将其导出到 <code>JavaScript</code> 环境。我们也将借此导入<a href=http://mustache.github.io>Mustache JS library</a>，我们将应用模板到我们的 Person 对象。
+{% codeblock lang:swift %}
+// export Person class，JS中以该<code>Person标示符</code>作为类名使用
+context.setObject(Person.self, forKeyedSubscript: &ldquo;Person&rdquo;)</p><p>// load Mustache.js
+if let mustacheJSString = String(contentsOfFile:&mldr;, encoding:NSUTF8StringEncoding, error:nil)
+{
+context.evaluateScript(mustacheJSString)
+}
+{% endcodeblock %}</p><h3>JavaScript 数据和进程</h3><p>下面就来看看我们简单的 JSON 例子，这段代码将创建新的 Person 实例。
+数据：
+{% codeblock Persons.json lang:json %}
+[
+{ &ldquo;first&rdquo;: &ldquo;Grace&rdquo;, &ldquo;last&rdquo;: &ldquo;Hopper&rdquo;, &ldquo;year&rdquo;: 1906 },
+{ &ldquo;first&rdquo;: &ldquo;Ada&rdquo;, &ldquo;last&rdquo;: &ldquo;Lovelace&rdquo;, &ldquo;year&rdquo;: 1815 },
+{ &ldquo;first&rdquo;: &ldquo;Margaret&rdquo;, &ldquo;last&rdquo;: &ldquo;Hamilton&rdquo;, &ldquo;year&rdquo;: 1936 }
+]
+{% endcodeblock %}
+创建新的 Person 实例：
+{% codeblock loadPeople.js lang:js %}
+var loadPeopleFromJSON = function(jsonString)
+{
+var data = JSON.parse(jsonString);
+var people = [];
+for (i = 0; i &lt; data.length; i++)
+{
+//在swift中的js协议方法：<code>createWithFirstName:lastName:</code>
+var person = Person.createWithFirstNameLastName(data[i].first, data[i].last);
+person.birthYear = data[i].year;
+//<code>push:</code>添加到数组中
+people.push(person);
+}
+//返回该对象
+return people;
+}
+{% endcodeblock %}
+<code>JSContext</code>加载装换<code>loadPeople.js</code>脚本
+加载js脚本之后，<code>loadPeopleFromJSON</code>即可作为下标被<code>context</code>调用该方法:
+{% codeblock 加载loadPeople.js lang:swift %}
+// load loadPeople.js
+if let loadPeople = String(contentsOfFile:&mldr;, encoding:NSUTF8StringEncoding, error:nil)
+{
+//加载js脚本之后，<code>loadPeopleFromJSON</code>即可作为下标被context调用该方法
+context.evaluateScript(loadPeople)
+}
+{% endcodeblock %}</p><blockquote><p>注意：JavaScriptCore 转换的 Objective-C / Swift 方法名是 JavaScript 兼容的。由于 JavaScript 没有参数 名称，任何外部参数名称都会被转换为驼峰形式并且附加到函数名后。在这个例子中，Objective-C 的方法 createWithFirstName:lastName: 变成了在JavaScript中的 createWithFirstNameLastName()。</p></blockquote><h3>使用Mustache 模板 渲染</h3><p>Mustache 是一个很强大的 template 引擎，可以通过解析 json 来绑定并渲染占位符。如果你做过一些前端开发的话，会知道这是一种很常用的 HTML 绑定 Model 的做法，GRMustache.swift 是这个框架的 Swift 实现。
+<a href=http://blog.csdn.net/kevin_luan/article/details/46485561>mustache模板引擎</a>
+<a href=https://github.com/BjornRuud/Swiftache>Mustache 的 Swift 语言实现版本</a>
+mustache的特点就是很语法很简单，主要语法如下:
+1. {{ name }} 打印变量，默认是escape过的，如果不要escape,用3个分隔符 {{{ name }}}，或者用 {{ &amp;name }}，这个和分隔符无关
+2. {{#person}}…{{/person}} 区块，4种方式
+person 是真假值，决定是否输出
+person 是list of array，会循环展开 for x in person:section.render(&lsquo;xxx)
+person 是匿名函数/object, 区块包裹的html 会作为参数传递进去
+person 是dict，直接打印 dict[key]
+3. {{^person}}…{{/person}，反向区块
+4. {{！name }} 注释
+5. {{> box }} 载入子模块</p><p>加载 <code>JSON 数据</code>，调用 <code>JSContext</code> 将数据解析成 <code>Person 对象</code>的数组，并用 <code>Mustache 模板</code>呈现每个<code> Person</code>：
+{% codeblock lang:swift %}
+// 从文件<code>Persons.json</code>中加载json数据
+if let peopleJSON = NSString(contentsOfFile:&mldr;, encoding: NSUTF8StringEncoding, error: nil)
+{
+// 获取js中定义的<code>loadPeopleFromJSON</code>的方法
+let load = context.objectForKeyedSubscript(&ldquo;loadPeopleFromJSON&rdquo;)
+// 通过调用load方法将<code>JSON 数据</code>解析成<code>Person 对象</code>的数组
+if let people = load.callWithArguments([peopleJSON]).toArray() as? [Person]
+{
+// get rendering function and create template
+let mustacheRender = context.objectForKeyedSubscript(&ldquo;Mustache&rdquo;).objectForKeyedSubscript(&ldquo;render&rdquo;)
+let template = &ldquo;{{getFullName}}, born {{birthYear}}&rdquo;</p><pre><code>    // loop through people and render Person object as string
+    for person in people 
+    {
+        println(mustacheRender.callWithArguments([template, person]))
+    }
+}
+</code></pre><p>}</p><p>// Output:
+// Grace Hopper, born 1906
+// Ada Lovelace, born 1815
+// Margaret Hamilton, born 1936
+{% endcodeblock %}
+JavaScript 代码段可能是附带应用一起发布的基本的用户定义的插件。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-02-12</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/swift/>swift</a></div><nav class=post-nav><a class=prev href=/post/old/%E5%AF%BC%E5%9B%BE/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E4%B9%8B%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%E7%AF%87/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">思维导图之开发实践篇</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/swift/JavaScriptCore%E5%AE%9E%E7%8E%B0swift%E6%B7%B7%E7%BC%96/><span class="next-text nav-default">Java​Script​Core实现swift混编</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-02-12 14:41:35 +0000 UTC",title:"使用JavaScript把JSON数据定义对象",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

@@ -1,0 +1,269 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>PBBReader项目重构模型 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content='
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 title PBBReader项目重构模型 center header PBBReader项目重构模型 endheader &#39;******* 声明组件模块 component/[组件名] 中括号支持\n换行 *******&#39; &#39;---- 声明备注:组件线备注可以通过虚线".."连接到其他对象---&#39; &#39;##### 备注模块 位置：left/right/top/bottom #####&#39; &#39;&&&&&& 组件组合模块 支持模块嵌套 &&&&&&&&#39; &#39;六种组合样式:Node,Rectangle,Folder,Frame,Cloud,Database&#39; Frame "启动APP"{ [APPDelegate] as LaunchAPP } Folder "注册模块"{ [欢迎页] -- [密码找回页] [欢迎页] -- [忘记密码页] [密码找回页] -- [完成注册页] [忘记密码页] -- [完成注册页] } Frame "功能项"{ Folder "制作模块"{ [多媒体选择页] -- [设定权限页] [设定权限页] -- [外发分享页] [外发分享页] -- [已发送列表页] } Folder "阅读模块"{ [已接收页] -- [广告页] [广告页] -- [播放视频页] [广告页] -- [播放音频页] [广告页] -- [浏览PDF页] } Folder "发现Tab"{ [发现页] -- [店铺详情页] } Folder "个人中心Tab"{ [个人中心] -- [个人设置] } } Database "sqliteDB" { &#39;reader数据库 Database "PBBReader" { Folder "sqlite" { [dao] [db] [model] } } &#39;online数据库 Database "PBBOnline" { [待定] } } Cloud "http+socket"{ Cloud "socket"{ [basesocket] [code] [other] [publiclib] } Cloud "HTTP" { [ASIHttp] } } Node "第三方SDK"{ [极光推送] [ShareSDK] [mupdf] } Node "公用工具"{ [CustomIOS7AlertView] [timers] [Advertising] } Node "项目依赖"{ &#39;[SZMobileSDK] -- LaunchAPP [PBBMaker] -- LaunchAPP &#39;[PBBMaker] --> [设定权限页] [IJKMediaPlayer] -- LaunchAPP &#39;[IJKMediaPlayer] --> [播放视频页] } Node "资源"{ folder "IB"{ [主iPad] [Personal] [Register] [space] [WelcomeView] } folder "Images.xcassets"{ [主iPadImages] [PersonalImages] [RegisterImages] [spaceImages] [WelcomeViewImages] } } &#39;>>>>>>>>>> 关系模块 >>>>>>>>>>&#39; LaunchAPP -- [欢迎页] [完成注册页] -- [多媒体选择页] [完成注册页] -- [已接收页] [ShareSDK] -left-> [外发分享页] [Advertising] -right-> [广告页] IB -right- Images.xcassets 资源 -left-> 功能项 资源 -right-> 注册模块 center footer boyer制作 endfooter '><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/PBBReader%E9%A1%B9%E7%9B%AE%E9%87%8D%E6%9E%84%E6%A8%A1%E5%9E%8B/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/PBBReader%E9%A1%B9%E7%9B%AE%E9%87%8D%E6%9E%84%E6%A8%A1%E5%9E%8B/"><meta property="og:site_name" content="习七"><meta property="og:title" content="PBBReader项目重构模型"><meta property="og:description" content='1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 title PBBReader项目重构模型 center header PBBReader项目重构模型 endheader &#39;******* 声明组件模块 component/[组件名] 中括号支持\n换行 *******&#39; &#39;---- 声明备注:组件线备注可以通过虚线".."连接到其他对象---&#39; &#39;##### 备注模块 位置：left/right/top/bottom #####&#39; &#39;&&&&&& 组件组合模块 支持模块嵌套 &&&&&&&&#39; &#39;六种组合样式:Node,Rectangle,Folder,Frame,Cloud,Database&#39; Frame "启动APP"{ [APPDelegate] as LaunchAPP } Folder "注册模块"{ [欢迎页] -- [密码找回页] [欢迎页] -- [忘记密码页] [密码找回页] -- [完成注册页] [忘记密码页] -- [完成注册页] } Frame "功能项"{ Folder "制作模块"{ [多媒体选择页] -- [设定权限页] [设定权限页] -- [外发分享页] [外发分享页] -- [已发送列表页] } Folder "阅读模块"{ [已接收页] -- [广告页] [广告页] -- [播放视频页] [广告页] -- [播放音频页] [广告页] -- [浏览PDF页] } Folder "发现Tab"{ [发现页] -- [店铺详情页] } Folder "个人中心Tab"{ [个人中心] -- [个人设置] } } Database "sqliteDB" { &#39;reader数据库 Database "PBBReader" { Folder "sqlite" { [dao] [db] [model] } } &#39;online数据库 Database "PBBOnline" { [待定] } } Cloud "http+socket"{ Cloud "socket"{ [basesocket] [code] [other] [publiclib] } Cloud "HTTP" { [ASIHttp] } } Node "第三方SDK"{ [极光推送] [ShareSDK] [mupdf] } Node "公用工具"{ [CustomIOS7AlertView] [timers] [Advertising] } Node "项目依赖"{ &#39;[SZMobileSDK] -- LaunchAPP [PBBMaker] -- LaunchAPP &#39;[PBBMaker] --> [设定权限页] [IJKMediaPlayer] -- LaunchAPP &#39;[IJKMediaPlayer] --> [播放视频页] } Node "资源"{ folder "IB"{ [主iPad] [Personal] [Register] [space] [WelcomeView] } folder "Images.xcassets"{ [主iPadImages] [PersonalImages] [RegisterImages] [spaceImages] [WelcomeViewImages] } } &#39;>>>>>>>>>> 关系模块 >>>>>>>>>>&#39; LaunchAPP -- [欢迎页] [完成注册页] -- [多媒体选择页] [完成注册页] -- [已接收页] [ShareSDK] -left-> [外发分享页] [Advertising] -right-> [广告页] IB -right- Images.xcassets 资源 -left-> 功能项 资源 -right-> 注册模块 center footer boyer制作 endfooter'><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-07-25T17:06:47+00:00"><meta property="article:modified_time" content="2017-07-25T17:06:47+00:00"><meta itemprop=name content="PBBReader项目重构模型"><meta itemprop=description content='1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 title PBBReader项目重构模型 center header PBBReader项目重构模型 endheader &#39;******* 声明组件模块 component/[组件名] 中括号支持\n换行 *******&#39; &#39;---- 声明备注:组件线备注可以通过虚线".."连接到其他对象---&#39; &#39;##### 备注模块 位置：left/right/top/bottom #####&#39; &#39;&&&&&& 组件组合模块 支持模块嵌套 &&&&&&&&#39; &#39;六种组合样式:Node,Rectangle,Folder,Frame,Cloud,Database&#39; Frame "启动APP"{ [APPDelegate] as LaunchAPP } Folder "注册模块"{ [欢迎页] -- [密码找回页] [欢迎页] -- [忘记密码页] [密码找回页] -- [完成注册页] [忘记密码页] -- [完成注册页] } Frame "功能项"{ Folder "制作模块"{ [多媒体选择页] -- [设定权限页] [设定权限页] -- [外发分享页] [外发分享页] -- [已发送列表页] } Folder "阅读模块"{ [已接收页] -- [广告页] [广告页] -- [播放视频页] [广告页] -- [播放音频页] [广告页] -- [浏览PDF页] } Folder "发现Tab"{ [发现页] -- [店铺详情页] } Folder "个人中心Tab"{ [个人中心] -- [个人设置] } } Database "sqliteDB" { &#39;reader数据库 Database "PBBReader" { Folder "sqlite" { [dao] [db] [model] } } &#39;online数据库 Database "PBBOnline" { [待定] } } Cloud "http+socket"{ Cloud "socket"{ [basesocket] [code] [other] [publiclib] } Cloud "HTTP" { [ASIHttp] } } Node "第三方SDK"{ [极光推送] [ShareSDK] [mupdf] } Node "公用工具"{ [CustomIOS7AlertView] [timers] [Advertising] } Node "项目依赖"{ &#39;[SZMobileSDK] -- LaunchAPP [PBBMaker] -- LaunchAPP &#39;[PBBMaker] --> [设定权限页] [IJKMediaPlayer] -- LaunchAPP &#39;[IJKMediaPlayer] --> [播放视频页] } Node "资源"{ folder "IB"{ [主iPad] [Personal] [Register] [space] [WelcomeView] } folder "Images.xcassets"{ [主iPadImages] [PersonalImages] [RegisterImages] [spaceImages] [WelcomeViewImages] } } &#39;>>>>>>>>>> 关系模块 >>>>>>>>>>&#39; LaunchAPP -- [欢迎页] [完成注册页] -- [多媒体选择页] [完成注册页] -- [已接收页] [ShareSDK] -left-> [外发分享页] [Advertising] -right-> [广告页] IB -right- Images.xcassets 资源 -left-> 功能项 资源 -right-> 注册模块 center footer boyer制作 endfooter'><meta itemprop=datePublished content="2017-07-25T17:06:47+00:00"><meta itemprop=dateModified content="2017-07-25T17:06:47+00:00"><meta itemprop=wordCount content="936"><meta itemprop=keywords content="项目总结"><meta name=twitter:card content="summary"><meta name=twitter:title content="PBBReader项目重构模型"><meta name=twitter:description content='1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 title PBBReader项目重构模型 center header PBBReader项目重构模型 endheader &#39;******* 声明组件模块 component/[组件名] 中括号支持\n换行 *******&#39; &#39;---- 声明备注:组件线备注可以通过虚线".."连接到其他对象---&#39; &#39;##### 备注模块 位置：left/right/top/bottom #####&#39; &#39;&&&&&& 组件组合模块 支持模块嵌套 &&&&&&&&#39; &#39;六种组合样式:Node,Rectangle,Folder,Frame,Cloud,Database&#39; Frame "启动APP"{ [APPDelegate] as LaunchAPP } Folder "注册模块"{ [欢迎页] -- [密码找回页] [欢迎页] -- [忘记密码页] [密码找回页] -- [完成注册页] [忘记密码页] -- [完成注册页] } Frame "功能项"{ Folder "制作模块"{ [多媒体选择页] -- [设定权限页] [设定权限页] -- [外发分享页] [外发分享页] -- [已发送列表页] } Folder "阅读模块"{ [已接收页] -- [广告页] [广告页] -- [播放视频页] [广告页] -- [播放音频页] [广告页] -- [浏览PDF页] } Folder "发现Tab"{ [发现页] -- [店铺详情页] } Folder "个人中心Tab"{ [个人中心] -- [个人设置] } } Database "sqliteDB" { &#39;reader数据库 Database "PBBReader" { Folder "sqlite" { [dao] [db] [model] } } &#39;online数据库 Database "PBBOnline" { [待定] } } Cloud "http+socket"{ Cloud "socket"{ [basesocket] [code] [other] [publiclib] } Cloud "HTTP" { [ASIHttp] } } Node "第三方SDK"{ [极光推送] [ShareSDK] [mupdf] } Node "公用工具"{ [CustomIOS7AlertView] [timers] [Advertising] } Node "项目依赖"{ &#39;[SZMobileSDK] -- LaunchAPP [PBBMaker] -- LaunchAPP &#39;[PBBMaker] --> [设定权限页] [IJKMediaPlayer] -- LaunchAPP &#39;[IJKMediaPlayer] --> [播放视频页] } Node "资源"{ folder "IB"{ [主iPad] [Personal] [Register] [space] [WelcomeView] } folder "Images.xcassets"{ [主iPadImages] [PersonalImages] [RegisterImages] [spaceImages] [WelcomeViewImages] } } &#39;>>>>>>>>>> 关系模块 >>>>>>>>>>&#39; LaunchAPP -- [欢迎页] [完成注册页] -- [多媒体选择页] [完成注册页] -- [已接收页] [ShareSDK] -left-> [外发分享页] [Advertising] -right-> [广告页] IB -right- Images.xcassets 资源 -left-> 功能项 资源 -right-> 注册模块 center footer boyer制作 endfooter'><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>PBBReader项目重构模型</h1><div class=post-meta><span class=post-time>2017-07-25</span><div class=post-category><a href=/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/>项目总结</a></div><span class=more-meta>约 936 字 </span><span class=more-meta>预计阅读 2 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-07-25T17:06:47 title="July 25, 2017">July 25, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p><img src=http://www.plantuml.com/plantuml/png/ZLPTJnj757tVNp5ofQpKKdYib0Sa24AXAOq5g9Ng-c5j3_OgQw_h7VgX20a41lDXC8428ON458gRWasB-C0E-C_iZ7UV-XTwlRFsZZ6ccGVmd7lcp9cPEtUMg4J3oD_VFuAL24xP-UlQcw8zdsLxiwoGftjBKXWd24wXc1EN7cBYHCHbIVAdl27w-odRNgbLPitAHPsskuN2UZof9q2r9y1ncii6aNbrmfQEwUebsoYnvUdl4ooxR-MNaIiaW-Rdq5n1UZ3FpWgF-VXQkShxTBLaLWxjgHshEc-ztW7SrztjiwfxREMGPavf-iAiRDBIjVLt7gH04aG_gJU4k83hqBp9rcwA_txOqV0uwKcfqHZf8Ngo9wGJeiSHSiOumoNvaTCGTm9_QIxZgl25y0uzNwQ7M-WHRx8aq_H9xIZhyjzTqW-hZx_M8xXh18U9aeXgk6jGrs0hkmPJIXntFT7qYKZNW4AKa69WMN9GvAEv4bqizFdzlfSIWXQ0dmDOmr65u21I3FILCf48nm2L9YKkY7prZPfRvhuQuzZnlbLTiVFdGGHx7A2bkTgxQRPmIz_irS7xITLjgtZAgHv97EfHYyiia-CJUrHHe3DrihdOnRVMp0tadMkwiHwQkJ1lVcjP3vS_sA7lNvatw_RK0blwipc3LRobnHssEsE_pd4plBL7kA63JRgwHZDpPlalaTuUuVJBVm2qfwPfPilA5veZ9biyszjfgrHfzmoZ8LVPneMdTrsbQulYn0B6AUpL2TkujOxcxFsrZo3QRy_-btY-QXrb_0E37Up32cihfsDAIFJEGSzuUSjUBrkbFzXCkeECUVNUB9VXvjFgp1qnCSJrE09715Up8JOfDQu4yXa_Q2h10_q-z59omdBAAKRirrEMBTBokWDw_6ObWm5EI7J6nOG8TnLHzE0T97G7YEiHh7dOfB1iMKzeQW8_OEYvGn2d3T3RDEIajs39AGN85oCa-PcXXrzWukwR6n0nBb6NvwXmuc7mANHr4iCfeP-S26bgM5D3uhc9qpmT6_Et6EqR7NeAdWIdzOA6VBNZO_DgWMrUZmuyQvQRlMcQNc0h1RWdGGwDnfGK1ehRZKya8-D1JuMcZsiR1NfvIDEN3PKd4mQKuw7der_qQJX5lb7nJ-veeiPnod0xVP4V8QeQQY8g2FBtoxpTjSutNK4vCFhTi1vIDSS799rNFhaIdD2myWAdxed9BS7U3bKcCFJbis4SKHM_flpIGQUTqjj-nRrrMEUph9npLp3kfkzGV-jTggX-9IAShXzsHqyecW2DuAXga9OSC99A60lzRx46RpVc-oncXJXpN8bYe_ldi68Oc1ZtsE2CUyouWNPBNa0qvg7jzeGOJqMvjzaGekcpsfbRV17o8hBKF0lOTV6zazgU9I2qlp0FCCMwBZMJ7OBrJmmuuVPdHinRu3bV8K0K7uIX_WQExkoxnDEYATzyEzs0foT-3JI-zSPr7Vv98HqIaB-kzMyxZlu7 alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>title PBBReader项目重构模型
+</span></span><span class=line><span class=cl>center header
+</span></span><span class=line><span class=cl>PBBReader项目重构模型
+</span></span><span class=line><span class=cl>endheader
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&#39;******* 声明组件模块 component/[组件名] 中括号支持\n换行 *******&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&#39;---- 声明备注:组件线备注可以通过虚线&#34;..&#34;连接到其他对象---&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&#39;#####  备注模块 位置：left/right/top/bottom  #####&#39;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&#39;&amp;&amp;&amp;&amp;&amp;&amp; 组件组合模块 支持模块嵌套 &amp;&amp;&amp;&amp;&amp;&amp;&amp;&#39;
+</span></span><span class=line><span class=cl>&#39;六种组合样式:Node,Rectangle,Folder,Frame,Cloud,Database&#39;
+</span></span><span class=line><span class=cl>Frame &#34;启动APP&#34;{
+</span></span><span class=line><span class=cl>    [APPDelegate] as LaunchAPP
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>Folder &#34;注册模块&#34;{
+</span></span><span class=line><span class=cl>    [欢迎页] -- [密码找回页]
+</span></span><span class=line><span class=cl>    [欢迎页] -- [忘记密码页]
+</span></span><span class=line><span class=cl>    [密码找回页] -- [完成注册页]
+</span></span><span class=line><span class=cl>    [忘记密码页] -- [完成注册页]
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>Frame &#34;功能项&#34;{
+</span></span><span class=line><span class=cl>    Folder &#34;制作模块&#34;{
+</span></span><span class=line><span class=cl>        [多媒体选择页] -- [设定权限页]
+</span></span><span class=line><span class=cl>        [设定权限页] -- [外发分享页]
+</span></span><span class=line><span class=cl>        [外发分享页] -- [已发送列表页]
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    Folder &#34;阅读模块&#34;{
+</span></span><span class=line><span class=cl>        [已接收页] -- [广告页]
+</span></span><span class=line><span class=cl>        [广告页] -- [播放视频页]
+</span></span><span class=line><span class=cl>        [广告页] -- [播放音频页]
+</span></span><span class=line><span class=cl>        [广告页] -- [浏览PDF页]
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    Folder &#34;发现Tab&#34;{
+</span></span><span class=line><span class=cl>        [发现页] -- [店铺详情页]
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    Folder &#34;个人中心Tab&#34;{
+</span></span><span class=line><span class=cl>        [个人中心] -- [个人设置]
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>Database &#34;sqliteDB&#34; {
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    &#39;reader数据库
+</span></span><span class=line><span class=cl>    Database &#34;PBBReader&#34; {
+</span></span><span class=line><span class=cl>        Folder &#34;sqlite&#34; {
+</span></span><span class=line><span class=cl>            [dao]
+</span></span><span class=line><span class=cl>            [db]
+</span></span><span class=line><span class=cl>            [model]
+</span></span><span class=line><span class=cl>        }
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    &#39;online数据库
+</span></span><span class=line><span class=cl>    Database &#34;PBBOnline&#34; {
+</span></span><span class=line><span class=cl>        [待定]
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Cloud &#34;http+socket&#34;{
+</span></span><span class=line><span class=cl>    Cloud &#34;socket&#34;{
+</span></span><span class=line><span class=cl>        [basesocket]
+</span></span><span class=line><span class=cl>        [code]
+</span></span><span class=line><span class=cl>        [other]
+</span></span><span class=line><span class=cl>        [publiclib]
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    Cloud &#34;HTTP&#34; {
+</span></span><span class=line><span class=cl>        [ASIHttp]
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Node &#34;第三方SDK&#34;{
+</span></span><span class=line><span class=cl>    [极光推送]
+</span></span><span class=line><span class=cl>    [ShareSDK]
+</span></span><span class=line><span class=cl>    [mupdf]
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Node &#34;公用工具&#34;{
+</span></span><span class=line><span class=cl>    [CustomIOS7AlertView]
+</span></span><span class=line><span class=cl>    [timers]
+</span></span><span class=line><span class=cl>    [Advertising]
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Node &#34;项目依赖&#34;{
+</span></span><span class=line><span class=cl>    &#39;[SZMobileSDK] -- LaunchAPP
+</span></span><span class=line><span class=cl>    [PBBMaker] -- LaunchAPP
+</span></span><span class=line><span class=cl>    &#39;[PBBMaker] --&gt; [设定权限页]
+</span></span><span class=line><span class=cl>    [IJKMediaPlayer] -- LaunchAPP
+</span></span><span class=line><span class=cl>    &#39;[IJKMediaPlayer] --&gt; [播放视频页]
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Node &#34;资源&#34;{
+</span></span><span class=line><span class=cl>    folder &#34;IB&#34;{
+</span></span><span class=line><span class=cl>        [主iPad]
+</span></span><span class=line><span class=cl>        [Personal]
+</span></span><span class=line><span class=cl>        [Register]
+</span></span><span class=line><span class=cl>        [space]
+</span></span><span class=line><span class=cl>        [WelcomeView]
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    folder &#34;Images.xcassets&#34;{
+</span></span><span class=line><span class=cl>        [主iPadImages]
+</span></span><span class=line><span class=cl>        [PersonalImages]
+</span></span><span class=line><span class=cl>        [RegisterImages]
+</span></span><span class=line><span class=cl>        [spaceImages]
+</span></span><span class=line><span class=cl>        [WelcomeViewImages]
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&#39;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;  关系模块  &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&#39;
+</span></span><span class=line><span class=cl>LaunchAPP -- [欢迎页]
+</span></span><span class=line><span class=cl>[完成注册页] -- [多媒体选择页]
+</span></span><span class=line><span class=cl>[完成注册页] -- [已接收页]
+</span></span><span class=line><span class=cl>[ShareSDK] -left-&gt; [外发分享页]
+</span></span><span class=line><span class=cl>[Advertising] -right-&gt; [广告页]
+</span></span><span class=line><span class=cl>IB -right- Images.xcassets
+</span></span><span class=line><span class=cl>资源 -left-&gt; 功能项
+</span></span><span class=line><span class=cl>资源 -right-&gt; 注册模块
+</span></span><span class=line><span class=cl>center footer
+</span></span><span class=line><span class=cl>boyer制作
+</span></span><span class=line><span class=cl>endfooter
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-07-25</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><nav class=post-nav><a class=prev href=/post/old/shell/%E5%9C%A8space-vim%E5%B9%B3%E5%8F%B0%E5%AE%89%E8%A3%85%E8%8B%A5%E5%B9%B2%E6%8F%92%E4%BB%B6/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">在space-vim平台安装若干插件</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/iOS/UI/WKWebView%E6%8E%A7%E4%BB%B6%E5%92%8CJS%E8%84%9A%E6%9C%AC%E4%BC%A0%E5%8F%82%E5%8F%8A%E4%BA%A4%E4%BA%92/><span class="next-text nav-default">WKWebView控件和JS脚本传参及交互</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-07-25 17:06:47 +0000 UTC",title:"PBBReader项目重构模型",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

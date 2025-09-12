@@ -1,0 +1,652 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>gptel 的 api 是如何插入到当前 buffer - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="博客简介"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9A%E5%88%B6gptel%E4%BA%86%E8%A7%A3%E6%B5%81%E5%BC%8F%E5%93%8D%E5%BA%94%E5%BC%80%E5%8F%91/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9A%E5%88%B6gptel%E4%BA%86%E8%A7%A3%E6%B5%81%E5%BC%8F%E5%93%8D%E5%BA%94%E5%BC%80%E5%8F%91/"><meta property="og:site_name" content="习七"><meta property="og:title" content="gptel 的 api 是如何插入到当前 buffer"><meta property="og:description" content="博客简介"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-05-27T03:12:00+08:00"><meta property="article:modified_time" content="2023-05-27T03:13:04+08:00"><meta itemprop=name content="gptel 的 api 是如何插入到当前 buffer"><meta itemprop=description content="博客简介"><meta itemprop=datePublished content="2023-05-27T03:12:00+08:00"><meta itemprop=dateModified content="2023-05-27T03:13:04+08:00"><meta itemprop=wordCount content="4877"><meta itemprop=keywords content=",学习笔记"><meta name=twitter:card content="summary"><meta name=twitter:title content="gptel 的 api 是如何插入到当前 buffer"><meta name=twitter:description content="博客简介"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>gptel 的 api 是如何插入到当前 buffer</h1><div class=post-meta><span class=post-time>2023-05-27</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 4877 字 </span><span class=more-meta>预计阅读 10 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by
+<a href=/authors/iTBoyer>iTBoyer</a></span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#gptel-入口-gptel-request-方法介绍>gptel 入口 gptel-request 方法介绍</a><ul><li><a href=#使用>使用</a></li></ul></li><li><a href=#gptel-curl-中的方法介绍>gptel-curl 中的方法介绍</a><ul><li><a href=#参数部分>参数部分</a></li><li><a href=#gptel-curl-进程部分>gptel-curl 进程部分</a></li><li><a href=#以流的方式插入-buffer>以流的方式插入 buffer</a></li></ul></li><li><a href=#使用-slack-curl>使用 slack curl</a><ul><li><a href=#参数定义模块>参数定义模块</a></li><li><a href=#数据解析模块>数据解析模块</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2023-05-27T03:13:04 title="May 27, 2023">May 27, 2023</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>模拟curl 方式请求slack Api,需要参考的逻辑有</p><ol><li><input disabled type=checkbox> 先定位入口，跟踪代码</li><li>定位到 gptel-curl 实现类主要功能都在这里，需要在这里找到解决方案先分析该类的主要功能<ol><li>参数内容的收集 <code>gptel-curl--get-args</code></li><li>以进程的方式开始 curl 请求数据开启进程 <code>gptel-curl-get-response</code></li><li>处理数据：以流的方式插入到当前 buffer</li></ol></li><li>需要流式响应功能支持，socket模式 <a href=https://api.slack.com/apis/connections/socket-implement>Socket Mode implementation | Slack</a></li></ol><h2 id=gptel-入口-gptel-request-方法介绍>gptel 入口 gptel-request 方法介绍</h2><p>理解源码，分析入口参数和环境变量初始状态，以及后续功能方法的处理逻辑</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>cl-defun</span> <span class=nv>gptel-request</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=kp>&amp;optional</span> <span class=nv>prompt</span> <span class=kp>&amp;key</span> <span class=nv>callback</span>
+</span></span><span class=line><span class=cl>               <span class=p>(</span><span class=nv>buffer</span> <span class=p>(</span><span class=nf>current-buffer</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>               <span class=nv>position</span> <span class=nv>context</span> <span class=p>(</span><span class=nv>stream</span> <span class=no>nil</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>               <span class=p>(</span><span class=nv>in-place</span> <span class=no>nil</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>               <span class=p>(</span><span class=nv>system</span> <span class=nv>gptel--system-message</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>gptel-stream</span> <span class=nv>stream</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>start-marker</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nb>cond</span>
+</span></span><span class=line><span class=cl>           <span class=p>((</span><span class=nf>null</span> <span class=nv>position</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nb>if</span> <span class=p>(</span><span class=nv>use-region-p</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=nf>set-marker</span> <span class=p>(</span><span class=nf>make-marker</span><span class=p>)</span> <span class=p>(</span><span class=nf>region-end</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>              <span class=p>(</span><span class=nf>point-marker</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>           <span class=p>((</span><span class=nf>markerp</span> <span class=nv>position</span><span class=p>)</span> <span class=nv>position</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>((</span><span class=nf>integerp</span> <span class=nv>position</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>set-marker</span> <span class=p>(</span><span class=nf>make-marker</span><span class=p>)</span> <span class=nv>position</span> <span class=nv>buffer</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>full-prompt</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nb>cond</span>
+</span></span><span class=line><span class=cl>           <span class=p>((</span><span class=nf>null</span> <span class=nv>prompt</span><span class=p>)</span> <span class=p>(</span><span class=nv>gptel--create-prompt</span> <span class=nv>start-marker</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>           <span class=p>((</span><span class=nf>stringp</span> <span class=nv>prompt</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=o>`</span><span class=p>((</span><span class=nb>:role</span> <span class=s>&#34;system&#34;</span> <span class=nb>:content</span> <span class=o>,</span><span class=nv>system</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>              <span class=p>(</span><span class=nb>:role</span> <span class=s>&#34;user&#34;</span>   <span class=nb>:content</span> <span class=o>,</span><span class=nv>prompt</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>           <span class=p>((</span><span class=nf>consp</span> <span class=nv>prompt</span><span class=p>)</span> <span class=nv>prompt</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>info</span> <span class=p>(</span><span class=nf>list</span> <span class=nb>:prompt</span> <span class=nv>full-prompt</span>
+</span></span><span class=line><span class=cl>                     <span class=nb>:buffer</span> <span class=nv>buffer</span>
+</span></span><span class=line><span class=cl>                     <span class=nb>:position</span> <span class=nv>start-marker</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>when</span> <span class=nv>context</span> <span class=p>(</span><span class=nf>plist-put</span> <span class=nv>info</span> <span class=nb>:context</span> <span class=nv>context</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>when</span> <span class=nv>in-place</span> <span class=p>(</span><span class=nf>plist-put</span> <span class=nv>info</span> <span class=nb>:in-place</span> <span class=nv>in-place</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nf>funcall</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nb>if</span> <span class=nv>gptel-use-curl</span>
+</span></span><span class=line><span class=cl>         <span class=nf>#&#39;</span><span class=nv>gptel-curl-get-response</span> <span class=nf>#&#39;</span><span class=nv>gptel--url-get-response</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=nv>info</span> <span class=nv>callback</span><span class=p>)))</span>
+</span></span></code></pre></td></tr></table></div></div><p>这是 gptel-request 函数的定义,它向 ChatGPT 发出请求并获取响应。让我们详细分析它:</p><ol><li><p>它接受可选的 <code>prompt</code> 、 <code>callback</code> 和许多关键字参数。</p></li><li><p><code>prompt</code> 可以是字符串(用于构造完整提示)、 <code>nil</code> (使用当前区域或缓冲区内容)或 <code>plist</code> 的列表(原样使用)。</p></li><li><p><code>callback</code> 是两个参数的函数,用于响应(字符串)和 <code>info</code> <code>plist</code> 调用:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=p>(</span><span class=nv>callback</span> <span class=nv>RESPONSE</span> <span class=nv>INFO</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果没有响应或错误, RESPONSE 为 nil。</p><p>info plist 至少包含:</p><ul><li><code>:prompt</code> - 发送的完整提示</li><li><code>:position</code> - 发送请求的 marker</li><li><code>:buffer</code> - 发送请求时的当前缓冲区</li><li><code>:status</code> - 请求结果的简短字符串</li></ul></li><li><p>如果省略 callback ,响应将插入发送请求的点。</p></li><li><p>BUFFER 是请求属于的缓冲区。如果省略,则记录当前缓冲区。</p></li><li><p>POSITION 是缓冲区位置(整数或标记)。如果省略,则记录(point)或(region-end),具体取决于是否激活了区域。</p></li><li><p>CONTEXT 是回调运行所需的任何其他数据。它包含在回调的INFO参数中。</p></li><li><p>SYSTEM 是发送给 ChatGPT 的系统消息(聊天指令)。如果省略,则使用当前缓冲区的 <code>gptel--system-message</code> 的值。</p></li><li><p>以下关键字主要用于内部使用:</p><ul><li><code>IN-PLACE</code> :是一个布尔值,用于默认回调在插入响应时确定是否需要在提示和响应之间插入分隔符。</li><li><code>STREAM</code> : 是一个布尔值,用于确定是否应流式传输响应,就像在`gptel-stream’中一样。如果指定自定义CALLBACK,请勿设置此项!</li></ul></li><li><p>该函数调用周围可以 let 绑定模型参数。</p></li></ol><p>所以总而言之,这个函数向 ChatGPT 发出请求并获取响应,要么使用提供的回调进行处理,要么直接将其插入到缓冲区中。它接受许多参数以控制和定制该请求。</p><h3 id=使用>使用</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>gptel-tmp-request</span> <span class=p>(</span><span class=nv>prompt</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nv>string=</span> <span class=nv>prompt</span> <span class=s>&#34;&#34;</span><span class=p>)</span> <span class=p>(</span><span class=ne>user-error</span> <span class=s>&#34;A prompt is required.&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>gptel-request</span> <span class=nv>prompt</span>
+</span></span><span class=line><span class=cl>                 <span class=nb>:callback</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>(</span><span class=nv>response</span> <span class=nv>info</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                             <span class=p>(</span><span class=nb>if</span> <span class=p>(</span><span class=nv>not</span> <span class=nv>response</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                 <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;gptel-capture 错误: %s&#34;</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>info</span> <span class=nb>:status</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                               <span class=c1>;; (with-current-buffer</span>
+</span></span><span class=line><span class=cl>                               <span class=p>(</span><span class=nf>goto-char</span> <span class=p>(</span><span class=nf>point-max</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                               <span class=p>(</span><span class=nb>unless</span> <span class=p>(</span><span class=nf>bolp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                 <span class=p>(</span><span class=nf>insert</span> <span class=s>&#34;\n&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                               <span class=p>(</span><span class=nf>insert</span> <span class=s>&#34;**  测试 \n&#34;</span> <span class=nv>response</span> <span class=s>&#34;\n&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                               <span class=c1>;; )</span>
+</span></span><span class=line><span class=cl>                               <span class=p>))</span>
+</span></span><span class=line><span class=cl>                 <span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>;;测试 gptel-tmp-request</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>let</span> <span class=p>((</span><span class=nv>prompt</span> <span class=s>&#34;测试&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>gptel-tmp-request</span> <span class=nv>prompt</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>gptel-curl--sentinel
+</span></span></code></pre></td></tr></table></div></div><h2 id=gptel-curl-中的方法介绍>gptel-curl 中的方法介绍</h2><h3 id=参数部分>参数部分</h3><p>要先理解 gptel 参数格式，按照格式整理出 slack 接口的入参变量</p><ol><li>gptel 参数格式
+<a id=code-snippet--gptelarg></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=p>(</span><span class=nb>defun</span> <span class=nv>gptel-curl--get-args</span> <span class=p>(</span><span class=nv>prompts</span> <span class=nv>token</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=s>&#34;Produce list of arguments for calling Curl.
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>   PROMPTS is the data to send, TOKEN is a unique identifier.&#34;</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>args</span>
+</span></span><span class=line><span class=cl>             <span class=p>(</span><span class=nf>list</span> <span class=s>&#34;--location&#34;</span> <span class=s>&#34;--silent&#34;</span> <span class=s>&#34;--compressed&#34;</span> <span class=s>&#34;--disable&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nv>url</span> <span class=s>&#34;https://api.openai.com/v1/chat/completions&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nv>data</span> <span class=p>(</span><span class=nf>encode-coding-string</span>
+</span></span><span class=line><span class=cl>                   <span class=p>(</span><span class=nv>json-encode</span> <span class=p>(</span><span class=nv>gptel--request-data</span> <span class=nv>prompts</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                   <span class=ss>&#39;utf-8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nv>headers</span>
+</span></span><span class=line><span class=cl>             <span class=o>`</span><span class=p>((</span><span class=s>&#34;Content-Type&#34;</span> <span class=o>.</span> <span class=s>&#34;application/json&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>               <span class=p>(</span><span class=s>&#34;Authorization&#34;</span> <span class=o>.</span> <span class=o>,</span><span class=p>(</span><span class=nf>concat</span> <span class=s>&#34;Bearer &#34;</span> <span class=p>(</span><span class=nv>gptel--api-key</span><span class=p>))))))</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-X%s&#34;</span> <span class=s>&#34;POST&#34;</span><span class=p>)</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-w(%s . %%{size_header})&#34;</span> <span class=nv>token</span><span class=p>)</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>       <span class=c1>;; (push (format &#34;--keepalive-time %s&#34; 240) args)</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-m%s&#34;</span> <span class=mi>60</span><span class=p>)</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nb>push</span> <span class=s>&#34;-D-&#34;</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nb>pcase-dolist</span> <span class=p>(</span><span class=o>`</span><span class=p>(</span><span class=o>,</span><span class=nv>key</span> <span class=o>.</span> <span class=o>,</span><span class=nv>val</span><span class=p>)</span> <span class=nv>headers</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-H%s: %s&#34;</span> <span class=nv>key</span> <span class=nv>val</span><span class=p>)</span> <span class=nv>args</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-d%s&#34;</span> <span class=nv>data</span><span class=p>)</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nf>nreverse</span> <span class=p>(</span><span class=nf>cons</span> <span class=nv>url</span> <span class=nv>args</span><span class=p>))))</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><p>这是 <code>gptel-curl--get-args</code> 函数的定义,它为调用 <code>curl</code> 生成参数列表。让我们详细分析它:</p><ol><li>它接受 <code>prompts</code> (要发送的数据)和 <code>token</code> (唯一标识符)作为参数。</li><li>它首先定义一些默认 <code>curl args</code> ,如 <code>--location</code> 、 <code>--silent</code> 、 <code>--compressed</code> 等。</li><li>它定义 ChatGPT API端点的URL。</li><li>它使用 <code>json-encode</code> 将 <code>prompts</code> 编码为 JSON,并使用 <code>encode-coding-string</code> 将其编码为 UTF-8。</li><li>它定义包含认证令牌的标题。</li><li>它使用 <code>push</code> 将更多 <code>args</code> 添加到列表,如-X POST(用于POST请求)、-w 来关联响应大小与 token、-m 60(超时)等。</li><li>它使用 <code>pcase-dolist</code> 迭代标题,并使用 push 将格式化的 <code>-H</code> args 添加到列表中。</li><li>它使用 push 将 -d arg (包含编码的JSON数据)添加到列表中。</li><li>它使用 nreverse 反转 args 列表,并使用 cons 将 URL 添加到开头,形成完整的 curl 调用参数。</li><li>它返回生成的 args 列表。</li></ol><p>所以总而言之,这个函数构造用于将 prompts 发送到 ChatGPT API的curl命令行参数。它添加所有必需的参数,如方法、数据、标头、超时等,并返回完整的参数列表以供调用 curl 使用。</p><p>它显示了构建命令行工具包装器/接口所需的各种知识,如:</p><ul><li>curl 的参数理解</li><li>编码(这里为JSON和UTF-8)</li><li>plist 和 alist 的使用</li><li>反转列表以获得正确的参数顺序</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nv>gptel-curl--get-args</span> <span class=s>&#34;xx&#34;</span> <span class=s>&#34;xxx3&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><table><thead><tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td>&ndash;disable</td><td>&ndash;compressed</td><td>&ndash;silent</td><td>&ndash;location</td><td>-XPOST</td><td>-w(xxx3 . %{size_header})</td><td>-m60</td><td>-D-</td><td>-HContent-Type: application/json</td><td>-HAuthorization: Bearer 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</td><td>-d{&ldquo;model&rdquo;:&ldquo;gpt-3.5-turbo&rdquo;,&ldquo;messages&rdquo;:[120,120],&ldquo;stream&rdquo;:true,&ldquo;temperature&rdquo;:1.0}</td><td><a href=https://api.openai.com/v1/chat/completions>https://api.openai.com/v1/chat/completions</a></td></tr></tbody></table><h4 id=slack-相关参数>slack 相关参数</h4><p>整理 slack 参数，打印测试</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>slack-curl--get-args</span> <span class=p>(</span><span class=nv>prompts</span> <span class=nv>token</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Produce list of arguments for calling Curl.
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>PROMPTS is the data to send, TOKEN is a unique identifier.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>args</span> <span class=p>(</span><span class=nf>list</span> <span class=s>&#34;--location&#34;</span> <span class=s>&#34;--silent&#34;</span> <span class=s>&#34;--compressed&#34;</span> <span class=s>&#34;--disable&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>url</span> <span class=s>&#34;https://slack.com/api/chat.postMessage&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>data</span> <span class=p>(</span><span class=nf>encode-coding-string</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=nv>json-encode</span> <span class=p>(</span><span class=nv>gptel--request-data</span> <span class=nv>prompts</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                <span class=ss>&#39;utf-8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>headers</span>
+</span></span><span class=line><span class=cl>          <span class=o>`</span><span class=p>((</span><span class=s>&#34;Content-Type&#34;</span> <span class=o>.</span> <span class=s>&#34;application/json&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=s>&#34;Authorization&#34;</span> <span class=o>.</span> <span class=o>,</span><span class=p>(</span><span class=nf>concat</span> <span class=s>&#34;Bearer &#34;</span> <span class=p>(</span><span class=nv>gptel--api-key</span><span class=p>))))))</span>
+</span></span><span class=line><span class=cl>    <span class=c1>;;向 crul参数：args 中添加字段</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-X%s&#34;</span> <span class=s>&#34;POST&#34;</span><span class=p>)</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-w(%s . %%{size_header})&#34;</span> <span class=nv>token</span><span class=p>)</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>;; (push (format &#34;--keepalive-time %s&#34; 240) args)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-m%s&#34;</span> <span class=mi>60</span><span class=p>)</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>push</span> <span class=s>&#34;-D-&#34;</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>;; pcase-dolist essentially循环一个alist或plist,为每个元素执行一些操作</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>pcase-dolist</span> <span class=p>(</span><span class=o>`</span><span class=p>(</span><span class=o>,</span><span class=nv>key</span> <span class=o>.</span> <span class=o>,</span><span class=nv>val</span><span class=p>)</span> <span class=nv>headers</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-H%s: %s&#34;</span> <span class=nv>key</span> <span class=nv>val</span><span class=p>)</span> <span class=nv>args</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=c1>;;添加 prompt data</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-d%s&#34;</span> <span class=nv>data</span><span class=p>)</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nf>nreverse</span> <span class=p>(</span><span class=nf>cons</span> <span class=nv>url</span> <span class=nv>args</span><span class=p>))))</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=gptel-curl-进程部分>gptel-curl 进程部分</h3><p>先理解源码，看看如何新建 slack API 的进程，实现异步请求接口，同时和 emacs 交互。</p><p>这个函数启动一个后台 <code>curl</code> 进程来获取响应,并设置回调以在获得完整响应时进行处理。它还包括将响应从 markdown 转换为 org mode 的选项。</p><p>它显示了 <code>Emacs</code> 中的强大进程和异步编程功能。这使您可以启动长时间运行的后台进程,同时仍然保持 <code>Emacs</code> 响应,因为处理是异步完成的。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=c1>;;TODO: The :transformer argument here is an alternate implementation of</span>
+</span></span><span class=line><span class=cl><span class=c1>;;`gptel-response-filter-functions&#39;. The two need to be unified.</span>
+</span></span><span class=line><span class=cl><span class=c1>;;;###autoload</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>gptel-curl-get-response</span> <span class=p>(</span><span class=nv>info</span> <span class=kp>&amp;optional</span> <span class=nv>callback</span><span class=p>)</span>  <span class=c1>;; 1</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Retrieve response to prompt in INFO.
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>INFO is a plist with the following keys:
+</span></span></span><span class=line><span class=cl><span class=s>- :prompt (the prompt being sent)
+</span></span></span><span class=line><span class=cl><span class=s>- :buffer (the gptel buffer)
+</span></span></span><span class=line><span class=cl><span class=s>- :position (marker at which to insert the response).
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>Call CALLBACK with the response and INFO afterwards. If omitted
+</span></span></span><span class=line><span class=cl><span class=s>the response is inserted into the current buffer after point.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>token</span> <span class=p>(</span><span class=nf>md5</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;%s%s%s%s&#34;</span>
+</span></span><span class=line><span class=cl>                             <span class=p>(</span><span class=nf>random</span><span class=p>)</span> <span class=p>(</span><span class=nf>emacs-pid</span><span class=p>)</span> <span class=p>(</span><span class=nf>user-full-name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                             <span class=p>(</span><span class=nf>recent-keys</span><span class=p>))))</span>   <span class=c1>;; 3</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>args</span> <span class=p>(</span><span class=nv>gptel-curl--get-args</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>info</span> <span class=nb>:prompt</span><span class=p>)</span> <span class=nv>token</span><span class=p>))</span> <span class=c1>;;</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>process</span> <span class=p>(</span><span class=nf>apply</span> <span class=nf>#&#39;start-process</span> <span class=s>&#34;gptel-curl&#34;</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nv>generate-new-buffer</span> <span class=s>&#34;*gptel-curl*&#34;</span><span class=p>)</span> <span class=s>&#34;curl&#34;</span> <span class=nv>args</span><span class=p>)))</span> <span class=c1>;;4</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>with-current-buffer</span> <span class=p>(</span><span class=nf>process-buffer</span> <span class=nv>process</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>set-process-query-on-exit-flag</span> <span class=nv>process</span> <span class=no>nil</span><span class=p>)</span>  <span class=c1>;;6</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>setf</span> <span class=p>(</span><span class=nv>alist-get</span> <span class=nv>process</span> <span class=nv>gptel-curl--process-alist</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>nconc</span> <span class=p>(</span><span class=nf>list</span> <span class=nb>:token</span> <span class=nv>token</span>
+</span></span><span class=line><span class=cl>                         <span class=nb>:callback</span> <span class=p>(</span><span class=nb>or</span> <span class=nv>callback</span>
+</span></span><span class=line><span class=cl>                                       <span class=p>(</span><span class=nb>if</span> <span class=nv>gptel-stream</span>
+</span></span><span class=line><span class=cl>                                           <span class=nf>#&#39;</span><span class=nv>gptel-curl--stream-insert-response</span>
+</span></span><span class=line><span class=cl>                                         <span class=nf>#&#39;</span><span class=nv>gptel--insert-response</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                         <span class=nb>:transformer</span> <span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nb>or</span> <span class=p>(</span><span class=nf>eq</span> <span class=nv>gptel-default-mode</span> <span class=ss>&#39;org-mode</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                                <span class=p>(</span><span class=nf>eq</span> <span class=p>(</span><span class=nf>buffer-local-value</span>
+</span></span><span class=line><span class=cl>                                                     <span class=ss>&#39;major-mode</span>
+</span></span><span class=line><span class=cl>                                                     <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>info</span> <span class=nb>:buffer</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                                    <span class=ss>&#39;org-mode</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                        <span class=p>(</span><span class=nv>gptel--stream-convert-markdown-&gt;org</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                   <span class=nv>info</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>if</span> <span class=nv>gptel-stream</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nb>progn</span> <span class=p>(</span><span class=nf>set-process-sentinel</span> <span class=nv>process</span> <span class=nf>#&#39;</span><span class=nv>gptel-curl--stream-cleanup</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                 <span class=p>(</span><span class=nf>set-process-filter</span> <span class=nv>process</span> <span class=nf>#&#39;</span><span class=nv>gptel-curl--stream-filter</span><span class=p>))</span>  <span class=c1>;;8</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nf>set-process-sentinel</span> <span class=nv>process</span> <span class=nf>#&#39;</span><span class=nv>gptel-curl--sentinel</span><span class=p>)))))</span>  <span class=c1>;;9</span>
+</span></span></code></pre></td></tr></table></div></div><ol><li>它定义了一个名为 <code>gptel-curl-get-response</code> 的函数,该函数接受 <code>info plist</code> 和可选的回调 <code>callback</code> 作为参数。</li><li><code>info plist</code> 包含诸如提示、缓冲区、插入响应位置的标记等信息。 <code>callback</code> 将在获得响应后以 <code>response</code> 和 <code>info</code> 为参数进行调用。如果省略,响应将插入当前缓冲区的 <code>point</code> 之后。</li><li>它生成一个随机 <code>token</code>,并使用该 <code>token</code> 和 <code>prompt</code> 构建 <code>curl</code> 命令行参数。</li><li>它使用 <code>apply</code> 启动名为 <code>gptel-curl</code> 的新进程来运行 <code>curl</code> 和构建的参数。输出发送到一个专用缓冲区 <code>*gptel-curl*</code> 。</li><li>它在 <code>gptel-curl</code> 进程的缓冲区中设置一些进程标志:</li><li>查询退出标志设置为 <code>nil</code></li><li>它在 <code>gptel-curl--process-alist</code> 中存储进程、 <code>token</code> 、回调和转换器(如果需要,用于将 <code>markdown</code> 转换为 <code>org-mode</code>)</li><li>如果 <code>gptel-stream</code> 为真,它设置 <code>sentinel</code> 和 <code>filter</code> 函数来处理流输出。否则它设置 <code>sentinel</code> 函数。</li><li><code>sentinel</code> 和 <code>filter</code> 函数(定义在其他地方)将处理完成响应的接收和调用回调。</li></ol><h4 id=设置回调方法-gptel-curl-stream-insert-response>设置回调方法：gptel-curl&ndash;stream-insert-response</h4><p>这行代码是对函数 <code>gptel-curl--stream-insert-response</code> 的引用。 <code>#’</code> 是读取函数名称的语法。</p><p>所以这一行实际上表示要调用名为 <code>gptel-curl--stream-insert-response</code> 的函数。</p><p>该函数很可能与此前显示的 <code>gptel-curl-get-response</code> 函数一起工作,因为:</p><ol><li>它也与 <code>gptel-curl</code> 进程相关,用于从 <code>curl</code> 获取响应。</li><li><code>gptel-curl-get-response</code> 指定如果 <code>gptel-stream</code> 为真,则使用 <code>gptel-curl--stream-insert-response</code> 作为回调。</li></ol><p>所以我们可以推断, <code>gptel-curl--stream-insert-response</code> 函数很可能执行以下操作:</p><ol><li>它是 <code>gptel-curl-get-response</code> 指定的回调函数,以在接收到完整响应时进行调用。</li><li>鉴于其名称,它可能将响应插入 <code>calling</code> 函数(<code>gptel-curl-get-response</code>)指定的缓冲区。</li><li>因为它是 <code>stream</code> 版本,它可能逐渐添加响应,而不是等待完整响应。这可能意味着它被设置为 <code>gptel-curl</code> 进程的 <code>filter</code> 函数,每当有输出可用时就被调用。</li><li>它可能还执行 <code>markdown</code> 到 <code>org mode</code> 的转换(如果需要),因为 <code>gptel-curl-get-response</code> 指定了该选项。</li></ol><p>所以总而言之,这行代码表明在处理流 <code>curl</code> 响应并将其插入指定缓冲区时要调用名为 <code>gptel-curl--stream-insert-response</code> 的函数。该函数很可能通过 <code>filter</code> 函数挂钩到相关进程,并在处理响应时执行任何必要的格式转换。</p><h4 id=在-gptel-curl-process-alist-中存储进程>在 <code>gptel-curl--process-alist</code> 中存储进程</h4><p>这段代码将一些值与 <code>gptel-curl</code> 进程相关联,并将其存储在 <code>gptel-curl--process-alist</code> 中。让我们详细分析它:</p><ol><li>它使用 <code>alist-get</code> 查找与进程相关联的值。如果尚不存在,它将返回 <code>nil</code> 。</li><li>它使用 <code>nconc</code> 将多个列表合并为一个列表。它构建要与进程相关联的列表,包含:<ol><li><code>:token</code> - 之前生成的随机 token</li><li><code>:callback</code> - 要使用的回调。它首先检查是否指定了 <code>callback</code> ,如果没有则使用 <code>gptel-stream</code> 的值来确定是使用 <code>gptel-curl--stream-insert-response</code> 还是 <code>gptel--insert-response</code> 。</li><li><code>:transformer</code> - 仅当 <code>gptel-default-mode</code> 或 <code>info</code> 指定的缓冲区主要模式为 <code>org-mode</code> 时,才使用 <code>gptel--stream-convert-markdown-&amp;gt->org</code> 进行 <code>markdown</code> 到 <code>org</code> 模式的转换。</li></ol></li><li>它将 <code>info plist</code> 附加到列表的末尾。</li><li>它使用 <code>setf</code> 将该组合列表存储在 <code>gptel-curl--process-alist</code> 中,与进程相关联。</li></ol><p>所以总而言之,这段代码为进程设置一个回调函数和转换器(如果需要),并将所有这些信息与一个随机 <code>token</code> 相关联,以防止跨站点请求伪造。它存储所有这些信息,以便以后可以基于进程查找其回调/转换器等。</p><p>这显示了 <code>Lisp</code> 的许多功能,如:</p><ul><li><code>plist</code> 的使用</li><li><code>nconc</code> 用于列表连接</li><li><code>setf</code> 用于存储值</li><li>以 <code>alist</code> 形式存储关联数据</li><li>有条件的逻辑来设置可选值</li></ul><p>这些构建块允许您构建复杂的数据结构和关联,这是编写实际应用程序所必需的。</p><h4 id=定义自己的函数>定义自己的函数</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=c1>;;;###autoload</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>slack-curl-get-response</span> <span class=p>(</span><span class=nv>info</span> <span class=kp>&amp;optional</span> <span class=nv>callback</span><span class=p>)</span>  <span class=c1>;; 1</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Retrieve response to prompt in INFO.
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>INFO is a plist with the following keys:
+</span></span></span><span class=line><span class=cl><span class=s>- :prompt (the prompt being sent)
+</span></span></span><span class=line><span class=cl><span class=s>- :buffer (the gptel buffer)
+</span></span></span><span class=line><span class=cl><span class=s>- :position (marker at which to insert the response).
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>Call CALLBACK with the response and INFO afterwards. If omitted
+</span></span></span><span class=line><span class=cl><span class=s>the response is inserted into the current buffer after point.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>token</span> <span class=p>(</span><span class=nf>md5</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;%s%s%s%s&#34;</span>
+</span></span><span class=line><span class=cl>                             <span class=p>(</span><span class=nf>random</span><span class=p>)</span> <span class=p>(</span><span class=nf>emacs-pid</span><span class=p>)</span> <span class=p>(</span><span class=nf>user-full-name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                             <span class=p>(</span><span class=nf>recent-keys</span><span class=p>))))</span>   <span class=c1>;; 3</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>args</span> <span class=p>(</span><span class=nv>gptel-curl--get-args</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>info</span> <span class=nb>:prompt</span><span class=p>)</span> <span class=nv>token</span><span class=p>))</span> <span class=c1>;;</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>process</span> <span class=p>(</span><span class=nf>apply</span> <span class=nf>#&#39;start-process</span> <span class=s>&#34;gptel-curl&#34;</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nv>generate-new-buffer</span> <span class=s>&#34;*gptel-curl*&#34;</span><span class=p>)</span> <span class=s>&#34;curl&#34;</span> <span class=nv>args</span><span class=p>)))</span> <span class=c1>;;4</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>with-current-buffer</span> <span class=p>(</span><span class=nf>process-buffer</span> <span class=nv>process</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nf>set-process-query-on-exit-flag</span> <span class=nv>process</span> <span class=no>nil</span><span class=p>)</span>  <span class=c1>;;6</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>setf</span> <span class=p>(</span><span class=nv>alist-get</span> <span class=nv>process</span> <span class=nv>gptel-curl--process-alist</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>nconc</span> <span class=p>(</span><span class=nf>list</span> <span class=nb>:token</span> <span class=nv>token</span>
+</span></span><span class=line><span class=cl>                         <span class=nb>:callback</span> <span class=p>(</span><span class=nb>or</span> <span class=nv>callback</span>
+</span></span><span class=line><span class=cl>                                       <span class=p>(</span><span class=nb>if</span> <span class=nv>gptel-stream</span>
+</span></span><span class=line><span class=cl>                                           <span class=nf>#&#39;</span><span class=nv>gptel-curl--stream-insert-response</span>
+</span></span><span class=line><span class=cl>                                         <span class=nf>#&#39;</span><span class=nv>gptel--insert-response</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                         <span class=nb>:transformer</span> <span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nb>or</span> <span class=p>(</span><span class=nf>eq</span> <span class=nv>gptel-default-mode</span> <span class=ss>&#39;org-mode</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                                <span class=p>(</span><span class=nf>eq</span> <span class=p>(</span><span class=nf>buffer-local-value</span>
+</span></span><span class=line><span class=cl>                                                     <span class=ss>&#39;major-mode</span>
+</span></span><span class=line><span class=cl>                                                     <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>info</span> <span class=nb>:buffer</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                                    <span class=ss>&#39;org-mode</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                        <span class=p>(</span><span class=nv>gptel--stream-convert-markdown-&gt;org</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                   <span class=nv>info</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>if</span> <span class=nv>gptel-stream</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nb>progn</span> <span class=p>(</span><span class=nf>set-process-sentinel</span> <span class=nv>process</span> <span class=nf>#&#39;</span><span class=nv>gptel-curl--stream-cleanup</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                 <span class=p>(</span><span class=nf>set-process-filter</span> <span class=nv>process</span> <span class=nf>#&#39;</span><span class=nv>gptel-curl--stream-filter</span><span class=p>))</span>  <span class=c1>;;8</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nf>set-process-sentinel</span> <span class=nv>process</span> <span class=nf>#&#39;</span><span class=nv>gptel-curl--sentinel</span><span class=p>)))))</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=以流的方式插入-buffer>以流的方式插入 buffer</h3><p>先理解源码，如何把 curl 进程的响应数据以流的方式插入到 buffer 中</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=c1>;;;###autoload</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>gptel-curl--stream-insert-response</span> <span class=p>(</span><span class=nv>response</span> <span class=nv>info</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Insert streaming RESPONSE from ChatGPT into the gptel buffer.
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>INFO is a mutable plist containing information relevant to this buffer.
+</span></span></span><span class=line><span class=cl><span class=s>See </span><span class=ss>`gptel--url-get-response&#39;</span><span class=s> for details.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let</span> <span class=p>((</span><span class=nv>status-str</span>  <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>response</span> <span class=nb>:status</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nv>start-marker</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>info</span> <span class=nb>:position</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nv>tracking-marker</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>info</span> <span class=nb>:tracking-marker</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nv>transformer</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>info</span> <span class=nb>:transformer</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>when</span> <span class=nv>response</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nb>with-current-buffer</span> <span class=p>(</span><span class=nf>marker-buffer</span> <span class=nv>start-marker</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nb>save-excursion</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;插入结果222：-----%s \n 状态：%s&#34;</span> <span class=nv>response</span> <span class=nv>status-str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nb>unless</span> <span class=nv>tracking-marker</span>
+</span></span><span class=line><span class=cl>              <span class=p>(</span><span class=nv>gptel--update-header-line</span> <span class=s>&#34; Typing...&#34;</span> <span class=ss>&#39;success</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>              <span class=p>(</span><span class=nf>goto-char</span> <span class=nv>start-marker</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>              <span class=p>(</span><span class=nb>unless</span> <span class=p>(</span><span class=nb>or</span> <span class=p>(</span><span class=nf>bobp</span><span class=p>)</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>info</span> <span class=nb>:in-place</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=nf>insert</span> <span class=s>&#34;\n\n&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>              <span class=p>(</span><span class=nb>setq</span> <span class=nv>tracking-marker</span> <span class=p>(</span><span class=nf>set-marker</span> <span class=p>(</span><span class=nf>make-marker</span><span class=p>)</span> <span class=p>(</span><span class=nf>point</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>              <span class=p>(</span><span class=nf>set-marker-insertion-type</span> <span class=nv>tracking-marker</span> <span class=no>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>              <span class=p>(</span><span class=nf>plist-put</span> <span class=nv>info</span> <span class=nb>:tracking-marker</span> <span class=nv>tracking-marker</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nb>when</span> <span class=nv>transformer</span>
+</span></span><span class=line><span class=cl>              <span class=p>(</span><span class=nb>setq</span> <span class=nv>response</span> <span class=p>(</span><span class=nf>funcall</span> <span class=nv>transformer</span> <span class=nv>response</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>put-text-property</span> <span class=mi>0</span> <span class=p>(</span><span class=nf>length</span> <span class=nv>response</span><span class=p>)</span> <span class=ss>&#39;gptel</span> <span class=ss>&#39;response</span> <span class=nv>response</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>goto-char</span> <span class=nv>tracking-marker</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>insert</span> <span class=nv>response</span><span class=p>))))))</span>
+</span></span></code></pre></td></tr></table></div></div><p>这是gptel-curl&ndash;stream-insert-response函数的定义,如我们预期的那样,它将流响应插入指定的缓冲区。让我们详细分析它:</p><ol><li><p>它接受响应response和info plist作为参数。info plist包含与该缓冲区相关的信息,如gptel&ndash;url-get-response中详述。</p></li><li><p>它从响应中获取状态字符串,从info中获取起始标记、跟踪标记和转换器(如果有)。</p></li><li><p>如果有响应,它将在包含起始标记的当前缓冲区中进行操作。</p></li><li><p>它首先检查是否已设置跟踪标记。如果没有,它会更新标题行,转到起始标记,插入两个换行符(除非在原地编辑),并设置一个跟踪标记以跟踪响应的插入位置。它还将跟踪标记添加到info plist中。</p></li><li><p>如果指定了转换器,它将对响应进行转换。</p></li><li><p>它将gptel属性与整个响应文本关联。</p></li><li><p>它转到跟踪标记并插入响应。</p></li><li><p>然后它返回,直到有更多响应要添加,在那时它将再次调用。</p></li></ol><p>所以总而言之,这个函数将流式响应添加到缓冲区,进行任何必要的转换,并跟踪每个响应的插入位置以供将来添加使用。</p><p>它显示了Emacs Lisp的许多强大功能,如:</p><ul><li>标记和缓冲区操作</li><li>属性和文本属性</li><li>plist的使用</li><li>save-excursion用于临时保存位置</li></ul><p>这是一个非常典型的Emacs Lisp函数,展示了构建复杂功能所需的各种工具。</p><h2 id=使用-slack-curl>使用 slack curl</h2><h3 id=参数定义模块>参数定义模块</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>slack-curl--get-args</span> <span class=p>(</span><span class=nv>prompts</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Produce list of arguments for calling Curl.
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>PROMPTS is the data to send, TOKEN is a unique identifier.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>args</span> <span class=p>(</span><span class=nf>list</span> <span class=s>&#34;--location&#34;</span> <span class=s>&#34;--silent&#34;</span> <span class=s>&#34;--compressed&#34;</span> <span class=s>&#34;--disable&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>data</span> <span class=p>(</span><span class=nf>encode-coding-string</span> <span class=p>(</span><span class=nv>url-hexify-string</span> <span class=s>&#34;你好&#34;</span><span class=p>)</span> <span class=ss>&#39;utf-8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>         <span class=c1>;; (url (format &#34;https://slack.com/api/chat.postMessage?channel=D052Y13FSRY&amp;as_user=true&amp;text=%s&#34; data))</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>url</span> <span class=s>&#34;https://slack.com/api/conversations.history?channel=D052Y13FSRY&amp;limit=2&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>headers</span>
+</span></span><span class=line><span class=cl>          <span class=o>`</span><span class=p>((</span><span class=s>&#34;Authorization&#34;</span> <span class=o>.</span> <span class=o>,</span><span class=p>(</span><span class=nf>concat</span> <span class=s>&#34;Bearer &#34;</span> <span class=nv>slack-claude-bot-token</span><span class=p>)))))</span>
+</span></span><span class=line><span class=cl>    <span class=c1>;;向 crul参数：args 中添加字段</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-X%s&#34;</span> <span class=s>&#34;POST&#34;</span><span class=p>)</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>;; (push (format &#34;-w(%s . %%{size_header})&#34; token) args)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>;; (push (format &#34;--keepalive-time %s&#34; 240) args)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-m%s&#34;</span> <span class=mi>60</span><span class=p>)</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>push</span> <span class=s>&#34;-D-&#34;</span> <span class=nv>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>;; pcase-dolist essentially循环一个alist或plist,为每个元素执行一些操作</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>pcase-dolist</span> <span class=p>(</span><span class=o>`</span><span class=p>(</span><span class=o>,</span><span class=nv>key</span> <span class=o>.</span> <span class=o>,</span><span class=nv>val</span><span class=p>)</span> <span class=nv>headers</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>push</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34;-H%s: %s&#34;</span> <span class=nv>key</span> <span class=nv>val</span><span class=p>)</span> <span class=nv>args</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=c1>;;添加 prompt data</span>
+</span></span><span class=line><span class=cl>    <span class=c1>;; (push (format &#34;-d%s&#34; data) args)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nf>nreverse</span> <span class=p>(</span><span class=nf>cons</span> <span class=nv>url</span> <span class=nv>args</span><span class=p>))))</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=数据解析模块>数据解析模块</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span><span class=lnt>90
+</span><span class=lnt>91
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>slack-curl--stream-filter</span> <span class=p>(</span><span class=nv>process</span> <span class=nv>output</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;进程过滤----&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>content-strs</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nv>proc-info</span> <span class=p>(</span><span class=nv>alist-get</span> <span class=nv>process</span> <span class=nv>slack-curl--process-alist</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>with-current-buffer</span> <span class=p>(</span><span class=nf>process-buffer</span> <span class=nv>process</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=c1>;; Insert output</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>save-excursion</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nf>goto-char</span> <span class=p>(</span><span class=nf>process-mark</span> <span class=nv>process</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nf>insert</span> <span class=nv>output</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nf>set-marker</span> <span class=p>(</span><span class=nf>process-mark</span> <span class=nv>process</span><span class=p>)</span> <span class=p>(</span><span class=nf>point</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=c1>;; Find HTTP status</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nb>unless</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>proc-info</span> <span class=nb>:http-status</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nb>save-excursion</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nf>goto-char</span> <span class=p>(</span><span class=nf>point-min</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nv>when-let*</span> <span class=p>(((</span><span class=nv>not</span> <span class=p>(</span><span class=nf>=</span> <span class=p>(</span><span class=nf>line-end-position</span><span class=p>)</span> <span class=p>(</span><span class=nf>point-max</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>                      <span class=p>(</span><span class=nv>http-msg</span> <span class=p>(</span><span class=nf>buffer-substring</span> <span class=p>(</span><span class=nf>line-beginning-position</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                                  <span class=p>(</span><span class=nf>line-end-position</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                      <span class=p>(</span><span class=nv>http-status</span>
+</span></span><span class=line><span class=cl>                       <span class=p>(</span><span class=nb>save-match-data</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nb>and</span> <span class=p>(</span><span class=nf>string-match</span> <span class=s>&#34;HTTP/[.0-9]+ +\\([0-9]+\\)&#34;</span> <span class=nv>http-msg</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                              <span class=p>(</span><span class=nv>match-string</span> <span class=mi>1</span> <span class=nv>http-msg</span><span class=p>)))))</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>plist-put</span> <span class=nv>proc-info</span> <span class=nb>:http-status</span> <span class=nv>http-status</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=nf>plist-put</span> <span class=nv>proc-info</span> <span class=nb>:status</span> <span class=p>(</span><span class=nv>string-trim</span> <span class=nv>http-msg</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>        <span class=c1>;; Handle read-only gptel buffer</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nb>with-current-buffer</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>proc-info</span> <span class=nb>:buffer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=nb>or</span> <span class=nv>buffer-read-only</span>
+</span></span><span class=line><span class=cl>                    <span class=p>(</span><span class=nf>get-char-property</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>proc-info</span> <span class=nb>:position</span><span class=p>)</span> <span class=ss>&#39;read-only</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;Buffer is read only, displaying reply in buffer \&#34;*ChatGPT response*\&#34;&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nv>display-buffer</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nb>with-current-buffer</span> <span class=p>(</span><span class=nf>get-buffer-create</span> <span class=s>&#34;*ChatGPT response*&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>             <span class=p>(</span><span class=nf>goto-char</span> <span class=p>(</span><span class=nf>point-max</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>             <span class=p>(</span><span class=nv>move-marker</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>proc-info</span> <span class=nb>:position</span><span class=p>)</span> <span class=p>(</span><span class=nf>point</span><span class=p>)</span> <span class=p>(</span><span class=nf>current-buffer</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>             <span class=p>(</span><span class=nf>current-buffer</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>           <span class=o>&#39;</span><span class=p>((</span><span class=nv>display-buffer-reuse-window</span>
+</span></span><span class=line><span class=cl>              <span class=nv>display-buffer-pop-up-window</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>             <span class=p>(</span><span class=nv>reusable-frames</span> <span class=o>.</span> <span class=nv>visible</span><span class=p>)))))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nv>when-let</span> <span class=p>((</span><span class=nv>http-msg</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>proc-info</span> <span class=nb>:status</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                 <span class=p>(</span><span class=nv>http-status</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>proc-info</span> <span class=nb>:http-status</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>;; Find data chunk(s) and run callback</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nf>equal</span> <span class=nv>http-status</span> <span class=s>&#34;200&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=p>(</span><span class=nf>funcall</span> <span class=nf>#&#39;</span><span class=nv>slack-curl--stream-insert-response</span>
+</span></span><span class=line><span class=cl>                   <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>json-object-type</span> <span class=ss>&#39;plist</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                          <span class=p>(</span><span class=nv>status</span> <span class=p>(</span><span class=nf>string-match</span> <span class=s>&#34;}}$&#34;</span> <span class=p>(</span><span class=nf>buffer-string</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                          <span class=p>(</span><span class=nv>response</span><span class=p>)</span> <span class=p>(</span><span class=nv>content-str</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                     <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;匹配结果：%s&#34;</span> <span class=nv>status</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                     <span class=p>(</span><span class=nb>when</span> <span class=p>(</span><span class=nf>string-match</span> <span class=s>&#34;}}&#34;</span> <span class=p>(</span><span class=nf>buffer-string</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nb>setq</span> <span class=nv>response</span> <span class=p>(</span><span class=nv>replace-regexp-in-string</span> <span class=s>&#34;[^\\{]*?\{\&#34;ok&#34;</span> <span class=s>&#34;{\&#34;ok&#34;</span><span class=p>(</span><span class=nf>buffer-string</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                       <span class=p>(</span><span class=nb>with-temp-buffer</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nf>insert</span> <span class=nv>response</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nf>goto-char</span> <span class=p>(</span><span class=nf>point-min</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>json-object-type</span> <span class=ss>&#39;plist</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                <span class=p>(</span><span class=nv>json-array-type</span> <span class=ss>&#39;list</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                <span class=p>(</span><span class=nv>json</span> <span class=p>(</span><span class=nv>json-read</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                <span class=p>(</span><span class=nv>messages</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>json</span> <span class=nb>:messages</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                <span class=p>)</span>
+</span></span><span class=line><span class=cl>                           <span class=c1>;; 解析 messages 消息数据</span>
+</span></span><span class=line><span class=cl>                           <span class=p>(</span><span class=nb>dolist</span> <span class=p>(</span><span class=nv>msg</span> <span class=nv>messages</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                             <span class=c1>;; 仅解析Claude的信息</span>
+</span></span><span class=line><span class=cl>                             <span class=p>(</span><span class=nv>if-let*</span> <span class=p>((</span><span class=nv>bot</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>msg</span> <span class=nb>:bot_profile</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                       <span class=p>(</span><span class=nv>botname</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>bot</span> <span class=nb>:name</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                       <span class=p>(</span><span class=nv>claude</span> <span class=p>(</span><span class=nv>string=</span> <span class=nv>botname</span> <span class=s>&#34;Claude&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                       <span class=p>(</span><span class=nv>text</span> <span class=p>(</span><span class=nf>plist-get</span> <span class=nv>msg</span> <span class=nb>:text</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                                 <span class=p>(</span><span class=nb>push</span> <span class=nv>text</span> <span class=nv>content-strs</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                               <span class=p>))</span>
+</span></span><span class=line><span class=cl>                           <span class=p>)</span>
+</span></span><span class=line><span class=cl>                         <span class=p>)</span>
+</span></span><span class=line><span class=cl>                       <span class=p>)</span>
+</span></span><span class=line><span class=cl>                     <span class=p>(</span><span class=nf>apply</span> <span class=nf>#&#39;concat</span> <span class=p>(</span><span class=nf>nreverse</span> <span class=nv>content-strs</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                   <span class=nv>proc-info</span><span class=p>))))))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>;; (condition-case nil</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;     (while (re-search-forward &#34;\{\&#34;ok&#34; nil t)</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;     (save-match-data</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;       (unless (looking-at &#34;\}{3}$&#34;)</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;         (when-let* ((response (json-read))</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;                     (delta (map-nested-elt</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;                             response &#39;(:choices 0 :delta)))</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;                     (content (plist-get delta :content)))</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;           (message &#34;响应plist：-----%s&#34; (buffer-string))</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;           (message &#34;delta：-----%s&#34; delta)</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;           (message &#34;解析content：-----%s&#34; content)</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;           (push content content-strs)</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;           (message &#34;组合结果：%s&#34; content-strs)</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;           ))))</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;   (error</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;;    (goto-char (match-beginning 0))))</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2023-05-27</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><nav class=post-nav><a class=prev href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/org-super-agenda%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">org-super-agenda 语法说明</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Claude%E8%BE%93%E5%87%BA%E7%8A%B6%E6%80%81%E5%9C%A8buffer%E4%B8%AD%E5%AE%9E%E7%8E%B0%E5%90%8C%E6%AD%A5/><span class="next-text nav-default">扩展 go-translate 渲染器支持 Claude Typing 输入状态</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2023-05-27 03:12:00 +0800 +0800",title:"gptel 的 api 是如何插入到当前 buffer",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

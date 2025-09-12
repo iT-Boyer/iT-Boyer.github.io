@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pod on 习七</title><link>https://it-boyer.github.io/tags/pod/</link><description>Recent content in Pod on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Sun, 21 Oct 2018 00:12:20 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/pod/index.xml" rel="self" type="application/rss+xml"/><item><title>fork印象笔记SDK支持pod安装</title><link>https://it-boyer.github.io/post/old/macOS/fork%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0SDK%E6%94%AF%E6%8C%81pod%E5%AE%89%E8%A3%85/</link><pubDate>Sun, 21 Oct 2018 00:12:20 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/macOS/fork%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0SDK%E6%94%AF%E6%8C%81pod%E5%AE%89%E8%A3%85/</guid><description>&lt;!--github库卡片--&gt;
+&lt;p&gt;{% github it-boyer evernote-sdk-mac fd5da70 width = 30% %}&lt;/p&gt;
+&lt;h2&gt;制作pod支持&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;fork 并clone代码&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/evernote/evernote-sdk-mac.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="2"&gt;
+&lt;li&gt;创建pod spec索引文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ cd evernote-sdk-mac
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ pod spec create EvernoteSDK https://github.com/it-boyer/evernote-sdk-mac.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;li&gt;编写配置文件
+设置支持的平台，源码目录位置，指定忽略的文件等配置。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;....
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;spec.osx.deployment_target = &amp;#34;10.7&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;spec.source_files = &amp;#34;EvernoteSDK&amp;#34;, &amp;#34;EvernoteSDK/**/*.{h,m}&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;spec.exclude_files = &amp;#34;EvernoteSDK/internal/ENOAuthViewController*&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;#spec.requires_arc = true
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;#spec.xcconfig = {&amp;#34;WARNING_CFLAGS&amp;#34; =&amp;gt; &amp;#39;-Wno-nullability-completeness&amp;#39;}
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# spec.xcconfig = { &amp;#34;HEADER_SEARCH_PATHS&amp;#34; =&amp;gt; &amp;#34;$(SDKROOT)/usr/include/libxml2&amp;#34; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;end
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="4"&gt;
+&lt;li&gt;验证EvernoteSDK.podspec
+需要用参数：&amp;ndash;allow-warnings ，由于源码验证过程中的警告提示问题，导致验证失败&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ pod lib lint --allow-warnings
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="5"&gt;
+&lt;li&gt;发布到私库中
+先在本地添加私库&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-mysql" data-lang="mysql"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pod&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;PodRepo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;it&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;boyer&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;PodRepo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;&lt;/span&gt;&lt;span class="c1"&gt;#输出：
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Cloning&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;spec&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;repo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;PodRepo&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;it&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;boyer&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;PodRepo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;开始发布过程中，也会验证，出现警告问题，需要添加&lt;code&gt;--allow-warnings&lt;/code&gt;&lt;/p&gt;</description></item><item><title>为Pod的库创建演示文件SwiftPlayground</title><link>https://it-boyer.github.io/post/old/macOS/%E4%B8%BAPod%E7%9A%84%E5%BA%93%E5%88%9B%E5%BB%BA%E6%BC%94%E7%A4%BA%E6%96%87%E4%BB%B6SwiftPlayground/</link><pubDate>Fri, 12 Oct 2018 19:56:59 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/macOS/%E4%B8%BAPod%E7%9A%84%E5%BA%93%E5%88%9B%E5%BB%BA%E6%BC%94%E7%A4%BA%E6%96%87%E4%BB%B6SwiftPlayground/</guid><description>&lt;!--github库卡片--&gt;
+&lt;p&gt;{% github asmallteapot cocoapods-playgrounds c54b492 width = 30% %}
+&lt;a href="https://github.com/asmallteapot/cocoapods-playgrounds/issues/62#issuecomment-427543129"&gt;issues 62&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.jianshu.com/p/8e7599c27542"&gt;在playground中优雅的使用Pod&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;This Could Be Us But You Playing&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://travis-ci.org/segiddins/ThisCouldBeUsButYouPlaying"&gt;&lt;img src="https://img.shields.io/travis/segiddins/ThisCouldBeUsButYouPlaying/master.svg?style=flat" alt="Build Status"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="README_images/alamofire.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;Generates a Swift Playground for any Pod.&lt;/p&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;p&gt;$ gem install cocoapods-playgrounds&lt;/p&gt;
+&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;h3&gt;CocoaPods&lt;/h3&gt;
+&lt;p&gt;To generate a Playground for a specific Pod:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ pod playgrounds Alamofire
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;To generate a Playground for a local development Pod:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ pod playgrounds ../../../Sources/Alamofire/Alamofire.podspec
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;To generate a Playground with multiple Pods:&lt;/p&gt;</description></item><item><title>配置Podfile支持playground导入库</title><link>https://it-boyer.github.io/post/old/macOS/%E9%85%8D%E7%BD%AEPodfile%E6%94%AF%E6%8C%81playground%E5%AF%BC%E5%85%A5%E5%BA%93/</link><pubDate>Sat, 06 Oct 2018 14:50:12 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/macOS/%E9%85%8D%E7%BD%AEPodfile%E6%94%AF%E6%8C%81playground%E5%AF%BC%E5%85%A5%E5%BA%93/</guid><description>&lt;h2&gt;pod支持问题&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/38216238/xcode-playground-with-cocoapods#"&gt;xcode-playground-with-cocoapods&lt;/a&gt;
+You could use &lt;a href="https://github.com/neonichu/ThisCouldBeUsButYouPlaying"&gt;ThisCouldBeUsButYouPlaying&lt;/a&gt; or add this to your Podfile
+xcode7.3.1和cocoapods1.0版本导致playground无法import相关动态库&lt;/p&gt;
+&lt;h2&gt;RxSwift资源案例&lt;/h2&gt;
+&lt;p&gt;在项目中使用&lt;code&gt;RxSwift.Resources.total&lt;/code&gt;，提供所有Rx资源分配的计数，这对于在开发期间检测泄漏非常有用。
+在写入磁盘之前，修改一些工程的配置&lt;a href="https://guides.cocoapods.org/syntax/podfile.html#tab_group_hooks"&gt;post_install hook&lt;/a&gt;:&lt;/p&gt;</description></item><item><title>使用CocoaPods开发静态库</title><link>https://it-boyer.github.io/post/old/macOS/%E4%BD%BF%E7%94%A8CocoaPods%E5%BC%80%E5%8F%91%E9%9D%99%E6%80%81%E5%BA%93/</link><pubDate>Thu, 21 Jun 2018 21:37:16 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/macOS/%E4%BD%BF%E7%94%A8CocoaPods%E5%BC%80%E5%8F%91%E9%9D%99%E6%80%81%E5%BA%93/</guid><description>&lt;p&gt;Cocoapods作为OS X和iOS开发平台的类库管理工具，已经非常完善和强大。通常我们用pod来管理第三方开源类库，但我们也极有可能会开发一个用pod管理依赖关系的静态类库给其他人使用，而又不愿意公开源代码，比如一些SDK，那么就需要打包成.a文件。本文将以一个依赖于ASIHTTPRequest的静态类库，来演示如何创建使用了CocoaPods的静态类库以及打包的过程。&lt;/p&gt;</description></item><item><title>使用Cocoapods创建私有podspec</title><link>https://it-boyer.github.io/post/old/macOS/%E4%BD%BF%E7%94%A8Cocoapods%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89podspec/</link><pubDate>Tue, 28 Feb 2017 15:46:16 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/macOS/%E4%BD%BF%E7%94%A8Cocoapods%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89podspec/</guid><description>&lt;h2&gt;创建一个版本库来托管pod索引:pod repo add命令&lt;/h2&gt;
+&lt;p&gt;第一步：在github登录个人账号，创建一个库作为pod索引托管库。也可根据具体情况可以选择：&lt;code&gt;github&lt;/code&gt;、&lt;code&gt;CODING&lt;/code&gt;、&lt;code&gt;开源中国&lt;/code&gt;、&lt;code&gt;Bitbucket&lt;/code&gt;以及&lt;code&gt;CSDN&lt;/code&gt;等，代码托管平台。
+当索引库托管在github私有的仓库时，如果有其他同事共同开发维护，则需要配置Git仓库的权限。
+第二步：pod化版本库，使其专门用户管理个人的&lt;code&gt;*podspec&lt;/code&gt;索引文件
+{% codeblock repo add命令 lang:ruby %}&lt;/p&gt;</description></item><item><title>快速正确的安装Ruby,Rails运行环境</title><link>https://it-boyer.github.io/post/old/shell/%E5%BF%AB%E9%80%9F%E6%AD%A3%E7%A1%AE%E7%9A%84%E5%AE%89%E8%A3%85RubyRails%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/</link><pubDate>Wed, 21 Jan 2015 23:00:39 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/shell/%E5%BF%AB%E9%80%9F%E6%AD%A3%E7%A1%AE%E7%9A%84%E5%AE%89%E8%A3%85RubyRails%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/</guid><description>&lt;p&gt;安装ruby环境：
+方法一：下载源码，编译安装：&lt;a href="http://fsjoy.blog.51cto.com/318484/115045/"&gt;配置中制定安装目录&lt;/a&gt;&lt;br&gt;
+方法二：使用rvm安装：&lt;a href="https://ruby-china.org/wiki/rvm-guide"&gt;可以提供一个便捷的多版本 Ruby 环境的管理和切换&lt;/a&gt;&lt;br&gt;
+方法三：使用macport安装 &lt;code&gt;port install ruby&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ruby-china.org/wiki/install_ruby_guide"&gt;详细教程&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;问题：&lt;br&gt;
+&lt;code&gt;ERROR: While executing gem ... (Errno::EPERM) Operation not permitted - /usr/bin/rake&lt;/code&gt;
+&lt;a href="http://stackoverflow.com/questions/30812777/cannot-install-cocoa-pods-after-uninstalling-results-in-error/30851030#30851030"&gt;stackoverflow方法&lt;/a&gt;测试结果没走通。&lt;br&gt;
+最终通过&lt;a href="http://tadaland.com/os-x-rootless.html"&gt;OS X 10.11中Rootless的实现与解释以及关闭方法&lt;/a&gt;解决.&lt;/p&gt;
+&lt;h4&gt;Gem介绍&lt;/h4&gt;
+&lt;p&gt;Gem是一个ruby库和程序的标准包，它通过RubyGem来定位、安装、升级和卸载，非常的便捷。&lt;/p&gt;
+&lt;p&gt;Ruby 1.9.2版本默认安装RubyGem，如果你使用其它版本，请参考如何安装RubyGem。&lt;/p&gt;</description></item></channel></rss>

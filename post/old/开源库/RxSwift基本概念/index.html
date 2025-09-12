@@ -1,0 +1,446 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>RxSwift基本概念 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="FRP函数式反应型编程 Functional Reactive Programming ， 缩写为 FRP
+函数编程 函数是第一等公民 所谓 第一等公民 (first class) ，指的是函数与其他数据类型一样，处于平等地位。既可以赋值给其他变量，也可以作为参数传入另一个函数，或者作为别的函数的返回值。 将数组通过指定的函数映射成另一个数组，例如将increment函数作为参数传入数组的map函数: {% codeblock lang:swift %} let increment = { return $0 + 1 } [1,2,3].map(increment) // [2,3,4] {% endcodeblock %}
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/RxSwift%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/RxSwift%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"><meta property="og:site_name" content="习七"><meta property="og:title" content="RxSwift基本概念"><meta property="og:description" content="FRP函数式反应型编程 Functional Reactive Programming ， 缩写为 FRP
+函数编程 函数是第一等公民 所谓 第一等公民 (first class) ，指的是函数与其他数据类型一样，处于平等地位。既可以赋值给其他变量，也可以作为参数传入另一个函数，或者作为别的函数的返回值。 将数组通过指定的函数映射成另一个数组，例如将increment函数作为参数传入数组的map函数: {% codeblock lang:swift %} let increment = { return $0 + 1 } [1,2,3].map(increment) // [2,3,4] {% endcodeblock %}"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-03-03T13:01:41+00:00"><meta property="article:modified_time" content="2017-03-03T13:01:41+00:00"><meta property="article:tag" content="SDK"><meta itemprop=name content="RxSwift基本概念"><meta itemprop=description content="FRP函数式反应型编程 Functional Reactive Programming ， 缩写为 FRP
+函数编程 函数是第一等公民 所谓 第一等公民 (first class) ，指的是函数与其他数据类型一样，处于平等地位。既可以赋值给其他变量，也可以作为参数传入另一个函数，或者作为别的函数的返回值。 将数组通过指定的函数映射成另一个数组，例如将increment函数作为参数传入数组的map函数: {% codeblock lang:swift %} let increment = { return $0 + 1 } [1,2,3].map(increment) // [2,3,4] {% endcodeblock %}"><meta itemprop=datePublished content="2017-03-03T13:01:41+00:00"><meta itemprop=dateModified content="2017-03-03T13:01:41+00:00"><meta itemprop=wordCount content="4152"><meta itemprop=keywords content="SDK"><meta name=twitter:card content="summary"><meta name=twitter:title content="RxSwift基本概念"><meta name=twitter:description content="FRP函数式反应型编程 Functional Reactive Programming ， 缩写为 FRP
+函数编程 函数是第一等公民 所谓 第一等公民 (first class) ，指的是函数与其他数据类型一样，处于平等地位。既可以赋值给其他变量，也可以作为参数传入另一个函数，或者作为别的函数的返回值。 将数组通过指定的函数映射成另一个数组，例如将increment函数作为参数传入数组的map函数: {% codeblock lang:swift %} let increment = { return $0 + 1 } [1,2,3].map(increment) // [2,3,4] {% endcodeblock %}"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>RxSwift基本概念</h1><div class=post-meta><span class=post-time>2017-03-03</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 4152 字 </span><span class=more-meta>预计阅读 9 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>FRP函数式反应型编程</a></li><li><a href=#>函数编程</a><ul><li><a href=#>函数是第一等公民</a></li><li><a href=#>函数式的函数</a></li><li><a href=#>函数式和指令式的比较</a></li></ul></li><li><a href=#>响应式编程 - Reactive</a></li><li><a href=#>swift 函数式编程</a></li></ul><ul><li><a href=#>Observable观察者模式</a><ul><li><a href=#>新建订阅源几种快捷方法</a></li><li><a href=#>create自定义订阅源</a></li><li><a href=#>deferred订阅源的懒加载</a></li></ul></li><li><a href=#>几种特殊类型的订阅源</a><ul><li><a href=#>PublishSubject 向所有订阅者发送事件队列</a></li><li><a href=#>基于PublishSubject的几种补发式订阅源</a></li></ul></li><li><a href=#>支持订阅的嵌套函数</a><ul><li><a href=#>map{规则} 遍历映射</a></li><li><a href=#>flatMap 嵌套式遍历映射</a></li><li><a href=#>scan(initial:U,combine:(U, T) -> U)迭代映射</a></li></ul></li><li><a href=#>Filtering 支持订阅的过滤器</a><ul><li><a href=#>filter{布尔语句} 条件过滤法</a></li><li><a href=#>distinctUntilChanged() 去重过滤法（相邻且不重复）</a></li><li><a href=#>take(int) 掐尖过滤法</a></li></ul></li><li><a href=#>Combining 订阅源聚合器</a><ul><li><a href=#>startWith 向可观察者队列中添加排头兵（新增的可观察者）</a></li><li><a href=#>combineLatest 合并聚合订阅源最后一次事件数据，生成一个聚合事件</a></li><li><a href=#>zip(intOb1, intOb2) 拉链式合并</a></li><li><a href=#>merge() 按可观察者的新的事件次序合并队列</a></li><li><a href=#>switchLatest订阅源切换器：用于嵌套式订阅源</a></li></ul></li><li><a href=#>订阅器</a></li><li><a href=#>控制take掐尖过滤器</a><ul><li><a href=#>takeUntil 得到指定事件之后触发 .Completed 事件</a></li><li><a href=#>takeWhile 判断语句</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-03-03T13:01:41 title="March 3, 2017">March 3, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2>FRP函数式反应型编程</h2><p>Functional Reactive Programming ， 缩写为 FRP</p><h2>函数编程</h2><h3>函数是第一等公民</h3><p>所谓 第一等公民 (first class) ，指的是函数与其他数据类型一样，处于平等地位。既可以赋值给其他变量，也可以作为参数传入另一个函数，或者作为别的函数的返回值。
+将数组通过指定的函数映射成另一个数组，例如将<code>increment函数</code>作为参数传入数组的<code>map函数</code>:
+{% codeblock lang:swift %}
+let increment = { return $0 + 1 }
+[1,2,3].map(increment) // [2,3,4]
+{% endcodeblock %}</p><h3>函数式的函数</h3><h4>map 映射函数</h4><p><code>map</code> 可以把一个数组按照一定的规则转换成另一个数组，定义如下：
+{% codeblock lang:swift %}
+func map<u>(transform: (T) -> U) -> U[]
+//效果
+[ x1, x2, &mldr; , xn].map(f) -> [f(x1), f(x2), &mldr; , f(xn)]
+{% endcodeblock %}
+<code>map</code>接受一个把 <code>T</code> 类型的转换成 <code>U</code> 类型的<code>transform</code>函数，最终返回的是 <code>U 类型的集合</code>。</p><h4>filter 筛选函数</h4><p><code>filter</code>通过在闭包中对每个元素进行逻辑运算，来排除为<code>false</code>的元素
+{% codeblock lang:swift %}
+func filter(includeElement: (T) -> Bool) -> [T]
+//实现
+var oldArray = [10,20,45,32]
+var filteredArray = oldArray.filter({ return $0 > 30 })
+println(filteredArray) // [45, 32]
+{% endcodeblock %}</p><h4>reduce 迭代函数</h4><p><code>reduce</code>函数把<code>U</code>类型集合中的所有元素，以<code>initial</code>为初始值，按照<code>combine</code>规则，逐个迭代并返回一个U类型的对象。
+定义如下：
+{% codeblock lang:swift %}
+func reduce<u>(initial: U, combine: (U, T) -> U) -> U
+{% endcodeblock %}
+reduce 有两个参数，<code>initial</code>是初始值，<code>combine</code>定义规则闭包，闭包有两个输入的参数，一个是原始值，一个是新进来的值，闭包返回的新值作为下一轮循环中的<code>initial</code>值。
+写几个小例子试一下：
+{% codeblock lang:swift %}
+var oldArray = [10,20,45,32]
+var sum = 0
+sum = oldArray.reduce(0,{$0 + $1}) // 0+10+20+45+32 = 107
+sum = oldArray.reduce(1,{$0 + $1}) // 1+10+20+45+32 = 108
+sum = oldArray.reduce(5,{$0 * $1}) // 5<em>10</em>20<em>45</em>32 = 1440000
+sum = oldArray.reduce(0,+) // 0+10+20+45+32 = 107
+println(sum)
+{% endcodeblock %}</p><h3>函数式和指令式的比较</h3><h2>响应式编程 - Reactive</h2><p>在日常开发中，我们经常需要监听某个属性，并且针对该属性的变化做一些处理。比如以下几个场景：</p><ol><li>用户在输入邮箱的时候，监测输入的内容并在界面上提示是否符合邮箱规范。</li><li>用户在修改用户名之后，所有显示用户名的界面都要改为新的用户名。
+外部输入信号的变化、事件的发生，这些都是典型的外部环境变化。根据外部环境的变化进行响应处理，直观上来讲像是一种自然地反应。我们可以将这种自动对变化作出响应的能力称为反应能力 (Reactive) 。</li></ol><p>那么什么是反应型编程呢？</p><pre><code>Reactive programming is programming with asynchronous data streams.
+反应型编程是异步数据流的编程。
+</code></pre><p>对于移动端来说，异步数据流的概念并不陌生，变量、点击事件、属性、缓存，这些就可以成为数据流。
+我们可以通过一些简单的 ASCII 字符来演示如何将事件转换成数据流：
+&ndash;a&mdash;b-c&mdash;d&mdash;X&mdash;|&ndash;>
+a, b, c, d 是具体的值，代表了某个事件
+X 表示发生了一个错误
+| 是这个流已经结束了的标记
+&mdash;&mdash;&mdash;-> 是时间轴
+比如我们要统计用户点击鼠标的次数，那么可以这样：
+clickStream: &mdash;c&mdash;-c&ndash;c&mdash;-c&mdash;&mdash;c&ndash;>
+vvvvv map(c becomes 1) vvvv
+&mdash;1&mdash;-1&ndash;1&mdash;-1&mdash;&mdash;1&ndash;>
+vvvvvvvvv scan(+) vvvvvvvvv
+counterStream: &mdash;1&mdash;-2&ndash;3&mdash;-4&mdash;&mdash;5&ndash;>
+反应型编程就是基于这些数据流的编程。而函数式编程则相当于提供了一个工具箱，可以方便的对数据流进行合并、创建和过滤等操作。</p><h2>swift 函数式编程</h2><p>Swift 是苹果公司在 2014 年推出的编程语言，用于编写 iOS 和 OS X 应用程序。它吸收了很多其它语言的语法特性，例如闭包、元组、泛型、结构体等等，这使得它的语法简洁而灵活。
+Swift 本身并不是一门函数式语言，不过有一些函数式的方法和特性</p><ol><li>map reduce 等函数式函数</li><li>函数是一等公民</li><li>模式匹配
+我们并不能因为 Swift 中的一些函数式特性就把它归为函数式语言，但是我们可以利用这些特性进行函数式 Style 的编程。</li></ol><h1>RxSwift 响应式编程</h1><p><a href=https://github.com/ReactiveX/RxSwift/tree/master/Rx.playground>Rx.playground</a></p><h2>Observable观察者模式</h2><p>Rx 的基础：<code>Observable</code> ， <code>Observable&lt;Element></code> 是观察者模式中可观察的对象，相当于一个事件序列 (GeneratorType)。
+支持订阅的事件序列，在下文简称为<code>订阅源</code>或<code>可观察者</code>。
+订阅源的事件队列中包括三种事件类型：</p><ol><li><code>.Next(value)</code>: 表示新的事件数据。</li><li><code>.Completed</code>: 表示事件序列的完结。</li><li><code>.Error</code>: 同样表示完结，但是代表异常导致的完结。</li></ol><h3>新建订阅源几种快捷方法</h3><ol><li><code>empty</code>是一个空的序列，它只发送 <code>.Completed</code> 消息。
+{% codeblock Observable+Creation.swift lang:swift %}
+public static func empty() -> Observable<e>
+example(&ldquo;empty&rdquo;) {
+let emptySequence: Observable<int> = empty()
+let subscription = emptySequence.subscribe { event in
+print(event)
+}
+}
+&mdash; empty example &mdash;
+Completed
+{% endcodeblock %}</li><li><code>never</code> 是没有任何元素、也不会发送任何事件的空序列。
+{% codeblock Observable+Creation.swift lang:swift %}
+/**</li></ol><ul><li>returns: An observable sequence whose observers will never get called.
+*/
+public static func never() -> Observable<e>
+{% endcodeblock %}</li></ul><ol start=3><li><code>just</code> 是只包含一个元素的序列，它会先发送 <code>.Next(value)</code> ，然后发送 <code>.Completed</code>
+{% codeblock Observable+Creation.swift lang:swift %}
+/**
+Returns an observable sequence that contains a single element.
+*/
+public static func just(_ element: E) -> Observable<e> {
+return Just(element: element)
+}
+{% endcodeblock %}</li><li><code>sequenceOf</code> 可以把一系列元素转换成订阅源
+{% codeblock lang:swift %}
+let sequenceOfElements/* : Observable<int> */ = sequenceOf(0, 1, 2, 3)
+{% endcodeblock %}</li><li><code>asObservable方法</code> 将遵守<code>ObservableType</code>协议的对象转为可观察者序列
+{% codeblock ObservableType.swift lang:swift %}
+public protocol ObservableType : ObservableConvertibleType
+{
+//Default implementation of converting <code>ObservableType</code> to <code>Observable</code>.
+public func asObservable() -> Observable<e>
+}
+let sequenceFromArray = [1, 2, 3, 4, 5].asObservable()
+{% endcodeblock %}</li><li><code>failWith</code>创建一个没有元素的序列，只会发送失败 (<code>.Error</code>) 事件。
+{% codeblock lang:swift %}
+let error = NSError(domain: &ldquo;Test&rdquo;, code: -1, userInfo: nil)
+let erroredSequence: Observable<int> = failWith(error)
+let subscription = erroredSequence.subscribe { event in print(event)}
+&mdash; failWith example &mdash;
+Error(Error Domain=Test Code=-1 &ldquo;The operation couldn’t be completed. (Test error -1.)&rdquo;)
+{% endcodeblock %}</li></ol><h3>create自定义订阅源</h3><p><code>create</code> 可以通过闭包创建序列，通过 <code>.on(e: Event)</code> 添加可观察者事件。
+{% codeblock lang:swift %}
+example(&ldquo;create&rdquo;)
+{
+let myJust = { (singleElement: Int) -> Observable<int> in
+return create { observer in
+observer.on(.Next(singleElement))
+observer.on(.Completed)
+return NopDisposable.instance
+}
+}</p><pre><code>let subscription = myJust(5).subscribe { event in
+        print(event)
+}
+</code></pre><p>}
+&mdash; create example &mdash;
+Next(5)
+Completed
+{% endcodeblock %}</p><h3>deferred订阅源的懒加载</h3><p><code>deferred</code>表示当有有新增订阅者第一次订阅了该订阅源时，订阅源才会被创建，且每个订阅者订阅的对象都是内容相同而完全独立的序列。
+{% codeblock lang:swift %}
+example(&ldquo;TestDeferred&rdquo;)
+{
+var value: String? = nil
+var subscription: Observable&lt;String?> = deferred {
+return just(value)
+}
+// got value
+value = &ldquo;Hello!&rdquo;
+subscription.subscribe { event in
+print(event)
+}
+}
+&mdash; TestDeferred example &mdash;
+Next(Optional(&ldquo;Hello!&rdquo;))
+Completed
+{% endcodeblock %}</p><h2>几种特殊类型的订阅源</h2><p><code>Subject</code> 可以看做是一种代理和桥梁。它既是订阅者又是订阅源，这意味着它既可以订阅其他 <code>Observable 对象</code>，同时又可以对它的订阅者们发送事件。</p><h3>PublishSubject 向所有订阅者发送事件队列</h3><p>当<code>PublishSubject</code>类型订阅源事件队列中<code>.on()</code>新增事件时，会触发所有订阅者，一起响应该事件。
+{% codeblock lang:swift %}
+example(&ldquo;PublishSubject&rdquo;) {
+let subject = PublishSubject<string>()
+writeSequenceToConsole(&ldquo;1&rdquo;, sequence: subject)
+subject.on(.Next(&ldquo;a&rdquo;))
+subject.on(.Next(&ldquo;b&rdquo;))
+writeSequenceToConsole(&ldquo;2&rdquo;, sequence: subject)
+subject.on(.Next(&ldquo;c&rdquo;))
+subject.on(.Next(&ldquo;d&rdquo;))
+}
+&mdash; PublishSubject example &mdash;
+Subscription: 1, event: Next(a)
+Subscription: 1, event: Next(b)
+Subscription: 1, event: Next(c)
+Subscription: 2, event: Next(c)
+Subscription: 1, event: Next(d)
+Subscription: 2, event: Next(d)
+{% endcodeblock %}</p><h3>基于PublishSubject的几种补发式订阅源</h3><p>以下几种类型的订阅源，相较第一种仅多了补发历史事件，姑且称为<code>补发式订阅源</code>。</p><h4>ReplaySubject先向最新订阅者补发所有已发生的事件</h4><p>当<code>ReplaySubject</code>类型的订阅源，新增订阅者时，该类型的订阅源会把之前已发送过的所有事件队列重新补发给这个最新订阅者。这样就迫使订阅者会对从历史的事件队列逐一响应。
+<code>bufferSize</code> 是缓冲区的大小，决定了补发队列的最大值。如果 <code>bufferSize</code> 是1，那么新的订阅者出现的时候就会补发上一个事件，如果是2，则补两个，以此类推。
+{% codeblock lang:swift %}
+example(&ldquo;ReplaySubject&rdquo;)
+{
+let subject = ReplaySubject<string>.create(bufferSize: 1)
+writeSequenceToConsole(&ldquo;1&rdquo;, sequence: subject)
+subject.on(.Next(&ldquo;a&rdquo;))
+subject.on(.Next(&ldquo;b&rdquo;))
+writeSequenceToConsole(&ldquo;2&rdquo;, sequence: subject)
+subject.on(.Next(&ldquo;c&rdquo;))
+subject.on(.Next(&ldquo;d&rdquo;))
+}
+&mdash; ReplaySubject example &mdash;
+Subscription: 1, event: Next(a)
+Subscription: 1, event: Next(b)
+Subscription: 2, event: Next(b) // 补了一个 b
+Subscription: 1, event: Next(c)
+Subscription: 2, event: Next(c)
+Subscription: 1, event: Next(d)
+Subscription: 2, event: Next(d)
+{% endcodeblock %}</p><h4>BehaviorSubject 先向最新订阅者补发最近一次历史事件</h4><p><code>BehaviorSubject</code>类型的订阅源会向最新订阅者发送最近一次的历史事件队列，如果没有则发送一个默认值。
+{% codeblock lang:swift %}
+example(&ldquo;BehaviorSubject&rdquo;)
+{
+let subject = BehaviorSubject(value: &ldquo;z&rdquo;)
+writeSequenceToConsole(&ldquo;1&rdquo;, sequence: subject)
+subject.on(.Next(&ldquo;a&rdquo;))
+subject.on(.Next(&ldquo;b&rdquo;))
+writeSequenceToConsole(&ldquo;2&rdquo;, sequence: subject)
+subject.on(.Next(&ldquo;c&rdquo;))
+subject.on(.Completed)
+}
+&mdash; BehaviorSubject example &mdash;
+Subscription: 1, event: Next(z)
+Subscription: 1, event: Next(a)
+Subscription: 1, event: Next(b)
+Subscription: 2, event: Next(b)
+Subscription: 1, event: Next(c)
+Subscription: 2, event: Next(c)
+Subscription: 1, event: Completed
+Subscription: 2, event: Completed</p><p>{% endcodeblock %}</p><h4>Variable</h4><p><code>Variable</code> 是基于 <code>BehaviorSubject</code> 的一层封装，它的优势是：不会被显式终结。
+即：不会收到 <code>.Completed</code> 和 <code>.Error</code> 这类的终结事件，它会主动在析构的时候发送 <code>.Complete</code>
+{% codeblock lang:swift %}
+example(&ldquo;Variable&rdquo;)
+{
+let variable = Variable(&ldquo;z&rdquo;)
+writeSequenceToConsole(&ldquo;1&rdquo;, sequence: variable)
+variable.value = &ldquo;a&rdquo;
+variable.value = &ldquo;b&rdquo;
+writeSequenceToConsole(&ldquo;2&rdquo;, sequence: variable)
+variable.value = &ldquo;c&rdquo;
+}
+&mdash; Variable example &mdash;
+Subscription: 1, event: Next(z)
+Subscription: 1, event: Next(a)
+Subscription: 1, event: Next(b)
+Subscription: 2, event: Next(b)
+Subscription: 1, event: Next(c)
+Subscription: 2, event: Next(c)
+Subscription: 1, event: Completed
+Subscription: 2, event: Completed
+{% endcodeblock %}</p><h2>支持订阅的嵌套函数</h2><h3>map{规则} 遍历映射</h3><p>通过闭包中定义的规则将队列中的数据映射到新的队列中，支持订阅遍历事件。
+{% codeblock lang:swift %}
+func map<u>(transform: (T) -> U) -> U[]
+//效果
+[ x1, x2, &mldr; , xn].map(f) -> [f(x1), f(x2), &mldr; , f(xn)]
+{% endcodeblock %}
+<code>map</code>接受一个把 <code>T</code> 类型的转换成 <code>U</code> 类型的<code>transform</code>函数，最终返回的是 <code>U 类型的集合</code>。
+{% codeblock lang:swift %}
+example(&ldquo;map&rdquo;)
+{
+let originalSequence = sequenceOf(1,2,3)
+originalSequence.map{ $0 * 2 }.subscribe{ print($0) }
+}
+&mdash; map example &mdash;
+Next(2)
+Next(4)
+Next(6)
+Completed
+{% endcodeblock %}</p><h3>flatMap 嵌套式遍历映射</h3><p>嵌套式遍历描述：在遍历当前队列的过程中，每次执行闭包时都会遍历另一个嵌套队列中的所有事件。
+可以想象嵌套for 循环来理解。
+{% codeblock lang:swift %}
+example(&ldquo;flatMap&rdquo;)
+{
+let sequenceInt = sequenceOf(1, 2, 3)
+let sequenceString = sequenceOf(&ldquo;A&rdquo;, &ldquo;B&rdquo;, &ldquo;&ndash;&rdquo;)
+sequenceInt.flatMap{ int in sequenceString }.subscribe{ print($0) }
+}
+&mdash; flatMap example &mdash;
+Next(A)
+Next(B)
+Next(&ndash;)
+Next(A)
+Next(B)
+Next(&ndash;)
+Next(A)
+Next(B)
+Next(&ndash;)
+Completed
+{% endcodeblock %}</p><h3>scan(initial:U,combine:(U, T) -> U)迭代映射</h3><p>scan 有点像 reduce ，把<code>U</code>类型集合中的所有元素，以<code>initial</code>为初始值，按照<code>combine</code>规则，逐个迭代并返回一个U类型的对象。
+{% codeblock lang:swift %}
+example(&ldquo;scan&rdquo;)
+{
+let sequenceToSum = sequenceOf(0, 1, 2, 3, 4, 5)
+sequenceToSum.scan(0) { acum, elem in acum + elem }
+.subscribe {
+print($0)
+}
+}
+&mdash; scan example &mdash;
+Next(0)
+Next(1)
+Next(3)
+Next(6)
+Next(10)
+Next(15)
+Completed
+{% endcodeblock %}</p><h2>Filtering 支持订阅的过滤器</h2><h3>filter{布尔语句} 条件过滤法</h3><p>{% codeblock lang:swift %}
+example(&ldquo;filter&rdquo;)
+{
+let subscription = sequenceOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+.filter { $0 % 2 == 0 }.subscribe { print($0) }
+}
+&mdash; filter example &mdash;
+Next(0)
+Next(2)
+Next(4)
+Next(6)
+Next(8)
+Completed
+{% endcodeblock %}</p><h3>distinctUntilChanged() 去重过滤法（相邻且不重复）</h3><p>{% codeblock lang:swift %}
+example(&ldquo;distinctUntilChanged&rdquo;)
+{
+let subscription = sequenceOf(1, 2, 3, 1, 1, 4)
+.distinctUntilChanged().subscribe{ print($0) }
+}
+&mdash; distinctUntilChanged example &mdash;
+Next(1)
+Next(2)
+Next(3)
+Next(1)
+Next(4)
+Completed
+{% endcodeblock %}</p><h3>take(int) 掐尖过滤法</h3><p><code>take</code>只获取队列中前 n 个事件，在满足数量之后会自动 <code>.Completed</code>
+{% codeblock lang:swift %}
+example(&ldquo;take&rdquo;)
+{
+let subscription = sequenceOf(1, 2, 3, 4, 5, 6)
+.take(3).subscribe { print($0) }
+}
+&mdash; take example &mdash;
+Next(1)
+Next(2)
+Next(3)
+Completed
+{% endcodeblock %}</p><h2>Combining 订阅源聚合器</h2><p>订阅源聚合器将多个可观察者（订阅源）合并成一个可观察者（聚合订阅源），这样更便于订阅者同时监听多个订阅源。</p><h3>startWith 向可观察者队列中添加排头兵（新增的可观察者）</h3><p>{% codeblock lang:swift %}
+let subscription = sequenceOf(4, 5, 6).startWith(3).subscribe { print($0)}
+&mdash; startWith example &mdash;
+Next(3)
+Next(4)
+Next(5)
+Next(6)
+Completed
+{% endcodeblock %}</p><h3>combineLatest 合并聚合订阅源最后一次事件数据，生成一个聚合事件</h3><p>便于订阅者监听聚合订阅源中每个订阅源的最后一次事件数据
+{% codeblock lang:swift %}
+example(&ldquo;combineLatest 1&rdquo;)
+{
+let intOb1 = PublishSubject<string>()
+let intOb2 = PublishSubject<int>()
+combineLatest(intOb1, intOb2) {"($0) ($1)"}.subscribe { print($0) }
+intOb1.on(.Next(&ldquo;A&rdquo;))
+intOb2.on(.Next(1))
+intOb1.on(.Next(&ldquo;B&rdquo;))
+intOb2.on(.Next(2))
+}
+&mdash; combineLatest 1 example &mdash;
+Next(A 1)
+Next(B 1)
+Next(B 2)
+{% endcodeblock %}</p><h3>zip(intOb1, intOb2) 拉链式合并</h3><p>仅在凑齐聚合源中所有订阅源的事件时，才会聚合一次，触发订阅者的响应。可以将多达8个订阅源
+{% codeblock lang:swift %}
+example(&ldquo;zip 1&rdquo;)
+{
+let intOb1 = PublishSubject<string>()
+let intOb2 = PublishSubject<int>()
+zip(intOb1, intOb2) { &ldquo;($0) ($1)&rdquo; }.subscribe { print($0)}
+intOb1.on(.Next(&ldquo;A&rdquo;))
+intOb2.on(.Next(1))
+intOb1.on(.Next(&ldquo;B&rdquo;))
+intOb1.on(.Next(&ldquo;C&rdquo;))
+intOb2.on(.Next(2))
+}
+&mdash; zip 1 example &mdash;
+Next(A 1)
+Next(B 2)
+{% endcodeblock %}</p><h3>merge() 按可观察者的新的事件次序合并队列</h3><p>订阅者会按次序来响应聚合订阅源的每一件事件
+{% codeblock lang:swift %}
+example(&ldquo;merge 1&rdquo;)
+{
+let subject1 = PublishSubject<int>()
+let subject2 = PublishSubject<int>()
+sequenceOf(subject1, subject2).merge().subscribeNext { int in print(int)}
+subject1.on(.Next(1))
+subject1.on(.Next(2))
+subject2.on(.Next(3))
+subject1.on(.Next(4))
+subject2.on(.Next(5))
+}
+&mdash; merge 1 example &mdash;
+1
+2
+3
+4
+5
+{% endcodeblock %}</p><h3>switchLatest订阅源切换器：用于嵌套式订阅源</h3><p>通过切换（var3.value）嵌套的订阅源，来切换订阅者当前监听的订阅源，以响应当前订阅源中的可观察者的事件。
+{% codeblock lang:swift %}
+example(&ldquo;switchLatest&rdquo;)
+{
+let var1 = Variable(0)
+let var2 = Variable(200)
+// var3 is like an Observable&lt;Observable<int>>
+let var3 = Variable(var1)
+let d = var3.switchLatest().subscribe{ print($0) }
+var1.value = 1
+var1.value = 2
+var1.value = 3
+var1.value = 4
+var3.value = var2
+var2.value = 201
+var1.value = 5
+var3.value = var1
+var2.value = 202
+var1.value = 6
+}
+&mdash; switchLatest example &mdash;
+Next(0)
+Next(1)
+Next(2)
+Next(3)
+Next(4)
+Next(200)
+Next(201)
+Next(5)
+Next(6)
+{% endcodeblock %}</p><h2>订阅器</h2><ol><li>订阅器：<code>subscribe</code> 用来订阅可观察者的事件队列（即订阅源），并指定响应的相关操作</li><li>Next订阅器：<code>subscribeNext</code> 只订阅 <code>.Next</code> 事件</li><li>Completed订阅器：<code>subscribeCompleted</code> 只订阅<code>.Completed</code> 完成事件</li><li>Error订阅器：<code>subscribeError</code> 订阅 <code>.Error</code> 失败事件</li><li>订阅器观察者：<code>doOn</code> 在订阅器执行之前，获得执行代码的机会。可对比理解：<code>swift中的属性观察者</code></li></ol><h2>控制take掐尖过滤器</h2><p>过滤器通过指定的事件和状态语句来判断是否停止take</p><h3>takeUntil 得到指定事件之后触发 .Completed 事件</h3><p>{% codeblock lang:swift %}
+example(&ldquo;takeUntil&rdquo;)
+{
+let originalSequence = PublishSubject<int>()
+let whenThisSendsNextWorldStops = PublishSubject<int>()
+originalSequence.takeUntil(whenThisSendsNextWorldStops)
+.subscribe {
+print($0)
+}
+originalSequence.on(.Next(1))
+originalSequence.on(.Next(2))
+whenThisSendsNextWorldStops.on(.Next(1))
+originalSequence.on(.Next(3))
+}
+&mdash; takeUntil example &mdash;
+Next(1)
+Next(2)
+Completed
+{% endcodeblock %}</p><h3>takeWhile 判断语句</h3><p>takeWhile 则是可以通过状态语句判断是否继续 take 。
+{% codeblock lang:swift %}
+example(&ldquo;takeWhile&rdquo;)
+{
+let sequence = PublishSubject<int>()
+sequence.takeWhile { int in int &lt; 2 }.subscribe { print($0) }
+sequence.on(.Next(1))
+sequence.on(.Next(2))
+sequence.on(.Next(3))
+}
+&mdash; takeWhile example &mdash;
+Next(1)
+Completed
+{% endcodeblock %}</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-03-03</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/SDK/>SDK</a></div><nav class=post-nav><a class=prev href=/post/old/macOS/%E4%BB%8EUIKit%E5%88%B0AppKit/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">从UIKit到AppKit</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/swift/%E4%BA%92%E5%8A%A8%E6%80%A7%E7%9A%84%E6%95%99%E5%AD%A6%E5%B7%A5%E5%85%B7XCPlayground/><span class="next-text nav-default">互动性的教学工具XCPlayground</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-03-03 13:01:41 +0000 UTC",title:"RxSwift基本概念",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

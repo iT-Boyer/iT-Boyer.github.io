@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PDF on 习七</title><link>https://it-boyer.github.io/tags/PDF/</link><description>Recent content in PDF on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Fri, 08 Sep 2017 18:48:43 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/PDF/index.xml" rel="self" type="application/rss+xml"/><item><title>支持OSX浏览PDF简单视图</title><link>https://it-boyer.github.io/post/old/macOS/%E6%94%AF%E6%8C%81OSX%E6%B5%8F%E8%A7%88PDF%E7%AE%80%E5%8D%95%E8%A7%86%E5%9B%BE/</link><pubDate>Fri, 08 Sep 2017 18:48:43 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/macOS/%E6%94%AF%E6%8C%81OSX%E6%B5%8F%E8%A7%88PDF%E7%AE%80%E5%8D%95%E8%A7%86%E5%9B%BE/</guid><description>&lt;p&gt;运行scheme： &lt;code&gt;PDFReaderForOSX&lt;/code&gt; 即可&lt;/p&gt;
+&lt;p&gt;{% github it-boyer PDFReader 737a7e %}&lt;/p&gt;
+&lt;h2&gt;支持iOS&lt;/h2&gt;
+&lt;p&gt;pageViewController: pdf翻页效果视图控制器
+startingViewController:DataViewController,翻页视图控制器的视图源
+modelController:ModelController:NSObject,数据视图数据源的model模型。&lt;/p&gt;</description></item><item><title>mupdf使用说明</title><link>https://it-boyer.github.io/post/old/%E7%BC%96%E8%AF%91/mupdf%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link><pubDate>Mon, 19 Jun 2017 18:25:32 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E7%BC%96%E8%AF%91/mupdf%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid><description>&lt;h3&gt;需求描述&lt;/h3&gt;
+&lt;p&gt;目前手机端使用mupdf，通过在底层添加加密方法实现定制pbb阅读器功能。
+资源获取如下：
+{% blockquote %}
+Download packages of the latest release for your system:
+Source code for all platforms.
+Windows viewer and tools.
+Android viewer on Google Play.
+Android viewer APK installer files.
+iPad and iPhone version on the App Store.
+The latest development source is available directly from the git repository:
+git clone &amp;ndash;recursive git://git.ghostscript.com/mupdf.git
+{% endblockquote %}&lt;/p&gt;</description></item><item><title>macOS之PDFKit基础</title><link>https://it-boyer.github.io/post/old/macOS/macOS%E4%B9%8BPDFKit%E5%9F%BA%E7%A1%80/</link><pubDate>Tue, 14 Feb 2017 14:29:18 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/macOS/macOS%E4%B9%8BPDFKit%E5%9F%BA%E7%A1%80/</guid><description>&lt;p&gt;一个PDF的基本构建块是Documents本身。Documents通常作为文件存储在磁盘上。
+作为文件版本，可以支持元数据标记如作者，创建日期，等等。
+一个文件可以加密，需要密码才能查看它。两级加密存在：&lt;/p&gt;</description></item></channel></rss>

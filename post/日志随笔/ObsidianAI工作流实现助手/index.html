@@ -1,0 +1,513 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>QuickAdd 插件实现 ObsidianAI 工作流助手 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="博客简介"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/ObsidianAI%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%AE%9E%E7%8E%B0%E5%8A%A9%E6%89%8B/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/ObsidianAI%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%AE%9E%E7%8E%B0%E5%8A%A9%E6%89%8B/"><meta property="og:site_name" content="习七"><meta property="og:title" content="QuickAdd 插件实现 ObsidianAI 工作流助手"><meta property="og:description" content="博客简介"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-06-05T00:05:00+08:00"><meta property="article:modified_time" content="2023-06-05T00:05:00+08:00"><meta itemprop=name content="QuickAdd 插件实现 ObsidianAI 工作流助手"><meta itemprop=description content="博客简介"><meta itemprop=datePublished content="2023-06-05T00:05:00+08:00"><meta itemprop=dateModified content="2023-06-05T00:05:00+08:00"><meta itemprop=wordCount content="5782"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="QuickAdd 插件实现 ObsidianAI 工作流助手"><meta name=twitter:description content="博客简介"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>QuickAdd 插件实现 ObsidianAI 工作流助手</h1><div class=post-meta><span class=post-time>2023-06-05 </span><span class=more-meta>约 5782 字 </span><span class=more-meta>预计阅读 12 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by
+<a href=/authors/iTBoyer>iTBoyer</a></span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#from-0-to-ai-powered>从0到AI驱动</a></li><li><a href=#the-ai-assistant-settings>The AI Assistant Settings</a></li><li><a href=#my-ai-powered-workflows>My AI-Powered Workflows</a><ul><li><a href=#generating-writing-prompts>Generating writing prompts</a></li><li><a href=#moc-creator>MOC Creator</a></li><li><a href=#summarizer>Summarizer</a></li><li><a href=#transform-selected>Transform selected</a></li><li><a href=#flashcard-creator>Flashcard creator</a></li><li><a href=#get-me-started-writing-about>Get me started writing about…</a></li><li><a href=#manual-prompt>Manual prompt</a></li><li><a href=#alternative-viewpoints>Alternative viewpoints</a></li><li><a href=#prompt-chaining>Prompt Chaining</a></li><li><a href=#summarize-book-notes>Summarize book notes</a></li><li><a href=#actionable-takeaways>Actionable takeaways</a></li><li><a href=#youtube-summarizer>YouTube Summarizer</a></li></ul></li><li><a href=#final-words>Final words</a></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2023-06-05T00:05:00 title="June 5, 2023">June 5, 2023</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>如果你能利用 Obsidian 中现有的所有工作流程,通过几个简单步骤就添加人工智能的功能,那会是什么样的体验?</p><p>想象一下:</p><ul><li>创建一个新笔记,人工智能会根据你已经建立的链接推荐写作提建议,这样你就不会再面临空白页面。</li><li>在写笔记时,人工智能可以作为知识搏斗的伙伴。</li><li>通过简单的英语指示轻松改变你写作的结构。</li></ul><p>以上这些,以及更多功能,现在都可以在 Obsidian 中实现。</p><p>用于 QuickAdd 的新人工智能助手是一个强大的工具,它集成了 OpenAI 的 GPT-3 和GPT-4模型,在你的思维环境中提供功能强大的人工智能助手。它可以自动化琐碎的任务,节省时间专注于重要的事情,并通过作为知识对手来增强你的思考。</p><p>你只需要 QuickAdd 插件和一个<a href=https://platform.openai.com>OpenAI API 密钥</a>。这里有<a href=https://tfthacker.medium.com/how-to-get-your-own-api-key-for-using-openai-chatgpt-in-obsidian-41b7dd71f8d3>TfTHacker 的精彩指南</a>来获取这样的 API 密钥。</p><p>这里有一个 <a href=https://twitter.com/chrisbbh/status/1647670976035815424>Twitter 主题</a> 展示了你可以用人工智能助手做什么。我将在本指南中展示所有这些示例。</p><h2 id=from-0-to-ai-powered><a href=https://bagerbach.com/blog/obsidian-ai#from-0-to-ai-powered>从0到AI驱动</a></h2><ol><li>在 Obsidian 中,创建一个AI提示模板文件夹。记住这个文件夹的路径,以后会需要。例如 <code>bins/ai_prompts</code> 。</li><li>打开 QuickAdd 设置。打开 “AI Assistant” 设置,将其路径设置为AI提示模板文件夹。</li><li>在同一选项卡设置中,将 OpenAI API 密钥粘贴到"OpenAI API 密钥"字段中。</li></ol><p>这就是所有的设置了。现在你可以使用AI助手了。</p><p>基本思想是设置一个 QuickAdd 宏,它将触发AI助手。AI助手将使用你指定的提示模板生成一个提示,然后将其发送到 OpenAI。OpenAI 将返回一个响应,AI助手将该响应传递给 QuickAdd 宏。然后,您可以在宏的后续步骤中使用该响应,例如捕获到笔记或创建新笔记。</p><p><strong>创建提示模板很简单:只需在提示模板文件夹中创建一个笔记。</strong></p><p>你可以使用 <a href=https://quickadd.obsidian.guide/docs/FormatSyntax>QuickAdd格式语法</a>或<a href=https://quickadd.obsidian.guide/docs/InlineScripts>QuickAdd内嵌脚本</a>的任何语法。您将在<a href=https://bagerbach.com/blog/obsidian-ai#my-ai-powered-workflows>我的工作流部分</a>中看到一些此功能的强大示例。</p><p>这里有一个非常简单的示例设置,仅仅通过几个步骤就从0到AI驱动。</p><p>我有一个AI提示模板文件夹,如推荐。我的基本AI助手宏设置只使用AI助手和捕获,如上图GIF所示。</p><p>插入当前文档唯一的区别是我的捕获使用以下捕获格式:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>{{selected}}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>{{value:output}}
+</span></span></code></pre></td></tr></table></div></div><p><code>{{selected}}</code> 可以为空或选择的任何文本,这使得它非常适合在活动文件中使用AI。 <code>{{value:output}}</code> 是助手的输出。</p><p>但是AI助手可以被用作更复杂宏中的构建块,正如我们将看到的。</p><h2 id=the-ai-assistant-settings><a href=https://bagerbach.com/blog/obsidian-ai#the-ai-assistant-settings>The AI Assistant Settings</a></h2><p>在 AI 助手的主要设置中,可以通过 QuickAdd 设置访问,您可以设置以下选项:</p><ul><li>OpenAI 的API密钥</li><li>提示模板文件夹,包含您的所有提示模板</li><li>默认模型,确定 OpenAI 将使用的模型</li><li>是否显示助手,用于切换状态消息</li><li>默认系统提示模板,将确定模型的行为</li></ul><style>.foo img{border:2px solid #000}</style><figure class=foo><img src="https://bagerbach.com/_next/image?url=%2Fuploads%2FAI_Assistant_Settings.png&amp;w=3840&amp;q=75" alt="Org mode logo" width=300></figure><p>然后,对于宏中的每个AI助手命令,您可以设置以下选项:</p><ul><li>提示模板,确定要使用的提示模板。如果不指定,AI助手将要求您从提示模板文件夹中选择一个。</li><li>模型,确定 OpenAI 将使用的模型。这将覆盖主设置中设置的默认模型。</li><li>输出名称变量,确定将包含AI助手输出的变量的名称。如果要在宏的后续步骤中使用输出,这很有用。默认情况下,这是 <code>output</code>,即 <code>{{value:output}}</code> 。还将有一个 <code>{{value:output-quoted}}</code> 变量,其中将包含输出,但使用 markdown 块引用格式。例如,如果要在提示中使用输出,这很有用。</li><li>系统提示模板,确定模型的行为。这将覆盖主设置中设置的默认系统提示模板。</li></ul><figure><img src="https://bagerbach.com/_next/image?url=%2Fuploads%2FAI_Assistant_Command_Settings.png&amp;w=3840&amp;q=75"></figure><h2 id=my-ai-powered-workflows><a href=https://bagerbach.com/blog/obsidian-ai#my-ai-powered-workflows>My AI-Powered Workflows</a></h2><p>下面是我在工作中发现的一些有用的工作流。</p><p>我将整个提示模板作为一个整体包括在内,以便您可以将其复制并粘贴到自己的AI提示模板文件夹中。这些工作流中的一些涉及一些脚本编程,但我试图注释代码,以便易于理解您正在运行的内容。</p><h3 id=generating-writing-prompts><a href=https://bagerbach.com/blog/obsidian-ai#generating-writing-prompts>Generating writing prompts</a></h3><p>输入链接,AI 根据与该笔记相关的笔记生成10个写作提示。</p><p>这个提示模板使用 Dataview (必需的插件)来获取与您输入的笔记相关的所有笔记。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>这里是与{{value:Link}}相关的 Obsidian(Markdown)链接列表。
+</span></span><span class=line><span class=cl>请使用这些链接以项目符号形式给出关于{{value:Link}}的10个写作提示。
+</span></span><span class=line><span class=cl>在段落中将链接作为句子的一部分使用。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>``<span class=sb>`js quickadd
+</span></span></span><span class=line><span class=cl><span class=sb>//使用DataView API的简称
+</span></span></span><span class=line><span class=cl><span class=sb>const dv = DataviewAPI;
+</span></span></span><span class=line><span class=cl><span class=sb>//提示用户输入MoC笔记的链接
+</span></span></span><span class=line><span class=cl><span class=sb>const targetLink = await this.quickAddApi.inputPrompt(
+</span></span></span><span class=line><span class=cl><span class=sb>    &#39;MoC链接&#39;,
+</span></span></span><span class=line><span class=cl><span class=sb>    &#34;输入我们将使用的链接以获取所有与其链接的笔记。&#34;
+</span></span></span><span class=line><span class=cl><span class=sb>);
+</span></span></span><span class=line><span class=cl><span class=sb>this.variables[&#39;Link&#39;] = targetLink;
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>//获取与目标链接链接的所有笔记的列表
+</span></span></span><span class=line><span class=cl><span class=sb>const healthPages = dv.pages(targetLink).values;
+</span></span></span><span class=line><span class=cl><span class=sb>//将笔记格式化为[[links]]
+</span></span></span><span class=line><span class=cl><span class=sb>const links = healthPages.map((f) =&gt; {
+</span></span></span><span class=line><span class=cl><span class=sb>    const tf = app.vault.getAbstractFileByPath(f.file.path);
+</span></span></span><span class=line><span class=cl><span class=sb>    return app.fileManager.generateMarkdownLink(tf, &#39;/&#39;);
+</span></span></span><span class=line><span class=cl><span class=sb>});
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>//将列表连接起来,使其成为文本格式,每个链接占一行
+</span></span></span><span class=line><span class=cl><span class=sb>return links.join(&#39;\n&#39;);
+</span></span></span><span class=line><span class=cl><span class=sb>`</span>``
+</span></span></code></pre></td></tr></table></div></div><h3 id=moc-creator><a href=https://bagerbach.com/blog/obsidian-ai#moc-creator>MOC Creator</a></h3><p>这是我在 <a href=https://twitter.com/chrisbbh/status/1647670981417156609>Twitter工作流</a> 中展示的MOC大纲创建者。生成文档导航和内容这是一个改进版本,与上面的提示一样,它会要求您输入一个链接,然后为该笔记生成一个MOC。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>这里是与{{value:Link}}相关的Obsidian(Markdown)链接列表。
+</span></span><span class=line><span class=cl>请使用这些链接为关于{{value:Link}}的笔记写出大纲。最多不超过200字。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>在段落中将markdown链接作为句子的一部分使用。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>``<span class=sb>`js quickadd
+</span></span></span><span class=line><span class=cl><span class=sb>//使用DataView API的简称
+</span></span></span><span class=line><span class=cl><span class=sb>const dv = DataviewAPI;
+</span></span></span><span class=line><span class=cl><span class=sb>//提示用户输入MoC笔记的链接
+</span></span></span><span class=line><span class=cl><span class=sb>const targetLink = await this.quickAddApi.inputPrompt(
+</span></span></span><span class=line><span class=cl><span class=sb>    &#39;MoC链接&#39;,
+</span></span></span><span class=line><span class=cl><span class=sb>    &#34;输入我们将使用的链接以获取所有与其链接的笔记。&#34;
+</span></span></span><span class=line><span class=cl><span class=sb>);
+</span></span></span><span class=line><span class=cl><span class=sb>this.variables[&#39;Link&#39;] = targetLink;
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>//获取与目标链接链接的所有笔记的列表
+</span></span></span><span class=line><span class=cl><span class=sb>const healthPages = dv.pages(targetLink).values;
+</span></span></span><span class=line><span class=cl><span class=sb>//将笔记格式化为[[links]]
+</span></span></span><span class=line><span class=cl><span class=sb>const links = healthPages.map((f) =&gt; {
+</span></span></span><span class=line><span class=cl><span class=sb>    const tf = app.vault.getAbstractFileByPath(f.file.path);
+</span></span></span><span class=line><span class=cl><span class=sb>    return app.fileManager.generateMarkdownLink(tf, &#39;/&#39;);
+</span></span></span><span class=line><span class=cl><span class=sb>});
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>//将列表连接起来,使其成为文本格式,每个链接占一行
+</span></span></span><span class=line><span class=cl><span class=sb>return links.join(&#39;\n&#39;);
+</span></span></span><span class=line><span class=cl><span class=sb>`</span>``
+</span></span></code></pre></td></tr></table></div></div><h4 id=moc-creator-with-content><a href=https://bagerbach.com/blog/obsidian-ai#moc-creator-with-content>MOC Creator with content</a></h4><p>这是MOC创建者的延伸,它还包括您要为其创建MOC的笔记的内容。文档导航和内容</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>这里是与{{value:Link}}相关的Obsidian(Markdown)链接列表,以及它们的内容。
+</span></span><span class=line><span class=cl>请使用这些链接为关于{{value:Link}}的笔记写出大纲，最不超过多200个词。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>在段落中将markdown链接作为句子的一部分使用。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>``<span class=sb>`js quickadd
+</span></span></span><span class=line><span class=cl><span class=sb>//使用DataView API的简称
+</span></span></span><span class=line><span class=cl><span class=sb>const dv = DataviewAPI;
+</span></span></span><span class=line><span class=cl><span class=sb>//提示用户输入MoC笔记的链接
+</span></span></span><span class=line><span class=cl><span class=sb>const targetLink = await this.quickAddApi.inputPrompt(
+</span></span></span><span class=line><span class=cl><span class=sb>    &#34;MoC链接&#34;,
+</span></span></span><span class=line><span class=cl><span class=sb>    &#34;输入我们将使用的链接以获取所有与其链接的笔记。&#34;
+</span></span></span><span class=line><span class=cl><span class=sb>);
+</span></span></span><span class=line><span class=cl><span class=sb>this.variables[&#34;Link&#34;] = targetLink;
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>//获取与目标链接链接的所有笔记的列表
+</span></span></span><span class=line><span class=cl><span class=sb>const healthPages = dv.pages(targetLink).values;
+</span></span></span><span class=line><span class=cl><span class=sb>//将笔记格式化为[[links]]
+</span></span></span><span class=line><span class=cl><span class=sb>const links = await Promise.all(healthPages.map(async f =&gt; {
+</span></span></span><span class=line><span class=cl><span class=sb>    const tf = app.vault.getAbstractFileByPath(f.file.path);
+</span></span></span><span class=line><span class=cl><span class=sb>    const fileContent = await app.vault.cachedRead(tf);
+</span></span></span><span class=line><span class=cl><span class=sb>    const link = app.fileManager.generateMarkdownLink(tf, &#39;/&#39;);
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>    return `</span>## ${link}\n${fileContent}<span class=sb>`
+</span></span></span><span class=line><span class=cl><span class=sb>}));
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>//将列表连接起来,使其成为文本格式,每个链接占一行
+</span></span></span><span class=line><span class=cl><span class=sb>return links.join(&#34;\n&#34;);
+</span></span></span><span class=line><span class=cl><span class=sb>`</span>``
+</span></span></code></pre></td></tr></table></div></div><h3 id=summarizer><a href=https://bagerbach.com/blog/obsidian-ai#summarizer>Summarizer</a></h3><p>这是一个简单的提示,您选择一些文本,然后使用该提示调用助手。然后,它将吐出一个AI生成的摘要:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>请摘要如下文本。仅使用文本本身作为摘要材料,不要添加任何新内容。为简洁起见,以大纲形式重写此内容:
+</span></span><span class=line><span class=cl>{{value}}
+</span></span></code></pre></td></tr></table></div></div><h3 id=transform-selected><a href=https://bagerbach.com/blog/obsidian-ai#transform-selected>Transform selected</a></h3><p>这个提示模板将要求您提供说明,它将使用这些说明来转换您选择的文本。</p><p>它基本上可以做任何事情 - 不仅仅是转换。</p><p>您可以通过提供与摘要提示中类似的说明来要求它概述文本,解释您选择的文本,以大纲形式重写某些内容,或任何您想要的内容。</p><p>我要求它通过使用符号作为参考来解释我选择的 LaTeX 方程式,它完美地解释了每个符号以及整个公式。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>说明:
+</span></span><span class=line><span class=cl>{{VALUE:Instructions}}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>请按上述说明转换文本:
+</span></span><span class=line><span class=cl>{{selected}}
+</span></span></code></pre></td></tr></table></div></div><h3 id=flashcard-creator><a href=https://bagerbach.com/blog/obsidian-ai#flashcard-creator>Flashcard creator</a></h3><p>这个提示模板根据选择的文本生成背诵卡。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>请以以下形式创建记忆卡:
+</span></span><span class=line><span class=cl>Q: 问题在这里
+</span></span><span class=line><span class=cl>A: 答案在这里
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>问题应该简洁、简明、简单,不应该是一个双重问题。避免一般性问题和双重否定问题。
+</span></span><span class=line><span class=cl>答案也应该简短简单。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>如果无法将材料包含在一个问题中,请创建多个记忆卡。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>{{value}}
+</span></span></code></pre></td></tr></table></div></div><h3 id=get-me-started-writing-about><a href=https://bagerbach.com/blog/obsidian-ai#get-me-started-writing-about>Get me started writing about&mldr;</a></h3><p>为了启动您的写作:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>我正在写关于{{value:Topic}}的文章。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>请给我一些要点来开始:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>- 相关主题是什么?
+</span></span><span class=line><span class=cl>- 主题的基础知识是什么?
+</span></span><span class=line><span class=cl>- 为什么创建&#34;{{value:Topic}}&#34;主题?
+</span></span><span class=line><span class=cl>- 它解决了什么问题?
+</span></span></code></pre></td></tr></table></div></div><h3 id=manual-prompt><a href=https://bagerbach.com/blog/obsidian-ai#manual-prompt>Manual prompt</a></h3><p>我认为这几乎是必不可少的。它类似于简单地打开 ChatGPT 并提示它。</p><p>该模板将要求您提供一些输入,这是整个提示。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>{{value}}
+</span></span></code></pre></td></tr></table></div></div><p>这也是我在简单设置示例中演示的一个模板。</p><p>它允许您输入任何 Prompt,将其发送到AI,并将其响应捕获到宏中以进行进一步使用。非常强大,几乎可以实现任何功能。</p><h3 id=alternative-viewpoints><a href=https://bagerbach.com/blog/obsidian-ai#alternative-viewpoints>Alternative viewpoints</a></h3><p>当我陷入困境时,这个模板对我很有帮助。从另一个角度看问题总是很好的。您需要选择一些文本(您的草稿),然后在提示时输入一个主题。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>我正在写关于{{value:Topic}}的文章。这里是我的草稿:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>{{value}}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>请提出3个改进建议,3个不同观点和3个用于进一步思考的问题。
+</span></span></code></pre></td></tr></table></div></div><p>它会分析您的草稿并提供:</p><ul><li>3个改进建议 - 可以改进的方面</li><li>3个不同观点 - 另一种看问题的方式</li><li>3个问题进行进一步思考 - 推动您在写作中更深入思考的问题</li></ul><p>这真的有助于打破思维定势,找到新的灵感来源,并激发创造性思维。人工智能可以以全新的方式审视问题,这真的很有价值。</p><p>我经常在写作时使用这个模板。它不仅可以解决特定的写作难题,还可以在更广泛的层面上扩展我的思维。</p><h3 id=prompt-chaining><a href=https://bagerbach.com/blog/obsidian-ai#prompt-chaining>Prompt Chaining</a></h3><p>好的,让我们来看一些更高级的东西。</p><p>提示链是指一个提示使用前一个提示的输出。从本质上讲,您正在使AI逐步思考——就像遵循配方。</p><p><a href=https://twitter.com/chrisbbh/status/1647670986496520193>这里有一个疯狂的例子可以生成初创企业名称→商业计划、目标用户等→为您提供一步一步的实施指南</a>。</p><p>正如我前面提到的,AI助手可以被视为一个建筑块。您可以把它们堆叠在一起以获得强大的结果。</p><p>这里有三个提示的堆栈,每个提示都使用前一个提示的结果。</p><figure><img src="https://bagerbach.com/_next/image?url=%2Fuploads%2FAI_Assistant_Chainprompt_1.png&amp;w=3840&amp;q=75"></figure><p>当您配置每个提示以具有特定设置时,您可以完全自动化它:</p><figure><img src="https://bagerbach.com/_next/image?url=%2Fuploads%2FAI_Assistant_Chainprompt.png&amp;w=3840&amp;q=75"></figure><p>例如,这是第一步。它使用 <code>ChainPrompt1</code> 模板并在 <code>{{value:out1}}</code> 中输出其值。而且由于这是一个宏,每个输出变量可以在后续步骤中使用。</p><p>通过堆叠助手许多次并使用每个步骤消耗前一个步骤的输出变量的模板,我们得到了提示链。</p><p>最终捕获的格式如下:</p><figure><img src="https://bagerbach.com/_next/image?url=%2Fuploads%2FAI_assistant_Chainprompting_2.jpeg&amp;w=3840&amp;q=75"></figure><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>## Iteration 1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>{{value:out1}}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## Iteration 2
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>{{value:out2}}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>## Output
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>{{value:out_final}}
+</span></span></code></pre></td></tr></table></div></div><h3 id=summarize-book-notes><a href=https://bagerbach.com/blog/obsidian-ai#summarize-book-notes>Summarize book notes</a></h3><p>这是我使用AI助手构建的第一个工作流之一。</p><p>这里是我以前将书籍笔记导入 Obsidian 的工作流程:</p><ol><li>从 Readwise 获取高亮部分</li><li>在笔记本中创建笔记</li></ol><p>新的AI驱动的工作流程:</p><ol><li>从 Readwise 获取高亮部分</li><li>AI助手根据高亮部分概括书籍</li><li>在笔记本中创建带有摘要的笔记</li></ol><p>核心工作流程实际上是相同的。我只需要选择一本书,就可以导入,所以我的输入没有改变。</p><figure><img src="https://bagerbach.com/_next/image?url=%2Fuploads%2FAI_Assistant_Book_Summary.jpeg&amp;w=3840&amp;q=75"></figure><p>您也可以获得这个工作流程!这里是我们需要设置的宏:</p><figure><img src="https://bagerbach.com/_next/image?url=%2Fuploads%2FAI_Assistant_Book_Summary_Macro.png&amp;w=3840&amp;q=75"></figure><p>第一个和最后一个步骤都来自我的博客文章<a href=https://bagerbach.com/blog/importing-source-notes-to-obsidian>我如何将文献笔记导入Obsidian</a>。如果您以前已经遵循过,您需要再次这样做,因为我最近更新了脚本和说明,以实现更强大的工作流程(在制作AI助手之前)。</p><p>中间步骤是AI助手。您需要将其设置为使用GPT-4模型以获得更大的上下文大小。我发现GPT-3.5对于这个任务来说太局限了。然后,您需要配置AI助手使用特定的模板,我称之为 <code>概括书籍笔记</code> 。</p><p>这里是模板:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>请概括如下书籍&#34;{{value:title}}&#34;作者{{value:author}}。仅使用文本本身作为摘要材料,不要添加任何新内容。为简洁起见重写此内容:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>{{value:highlights}}
+</span></span></code></pre></td></tr></table></div></div><p>这些值中的每一个都来自 EzImport 脚本,这就是为什么宏的排序必须是 EzImport → AI助手 → 捕获。</p><p>所以,请先按照<a href=https://bagerbach.com/blog/importing-source-notes-to-obsidian>指南</a>进行操作。在工作流程的中间注入AI助手,设置如上所示&mldr;就是这样。</p><p>除了摘要之外,您可以在宏中添加另一个步骤来创建可操作的要点。使用下面的模板进行此操作。</p><p>最后,这里是我用于所有书籍笔记的书籍笔记模板。非AI版本在上述指南中找到:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>image:
+</span></span><span class=line><span class=cl>tags: in/books state/process
+</span></span><span class=line><span class=cl>aliases:
+</span></span><span class=line><span class=cl>  <span class=k>-</span> &#34;{{VALUE:title}}&#34;
+</span></span><span class=line><span class=cl>cssclass:
+</span></span><span class=line><span class=cl>lastHighlightAt: {{VALUE:lastHighlightAt}}
+</span></span><span class=line><span class=cl>shouldPublish: true
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gh># {{VALUE:title}}
+</span></span></span><span class=line><span class=cl><span class=gh></span>
+</span></span><span class=line><span class=cl><span class=gu>## 元数据
+</span></span></span><span class=line><span class=cl><span class=gu></span>标签:: {{VALUE:tags}}
+</span></span><span class=line><span class=cl>类型:: [[{]]
+</span></span><span class=line><span class=cl>作者:: {{VALUE:author}}
+</span></span><span class=line><span class=cl>参考::
+</span></span><span class=line><span class=cl>评级:: {{VALUE:10,9,8,7,6,5,4,3,2,1,0}}
+</span></span><span class=line><span class=cl>审阅日期:: ==更新此处==
+</span></span><span class=line><span class=cl>完成年份:: [[{{DATE:gggg}}]]
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gh># 想法
+</span></span></span><span class=line><span class=cl><span class=gh></span>
+</span></span><span class=line><span class=cl><span class=gh># 采取的行动/变化
+</span></span></span><span class=line><span class=cl><span class=gh></span><span class=k>&gt; </span><span class=ge>[!todo] 可操作要点 - AI
+</span></span></span><span class=line><span class=cl><span class=ge></span>{{value:actionable-takeaways-quoted}}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gh># 主要要点摘要
+</span></span></span><span class=line><span class=cl><span class=gh></span><span class=k>&gt; </span><span class=ge>[!tip] AI 摘要
+</span></span></span><span class=line><span class=cl><span class=ge></span>{{value:summary-quoted}}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=gh># 高亮和笔记
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=actionable-takeaways><a href=https://bagerbach.com/blog/obsidian-ai#actionable-takeaways>Actionable takeaways</a></h3><p>根据您提供的文本创建可操作的要点。这需要一个 <code>summary</code> 变量,您可以从宏中的前一步(例如使用“概括书籍笔记”工作流程)获得。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>根据以下文本编写可操作的要点。编写一步一步的计划。首先给我一些我可以立即采取行动的东西,然后告诉我根据文本我还可以做什么。使用80/20原则优先考虑最重要的要点。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>{{value:summary}}
+</span></span></code></pre></td></tr></table></div></div><h3 id=youtube-summarizer><a href=https://bagerbach.com/blog/obsidian-ai#youtube-summarizer>YouTube Summarizer</a></h3><p>这个提示模板将允许您获取 YouTube 视频的字幕,然后对其进行摘要。</p><p>您需要提供的只是希望创建新笔记时的 YouTube 视频 URL。</p><p>我将此与<a href=https://bagerbach.com/blog/obsidian-ai#actionable-takeaways>Actionable takeaways</a>提示模板结合使用,以创建具有摘要和可操作要点的笔记。</p><p>因此,我的宏看起来像这样:</p><ol><li>YouTube 摘要 - AI助手步骤获取字幕并进行摘要。它还为下一步设置了几个变量。</li><li>可操作要点 - AI助手步骤根据摘要创建可操作要点。</li><li>创建笔记 - 创建具有视频标题、摘要和可操作要点的新笔记。</li></ol><p>第三步- 创建新笔记 - 是一个模板操作,它创建一个文件名为 <code>+ {{VALUE:safeTitle}}</code> 的新笔记。 <code>safeTitle</code> 来自宏的第一步,表示视频的标题,但移除了所有非法字符。</p><p>对YT摘要的GPT-4限制似乎是~20分钟的视频长度。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>请对以下文本进行摘要。仅使用文本本身作为摘要材料,不要添加任何新内容。为简洁起见,以提纲形式重写:
+</span></span><span class=line><span class=cl>``<span class=sb>`js quickadd
+</span></span></span><span class=line><span class=cl><span class=sb>const videoUrl = await this.quickAddApi.inputPrompt(&#34;Video URL&#34;);
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>const url = new URL(videoUrl);
+</span></span></span><span class=line><span class=cl><span class=sb>const videoId = url.searchParams.get(&#39;v&#39;);
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>this.variables[&#34;📺 YouTube Video ID&#34;] = videoId;
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>const transcriptBody = await requestUrl(`</span>https://youtubetranscript.com/?server_vid=${videoId}<span class=sb>`).text;
+</span></span></span><span class=line><span class=cl><span class=sb>const videoPage = await requestUrl(videoUrl).text;
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>console.log(transcriptBody);
+</span></span></span><span class=line><span class=cl><span class=sb>console.log(videoPage);
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>const dp = new DOMParser();
+</span></span></span><span class=line><span class=cl><span class=sb>const dom = dp.parseFromString(transcriptBody, &#39;text/xml&#39;);
+</span></span></span><span class=line><span class=cl><span class=sb>const transcriptEl = dom.getElementsByTagName(&#39;transcript&#39;)[0];
+</span></span></span><span class=line><span class=cl><span class=sb>if (!transcriptEl) {
+</span></span></span><span class=line><span class=cl><span class=sb>    new Notice(&#34;No transcript found.&#34;);
+</span></span></span><span class=line><span class=cl><span class=sb>    throw new Error(&#34;No transcript found.&#34;)
+</span></span></span><span class=line><span class=cl><span class=sb>}
+</span></span></span><span class=line><span class=cl><span class=sb>const textElements = transcriptEl.getElementsByTagName(&#39;text&#39;);
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>const textArr = [];
+</span></span></span><span class=line><span class=cl><span class=sb>for (let i = 0; i &lt; textElements.length; i++) {
+</span></span></span><span class=line><span class=cl><span class=sb>  const text = textElements[i];
+</span></span></span><span class=line><span class=cl><span class=sb>  textArr.push(text.textContent);
+</span></span></span><span class=line><span class=cl><span class=sb>}
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>const transcript = textArr.join(&#34;\n&#34;);
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>const title = videoPage.split(&#39;&#39;)[1].split(&#39;&#39;)[0].replace(&#34; - YouTube&#34;, &#39;&#39;).trim();
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>function sanitizeFileName(fileName) {
+</span></span></span><span class=line><span class=cl><span class=sb>  const illegalChars = /[\/\?&lt;&gt;\\:\*\|&#34;]/g;
+</span></span></span><span class=line><span class=cl><span class=sb>  const undesiredChars = /&#34;/g;
+</span></span></span><span class=line><span class=cl><span class=sb>  const replacementChar = &#39;_&#39;;
+</span></span></span><span class=line><span class=cl><span class=sb>  return fileName.replace(illegalChars, replacementChar).replace(undesiredChars, &#34;&#34;);
+</span></span></span><span class=line><span class=cl><span class=sb>}
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>function sanetizeTitle(text) {
+</span></span></span><span class=line><span class=cl><span class=sb>  const undesiredChars = /&#34;/g;
+</span></span></span><span class=line><span class=cl><span class=sb>  const replacementChar = &#34;&#34;;
+</span></span></span><span class=line><span class=cl><span class=sb>  return text.replace(undesiredChars, replacementChar);
+</span></span></span><span class=line><span class=cl><span class=sb>}
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>this.variables[&#34;title&#34;] = sanetizeTitle(title);
+</span></span></span><span class=line><span class=cl><span class=sb>this.variables[&#34;safeTitle&#34;] = sanitizeFileName(title);
+</span></span></span><span class=line><span class=cl><span class=sb>
+</span></span></span><span class=line><span class=cl><span class=sb>return transcript;
+</span></span></span><span class=line><span class=cl><span class=sb>`</span>``
+</span></span></code></pre></td></tr></table></div></div><p>这里是我的 YouTube 视频笔记模板:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>tags: in/video state/process
+</span></span><span class=line><span class=cl>aliases:
+</span></span><span class=line><span class=cl>  <span class=k>-</span> &#34;+ {{VALUE:title}}&#34;
+</span></span><span class=line><span class=cl>cssclass: null
+</span></span><span class=line><span class=cl>image: https://i.ytimg.com/vi/{{VALUE:📺 YouTube Video ID}}/hqdefault.jpg
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Title:: {{VALUE:title}}
+</span></span><span class=line><span class=cl>Type:: [[+]]
+</span></span><span class=line><span class=cl>Tags::
+</span></span><span class=line><span class=cl>URL:: https://www.youtube.com/watch?v={{VALUE:📺 YouTube Video ID}}
+</span></span><span class=line><span class=cl>Channel::
+</span></span><span class=line><span class=cl>Rating:: {{VALUE:10,9,8,7,6,5,4,3,2,1,0}}
+</span></span><span class=line><span class=cl>Reference::
+</span></span><span class=line><span class=cl>Publish Date::
+</span></span><span class=line><span class=cl>Reviewed Date:: ==UPDATE THIS==
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;center&gt;&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/{{VALUE:📺 YouTube Video ID}}&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>---
+</span></span><span class=line><span class=cl><span class=k>&gt; </span><span class=ge>[!info] AI Summary
+</span></span></span><span class=line><span class=cl><span class=ge></span>{{value:summary-quoted}}
+</span></span><span class=line><span class=cl><span class=k>
+</span></span></span><span class=line><span class=cl><span class=k>&gt; </span><span class=ge>[!todo] Actionable Takeaways
+</span></span></span><span class=line><span class=cl><span class=ge></span>{{value:actionable-takeaways-quoted}}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;% tp.file.cursor(0) %&gt;
+</span></span></code></pre></td></tr></table></div></div><h2 id=final-words><a href=https://bagerbach.com/blog/obsidian-ai#final-words>Final words</a></h2><p>这还处于初期阶段。我有那么多的工作流程想法,提示和其他我们可以与AI助手一起做的酷事情。</p><p>如果您有任何问题,请让我知道。所有我的提示模板也可以在AI助手的同一页面上找到。</p><p>我很想知道您如何在保险库中使用AI。欢迎在 Twitter 上@我。</p><p>请记住,使用API会产生货币成本。GPT-3.5相当便宜,但过度使用GPT-4可能会造成高昂的成本。出于这个原因,我强烈建议您在 OpenAI 账户上设置支出限额。尝试玩转模型以了解适合您的模型。</p><p>这个工具——以及AI一般来说——是一个重大的生产力乘数。它绝不应取代您的思考,只应增强它。让它处理PKM的琐碎部分,这样您可以专注于最重要的事情。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2023-06-05</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><nav class=post-nav><a class=prev href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AE%BE%E7%BD%AEmodeline%E6%92%AD%E6%94%BE%E7%8A%B6%E6%80%81/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">设置音频播放状态在modeline上的展示样式</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/roam/org-roam%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/><span class="next-text nav-default">org-roam新手入门</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2023-06-05 00:05:00 +0800 +0800",title:"QuickAdd 插件实现 ObsidianAI 工作流助手",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

@@ -1,0 +1,597 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>电子巡查项目设计 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content=" 工期预估 整改 录入 用例 时序图 类图 活动图 工期预估 整改 二级布局器入口配置/电子巡查底部详情 1 复用旧版电子整改管理列表(新增过滤器)待定页 1 电子巡查记录(列表/过滤器) 1 复用/详情页(数据源变更,新增视频类型) 1天
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E7%94%B5%E5%AD%90%E5%B7%A1%E6%9F%A5/%E7%94%B5%E5%AD%90%E5%B7%A1%E6%9F%A5%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E7%94%B5%E5%AD%90%E5%B7%A1%E6%9F%A5/%E7%94%B5%E5%AD%90%E5%B7%A1%E6%9F%A5%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/"><meta property="og:site_name" content="习七"><meta property="og:title" content="电子巡查项目设计"><meta property="og:description" content="工期预估 整改 录入 用例 时序图 类图 活动图 工期预估 整改 二级布局器入口配置/电子巡查底部详情 1 复用旧版电子整改管理列表(新增过滤器)待定页 1 电子巡查记录(列表/过滤器) 1 复用/详情页(数据源变更,新增视频类型) 1天"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2019-06-11T07:03:20+08:00"><meta property="article:modified_time" content="2019-06-11T07:03:20+08:00"><meta itemprop=name content="电子巡查项目设计"><meta itemprop=description content="工期预估 整改 录入 用例 时序图 类图 活动图 工期预估 整改 二级布局器入口配置/电子巡查底部详情 1 复用旧版电子整改管理列表(新增过滤器)待定页 1 电子巡查记录(列表/过滤器) 1 复用/详情页(数据源变更,新增视频类型) 1天"><meta itemprop=datePublished content="2019-06-11T07:03:20+08:00"><meta itemprop=dateModified content="2019-06-11T07:03:20+08:00"><meta itemprop=wordCount content="2369"><meta itemprop=keywords content="项目总结"><meta name=twitter:card content="summary"><meta name=twitter:title content="电子巡查项目设计"><meta name=twitter:description content="工期预估 整改 录入 用例 时序图 类图 活动图 工期预估 整改 二级布局器入口配置/电子巡查底部详情 1 复用旧版电子整改管理列表(新增过滤器)待定页 1 电子巡查记录(列表/过滤器) 1 复用/详情页(数据源变更,新增视频类型) 1天"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){"1234"&&prompt("请输入文章密码")!=="1234"&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>电子巡查项目设计</h1><div class=post-meta><span class=post-time>2019-06-11</span><div class=post-category><a href=/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/>项目总结</a></div><span class=more-meta>约 2369 字 </span><span class=more-meta>预计阅读 5 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#>工期预估</a></li><li><a href=#>用例</a></li><li><a href=#>时序图</a></li><li><a href=#>类图</a></li><li><a href=#>活动图</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2019-06-11T07:03:20 title="June 11, 2019">June 11, 2019</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><ul><li><a href=#%E5%B7%A5%E6%9C%9F%E9%A2%84%E4%BC%B0>工期预估</a><ul><li><a href=#%E6%95%B4%E6%94%B9>整改</a></li><li><a href=#%E5%BD%95%E5%85%A5>录入</a></li></ul></li><li><a href=#%E7%94%A8%E4%BE%8B>用例</a></li><li><a href=#%E6%97%B6%E5%BA%8F%E5%9B%BE>时序图</a></li><li><a href=#%E7%B1%BB%E5%9B%BE>类图</a></li><li><a href=#%E6%B4%BB%E5%8A%A8%E5%9B%BE>活动图</a></li></ul><h3>工期预估</h3><h4>整改</h4><p>二级布局器入口配置/电子巡查底部详情 1
+复用旧版电子整改管理列表(新增过滤器)待定页 1
+电子巡查记录(列表/过滤器) 1
+复用/详情页(数据源变更,新增视频类型) 1天</p><h4>录入</h4><p>电子巡查录入:
+重构录入界面UI/详情页UI(待定问题图片布局) 2天
+图片编辑器 1天
+检查 1
+联调接口串联业务层 1天<br><img src=http://www.plantuml.com/plantuml/png/XPBDRjD04CVl-nHpuuAbfW8aBZn3fHwZ75RsjZ5OjkNTYWzKoT2cIPf-54Y8A4qZ4qB2WRGWghPAA2-JNTjlmOOriUjMukJrpF-_E_EReJgs22m2OYQJXx1vnhyTyFD0TFlyl2-EkjF9QJXg8vtOZ7XG9jWW7ehzm-XtDJxonVVNqSac7mLtUMqh6lHKIEpKmyg0xtNvSOD_lEArjp8x7O_vTY260U-q4R6Dv2haUivZeZEW37kCmk92uQ6sy40h500jhza6VWxO8w1R3YK6MiPipSl5DErQrRzQlDBND5Iy6Iq1fb1qRCkqoH9cdcEL01mRNfRfwZg0XQaiu3x8-oagnjLTSRofZ65h9-vyKdQFKC8ihvJ82ubS2QEJBsAZ4WTdIcjv1c7OjF9Y2IMiLyF9--Zg3VymL6BNr8bXIifvjUZvieKuk8pzkcXydHiSbvcElKmiej_YcbxyY5urfnU7aheyHASROg_Fztl_AdDOUMQQjVzqPVswMQPiI5eAn-z4frk2CdPTObF0B8Vm3WLYpyR09puVD4JhfsXUybex2eQpCIJ_-zigf9vVCPyjMIPb2N_toHp_lQHyPGj7GNYmbNCgOxRWtB0pSlTlZRSv-EVTi3bKpyY1fNNbXLbuMQZAyQAy-d-IwfMR93CW4eeetI_jKMQ1qFoe4kcoeFIiKhcrGFc05ANpHobG6SxYGkcFIYeuI7ra8DFx7m00 alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>scale 2 
+</span></span><span class=line><span class=cl>title 电子巡查工期估算
+</span></span><span class=line><span class=cl>center header
+</span></span><span class=line><span class=cl>通过需求评审,分解需求按照原型图划分任务模块
+</span></span><span class=line><span class=cl>endheader
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>project starts 2019-06-11 
+</span></span><span class=line><span class=cl>Sunday are closed
+</span></span><span class=line><span class=cl>Saturday are closed
+</span></span><span class=line><span class=cl>--电子巡查录入--
+</span></span><span class=line><span class=cl>[电子巡查录入] as [onlinePatrol]  on {hsg}  lasts 5 days
+</span></span><span class=line><span class=cl>[重构录入界面] as [resetlr] lasts 1 days
+</span></span><span class=line><span class=cl>[录入详情页] as [lrdetail] lasts 1 days
+</span></span><span class=line><span class=cl>[图片编辑器] as [picediter] lasts 1 days
+</span></span><span class=line><span class=cl>[检查项选择器] as [optionSelecter] lasts 1 days
+</span></span><span class=line><span class=cl>[串联业务联调接口] as [lrother] on {wf} lasts 1 days
+</span></span><span class=line><span class=cl>then [录入结束] happens at [onlinePatrol]&#39;s end
+</span></span><span class=line><span class=cl>--开始整改列表--
+</span></span><span class=line><span class=cl>[整改及列表] as [fixPlist]  on {pk}  lasts 4 days
+</span></span><span class=line><span class=cl>[整改管理列表] as [fixlist] lasts 1 days
+</span></span><span class=line><span class=cl>[电子巡查列表] as [patrollist] lasts 1 days
+</span></span><span class=line><span class=cl>[复用整改页] as [fixP] lasts 1 days
+</span></span><span class=line><span class=cl>[联调接口串联业务] as [zhgother] on {wf} lasts 1 days
+</span></span><span class=line><span class=cl>then [整改结束] happens at [fixPlist]&#39;s end
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[resetlr] -&gt; [lrdetail]
+</span></span><span class=line><span class=cl>[lrdetail] -&gt; [picediter]
+</span></span><span class=line><span class=cl>[picediter] -&gt; [optionSelecter]
+</span></span><span class=line><span class=cl>[optionSelecter] -&gt; [lrother]
+</span></span><span class=line><span class=cl>[fixlist] -&gt; [patrollist]
+</span></span><span class=line><span class=cl>[patrollist] -&gt; [fixP]
+</span></span><span class=line><span class=cl>[fixP] -&gt; [zhgother]
+</span></span></code></pre></td></tr></table></div></div><h3>用例</h3><p>用例图
+截屏&ndash;标记&ndash;分组到检项&ndash;更新电子巡查<br><img src=http://www.plantuml.com/plantuml/png/TLNRKjj847sVhr3bQQEoJ2NP9rNCUpuW7q21TY7BPSkOTnECBzX6PZ4s2-9YLgoz50W845zau6VKCz9JVc5xt2ep5SgKNz1qdvvpkljCPY6pQ6cY_W1NDUYs-CavFEx1vddGEu2jbgXtWgSo73wnMMivOwMrUMjcpaepAEQ3dXlqBdYd1KTDVdGEth7Olg5uSP3ZjXq-tx1tIGsJHQd0JmkXTuDfmi-nzqcDsxLWu58HPYtFnRXiRTMQdLcrj2yPRMPLUyEB5vXlHjc3yBaGFZkYKuRQDcnt-4uEDcnmxtyCArYQDx_phLsm6tW7S0PKaxqPmotDfFyO0J9TfqDUwlExZgupmrYOCmpsZgLIS38GhIpVhGQF3dzOnsAf50Edeu86lIt9AigMHDqNbtNediDcbsduXnoZGbLyxITu_PfNrgCp9onzWsA1Ly-GiypXZG9tBjKSl4Qz3su1BnEdyNA3rv_m1suxmPlbyF4oGI04o999iAyHJBreCideFk9RK_ZvgRZGLJDutEMdNHZQqDk0swoYoUoyDJiMXV-JnTP7hJwrw4MNznDrkUvJ4dORyflWzSFdmx1LYNiCNeKNQqWF2lcWBxk6dS887AsVQaavWq553DhYqCFX4_ukFyubmFuQPZTW-mIEvG1A0NMT50Bt0Ed_61R3RaTYtFf1xqfU8_vUqlK98Ydqr_wScybOn3-LGkZ3Uzwu-Vp9f3w_4WGfVq1HNck18b4m9H9nv9iWn5UhXQ0FT5zAe1Nw_6aq3t9XYbrC6zUNIxPtCpfy_-gG411AYVgGr706eU2_HBbj38pESc6xE0hvDQaPniVVLfOpskpAuaewbRRcfd6oW-4f8Ke6MoVWteRtvr7JYyxsFqx9y6d3cAGiIciIos0mCAMkQMjvh7RQMbrRp2Xgq-Z8LZjJuEP4BSyRVHpJaT2XzoGUFJK6_ggeKPCQ4VdxeUTIUkmQFxLph1KKNTwueWIgmNYf35kTE5l3528ZVxq1VPx4tZ1qFUXLQJuHX6VNgG11wxfXACE7gYyjBIXoa1sIV9Gnqe7NdEWmhquGNX-9useZ0rxr4fJ8dIhwAFpTcJYWfwteeg8Acf2pU6k7xNnqjaEjfwOpWYJyINHL5rbRVE51FQAhejzZ3UAXq0kUMtpzcYmX0SCijCkKnVUleVOltxj7Gvm2UmSDA_1zv3MPL1-lI7H8R8A08Kx_W413su7gdhGOH0mVkWIV2BjtQAjXuOx-nusCZaOUhTQDez00eiqgVSAzdIm9mu77lPh6nylKw3cYfmb741yhzYKZJ-ajCZLmEgfjO0jW_O1U9IP3P2nvj3csMlBPs3Rb6KMHbPdaD-Gnn0XDXT6XPgGNVf_FO72yYIRf4qy-VQIID9ecZGoD0VMF23CAe5ZPV9EKXStlWTy81cLH-e_9Wr74BwhiRqrUQlExFLmeQZnzLg9L-T-Qmcl9QThPLp-p_m40 alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>title 电子巡查录入业务用例图
+</span></span><span class=line><span class=cl>center header
+</span></span><span class=line><span class=cl>分两个模块来实现用例的描述
+</span></span><span class=line><span class=cl>1. 图片标记分组
+</span></span><span class=line><span class=cl>2. 提交业务
+</span></span><span class=line><span class=cl>endheader
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>usecase jt as &#34;截图:通过远程后厨摄像头，实时抓取现场图片
+</span></span><span class=line><span class=cl>&#34;
+</span></span><span class=line><span class=cl>usecase mark as &#34;
+</span></span><span class=line><span class=cl>**图片批注**
+</span></span><span class=line><span class=cl>--id--
+</span></span><span class=line><span class=cl>1
+</span></span><span class=line><span class=cl>==基础操作流程==
+</span></span><span class=line><span class=cl>在现场图片上
+</span></span><span class=line><span class=cl>1. 选画笔工具
+</span></span><span class=line><span class=cl>    标重点,支持颜色切换
+</span></span><span class=line><span class=cl>2. 选文本工具
+</span></span><span class=line><span class=cl>    批改备注,支持拖放放大,旋转,切换颜色
+</span></span><span class=line><span class=cl>..可选操作流程..
+</span></span><span class=line><span class=cl>画笔粗细/文本字体样式布局
+</span></span><span class=line><span class=cl>&#34;
+</span></span><span class=line><span class=cl>usecase check as &#34;
+</span></span><span class=line><span class=cl>**检查项分组**
+</span></span><span class=line><span class=cl>--id--
+</span></span><span class=line><span class=cl>2
+</span></span><span class=line><span class=cl>==基础操作流程==
+</span></span><span class=line><span class=cl>对检查的内容进行分组
+</span></span><span class=line><span class=cl>完成批准之后，进入检查项分组
+</span></span><span class=line><span class=cl>1. 二级目录结构,参考原型图
+</span></span><span class=line><span class=cl>2. **支持多选（跨分类中的多选）**
+</span></span><span class=line><span class=cl>..可选操作流程..
+</span></span><span class=line><span class=cl>&#34;
+</span></span><span class=line><span class=cl>usecase update as &#34;
+</span></span><span class=line><span class=cl>==**更新UI:图片检查项分组**==
+</span></span><span class=line><span class=cl>3
+</span></span><span class=line><span class=cl>--基础操作流程--
+</span></span><span class=line><span class=cl>检查图片完成后,更新电子巡查录入页中的图片模块UI
+</span></span><span class=line><span class=cl>    1. 刷新检查项个数
+</span></span><span class=line><span class=cl>    2. 刷新检查项图片的个数
+</span></span><span class=line><span class=cl>    3. 点击检查项大图预览
+</span></span><span class=line><span class=cl>    4. --&lt;font color=red&gt;上传图片成功失败问题&lt;/font&gt;--
+</span></span><span class=line><span class=cl>..可选操作流程..
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&#34;
+</span></span><span class=line><span class=cl>:巡查人: as ren
+</span></span><span class=line><span class=cl>usecase result as &#34;
+</span></span><span class=line><span class=cl>==**检查结果/处理方式**==
+</span></span><span class=line><span class=cl>设置检查结果和处理方式
+</span></span><span class=line><span class=cl>--基础操作流程--
+</span></span><span class=line><span class=cl>默认设置:通过图片检查项的个数判断默认结果
+</span></span><span class=line><span class=cl>手动设置: 检查人人为设置
+</span></span><span class=line><span class=cl>..可选操作流程..
+</span></span><span class=line><span class=cl>--**不支持动态判断结果**--.
+</span></span><span class=line><span class=cl>&#34;
+</span></span><span class=line><span class=cl>usecase commit as &#34;
+</span></span><span class=line><span class=cl>==**提交巡查结果**==
+</span></span><span class=line><span class=cl>搜集电子巡查的基本数据,提交服务器
+</span></span><span class=line><span class=cl>--基础操作流程--
+</span></span><span class=line><span class=cl>校验检查结果,录屏视频上传成功
+</span></span><span class=line><span class=cl>提交数据
+</span></span><span class=line><span class=cl>..可选操作流程..
+</span></span><span class=line><span class=cl>&#34;
+</span></span><span class=line><span class=cl>usecase chul as &#34;
+</span></span><span class=line><span class=cl>==**处理巡查记录**==
+</span></span><span class=line><span class=cl>提交巡查信息之后,开始处理是否整改/发布任务
+</span></span><span class=line><span class=cl>--基础操作流程--
+</span></span><span class=line><span class=cl>根据结果判断是否弹出处理菜单
+</span></span><span class=line><span class=cl>1. 发起整改,跳转至整改页面
+</span></span><span class=line><span class=cl>2. 发布任务,跳转分配任务中
+</span></span><span class=line><span class=cl>..可选操作流程..
+</span></span><span class=line><span class=cl>&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ren --&gt; jt: 抓取实时图像
+</span></span><span class=line><span class=cl>jt --&gt; mark : 在检查图片上做批注
+</span></span><span class=line><span class=cl>mark --&gt; check:对检查内容分组
+</span></span><span class=line><span class=cl>check --&gt; update:更新录入页面UI
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>update -right-&gt; result :处理结果
+</span></span><span class=line><span class=cl>result --&gt; commit :校验数据提交操作
+</span></span><span class=line><span class=cl>commit --&gt; chul :发起其他事物
+</span></span><span class=line><span class=cl>chul --&gt; (发起整改):执法人开始整改
+</span></span><span class=line><span class=cl>chul --&gt; (发布任务):管理员发布任务
+</span></span></code></pre></td></tr></table></div></div><h3>时序图</h3><p><img src=http://www.plantuml.com/plantuml/png/VL5DRjD05Dxx57C08h6sPFOSW0EuzaXDczh8dG3TET34RX3v4Q454fH24pL23Kr5IKhQbClulKblmKp67fiDcndxlM--xtlVOsLMeOJtVi6q0uklE1p3wWFKntWoXsKR-lU6Gpr60x9DRPS6Hh9ihC_FeFqwkMcfSntM-UT3tXj2TmNT2Gw6Zt0UO-qIsjs7i2Pwq9nWMCF14kAv-4rMxtbhPb3FJJdjAlEzwjwMK7bis0xp0uBnTw5Dx7sommp7zrZWLmYUHkiVCrYCeRwGhJqxs4tnl7VBBtgow0RsIngaPJoES70Xouo-4bDegkIccToTmgU9x5MVL_oDaIs_whbsS43mB9H9gBQpJPrTqQMU2Ek0g7naerBUPrAe_C9cL1hTOQHKUhBnPIgpYeYtBk7R6vb4_vuVHOPBYwyioyAZt_XpehgMfJdLXFAGlEbefW9hK3Qnkd83oPylCFsejJGmvrEPc28ac9x0A2goPe79w_-i2b6iIA2SIeMSJQLrTTufMQa4To6SlrLmxI1VI_RnxsCONQslnm_HE_ce2CaMPYf2Z3lG70gHkC6lRc5qo3iDxROWeuNrmjMjEEMkYKcmVut7isTFDK4E_mi0 alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>title</span> <span class=err>电子巡查录入时序图</span>
+</span></span><span class=line><span class=cl><span class=n>center</span> <span class=n>header</span>
+</span></span><span class=line><span class=cl><span class=err>了解参与参与者的生命周期</span><span class=p>,</span><span class=err>消息发送的动态机制的体现</span>
+</span></span><span class=line><span class=cl><span class=n>endheader</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>autonumber</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>actor</span> <span class=err>截图</span> <span class=n>as</span> <span class=n>jt</span>
+</span></span><span class=line><span class=cl><span class=n>control</span> <span class=err>标记工具</span> <span class=n>as</span> <span class=n>mark</span>
+</span></span><span class=line><span class=cl><span class=n>actor</span> <span class=err>画笔</span> <span class=n>as</span> <span class=n>drawer</span>
+</span></span><span class=line><span class=cl><span class=n>actor</span> <span class=err>文本</span> <span class=n>as</span> <span class=n>texter</span>
+</span></span><span class=line><span class=cl><span class=n>control</span> <span class=err>上传器</span> <span class=n>as</span> <span class=n>uploader</span>
+</span></span><span class=line><span class=cl><span class=n>boundary</span> <span class=err>检查器</span> <span class=n>as</span> <span class=n>checker</span>
+</span></span><span class=line><span class=cl><span class=n>entity</span> <span class=err>录入</span> <span class=n>as</span> <span class=n>list</span>
+</span></span><span class=line><span class=cl><span class=n>activate</span> <span class=n>jt</span>
+</span></span><span class=line><span class=cl><span class=n>jt</span> <span class=o>--&gt;</span> <span class=n>mark</span><span class=p>:</span><span class=err>标记检查环境的图片</span>
+</span></span><span class=line><span class=cl><span class=n>deactivate</span> <span class=n>jt</span>
+</span></span><span class=line><span class=cl><span class=o>===</span><span class=err>批注图片</span><span class=o>==</span>
+</span></span><span class=line><span class=cl><span class=n>activate</span> <span class=n>mark</span>
+</span></span><span class=line><span class=cl><span class=n>mark</span> <span class=o>--&gt;</span> <span class=n>drawer</span><span class=p>:</span><span class=err>批注</span>
+</span></span><span class=line><span class=cl><span class=n>activate</span> <span class=n>drawer</span>
+</span></span><span class=line><span class=cl><span class=n>drawer</span> <span class=o>--&gt;</span> <span class=n>mark</span><span class=p>:</span><span class=err>保存</span>
+</span></span><span class=line><span class=cl><span class=n>deactivate</span> <span class=n>drawer</span>
+</span></span><span class=line><span class=cl><span class=n>mark</span> <span class=o>--&gt;</span> <span class=n>texter</span><span class=p>:</span><span class=err>文字备注</span>
+</span></span><span class=line><span class=cl><span class=n>activate</span> <span class=n>texter</span>
+</span></span><span class=line><span class=cl><span class=n>texter</span> <span class=o>--&gt;</span> <span class=n>mark</span><span class=p>:</span><span class=err>保存</span>
+</span></span><span class=line><span class=cl><span class=n>deactivate</span> <span class=n>texter</span>
+</span></span><span class=line><span class=cl><span class=n>deactivate</span> <span class=n>mark</span>
+</span></span><span class=line><span class=cl><span class=o>===</span><span class=err>上传图片</span><span class=o>==</span>
+</span></span><span class=line><span class=cl><span class=n>mark</span> <span class=o>--&gt;</span> <span class=n>uploader</span><span class=p>:</span><span class=err>保存</span><span class=o>--</span><span class=err>开始上传</span>
+</span></span><span class=line><span class=cl><span class=n>activate</span> <span class=n>uploader</span>
+</span></span><span class=line><span class=cl><span class=n>uploader</span> <span class=o>--&gt;</span> <span class=n>uploader</span><span class=p>:</span><span class=err>失败重传</span>
+</span></span><span class=line><span class=cl><span class=n>uploader</span> <span class=o>--&gt;</span> <span class=n>checker</span><span class=p>:</span><span class=err>上传成功</span><span class=o>--</span><span class=err>分类处理</span>
+</span></span><span class=line><span class=cl><span class=n>deactivate</span> <span class=n>uploader</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>activate</span> <span class=n>checker</span>
+</span></span><span class=line><span class=cl><span class=n>checker</span> <span class=o>--&gt;</span> <span class=n>list</span> <span class=p>:</span> <span class=err>更新</span><span class=n>UI</span>
+</span></span><span class=line><span class=cl><span class=n>deactivate</span> <span class=n>checker</span>
+</span></span></code></pre></td></tr></table></div></div><h3>类图</h3><p><img src=http://www.plantuml.com/plantuml/png/VLLRJnj757wkVyM89o1rt2HlInefWRIuCW75CL8aL3JiZkrHrhFkxfYMH9LG8IMX44CR4XHCg0aqLYLIK6cXCPS_uralJ_qBdSjwroou2C7Pxrpcp7SkGp4r4M37A-pfTdDbuMnzixbNPsidtWV-MusPA4j17a43sJ5MgR4N6sxbEPlVy6QEcszcsSR7PdMwSJZldQvvrGNlTATHV-TxkgzssUPRPQh5hbq5xhjfTsERXtPhLRR-cfLNtRLzpVtxXxF3tnBiS8RjJJUELjd2gzXrRbnUQdpSQXo-OVDLpGzLNlR-Ed1NzjsN_oJu1tTfrEjShyxmoXMsk193nF3JrKteEA1h15BRCeU9YGaQnUZRVei8m4Hs5u0EiAG2W2Snm7_YSRRtrfr-twpFSbb2NzXM0MJvdz7-FWdSIwUfZKaEz3hKib7I-2GAvwtYFLX04iua7y09KvuCUcbBbAhnSS3cZjsLNNxQ-BWwltlImaQFRcBzqGZ4Z_FGkgrJR94BsbJfEmn9hbqBsjJz_7mRQjt959v4c6Gj1_Jsc5nESZdslKzEa0zu4c1TYgf-P9gI89qBdTcvCpoS0jWPG1HYq-SXIIZA8LjwFfWgAXw61bFmyLI_85wcd2p07E99cHnLSf_FLsYZICCJ8tcBMkVXLYc6Il8EjsqRJjrKcGzP1Z91xwrUJ571aPg-Zdo3xkGTnM4Fde2Pecb1GtrhtPnB1n7HIifxmhJqHxwZOBhxwpmaXediJ375tGOWXJsg154oLGy6b0QVKMBZSUv9B8e0jOh0oeQMYbksjTXyMMC7LJv8Qehu40gQtLyFs57vtwC5LfvlhXsoft-wlomsZYjdqtNlP1c8gG0YRfXMm5HGv8BuwbpfHEAQnbxKt6Ud05pN-1Wtdyy1S4C3tliVppQNEzG-EZ9otVJv0OKH3yHcodxfPIFmYlD_WL5pvuGjBNe7Vx2JsKYmekWBJb6-PUkTLfgrdowpLJ4pjgbCKxBhScaAQSa1s565HqOqtHmsWZpMzjsVToH94ccVBBCbzeML3_MIOM72dJlp6nugJ7boFDamsiClLIkaaJtfRov7Yfq3NW6Jq0Os-gQ47AfzDPYvdxglFZfDmnNPydbe8wDzt_0GTyNesHR1UXfE8itlUotCBpH84gV8vR2tk7ldrefS_NQncBnGXBkSH5j76NxX_rMAdHjLfzMAlXI-p3vbwL1C_qMSv30j6HST8BqK7y6w4yL6iO5KZs12aPs5EcfVjmF8H3b8KJ2H0MdHOdLQz-SKq332dIdYdrVpu14rpmkHKW5qYITF9f7bWf-1m0PG5fPC2Zu7dtsQI9pLLxqFMu5o21OvwAvlUtE_iyekd-j0bKPGpmTATwdItDyCb2diqC3lsMklMkDvqF3DZCTl-OzqJARJ3gWHE0S9tXGGnD20ubWz8q8_HXGaNiC8eZQ1m6AjaRrvzMgu83KXKRxPE0lNX1l7xb0oY0q34Ouzl9kE1SQ1Az0YAMXZfBLEnqXhdOwH6vg_JOEXaLTHzuorUiAAnsNK_m00 alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>title</span> <span class=err>录入界面类图设计</span>
+</span></span><span class=line><span class=cl><span class=n>left</span> <span class=n>header</span>
+</span></span><span class=line><span class=cl><span class=err>在原有功能的基础上进行迭代设计</span>
+</span></span><span class=line><span class=cl><span class=err>新增功能</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=mf>1.</span> <span class=err>检查图模块变更</span><span class=p>:</span><span class=err>涂鸦</span><span class=o>/</span><span class=err>布局优化</span>
+</span></span><span class=line><span class=cl><span class=mf>2.</span> <span class=err>提交业务</span><span class=p>:</span><span class=err>新增发起整改</span><span class=o>/</span><span class=err>发布任务功能菜单</span>
+</span></span><span class=line><span class=cl><span class=n>endheader</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=s2>&#34;PatrolOnlineViewController&#34;</span> <span class=n>as</span> <span class=n>online</span>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>    <span class=n>From</span> <span class=n>fromVC</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>storeId</span>	
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>shopName</span>
+</span></span><span class=line><span class=cl>    <span class=n>UITableView</span> <span class=o>*</span><span class=n>tableView</span>
+</span></span><span class=line><span class=cl>    <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl>    <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>clickPaizhaoAction</span>
+</span></span><span class=line><span class=cl>    <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>clickLuxiangAction</span>
+</span></span><span class=line><span class=cl>    <span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>clickCamera</span><span class=p>:(</span><span class=n>ILiveinfos</span> <span class=o>*</span><span class=p>)</span><span class=n>liveInfo</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>tableView</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=s2>&#34;OnlineCell&#34;</span> <span class=n>as</span> <span class=n>cell</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>    <span class=n>BOOL</span> <span class=n>isDetail</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSInteger</span> <span class=n>cellType</span>
+</span></span><span class=line><span class=cl>    <span class=n>MHLazyCollectionImages</span> <span class=o>*</span><span class=n>lazyImages</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>UICollectionView</span> <span class=o>*</span><span class=n>ibPhotoCollectionView</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSMutableArray</span><span class=o>&lt;</span><span class=n>OnlineModel</span> <span class=o>*&gt;*</span><span class=n>itemsArray</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl>    <span class=o>-</span> <span class=p>(</span><span class=n>IBAction</span><span class=p>)</span><span class=n>ibaUploadAction</span><span class=p>:(</span><span class=n>id</span><span class=p>)</span><span class=n>sender</span>
+</span></span><span class=line><span class=cl>    <span class=n>__block__</span>
+</span></span><span class=line><span class=cl>    <span class=n>void</span><span class=p>(</span><span class=o>^</span><span class=n>handlerUpLoadData</span><span class=p>)(</span><span class=n>void</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=s2>&#34;OnlinePatrolCell&#34;</span> <span class=n>as</span> <span class=n>PatrolCell</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=err>属性</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>top</span> <span class=n>of</span> <span class=n>PatrolCell</span>
+</span></span><span class=line><span class=cl>    <span class=err>复用巡查模块的</span><span class=n>cell样式</span><span class=err>，及相关操作逻辑</span> 
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=s2>&#34;OnlineModel&#34;</span> <span class=n>as</span> <span class=n>cellmodel</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>    <span class=o>//</span><span class=mi>1</span><span class=p>:</span><span class=err>厨房</span>  <span class=mi>2</span><span class=p>:</span><span class=err>图片</span>  <span class=mi>3</span><span class=p>:</span> <span class=err>视频</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSInteger</span> <span class=n>cellType</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>title</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>//</span><span class=n>cell图像</span>
+</span></span><span class=line><span class=cl>    <span class=n>UIImage</span> <span class=o>*</span><span class=n>image</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>//</span><span class=err>签名路径</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>photoPath</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>//</span><span class=err>远程路径</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>imageUrl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>LazyImgStatus</span> <span class=n>isUploaded</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>gid</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>//</span><span class=err>直播</span><span class=n>model</span>
+</span></span><span class=line><span class=cl>    <span class=n>ILiveinfos</span> <span class=o>*</span><span class=n>liveinfos</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=s2>&#34;ILiveinfos&#34;</span> <span class=n>as</span> <span class=n>livemod</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>liveImgUrl</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=s2>&#34;YGPatrolServer&#34;</span> <span class=n>as</span> <span class=n>server</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>    <span class=o>+</span> <span class=k>var</span> <span class=n>request</span><span class=p>:</span><span class=n>JHURLRequest</span>
+</span></span><span class=line><span class=cl>    <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl>    <span class=o>+</span><span class=p>(</span><span class=n>id</span><span class=p>)</span><span class=n>shared</span>
+</span></span><span class=line><span class=cl>    <span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>reqElectronicSave</span><span class=p>:</span><span class=n>handler</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=s2>&#34;ElectronicInspectModel&#34;</span> <span class=n>as</span> <span class=n>reqmodel</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>AppId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>EnforceUserId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>EnforceUserName</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>StoreId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>StoreName</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>Location</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>Longitude</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>Latitude</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>Pics</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>NSString</span> <span class=o>*</span><span class=n>Videos</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>interface</span> <span class=s2>&#34;OnlineCellDelegate&#34;</span> <span class=n>as</span> <span class=n>celldel</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>__</span> <span class=err>函数组</span><span class=n>__</span>
+</span></span><span class=line><span class=cl>    <span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>clickCamera</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>addCollectionCell</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>delCollectionCell</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>enum</span> <span class=s2>&#34;From&#34;</span> <span class=n>as</span> <span class=n>from</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>FromDefault</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span><span class=o>//</span><span class=err>默认</span>
+</span></span><span class=line><span class=cl>    <span class=n>FromMap</span><span class=p>,</span><span class=o>//</span><span class=err>来自地图</span>
+</span></span><span class=line><span class=cl>    <span class=n>FromSeach</span><span class=p>,</span><span class=o>//</span><span class=err>来自搜索</span>
+</span></span><span class=line><span class=cl>    <span class=n>FromList</span><span class=o>//</span><span class=err>来自列表</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>tableView</span> <span class=o>*--&gt;</span> <span class=n>online</span>
+</span></span><span class=line><span class=cl><span class=n>from</span> <span class=o>*--&gt;</span> <span class=n>online</span>
+</span></span><span class=line><span class=cl><span class=n>server</span> <span class=o>*--&gt;</span> <span class=n>online</span>
+</span></span><span class=line><span class=cl><span class=n>cell</span> <span class=o>*--&gt;</span> <span class=n>tableView</span><span class=p>:</span> <span class=n>OnlinePhotoCell</span> \<span class=n>n</span> <span class=n>OnlineInfoCell</span> \<span class=n>n</span> <span class=n>OnlineUploadCell</span>
+</span></span><span class=line><span class=cl><span class=n>livemod</span> <span class=o>&lt;..</span> <span class=n>cellmodel</span><span class=p>:</span><span class=n>celltype</span> <span class=o>=</span> <span class=mi>1</span> \<span class=n>n</span> <span class=n>delBtnHidden</span> <span class=o>=</span> <span class=n>YES</span>
+</span></span><span class=line><span class=cl><span class=n>cellmodel</span> <span class=o>&lt;..</span> <span class=n>cell</span> <span class=p>:</span><span class=n>OnlinePhotoCell</span><span class=p>:</span>\<span class=n>n1</span><span class=p>:</span><span class=err>厨房</span>\<span class=n>n2</span><span class=p>:</span><span class=err>图片</span>\<span class=n>n3</span><span class=p>:</span><span class=err>视频</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>reqmodel</span> <span class=o>*--&gt;</span> <span class=n>server</span>
+</span></span><span class=line><span class=cl><span class=n>celldel</span> <span class=n>o</span><span class=o>--</span> <span class=n>cell</span>
+</span></span></code></pre></td></tr></table></div></div><h3>活动图</h3><p><img src=http://www.plantuml.com/plantuml/png/LOxVIiCm5CRlynIvR5-XVPf1KrOeLROyW39TkoYeM8SoTVMFK6I2C8ORRTUNwJcfLxw2cMSKp5NETtw_v9E130N7vwM-7EDaWyiSLySwFsEXy2NlYvud1WpLTLDTOBQ6UWHgtewgd_AS79XjzIGcarPCHDxU6yhUG387atU3kSmXp6M1Rz7Lvh8l8ZFpVm6tT5heHMepRawdYN0eB9p6UB_GvRJTNi5TlaSeXTUOmCWBVEOqzGDyt99dlgJHfcVQEeNPesqg7Xns_5erPRRh-NA4yxVlfmqaOrsSx9Al0bG6oITKDt1gLYltJ_q5 alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>title 梳理批注流程
+</span></span><span class=line><span class=cl>left header
+</span></span><span class=line><span class=cl>抓住核心功能，梳理图片批注功能
+</span></span><span class=line><span class=cl>endheader
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>start
+</span></span><span class=line><span class=cl>:截图;
+</span></span><span class=line><span class=cl>:批注;
+</span></span><span class=line><span class=cl>if(批注) then
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>if (批注) then (画笔)
+</span></span><span class=line><span class=cl>    :批注;
+</span></span><span class=line><span class=cl>else(文本编辑器)
+</span></span><span class=line><span class=cl>    :文本备注;
+</span></span><span class=line><span class=cl>endif
+</span></span><span class=line><span class=cl>:保存;
+</span></span><span class=line><span class=cl>elseif(保存)
+</span></span><span class=line><span class=cl>else(返回)
+</span></span><span class=line><span class=cl>stop
+</span></span><span class=line><span class=cl>endif
+</span></span><span class=line><span class=cl>:上传;
+</span></span><span class=line><span class=cl>:检查项分组;
+</span></span><span class=line><span class=cl>:添加到录入页;
+</span></span><span class=line><span class=cl>stop
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2019-06-11</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><nav class=post-nav><a class=prev href=/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E7%94%B5%E5%AD%90%E5%B7%A1%E6%9F%A5/%E5%AE%9A%E5%88%B6%E5%BC%80%E6%BA%90%E7%9A%84CLImageEditor%E5%9B%BE%E7%89%87%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">定制开源的CLImageEditor图片编辑工具</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E7%94%B5%E5%AD%90%E5%B7%A1%E6%9F%A5/%E6%9A%82%E5%AD%98%E6%9C%BA%E5%88%B6%E6%97%B6%E5%BA%8F%E5%9B%BE/><span class="next-text nav-default">iOS使用Realm和FMDB实现弱网下的暂存机制</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2019-06-11 07:03:20 +0800 +0800",title:"电子巡查项目设计",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

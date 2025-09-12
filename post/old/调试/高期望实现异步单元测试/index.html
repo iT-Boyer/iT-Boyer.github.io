@@ -1,0 +1,157 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>高期望实现异步单元测试 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="异步单元测试 在Xcode 6之前的版本里面并没有内置XCTest，只能是在主线程的RunLoop里面使用一个while循环,然后一直等待响应或者直到timeout.
+"><meta name=keywords content="工具,单元测试,UI,测试"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/%E8%B0%83%E8%AF%95/%E9%AB%98%E6%9C%9F%E6%9C%9B%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/%E8%B0%83%E8%AF%95/%E9%AB%98%E6%9C%9F%E6%9C%9B%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"><meta property="og:site_name" content="习七"><meta property="og:title" content="高期望实现异步单元测试"><meta property="og:description" content="异步单元测试 在Xcode 6之前的版本里面并没有内置XCTest，只能是在主线程的RunLoop里面使用一个while循环,然后一直等待响应或者直到timeout."><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-02-20T23:09:30+00:00"><meta property="article:modified_time" content="2017-02-20T23:09:30+00:00"><meta property="article:tag" content="IOS"><meta property="article:tag" content="单元测试"><meta itemprop=name content="高期望实现异步单元测试"><meta itemprop=description content="异步单元测试 在Xcode 6之前的版本里面并没有内置XCTest，只能是在主线程的RunLoop里面使用一个while循环,然后一直等待响应或者直到timeout."><meta itemprop=datePublished content="2017-02-20T23:09:30+00:00"><meta itemprop=dateModified content="2017-02-20T23:09:30+00:00"><meta itemprop=wordCount content="1900"><meta itemprop=keywords content="工具,单元测试,UI,测试"><meta name=twitter:card content="summary"><meta name=twitter:title content="高期望实现异步单元测试"><meta name=twitter:description content="异步单元测试 在Xcode 6之前的版本里面并没有内置XCTest，只能是在主线程的RunLoop里面使用一个while循环,然后一直等待响应或者直到timeout."><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>高期望实现异步单元测试</h1><div class=post-meta><span class=post-time>2017-02-20</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 1900 字 </span><span class=more-meta>预计阅读 4 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>异步单元测试</a><ul><li><a href=#>常规实现方式</a></li></ul></li><li><a href=#>XCTest相关API</a><ul><li><a href=#>XCTestExpection:高期望(High Expectations)的实现和使用</a></li><li><a href=#>传递expectation在目的方法中再fulfill()实现期望</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-02-20T23:09:30 title="February 20, 2017">February 20, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2>异步单元测试</h2><p>在Xcode 6之前的版本里面并没有内置<code>XCTest</code>，只能是在主线程的<code>RunLoop</code>里面使用一个<code>while循环</code>,然后一直等待响应或者直到<code>timeout</code>.</p><p>在Xcode 6里，苹果以<code>XCTestExpection类</code>的方式向<code>XCTest框架</code>里添加了<code>测试期望</code>(test expection)。
+XCTest框架中相关的方法：设置期望，实现期望，通知期望，谓词计算期望等，以及期望的传递。</p><h3>常规实现方式</h3><p>在主线程里，使用<code>while循环</code>每隔10毫秒会执行一次，直到有响应或者5秒之后超出响应时间限制才会跳出：</p><p>{% codeblock lang:swift %}
+func testAsyncTheOldWay()
+{
+let timeoutDate = Date.init(timeIntervalSinceNow: 5.0)
+var responseHasArrived = false
+Alamofire.request(&ldquo;<a href=https://www.baidu.com>https://www.baidu.com</a>&rdquo;).responseData{response in
+print(&ldquo;获取到的数据长度：(String(data: response.data!,
+encoding:String.Encoding.utf8)!)&rdquo;)
+responseHasArrived = true
+XCTAssert((response.data?.count)! > 0)
+}</p><pre><code>while (responseHasArrived == false 
+        &amp;&amp; (timeoutDate.timeIntervalSinceNow &gt; 0)) 
+{
+    CFRunLoopRunInMode(CFRunLoopMode.defaultMode, 0.01, false)
+}
+
+if (responseHasArrived == false)
+{
+    XCTFail(&quot;Test timed out&quot;)
+}
+</code></pre><p>}
+{% endcodeblock %}</p><h2>XCTest相关API</h2><p>在Xcode 6里，苹果以<code>XCTestExpection类</code>的方式向<code>XCTest框架</code>里添加了<code>测试期望</code>(test expection)。</p><h3>XCTestExpection:高期望(High Expectations)的实现和使用</h3><p>设置期望，实现期望，通知期望，谓词计算期望等，以及期望的传递。</p><h4><code>expectation(description:)</code>:为XCTest测试单元设置期望</h4><p>为XCTest单元测试，设置一个测试期望以及错误信息描述，并在某一时刻<code>fulfill</code>实现该期望对象
+{% codeblock lang:swift %}
+//expectation(description: String) -> XCTestExpectation
+let expection = expectation(description: &ldquo;失败时显示原因&rdquo;)
+{% endcodeblock %}</p><h5><code>fulfill()</code>:调用它表示测试达到期望值</h5><p>一般在单元测试通过时调用，告知测试已达期望，这一方法替代了<code>responseHasArrived</code>作为Flag的方式
+{% codeblock lang:swift %}
+//- (void)fulfill;
+expection.fulfill()
+{% endcodeblock %}</p><h4><code>waitForExpectations(timeout:handler:)</code>:在方法底部设置测试期望的时效</h4><p>在方法底部指定一个超时，如果测试条件不适合时间范围便会结束执行
+{% codeblock lang:swift %}
+// open func waitForExpectations(timeout: TimeInterval, handler: XCTest.XCWaitCompletionHandler? = nil)
+waitForExpectations(timeout: 5) { error in
+print(&ldquo;错误信息:(error?.localizedDescription)&rdquo;)
+}
+{% endcodeblock %}
+如果完成处理的代码在指定时限里执行并调用了<code>fulfill()</code>方法，那么就说明所有的测试期望在此期间都已经被实现。否则就测试就被打断不再执行</p><h4>expectation(forNotification:object:handler:):通知期望</h4><p>该方法监听一个通知,如果在规定时间内正确收到通知则测试通过
+{% codeblock lang:swift %}
+//expectation(forNotification notificationName: String, object objectToObserve: Any?, handler: XCTest.XCNotificationExpectationHandler? = nil) -> XCTestExpectation
+//设置一个测试通知期望
+expectation(forNotification: &ldquo;BLDownloadImageNotification&rdquo;,
+object: nil)
+{(notification) -> Bool in
+let userInfo = notification.userInfo as! [String:String]
+let name = userInfo[&ldquo;name&rdquo;]
+print(&ldquo;name:(name)&rdquo;)
+return true
+}
+来定义一个通知并发送通知，来测试：
+let notif = Notification.Name(rawValue: &ldquo;BLDownloadImageNotification&rdquo;)
+NotificationCenter.default.post(name: notif, object: self, userInfo: [&ldquo;name&rdquo;:&ldquo;iTBoyer&rdquo;,&ldquo;sex&rdquo;:&ldquo;man&rdquo;])</p><p>//设置延迟多少秒后，如果没有满足测试条件就报错
+waitForExpectations(timeout: 3, handler: nil)
+{% endcodeblock %}</p><h5>使用<code>expectation(description:)</code>实现</h5><p>帮助理解 <code>expectation(forNotification:object:handler:)</code> 方法和 <code>expectation(description:)</code> 的区别
+{% codeblock lang:swift %}
+func testAsynForNotificationWithExpectation()
+{
+let expectation = self.expectation(description: &ldquo;BLDownloadImageNotification&rdquo;)
+let notif = NSNotification.Name(rawValue: &ldquo;BLDownloadImageNotification&rdquo;)
+let sub = NotificationCenter.default.addObserver(forName: notif, object: nil, queue: nil) { (notification) -> Void in
+expectation.fulfill()
+}
+//发送一个通知
+NotificationCenter.default.post(name: notif, object: nil)</p><pre><code>//waitForExpectations
+waitForExpectations(timeout: 1, handler: nil)
+
+//移除通知
+NotificationCenter.default.removeObserver(sub)
+</code></pre><p>}</p><p>{% endcodeblock %}</p><h4>expectation(for:evaluatedWith:handler:):谓词计算测试法</h4><p>利用谓词计算，判断<code>button</code>的<code>backgroundImageForState</code>方法，是否正确的获得了<code>backgroundImage</code>，如果<code>20秒</code>内正确获得则通过测试，否则失败
+{% codeblock lang:swift %}
+//open func expectation(for predicate: NSPredicate, evaluatedWith object: Any, handler: XCTest.XCPredicateExpectationHandler? = nil) -> XCTestExpectation
+func testThatBackgroundImageChanges()
+{
+let viewController = OnclickLikeViewController()
+//viewController.loadView() //不执行viewDidload方法
+let _ = viewController.view
+let button = viewController.button
+let img = button.backgroundImage(for: .normal)
+XCTAssertNil(img,&ldquo;此时img不为nil,中止执行&rdquo;) //当img不是nil时，执行断言
+let predicate = NSPredicate.init { (anyobject, bindings) -> Bool in
+//
+let button = anyobject as! UIButton
+return button.backgroundImage(for: UIControlState()) != nil
+}
+expectation(for: predicate, evaluatedWith: button, handler: nil)
+waitForExpectations(timeout: 20, handler: nil)
+}
+{% endcodeblock %}</p><h5>使用<code>expectation(description:)</code>实现</h5><p>帮助理解 <code>expectation(for:evaluatedWith:handler:)</code> 方法和 <code>expectation(description:)</code> 的区别
+{% codeblock lang:swift %}
+func testThatBackgroundImageChanges()
+{
+//设置期望
+let expectation = self.expectation(description: &ldquo;backgroundImageForState&rdquo;)</p><pre><code>let viewController = OnclickLikeViewController()
+//viewController.loadView()  //不执行viewDidload方法
+let _ = viewController.view
+let button = viewController.button
+let img = button.backgroundImage(for: .normal)
+XCTAssertNil(img,&quot;此时img不为nil,中止执行&quot;)  //当img不是nil时，执行断言
+let predicate = NSPredicate.init { (anyobject, bindings) -&gt; Bool in
+    //
+    let button = anyobject as! UIButton
+    return button.backgroundImage(for: UIControlState()) != nil
+    //实现测试期望
+    expectation.fulfill()
+}
+
+//等待期望实现
+waitForExpectations(timeout: 20, handler: nil)
+</code></pre><p>}</p><p>{% endcodeblock %}</p><h3>传递expectation在目的方法中再fulfill()实现期望</h3><p>例如将期望封装在字典中，通过通知来传递给异步下载的方法中调用该期望的<code>fulfill()</code>方法，实现单元测试的期望
+{% codeblock lang:swift %}
+*/
+func testAsynForNotificationWithExpectation2()
+{
+let expectation = self.expectation(description: &ldquo;BLDownloadImageNotification&rdquo;)</p><pre><code>let notif = Notification.Name(rawValue: &quot;BLDownloadImageNotification&quot;)
+NotificationCenter.default.addObserver(self, selector: #selector(AsyncTheOldWayTest.downLoadImage(_:)), name: notif, object: nil)
+
+    //将期望封装在字典中传递
+    let userInf = [&quot;name&quot;:&quot;iTBoyer&quot;,&quot;sex&quot;:&quot;man&quot;,&quot;expectation&quot;:expectation]
+    NotificationCenter.default.post(name: notif, object: self, userInfo: userInf)
+    //等待期望实现
+    waitForExpectations(timeout: 1, handler: nil)
+    NotificationCenter.default.removeObserver(self)
+}
+
+//
+func downLoadImage(_ notification:Notification) 
+{
+    //
+    let userInfo = notification.userInfo as! [String:AnyObject]
+    let name = userInfo[&quot;name&quot;]
+    let sex = userInfo[&quot;sex&quot;]
+    print(&quot;name:\(name), sex = \(sex)&quot;)
+
+    let expectation = userInfo[&quot;expectation&quot;] as! XCTestExpectation
+    expectation.fulfill()
+}
+</code></pre><p>}
+{% endcodeblock %}</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-02-20</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/iOS/>iOS</a>
+<a href=/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/>单元测试</a></div><nav class=post-nav><a class=prev href=/post/old/iOS/UI/%E6%9B%B4%E6%94%B9%E8%AE%BE%E5%A4%87%E5%B1%8F%E5%B9%95%E4%B8%8A%E6%98%BE%E7%A4%BA%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%9B%BE%E6%A0%87%E4%B8%8B%E6%96%B9%E7%9A%84%E5%90%8D%E7%A7%B0/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">更改设备屏幕上显示的应用程序图标下方的名称</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/iOS/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%95%E7%A4%BA%E5%9E%8B%E6%8E%A7%E5%88%B6%E5%99%A8/><span class="next-text nav-default">自定义展示型控制器</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-02-20 23:09:30 +0000 UTC",title:"高期望实现异步单元测试",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

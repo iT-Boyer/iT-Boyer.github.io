@@ -1,0 +1,235 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>Git工具交互式暂存 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="交互式暂存 Git 自带的一些脚本可以使在命令行下工作更容易。 本节的几个互交命令可以帮助你将文件的特定部分组合成提交。 当你修改一组文件后，希望这些改动能放到若干提交而不是混杂在一起成为一个提交时，这几个工具会非常有用。 通过这种方式，可以确保提交是逻辑上独立的变更集，同时也会使其他开发者在与你工作时很容易地审核。 如果运行 git add 时使用 -i 或者 &ndash;interactive 选项，Git 将会进入一个交互式终端模式，显示类似下面的东西：
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/git/Git%E5%B7%A5%E5%85%B7%E4%BA%A4%E4%BA%92%E5%BC%8F%E6%9A%82%E5%AD%98/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/git/Git%E5%B7%A5%E5%85%B7%E4%BA%A4%E4%BA%92%E5%BC%8F%E6%9A%82%E5%AD%98/"><meta property="og:site_name" content="习七"><meta property="og:title" content="Git工具交互式暂存"><meta property="og:description" content="交互式暂存 Git 自带的一些脚本可以使在命令行下工作更容易。 本节的几个互交命令可以帮助你将文件的特定部分组合成提交。 当你修改一组文件后，希望这些改动能放到若干提交而不是混杂在一起成为一个提交时，这几个工具会非常有用。 通过这种方式，可以确保提交是逻辑上独立的变更集，同时也会使其他开发者在与你工作时很容易地审核。 如果运行 git add 时使用 -i 或者 –interactive 选项，Git 将会进入一个交互式终端模式，显示类似下面的东西："><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2018-04-12T19:41:46+00:00"><meta property="article:modified_time" content="2018-04-12T19:41:46+00:00"><meta property="article:tag" content="Git"><meta itemprop=name content="Git工具交互式暂存"><meta itemprop=description content="交互式暂存 Git 自带的一些脚本可以使在命令行下工作更容易。 本节的几个互交命令可以帮助你将文件的特定部分组合成提交。 当你修改一组文件后，希望这些改动能放到若干提交而不是混杂在一起成为一个提交时，这几个工具会非常有用。 通过这种方式，可以确保提交是逻辑上独立的变更集，同时也会使其他开发者在与你工作时很容易地审核。 如果运行 git add 时使用 -i 或者 –interactive 选项，Git 将会进入一个交互式终端模式，显示类似下面的东西："><meta itemprop=datePublished content="2018-04-12T19:41:46+00:00"><meta itemprop=dateModified content="2018-04-12T19:41:46+00:00"><meta itemprop=wordCount content="1654"><meta itemprop=keywords content="Git"><meta name=twitter:card content="summary"><meta name=twitter:title content="Git工具交互式暂存"><meta name=twitter:description content="交互式暂存 Git 自带的一些脚本可以使在命令行下工作更容易。 本节的几个互交命令可以帮助你将文件的特定部分组合成提交。 当你修改一组文件后，希望这些改动能放到若干提交而不是混杂在一起成为一个提交时，这几个工具会非常有用。 通过这种方式，可以确保提交是逻辑上独立的变更集，同时也会使其他开发者在与你工作时很容易地审核。 如果运行 git add 时使用 -i 或者 –interactive 选项，Git 将会进入一个交互式终端模式，显示类似下面的东西："><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>Git工具交互式暂存</h1><div class=post-meta><span class=post-time>2018-04-12</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 1654 字 </span><span class=more-meta>预计阅读 4 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>交互式暂存</a></li><li><a href=#>暂存与取消暂存文件</a></li><li><a href=#>暂存补丁</a></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2018-04-12T19:41:46 title="April 12, 2018">April 12, 2018</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2>交互式暂存</h2><p>Git 自带的一些脚本可以使在命令行下工作更容易。 本节的几个互交命令可以帮助你将文件的特定部分组合成提交。 当你修改一组文件后，希望这些改动能放到若干提交而不是混杂在一起成为一个提交时，这几个工具会非常有用。 通过这种方式，可以确保提交是逻辑上独立的变更集，同时也会使其他开发者在与你工作时很容易地审核。 如果运行 git add 时使用 -i 或者 &ndash;interactive 选项，Git 将会进入一个交互式终端模式，显示类似下面的东西：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ git add -i
+</span></span><span class=line><span class=cl>staged     unstaged path
+</span></span><span class=line><span class=cl>1:    unchanged        +0/-1 TODO
+</span></span><span class=line><span class=cl>2:    unchanged        +1/-1 index.html
+</span></span><span class=line><span class=cl>3:    unchanged        +5/-1 lib/simplegit.rb
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>*** Commands ***
+</span></span><span class=line><span class=cl>1: status     2: update      3: revert     4: add untracked
+</span></span><span class=line><span class=cl>5: patch      6: diff        7: quit       8: help
+</span></span><span class=line><span class=cl>What now&gt;
+</span></span></code></pre></td></tr></table></div></div><p>可以看到这个命令以非常不同的视图显示了暂存区 - 基本上与 <code>git status</code> 是相同的信息，但是更简明扼要一些。 它将暂存的修改列在左侧，未暂存的修改列在右侧。</p><p>在这块区域后是命令区域。 在这里你可以做一些工作，包括暂存文件、取消暂存文件、暂存文件的一部分、添加未被追踪的文件、查看暂存内容的区别。</p><h2>暂存与取消暂存文件</h2><p>如果在 What now> 提示符后键入 2 或 u，脚本将会提示想要暂存哪个文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>What now&gt; 2
+</span></span><span class=line><span class=cl>staged     unstaged path
+</span></span><span class=line><span class=cl>1:    unchanged        +0/-1 TODO
+</span></span><span class=line><span class=cl>2:    unchanged        +1/-1 index.html
+</span></span><span class=line><span class=cl>3:    unchanged        +5/-1 lib/simplegit.rb
+</span></span><span class=line><span class=cl>Update&gt;&gt;
+</span></span></code></pre></td></tr></table></div></div><p>要暂存 TODO 与 index.html 文件，可以输入数字：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Update&gt;&gt; 1,2
+</span></span><span class=line><span class=cl>staged     unstaged path
+</span></span><span class=line><span class=cl>* 1:    unchanged        +0/-1 TODO
+</span></span><span class=line><span class=cl>* 2:    unchanged        +1/-1 index.html
+</span></span><span class=line><span class=cl>3:    unchanged        +5/-1 lib/simplegit.rb
+</span></span><span class=line><span class=cl>Update&gt;&gt;
+</span></span></code></pre></td></tr></table></div></div><p>每个文件前面的 * 意味着选中的文件将会被暂存。 如果在 Update&#187; 提示符后不输入任何东西并直接按回车，Git 将会暂存之前选择的文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Update&gt;&gt;
+</span></span><span class=line><span class=cl>updated 2 paths
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>*** Commands ***
+</span></span><span class=line><span class=cl>1: status     2: update      3: revert     4: add untracked
+</span></span><span class=line><span class=cl>5: patch      6: diff        7: quit       8: help
+</span></span><span class=line><span class=cl>What now&gt; 1
+</span></span><span class=line><span class=cl>staged     unstaged path
+</span></span><span class=line><span class=cl>1:        +0/-1      nothing TODO
+</span></span><span class=line><span class=cl>2:        +1/-1      nothing index.html
+</span></span><span class=line><span class=cl>3:    unchanged        +5/-1 lib/simplegit.rb
+</span></span></code></pre></td></tr></table></div></div><p>现在可以看到 TODO 与 index.html 文件已经被暂存而 simplegit.rb 文件还未被暂存。 如果这时想要取消暂存 TODO 文件，使用 3 或 r（撤消）选项：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>*** Commands ***
+</span></span><span class=line><span class=cl>1: status     2: update      3: revert     4: add untracked
+</span></span><span class=line><span class=cl>5: patch      6: diff        7: quit       8: help
+</span></span><span class=line><span class=cl>What now&gt; 3
+</span></span><span class=line><span class=cl>staged     unstaged path
+</span></span><span class=line><span class=cl>1:        +0/-1      nothing TODO
+</span></span><span class=line><span class=cl>2:        +1/-1      nothing index.html
+</span></span><span class=line><span class=cl>3:    unchanged        +5/-1 lib/simplegit.rb
+</span></span><span class=line><span class=cl>Revert&gt;&gt; 1
+</span></span><span class=line><span class=cl>staged     unstaged path
+</span></span><span class=line><span class=cl>* 1:        +0/-1      nothing TODO
+</span></span><span class=line><span class=cl>2:        +1/-1      nothing index.html
+</span></span><span class=line><span class=cl>3:    unchanged        +5/-1 lib/simplegit.rb
+</span></span><span class=line><span class=cl>Revert&gt;&gt; [enter]
+</span></span><span class=line><span class=cl>reverted one path
+</span></span></code></pre></td></tr></table></div></div><p>再次查看 Git 状态，可以看到已经取消暂存 TODO 文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>*** Commands ***
+</span></span><span class=line><span class=cl>1: status     2: update      3: revert     4: add untracked
+</span></span><span class=line><span class=cl>5: patch      6: diff        7: quit       8: help
+</span></span><span class=line><span class=cl>What now&gt; 1
+</span></span><span class=line><span class=cl>staged     unstaged path
+</span></span><span class=line><span class=cl>1:    unchanged        +0/-1 TODO
+</span></span><span class=line><span class=cl>2:        +1/-1      nothing index.html
+</span></span><span class=line><span class=cl>3:    unchanged        +5/-1 lib/simplegit.rb
+</span></span></code></pre></td></tr></table></div></div><p>如果想要查看已暂存内容的区别，可以使用 6 或 d（区别）命令。 它会显示暂存文件的一个列表，可以从中选择想要查看的暂存区别。 这跟你在命令行指定 git diff &ndash;cached 非常相似：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>*** Commands ***
+</span></span><span class=line><span class=cl>1: status     2: update      3: revert     4: add untracked
+</span></span><span class=line><span class=cl>5: patch      6: diff        7: quit       8: help
+</span></span><span class=line><span class=cl>What now&gt; 6
+</span></span><span class=line><span class=cl>staged     unstaged path
+</span></span><span class=line><span class=cl>1:        +1/-1      nothing index.html
+</span></span><span class=line><span class=cl>Review diff&gt;&gt; 1
+</span></span><span class=line><span class=cl>diff --git a/index.html b/index.html
+</span></span><span class=line><span class=cl>index 4d07108..4335f49 100644
+</span></span><span class=line><span class=cl>--- a/index.html
+</span></span><span class=line><span class=cl>+++ b/index.html
+</span></span><span class=line><span class=cl>@@ -16,7 +16,7 @@ Date Finder
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;p id=&#34;out&#34;&gt;...&lt;/p&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>-&lt;div id=&#34;footer&#34;&gt;contact : support@github.com&lt;/div&gt;
+</span></span><span class=line><span class=cl>+&lt;div id=&#34;footer&#34;&gt;contact : email.support@github.com&lt;/div&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;script type=&#34;text/javascript&#34;&gt;
+</span></span></code></pre></td></tr></table></div></div><p>通过这些基本命令，可以使用交互式添加模式来轻松地处理暂存区。</p><h2>暂存补丁</h2><p>Git 也可以暂存文件的特定部分。 例如，如果在 simplegit.rb 文件中做了两处修改，但只想要暂存其中的一个而不是另一个，Git 会帮你轻松地完成。 从交互式提示符中，输入 5 或 p（补丁）。 Git 会询问你想要部分暂存哪些文件；然后，对已选择文件的每一个部分，它都会一个个地显示文件区别并询问你是否想要暂存它们：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>diff --git a/lib/simplegit.rb b/lib/simplegit.rb
+</span></span><span class=line><span class=cl>index dd5ecc4..57399e0 100644
+</span></span><span class=line><span class=cl>--- a/lib/simplegit.rb
+</span></span><span class=line><span class=cl>+++ b/lib/simplegit.rb
+</span></span><span class=line><span class=cl>@@ -22,7 +22,7 @@ class SimpleGit
+</span></span><span class=line><span class=cl>end
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>def log(treeish = &#39;master&#39;)
+</span></span><span class=line><span class=cl>-    command(&#34;git log -n 25 #{treeish}&#34;)
+</span></span><span class=line><span class=cl>+    command(&#34;git log -n 30 #{treeish}&#34;)
+</span></span><span class=line><span class=cl>end
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>def blame(path)
+</span></span><span class=line><span class=cl>Stage this hunk [y,n,a,d,/,j,J,g,e,?]?
+</span></span></code></pre></td></tr></table></div></div><p>这时有很多选项。 输入 ? 显示所有可以使用的命令列表：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Stage this hunk [y,n,a,d,/,j,J,g,e,?]? ?
+</span></span><span class=line><span class=cl>y - stage this hunk
+</span></span><span class=line><span class=cl>n - do not stage this hunk
+</span></span><span class=line><span class=cl>a - stage this and all the remaining hunks in the file
+</span></span><span class=line><span class=cl>d - do not stage this hunk nor any of the remaining hunks in the file
+</span></span><span class=line><span class=cl>g - select a hunk to go to
+</span></span><span class=line><span class=cl>/ - search for a hunk matching the given regex
+</span></span><span class=line><span class=cl>j - leave this hunk undecided, see next undecided hunk
+</span></span><span class=line><span class=cl>J - leave this hunk undecided, see next hunk
+</span></span><span class=line><span class=cl>k - leave this hunk undecided, see previous undecided hunk
+</span></span><span class=line><span class=cl>K - leave this hunk undecided, see previous hunk
+</span></span><span class=line><span class=cl>s - split the current hunk into smaller hunks
+</span></span><span class=line><span class=cl>e - manually edit the current hunk
+</span></span><span class=line><span class=cl>? - print help
+</span></span></code></pre></td></tr></table></div></div><p>通常情况下可以输入 y 或 n 来选择是否要暂存每一个区块，当然，暂存特定文件中的所有部分或为之后的选择跳过一个区块也是非常有用的。 如果你只暂存文件的一部分，状态输出可能会像下面这样：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>What now&gt; 1
+</span></span><span class=line><span class=cl>staged     unstaged path
+</span></span><span class=line><span class=cl>1:    unchanged        +0/-1 TODO
+</span></span><span class=line><span class=cl>2:        +1/-1      nothing index.html
+</span></span><span class=line><span class=cl>3:        +1/-1        +4/-0 lib/simplegit.rb
+</span></span></code></pre></td></tr></table></div></div><p>simplegit.rb 文件的状态很有趣。 它显示出若干行被暂存与若干行未被暂存。 已经部分地暂存了这个文件。 在这时，可以退出交互式添加脚本并且运行 git commit 来提交部分暂存的文件。</p><p>也可以不必在交互式添加模式中做部分文件暂存 - 可以在命令行中使用 git add -p 或 git add &ndash;patch 来启动同样的脚本。</p><p>更进一步地，可以使用 reset &ndash;patch 命令的补丁模式来部分重置文件，通过 checkout &ndash;patch 命令来部分检出文件与 stash save &ndash;patch 命令来部分暂存文件。 我们将会在接触这些命令的高级使用方法时了解更多详细信息。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2018-04-12</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/git/>git</a></div><nav class=post-nav><a class=prev href=/post/old/iOS/%E6%B1%89%E5%AD%97%E6%8B%BC%E9%9F%B3%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">汉字拼音排序方法</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/xcode/Otherlinkerflags%E8%AE%BE%E7%BD%AEld%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%9A%84%E5%8F%82%E6%95%B0/><span class="next-text nav-default">Otherlinkerflags设置ld命令执行的参数</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2018-04-12 19:41:46 +0000 UTC",title:"Git工具交互式暂存",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

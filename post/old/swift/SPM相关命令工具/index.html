@@ -1,0 +1,139 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>SPM相关命令工具 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="概念概述 getting-started {% github it-boyer PerfectTemplate 20294e56 width = 30% %}
+使用Swift编译系统 Swift 编译系统为编译库、可执行文件和在不同工程之间共享代码提供了基本的约定。
+swift 工具 swift package swift package generate-xcodeproj swift run swift build swift test swift package创建一个HelloSPM 创建Hello目录，目录名会作为SPM名称： 1 2 $ mkdir Hello $ cd Hello swift package初始化为SPM工程 1 2 3 4 5 6 7 8 9 10 $ swift package init ├── Package.swift // 依赖清单文件 ├── README.md ├── Sources // 源码目录 │ └── Hello │ └── Hello.swift └── Tests ├── HelloTests │ └── HelloTests.swift └── LinuxMain.swift 每个包在其根目录下都必须拥有一个命名为Package.swift清单文件。如果清单文件为空，那包管理器将会使用常规默认的方式来编译包。 3. swift build编译SPM 编译会先解析Package.swift项目配置和下载依赖库等环境，然后编译源码
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/swift/SPM%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/swift/SPM%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7/"><meta property="og:site_name" content="习七"><meta property="og:title" content="SPM相关命令工具"><meta property="og:description" content="概念概述 getting-started {% github it-boyer PerfectTemplate 20294e56 width = 30% %}
+使用Swift编译系统 Swift 编译系统为编译库、可执行文件和在不同工程之间共享代码提供了基本的约定。
+swift 工具 swift package swift package generate-xcodeproj swift run swift build swift test swift package创建一个HelloSPM 创建Hello目录，目录名会作为SPM名称： 1 2 $ mkdir Hello $ cd Hello swift package初始化为SPM工程 1 2 3 4 5 6 7 8 9 10 $ swift package init ├── Package.swift // 依赖清单文件 ├── README.md ├── Sources // 源码目录 │ └── Hello │ └── Hello.swift └── Tests ├── HelloTests │ └── HelloTests.swift └── LinuxMain.swift 每个包在其根目录下都必须拥有一个命名为Package.swift清单文件。如果清单文件为空，那包管理器将会使用常规默认的方式来编译包。 3. swift build编译SPM 编译会先解析Package.swift项目配置和下载依赖库等环境，然后编译源码"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2018-10-01T14:52:23+00:00"><meta property="article:modified_time" content="2018-10-01T14:52:23+00:00"><meta property="article:tag" content="Swift"><meta itemprop=name content="SPM相关命令工具"><meta itemprop=description content="概念概述 getting-started {% github it-boyer PerfectTemplate 20294e56 width = 30% %}
+使用Swift编译系统 Swift 编译系统为编译库、可执行文件和在不同工程之间共享代码提供了基本的约定。
+swift 工具 swift package swift package generate-xcodeproj swift run swift build swift test swift package创建一个HelloSPM 创建Hello目录，目录名会作为SPM名称： 1 2 $ mkdir Hello $ cd Hello swift package初始化为SPM工程 1 2 3 4 5 6 7 8 9 10 $ swift package init ├── Package.swift // 依赖清单文件 ├── README.md ├── Sources // 源码目录 │ └── Hello │ └── Hello.swift └── Tests ├── HelloTests │ └── HelloTests.swift └── LinuxMain.swift 每个包在其根目录下都必须拥有一个命名为Package.swift清单文件。如果清单文件为空，那包管理器将会使用常规默认的方式来编译包。 3. swift build编译SPM 编译会先解析Package.swift项目配置和下载依赖库等环境，然后编译源码"><meta itemprop=datePublished content="2018-10-01T14:52:23+00:00"><meta itemprop=dateModified content="2018-10-01T14:52:23+00:00"><meta itemprop=wordCount content="1034"><meta itemprop=keywords content="Swift"><meta name=twitter:card content="summary"><meta name=twitter:title content="SPM相关命令工具"><meta name=twitter:description content="概念概述 getting-started {% github it-boyer PerfectTemplate 20294e56 width = 30% %}
+使用Swift编译系统 Swift 编译系统为编译库、可执行文件和在不同工程之间共享代码提供了基本的约定。
+swift 工具 swift package swift package generate-xcodeproj swift run swift build swift test swift package创建一个HelloSPM 创建Hello目录，目录名会作为SPM名称： 1 2 $ mkdir Hello $ cd Hello swift package初始化为SPM工程 1 2 3 4 5 6 7 8 9 10 $ swift package init ├── Package.swift // 依赖清单文件 ├── README.md ├── Sources // 源码目录 │ └── Hello │ └── Hello.swift └── Tests ├── HelloTests │ └── HelloTests.swift └── LinuxMain.swift 每个包在其根目录下都必须拥有一个命名为Package.swift清单文件。如果清单文件为空，那包管理器将会使用常规默认的方式来编译包。 3. swift build编译SPM 编译会先解析Package.swift项目配置和下载依赖库等环境，然后编译源码"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>SPM相关命令工具</h1><div class=post-meta><span class=post-time>2018-10-01</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 1034 字 </span><span class=more-meta>预计阅读 3 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>概念概述</a></li><li><a href=#>使用Swift编译系统</a><ul><li><a href=#>swift 工具</a></li><li><a href=#><code>swift package</code>创建一个<code>Hello</code>SPM</a></li><li><a href=#>创建一个可执行的SPM</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2018-10-01T14:52:23 title="October 1, 2018">October 1, 2018</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2>概念概述</h2><p><a href=https://swift.org/getting-started>getting-started</a>
+{% github it-boyer PerfectTemplate 20294e56 width = 30% %}</p><h2>使用Swift编译系统</h2><p>Swift 编译系统为编译库、可执行文件和在不同工程之间共享代码提供了基本的约定。</p><h3>swift 工具</h3><ul><li>swift package</li><li>swift package generate-xcodeproj</li><li>swift run</li><li>swift build</li><li>swift test</li></ul><h3><code>swift package</code>创建一个<code>Hello</code>SPM</h3><ol><li>创建<code>Hello</code>目录，目录名会作为SPM名称：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ mkdir Hello
+</span></span><span class=line><span class=cl>$ cd Hello
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li><code>swift package</code>初始化为SPM工程</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ swift package init
+</span></span><span class=line><span class=cl>├── Package.swift   // 依赖清单文件
+</span></span><span class=line><span class=cl>├── README.md
+</span></span><span class=line><span class=cl>├── Sources         // 源码目录
+</span></span><span class=line><span class=cl>│   └── Hello
+</span></span><span class=line><span class=cl>│       └── Hello.swift
+</span></span><span class=line><span class=cl>└── Tests
+</span></span><span class=line><span class=cl>├── HelloTests
+</span></span><span class=line><span class=cl>│   └── HelloTests.swift
+</span></span><span class=line><span class=cl>└── LinuxMain.swift
+</span></span></code></pre></td></tr></table></div></div><p>每个包在其根目录下都必须拥有一个命名为<code>Package.swift</code>清单文件。如果清单文件为空，那包管理器将会使用常规默认的方式来编译包。
+3. <code>swift build</code>编译SPM
+编译会先解析<code>Package.swift</code>项目配置和下载依赖库等环境，然后编译源码</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ swift build  <span class=c1>#编译可执行文件</span>
+</span></span><span class=line><span class=cl>Compile Swift Module <span class=s1>&#39;Hello&#39;</span> <span class=o>(</span><span class=m>1</span> sources<span class=o>)</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>swift test运行SPM的单元测试</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ swift <span class=nb>test</span>
+</span></span><span class=line><span class=cl>Compile Swift Module <span class=s1>&#39;HelloTests&#39;</span> <span class=o>(</span><span class=m>1</span> sources<span class=o>)</span>
+</span></span><span class=line><span class=cl>Linking ./.build/x86_64-apple-macosx10.10/debug/HelloPackageTests.xctest/Contents/MacOS/HelloPackageTests
+</span></span><span class=line><span class=cl>Test Suite <span class=s1>&#39;All tests&#39;</span> started at 2016-08-29 08:00:31.453
+</span></span><span class=line><span class=cl>Test Suite <span class=s1>&#39;HelloPackageTests.xctest&#39;</span> started at 2016-08-29 08:00:31.454
+</span></span><span class=line><span class=cl>Test Suite <span class=s1>&#39;HelloTests&#39;</span> started at 2016-08-29 08:00:31.454
+</span></span><span class=line><span class=cl>Test Case <span class=s1>&#39;-[HelloTests.HelloTests testExample]&#39;</span> started.
+</span></span><span class=line><span class=cl>Test Case <span class=s1>&#39;-[HelloTests.HelloTests testExample]&#39;</span> passed <span class=o>(</span>0.001 seconds<span class=o>)</span>.
+</span></span><span class=line><span class=cl>Test Suite <span class=s1>&#39;HelloTests&#39;</span> passed at 2016-08-29 08:00:31.455.
+</span></span><span class=line><span class=cl>Executed <span class=m>1</span> test, with <span class=m>0</span> failures <span class=o>(</span><span class=m>0</span> unexpected<span class=o>)</span> in 0.001 <span class=o>(</span>0.001<span class=o>)</span> seconds
+</span></span><span class=line><span class=cl>Test Suite <span class=s1>&#39;HelloPackageTests.xctest&#39;</span> passed at 2016-08-29 08:00:31.455.
+</span></span><span class=line><span class=cl>Executed <span class=m>1</span> test, with <span class=m>0</span> failures <span class=o>(</span><span class=m>0</span> unexpected<span class=o>)</span> in 0.001 <span class=o>(</span>0.001<span class=o>)</span> seconds
+</span></span><span class=line><span class=cl>Test Suite <span class=s1>&#39;All tests&#39;</span> passed at 2016-08-29 08:00:31.455.
+</span></span><span class=line><span class=cl>Executed <span class=m>1</span> test, with <span class=m>0</span> failures <span class=o>(</span><span class=m>0</span> unexpected<span class=o>)</span> in 0.001 <span class=o>(</span>0.002<span class=o>)</span> seconds
+</span></span></code></pre></td></tr></table></div></div><h3>创建一个可执行的SPM</h3><p>可运行的SPM必须包含<code>main.swift</code>文件。SPM会把<code>main.swift</code>编译成可执行文件的二进制文件。
+在本例中，SPM将生成一个名为<code>Hello</code>的可执行文件，输出“Hello, world!”</p><ol><li>创建</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ mkdir Hello
+</span></span><span class=line><span class=cl>$ <span class=nb>cd</span> Hello
+</span></span><span class=line><span class=cl>$ swift package init --type executable
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>两种运行方式
+2.1 先编译在运行</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ swift build
+</span></span><span class=line><span class=cl>Compile Swift Module &#39;Hello&#39; (1 sources)
+</span></span><span class=line><span class=cl>Linking ./.build/x86_64-apple-macosx10.10/debug/Hello
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$ .build/x86_64-apple-macosx10.10/debug/Hello
+</span></span><span class=line><span class=cl>Hello, world!
+</span></span></code></pre></td></tr></table></div></div><p>2.2 <code>swift run</code>直接运行</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ swift run Hello
+</span></span><span class=line><span class=cl>Compile Swift Module <span class=s1>&#39;Hello&#39;</span> <span class=o>(</span><span class=m>1</span> sources<span class=o>)</span>
+</span></span><span class=line><span class=cl>Linking ./.build/x86_64-apple-macosx10.10/debug/Hello
+</span></span><span class=line><span class=cl>Hello, world!
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>多个源文件协作
+下一步，让我们在新的资源文件里定义一个新的方法 <code>sayHello(_:)</code> 然后直接用 <code>print(_:)</code> 替换执行调用的内容。
+在 <code>Sources/</code> 目录下创建一个新文件命名为 <code>Greeter.swift</code> 然后输入如下代码：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl><span class=kd>func</span> <span class=nf>sayHello</span><span class=p>(</span><span class=n>name</span><span class=p>:</span> <span class=nb>String</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=bp>print</span><span class=p>(</span><span class=s>&#34;Hello, </span><span class=si>\(</span><span class=n>name</span><span class=si>)</span><span class=s>!&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>sayHello(_:)</code> 方法带一个单一的字符串参数，然后在前面打印一个 “Hello”，后面跟着函数参数单词 “World”。</p><p>现在打开 <code>main.swift</code>， 然后替换原来的内容为下面代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl><span class=k>if</span> <span class=nb>Process</span><span class=p>.</span><span class=n>arguments</span><span class=p>.</span><span class=bp>count</span> <span class=o>!=</span> <span class=mi>2</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=bp>print</span><span class=p>(</span><span class=s>&#34;Usage: hello NAME&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>let</span> <span class=nv>name</span> <span class=p>=</span> <span class=nb>Process</span><span class=p>.</span><span class=n>arguments</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>sayHello</span><span class=p>(</span><span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>跟之前的硬编码不同，<code>main.swift</code> 现在从命令行参数中读取。替代之前直接调用 <code>print(_:)</code>， <code>main.swift</code> 现在调用 <code>sayHello(_:)</code> 方法。因为这个方法是 <code>Hello 模块</code>的一部分，所以不需要使用到 <code>import</code> 语句。</p><p>运行 swift build 并尝试 Hello 的新版本：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl><span class=err>$</span> <span class=n>swift</span> <span class=n>build</span>
+</span></span><span class=line><span class=cl><span class=err>$</span> <span class=p>.</span><span class=n>build</span><span class=o>/</span><span class=n>debug</span><span class=o>/</span><span class=n>Hello</span> <span class=err>&#39;</span><span class=n>whoami</span><span class=err>&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>目前为止，你已经能够运用开源 Swift 来运行一些你想要的程序了 。
+要了解Swift包管理器，包括如何构建模块、导入依赖项和映射系统库，请参阅网站的<a href=https://swift.org/package-manager>Swift包管理器</a>部分。</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2018-10-01</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/swift/>swift</a></div><nav class=post-nav><a class=prev href=/post/old/swift/swift%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8LLDB%E8%B0%83%E8%AF%95/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">swift在终端使用LLDB调试</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/macOS/%E5%88%A9%E7%94%A8JavaScript%E6%9E%84%E5%BB%BAOSX%E5%8E%9F%E7%94%9F%E5%BA%94%E7%94%A8/><span class="next-text nav-default">利用JavaScript构建OSX原生应用</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2018-10-01 14:52:23 +0000 UTC",title:"SPM相关命令工具",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

@@ -1,0 +1,79 @@
+@startuml
+
+![](http://www.plantuml.com/plantuml/png/VLJTRjCm6BtFKrZYEY-0q2vMD3QqYOfs87PdagzDLDSkYSU0hX8Q6p3G-D5K2SReg51LhjPMbTXGLVeoizF78AupnIdQV9MSStm-VoV-mdrE08cpjZpfY75Jx7MYmKXy-uii1oY707c0NGWiyVQrR7tI2jdwBLkx5-T7ubtR0kec4eio3eX0YIDMGe_kv34F67dWmrQEKVL8OhiR0RXMfjpHhlnnBYQluhhA32aNowfXfuBBWEJXmSNuM0nsK1t5Po8u3A-mhbieNhOj1YtviclRbwzlnhBPZryRCq0xh2sluXVFSsgVmtr6LwfnhT0G5007ZdSV71QuQGb3aFF0gQpw8SyUmhJmM2qiuiS4hfRuPJf7DjBMrrVYjklMDIVE0I49_p2VSihIe3QM2XpppJ0L66GHLo3lCSuqbidNW7GIu1gGway5O42BZ7DMBNW01ff6TQysLroNMToCTz44khjSX6UpKF_pr6WZlHhDlZmuLHaPaSbVRT5wNxTCtOUE-FWp8P1YadEnQfNHDUP2skMJ3SyluHbsUP_qTdM1p7xqjlGpwdV34jtQjksiOsP0iXIQ5HEzFteqfgVzU3hKQEntvL0zJ7jdSh2ZMzQjfCEIjXgDFqUZOnM9CjGh-qqB43pLiw9Nmz3f_9Ty0kirmh1hKBfDMYR06RsUlSssgEBLLJRTuYYt5-PDRaQZhjoVB9ZHK4HyMj5_2kK_dNoLNtfQAFQ6qT3uJ-YL_AfAB8O2AneTokydIgE1Vm00)
+
+title 巡查录入类图 
+center header
+分析录入架构业务
+endheader
+
+note left of YGPatrolViewController #red
+巡查录入的核心类
+end note
+
+package 操作层 {  
+class YGPatrolViewController{
+    --属性--
+    --函数--
+}
+    class MHLazyCollectionImages
+    class SearchRecordController
+    class CheckListViewController
+    class ShopsTableViewController
+    class SignViewController
+}
+
+package UI层{
+class MHLazyCollectionImageCell
+class WPCollectionViewCell
+class ZFStatusCollectionCell
+class TakePhotoCell
+class YGPatrolCell
+class RecordedCell
+class ShopListCell
+class BottomSheetCell
+class CheckListOptionCell
+class PatrolButton
+class JHTextView
+class BottomSheetView
+}
+package 数据层{
+package UI模型{
+
+}
+package 接口模型{ 
+
+}
+class CommonModel
+class ReqZhifaModel{
+    --接口--
+}
+class CheckModel
+class SignModel
+CommonModel <|-- ReqZhifaModel
+note left of ReqZhifaModel 
+    对巡查记录的执法的请求数据模型
+end note
+}
+package 网络层{ 
+        class YGPatrolServer{
+        }
+        class JHFileUpload
+        class SingletonUpload
+        class SingletonDownload
+}
+
+JHFileUpload --|> SingletonUpload:继承>
+note left on link #red
+    这是继承关系
+end note
+
+
+
+
+
+
+center footer
+结束
+endfooter
+@enduml

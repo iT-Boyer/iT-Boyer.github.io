@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zsh on 习七</title><link>https://it-boyer.github.io/tags/zsh/</link><description>Recent content in Zsh on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Mon, 15 Oct 2018 08:26:32 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/zsh/index.xml" rel="self" type="application/rss+xml"/><item><title>Zsh插件之github使用</title><link>https://it-boyer.github.io/post/old/git/Zsh%E6%8F%92%E4%BB%B6%E4%B9%8Bgithub%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 15 Oct 2018 08:26:32 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/git/Zsh%E6%8F%92%E4%BB%B6%E4%B9%8Bgithub%E4%BD%BF%E7%94%A8/</guid><description>&lt;h2&gt;github插件&lt;/h2&gt;
+&lt;p&gt;This plugin supports working with GitHub from the command line. It provides a few things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sets up the &lt;code&gt;hub&lt;/code&gt; wrapper and completions for the &lt;code&gt;git&lt;/code&gt; command if you have &lt;code&gt;hub&lt;/code&gt; installed.&lt;/li&gt;
+&lt;li&gt;Completion for the &lt;code&gt;github&lt;/code&gt; Ruby gem.&lt;/li&gt;
+&lt;li&gt;Convenience functions for working with repos and URLs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Functions&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;empty_gh&lt;/code&gt; - Creates a new empty repo (with a &lt;code&gt;README.md&lt;/code&gt;) and pushes it to GitHub&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;new_gh&lt;/code&gt; - Initializes an existing directory as a repo and pushes it to GitHub&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;exist_gh&lt;/code&gt; - Takes an existing repo and pushes it to GitHub&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git.io&lt;/code&gt; - Shortens a URL using &lt;a href="https://git.io"&gt;git.io&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>zsh插件之gi使用说明</title><link>https://it-boyer.github.io/post/old/git/zsh%E6%8F%92%E4%BB%B6%E4%B9%8Bgi%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link><pubDate>Tue, 09 Oct 2018 12:04:55 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/git/zsh%E6%8F%92%E4%BB%B6%E4%B9%8Bgi%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid><description>&lt;!--github库卡片--&gt;
+&lt;p&gt;{% github joeblau gitignore.io a09921d width = 30% %}&lt;/p&gt;
+&lt;h2&gt;配置zsh支持插件&lt;code&gt;gi&lt;/code&gt;命令&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;先浏览&lt;code&gt;oh-my-zsh/plugins&lt;/code&gt;目录下支持所有插件,找到&lt;code&gt;gi&lt;/code&gt;命令的插件名称：&lt;code&gt;gitignore&lt;/code&gt;,即目录名称。&lt;/li&gt;
+&lt;li&gt;把&lt;code&gt;gitignore&lt;/code&gt;添加到&lt;code&gt;zshrc.zsh-template&lt;/code&gt;的插件激活的清单中：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 插件设置，如果添加太多启动速度会比较慢
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;plugins=(git gitignore ruby autojump osx mvn)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2&gt;&lt;code&gt;gi&lt;/code&gt;清单命令使用&lt;/h2&gt;
+&lt;p&gt;再次打开zsh窗口会激活&lt;code&gt;gi&lt;/code&gt;命令&lt;/p&gt;</description></item></channel></rss>

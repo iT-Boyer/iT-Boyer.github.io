@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on 习七</title><link>https://it-boyer.github.io/tags/hugo/</link><description>Recent content in Hugo on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Fri, 16 Jul 2021 14:28:08 +0800</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>ox-hugo在博客写作过程积累总结</title><link>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/ox-hugo%E5%B7%A5%E5%85%B7%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/</link><pubDate>Fri, 16 Jul 2021 00:00:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/ox-hugo%E5%B7%A5%E5%85%B7%E7%BB%8F%E9%AA%8C%E7%A7%AF%E7%B4%AF/</guid><description>&lt;div class="ox-hugo-toc toc"&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div class="heading"&gt;&amp;#30446;&amp;#24405;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#%E5%86%99%E4%BD%9C%E7%9B%AE%E7%9A%84"&gt;&lt;span class="org-todo done DONE"&gt;DONE&lt;/span&gt; 写作目的&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E5%AF%BC%E5%87%BA%E6%97%B6todo-%E7%8A%B6%E6%80%81%E9%9A%90%E8%97%8F%E7%9A%84%E9%97%AE%E9%A2%98"&gt;导出时todo 状态隐藏的问题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E9%9A%90%E8%97%8Ftodo-%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E4%B9%8B%E5%90%8E%E7%9A%84%E6%97%B6%E9%97%B4%E6%88%B3%E7%9A%84%E6%96%B9%E6%B3%95"&gt;隐藏todo 状态转换之后的时间戳的方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E8%87%AA%E5%AE%9A%E4%B9%89todo-%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E6%A0%B7%E5%BC%8F"&gt;自定义todo 关键字的样式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E6%B8%A9%E4%B9%A0%E4%BA%86%E5%87%A0%E4%B8%AA%E6%A0%87%E7%AD%BE%E7%9A%84%E4%BD%BF%E7%94%A8"&gt;温习了几个标签的使用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E6%84%8F%E5%A4%96%E6%94%B6%E8%8E%B7"&gt;意外收获&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;!--endtoc--&gt;
+&lt;h2 id="写作目的"&gt;&lt;span class="org-todo done DONE"&gt;DONE&lt;/span&gt; 写作目的&lt;/h2&gt;
+&lt;p&gt;开这篇文章的目的是，总结今天在导出博客过程中遇到的问题和解决方式和办法。也希望在以后使用ox-hugo过程中，在遇到类似问题可以统一在这里汇总，在这里找到解决问题的思路和办法。&lt;/p&gt;</description></item><item><title>ox-hugo 常用的导出设置和+OPATIONS:选项</title><link>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/ox-hugo-%E4%B8%AD-options-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%B1%9E%E6%80%A7/</link><pubDate>Fri, 14 May 2021 13:45:59 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/ox-hugo-%E4%B8%AD-options-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%B1%9E%E6%80%A7/</guid><description>&lt;h2 id="漫长的经验积累"&gt;漫长的经验积累&lt;/h2&gt;
+&lt;p&gt;在工作中，一直在探索如何提高效率，如何把任务合理分解效果，如何坚持知识产出，搭建自己的知识体系。但往往会沉迷在收集工具的使用上，在没有评估该工具到底在实际项目中是否实用。以至于看似每天都非常忙碌，但是工具收集之后，很少真正的实践，产出很少，违背了产能和产出平衡原则。所有的专注力应该集中在真正能改变生活的事情上，耗费了时间和精力反省总结经验，还是无法改变自己的生活，无法改变生活，这都是浪费生命。&lt;/p&gt;</description></item><item><title>ox-hugo 使用 org-capture 模版搜集灵感提高效率</title><link>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/ox-hugo-%E7%9B%B8%E5%85%B3-capture-%E7%9A%84%E9%85%8D%E7%BD%AE/</link><pubDate>Tue, 11 May 2021 00:00:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/ox-hugo-%E7%9B%B8%E5%85%B3-capture-%E7%9A%84%E9%85%8D%E7%BD%AE/</guid><description>&lt;ul&gt;
+&lt;li&gt;State &amp;ldquo;DONE&amp;rdquo; from &amp;ldquo;TODO&amp;rdquo; &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;[2021-05-12 Wed 10:41]&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一直在尝试使用 ox-hugo 提升编写博客的效率,苦于资料苦涩难懂,网上资源缺失,一直处于又爱又恨的情绪,导致效率不升反降的尴尬境地.&lt;br&gt;
+今天发奋图强,自我感觉找到了效率密码,尝试在这里做一次分享,希望可以帮助到和我同样处境的小伙伴.&lt;/p&gt;</description></item><item><title>在 emacs 写博客精进手册:搭建 ox-hugo 测试用例站点</title><link>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/%E5%88%A9%E7%94%A8%E5%A5%BD-ox-hugo-%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E7%AB%99%E7%82%B9/</link><pubDate>Mon, 10 May 2021 12:30:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/%E5%88%A9%E7%94%A8%E5%A5%BD-ox-hugo-%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E7%AB%99%E7%82%B9/</guid><description>&lt;p&gt;ox-hugo 帮助用户很好的使用，专门提供了一个测试用例站点.&lt;br&gt;
+下面介绍下如何在本地轻松搭建一个测试用例站点，对于刚刚开始使用 emacs 写博客的新手,有很大的帮助.&lt;/p&gt;</description></item><item><title>在 hugo 站点实时预览 org 生成的 md 效果</title><link>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/ox-hugo-%E6%94%AF%E6%8C%81-org-%E5%AF%BC%E5%87%BA-md/</link><pubDate>Sat, 08 May 2021 19:32:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/ox-hugo-%E6%94%AF%E6%8C%81-org-%E5%AF%BC%E5%87%BA-md/</guid><description>&lt;h2 id="目的"&gt;目的&lt;/h2&gt;
+&lt;p&gt;要想实现在 hugo 站点实时预览 org 生成的 md 效果,需要借助 ox-hugo 提供的自动导出的功能,配合 hugo server 实时刷新的特性,达到实时预览的目的.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;实时预览&lt;/strong&gt;:hugo server 是 hugo 常用的命令,只要启动了站点服务,就可以实时预览 md 的变更.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自动导出&lt;/strong&gt;:ox-hugo 是基于 &lt;strong&gt;实时预览&lt;/strong&gt;,为 &lt;span class="underline"&gt;emacs&lt;/span&gt; 用户提供了一个强大的 &lt;strong&gt;自动导出&lt;/strong&gt; md 的功能.&lt;br&gt;
+即:当每次编写完成保存 org 文件时,会根据 Export 相关属性,自动导出 md 文件到 hugo 站点,从而实现在 hugo 实时预览 md 效果.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;ox-hugo 的自动导出功能有类似作用域的概念,可以针对目录下所有文件,也可以仅在当前 org 文件中起作用,也可以指定 org 文件不支持自动保存.&lt;/p&gt;</description></item><item><title>hugo中集成Fuse.js实现站内搜索</title><link>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/hugo%E4%B8%AD%E9%9B%86%E6%88%90Fusejs%E5%AE%9E%E7%8E%B0%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2/</link><pubDate>Fri, 07 May 2021 21:18:29 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/hugo%E4%B8%AD%E9%9B%86%E6%88%90Fusejs%E5%AE%9E%E7%8E%B0%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2/</guid><description>&lt;p&gt;&lt;a href="https://ttys3.dev/post/hugo/hugo-fast-search/"&gt;5分钟给Hugo博客增加搜索功能 :: /dev/ttyS3 — 回首向来萧瑟处 也无荒野也无灯&lt;/a&gt;&lt;br&gt;
+&lt;a href="https://gist.github.com/cmod/5410eae147e4318164258742dd053993"&gt;Fast, instant client side search for Hugo static site generator · GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;配置config.toml outputs:支持json&lt;br&gt;
+在layouts/_default/新建 index.json&lt;br&gt;
+在layouts/_default/新建 baseof.html 先拷贝even主题下的文件，在把搜索样式添加到文件末尾在static中添加js脚本在fastsearch.js中配置**CMD+/**显示隐藏快捷键&lt;/p&gt;</description></item><item><title>设置局域网内访问 hugo 本地服务 server</title><link>https://it-boyer.github.io/post/old/%E8%AE%BE%E7%BD%AE%E5%B1%80%E5%9F%9F%E7%BD%91%E5%86%85%E8%AE%BF%E9%97%AEhugo%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1server/</link><pubDate>Fri, 09 Aug 2019 19:53:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E8%AE%BE%E7%BD%AE%E5%B1%80%E5%9F%9F%E7%BD%91%E5%86%85%E8%AE%BF%E9%97%AEhugo%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1server/</guid><description>&lt;h2 id="场景说明"&gt;场景说明&lt;/h2&gt;
+&lt;p&gt;hugo配合emacs编写博客，借助emacs中org-mode的强大功能，对知识逻辑梳理和层级整理的神级操作，结合hugo+githubPage静态网页的支持，能够很好的将emacs本地知识体系分享到网络上。hugo的对知识点的可读性和体系，都有一个套完整的解决方案。&lt;/p&gt;</description></item><item><title>hugo文章支持密码访问的小技巧</title><link>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/hugo%E6%96%87%E7%AB%A0%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E8%AE%BF%E9%97%AE%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/</link><pubDate>Fri, 09 Aug 2019 14:00:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/hugo%E6%96%87%E7%AB%A0%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E8%AE%BF%E9%97%AE%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/</guid><description>&lt;p&gt;给文章添加访问权限,为自己知识产权多一份保障.
+本文章基于even主题,添加文章密码.&lt;/p&gt;
+&lt;h2 id="修改主题even的header-dot-html"&gt;修改主题even的header.html&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;vi themes/even/layouts/partials/head.html&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;在head.html底部添加js脚本:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-js" data-lang="js"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;script&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{{ .Params.password }}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;请输入文章密码&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{{ .Params.password }}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;alert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;密码错误！&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nx"&gt;history&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;back&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;})();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="err"&gt;/script&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id="配置文章默认密码值"&gt;配置文章默认密码值&lt;/h2&gt;
+&lt;p&gt;需要通过对post.org头设置,新增自定义字段&lt;code&gt;password&lt;/code&gt;&lt;/p&gt;</description></item><item><title>hugo 中实现支持 uml 的方式</title><link>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/hugo-%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%94%AF%E6%8C%81-uml-%E7%9A%84%E6%96%B9%E5%BC%8F/</link><pubDate>Thu, 08 Aug 2019 20:39:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/hugo-%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%94%AF%E6%8C%81-uml-%E7%9A%84%E6%96%B9%E5%BC%8F/</guid><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;使用 &lt;a href="https://mermaidjs.github.io/#/"&gt;mermaidjs&lt;/a&gt;&lt;br&gt;
+引入 js 文件:&lt;a href="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"&gt;mermaid.min.js&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;span class="lnt"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;vi themes/even/layouts/partials/footer.html
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#添加下面代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;!-- mermaid JS --&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;script &lt;span class="nv"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;script&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; mermaid.initialize&lt;span class="o"&gt;({&lt;/span&gt; startOnLoad: &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;})&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;/script&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在 md 文件中添加代码块&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;div &lt;span class="nv"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;mermaid&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; graph LR
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; A --- B
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; B--&amp;gt;C&lt;span class="o"&gt;[&lt;/span&gt;fa:fa-ban forbidden&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; B--&amp;gt;D&lt;span class="o"&gt;(&lt;/span&gt;fa:fa-spinner&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;/div&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;</description></item></channel></rss>

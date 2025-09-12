@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ffmpeg on 习七</title><link>https://it-boyer.github.io/tags/ffmpeg/</link><description>Recent content in Ffmpeg on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Fri, 10 Feb 2017 10:45:03 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/ffmpeg/index.xml" rel="self" type="application/rss+xml"/><item><title>bilibiliForMac版之mpv依赖编译</title><link>https://it-boyer.github.io/post/old/%E7%BC%96%E8%AF%91/bilibili%E4%B9%8BMac%E7%89%88ffmpeg%E4%BE%9D%E8%B5%96%E7%BC%96%E8%AF%91/</link><pubDate>Fri, 10 Feb 2017 10:45:03 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E7%BC%96%E8%AF%91/bilibili%E4%B9%8BMac%E7%89%88ffmpeg%E4%BE%9D%E8%B5%96%E7%BC%96%E8%AF%91/</guid><description>&lt;h2&gt;&lt;a href="https://github.com/typcn/bilibili-mac-client"&gt;Bilibili Mac Client&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;一款基于mpv和ffmpeg底层库实现的播放器.&lt;/p&gt;
+&lt;h2&gt;项目依赖库&lt;/h2&gt;
+&lt;p&gt;编译在项目中所需的相关依赖库&lt;/p&gt;
+&lt;h3&gt;下载资源&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下载mpv-build
+{% codeblock lang:git %}
+git clone &lt;a href="https://github.com/mpv-player/mpv-build.git"&gt;https://github.com/mpv-player/mpv-build.git&lt;/a&gt;
+{% endcodeblock %}&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;执行下载&lt;code&gt;ffmpeg&lt;/code&gt;, &lt;code&gt;libass&lt;/code&gt; 和&lt;code&gt;mpv资源&lt;/code&gt;，同时完成编译的命令：
+{% codeblock lang:bash %}
+cd mpv-build/
+./rebuild -j4&lt;br&gt;
+{% endcodeblock %}&lt;/p&gt;</description></item></channel></rss>

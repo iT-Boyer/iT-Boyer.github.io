@@ -1,0 +1,343 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>基于 helm-org-ql 自定义 helm 检索 prompt.org 库 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="博客简介"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%87%AA%E5%AE%9A%E4%B9%89helm%E6%94%AF%E6%8C%81%E6%9F%A5%E8%AF%A2prompt%E5%BA%93/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%87%AA%E5%AE%9A%E4%B9%89helm%E6%94%AF%E6%8C%81%E6%9F%A5%E8%AF%A2prompt%E5%BA%93/"><meta property="og:site_name" content="习七"><meta property="og:title" content="基于 helm-org-ql 自定义 helm 检索 prompt.org 库"><meta property="og:description" content="博客简介"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-05-25T03:59:00+08:00"><meta property="article:modified_time" content="2023-05-25T16:54:15+08:00"><meta itemprop=name content="基于 helm-org-ql 自定义 helm 检索 prompt.org 库"><meta itemprop=description content="博客简介"><meta itemprop=datePublished content="2023-05-25T03:59:00+08:00"><meta itemprop=dateModified content="2023-05-25T16:54:15+08:00"><meta itemprop=wordCount content="2318"><meta itemprop=keywords content=",学习笔记"><meta name=twitter:card content="summary"><meta name=twitter:title content="基于 helm-org-ql 自定义 helm 检索 prompt.org 库"><meta name=twitter:description content="博客简介"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>基于 helm-org-ql 自定义 helm 检索 prompt.org 库</h1><div class=post-meta><span class=post-time>2023-05-25</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 2318 字 </span><span class=more-meta>预计阅读 5 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by
+<a href=/authors/iTBoyer>iTBoyer</a></span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#helm-功能>helm 功能</a></li><li><a href=#学习路径>学习路径</a></li><li><a href=#helm-数据源初始化方法>helm 数据源初始化方法</a><ul><li><a href=#两个几个属性>两个几个属性</a></li></ul></li><li><a href=#基于-helm-org-ql-设置-ai-prompt>基于 helm-org-ql 设置 AI prompt</a></li><li><a href=#基于-org-ql-定制-helm-查询-prompt>基于 org-ql 定制 helm 查询 prompt</a></li><li><a href=#使用场景-在-go-translate-中使用-ai-prompt>使用场景: 在 go-translate 中使用 AI prompt</a></li><li><a href=#参考代码片段>参考代码片段</a></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2023-05-25T16:54:15 title="May 25, 2023">May 25, 2023</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2 id=helm-功能>helm 功能</h2><p>Helm是一个Emacs的框架,用于创建符合人体工程学的交互式工具。它有以下主要优点:</p><ol><li><p>简单且一致的交互方式</p><p>使用相同的界面和按键绑定为许多功能提供接口,这样用户只需要学习一次就可以应用到所有 Helm 工具上。这大大降低了学习成本,让 Emacs 的各种功能更易于掌握。</p></li><li><p>强大的过滤机制使用实时过滤,可以根据输入的字串快速过滤出相关选项,这使其非常适合处理长列表或大量数据。过滤器可以针对候选项的任何部分(标题,路径,标签等)进行操作。</p></li><li><p>支持模糊匹配</p><p>过滤不但支持精确匹配,还支持模糊匹配。这在处理长列表时提供了很大便利,只需要输入部分字母就可以过滤出相关选项。</p></li><li><p>快速选择</p><p>通过字母导航, Helm 允许使用户快速选择列表中的选项。无需从列表顶部逐一翻阅,用户可以直接输入选项的首字母快速定位。</p></li><li><p>支持补全</p><p>输入支持 Emacs 自带的补全功能。当用户输入部分字母时,Helm 会显示相关选项的补全提示,方便用户快速选择需要的项。</p></li><li><p>可定制</p><p>具有高度的可定制性,用户可以轻松定义新的 Helm 工具以满足特定需要。许多其他 Emacs 包都提供了 Helm 接口,这使得 Helm 的实用范围更加广泛。</p></li><li><p>基于源</p><p>工具基于多个命名源(source)运行,每个源返回一个候选项列表。这使得 Helm 可以同时搜索和过滤来自多个源的选项,比如查找文件时同时搜索多个目录。</p></li></ol><h2 id=学习路径>学习路径</h2><p>在日常使用中，helm 是接触最多的，能够很方便提供，现在通过插件的自定义，扩展 prompt 查询和获取 prompt 的功能。</p><p>现在根据比较常用的 helm 工具，可以基于现有的插件做集成，或学习自定义 prompt helm 插件。</p><ol><li>直接调用 helm 传入参数</li><li>基于 helm-org-ql 扩展支持 prompt 查询。</li><li>参考 helm-org-ql-views 的用法，学习 helm 数据源等，高级用法</li><li>参考 helm-org-capture-templates , 扩展 capture 模板的 helm ，学习相关用法</li></ol><h2 id=helm-数据源初始化方法>helm 数据源初始化方法</h2><ol><li><code>helm-make-source</code> 参考 <code>helm-org-ql-views-source</code><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=c1>;;;###autoload 通过 org-ql 获取数据源</span>
+</span></span><span class=line><span class=cl>     <span class=c1>;; 通过 alist 列表中获取数据源</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nb>defvar</span> <span class=nv>helm-org-ql-views-source</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nv>helm-make-source</span> <span class=s>&#34;Org QL Views&#34;</span> <span class=ss>&#39;helm-source-sync</span>
+</span></span><span class=line><span class=cl>         <span class=nb>:candidates</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>                       <span class=p>(</span><span class=nv>-&gt;&gt;</span> <span class=nv>org-ql-views</span>
+</span></span><span class=line><span class=cl>                            <span class=p>(</span><span class=nv>-map</span> <span class=nf>#&#39;car</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                            <span class=p>(</span><span class=nv>-sort</span> <span class=nf>#&#39;</span><span class=nv>string&lt;</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>         <span class=nb>:action</span> <span class=p>(</span><span class=nf>list</span> <span class=p>(</span><span class=nf>cons</span> <span class=s>&#34;Show view&#34;</span> <span class=nf>#&#39;</span><span class=nv>org-ql-view</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>       <span class=s>&#34;Helm source for </span><span class=ss>`org-ql-views&#39;</span><span class=s>.&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li><li>helm-build-in-buffer-source 参考获取浏览器书签的方法<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=p>(</span><span class=nb>defvar</span> <span class=nv>helm-chrome-history-source</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nv>helm-build-in-buffer-source</span> <span class=s>&#34;Edge History&#34;</span>
+</span></span><span class=line><span class=cl>       <span class=nb>:init</span> <span class=nf>#&#39;</span><span class=nv>helm-chrome-history-init</span>
+</span></span><span class=line><span class=cl>       <span class=nb>:action</span> <span class=p>(</span><span class=nv>helm-make-actions</span>
+</span></span><span class=line><span class=cl>                <span class=s>&#34;Browse URL&#34;</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=nb>lambda</span> <span class=p>(</span><span class=nv>x</span><span class=p>)</span> <span class=p>(</span><span class=nv>browse-url</span> <span class=p>(</span><span class=nf>car</span> <span class=p>(</span><span class=nv>split-string</span> <span class=nv>x</span> <span class=s>&#34;|&#34;</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>                <span class=s>&#34;W3m URL&#34;</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=nb>lambda</span> <span class=p>(</span><span class=nv>x</span><span class=p>)</span> <span class=p>(</span><span class=nv>w3m</span> <span class=p>(</span><span class=nf>car</span> <span class=p>(</span><span class=nv>split-string</span> <span class=nv>x</span> <span class=s>&#34;|&#34;</span><span class=p>)))))))</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><h3 id=两个几个属性>两个几个属性</h3><ol><li><p><code>:candidates</code> 候选列表: helm 展示的文本和选择传递的内容，基于该项的格式定义。</p><ol><li>简单的候选项列表: <code>:candidates '("Item 1" "Item 2" "Item 3")</code></li><li>候选项的assoc list:<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>      <span class=nb>:candidates</span> <span class=o>&#39;</span><span class=p>((</span><span class=s>&#34;Item 1&#34;</span> <span class=o>.</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                    <span class=p>(</span><span class=s>&#34;Item 2&#34;</span> <span class=o>.</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                    <span class=p>(</span><span class=s>&#34;Item 3&#34;</span> <span class=o>.</span> <span class=mi>3</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><p>在这种情况下,每个候选项都是一个 cons cell ,car 部位显示在 helm buffer 中,cdr部位是该候选项的值。</p></li><li><p><code>:action</code> 选中执行的事件: 支持 闭包的等实现。</p></li></ol><p>自定义 helm 数据源主要基于 org 文件文件中，需要了解 org-ql 的语法，知道如何将会 org-ql 结果数据，转换为 helm 的数据源等。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>setq</span> <span class=nv>contents</span> <span class=p>(</span><span class=nv>org-ql-query</span>
+</span></span><span class=line><span class=cl>                   <span class=nb>:select</span> <span class=o>&#39;</span><span class=p>(</span><span class=nv>org-get-entry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                   <span class=nb>:from</span> <span class=s>&#34;~/hsg/iNotes/content-org/prompt/prompt.org&#34;</span>
+</span></span><span class=line><span class=cl>                   <span class=nb>:where</span> <span class=o>&#39;</span><span class=p>(</span><span class=nb>and</span>
+</span></span><span class=line><span class=cl>                            <span class=p>(</span><span class=nv>ancestors</span> <span class=p>(</span><span class=nv>heading</span> <span class=nv>gts-claude-session</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                            <span class=p>(</span><span class=nv>heading</span> <span class=s>&#34;system&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                            <span class=p>)))</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=基于-helm-org-ql-设置-ai-prompt>基于 helm-org-ql 设置 AI prompt</h2><ol><li>声明处理 AI prompt 函数 <code>helm-org-ql-AI-show-marker</code></li><li>添加到 <code>helm-org-ql-actions</code> 中。</li><li>调用 <code>helm-org-ql</code> 时，在选中条目时，Tab 键，跳转到actions 操作列表。<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=c1>;; AI 选择Prompt 获取 system 的内容</span>
+</span></span><span class=line><span class=cl>   <span class=p>(</span><span class=nv>add-to-list</span> <span class=ss>&#39;helm-org-ql-actions</span>  <span class=p>(</span><span class=nf>cons</span> <span class=s>&#34;设置为 Claude 角色&#34;</span> <span class=ss>&#39;helm-AI-prompt-marker</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>   <span class=c1>;; 为helm-org-ql 添加自定义 action</span>
+</span></span><span class=line><span class=cl>   <span class=c1>;; 在 helm view 选择条目之后，处理条目下的内容获取。</span>
+</span></span><span class=line><span class=cl>   <span class=p>(</span><span class=nb>defun</span> <span class=nv>helm-AI-prompt-marker</span> <span class=p>(</span><span class=nv>marker</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=s>&#34;Show heading at MARKER.&#34;</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nb>interactive</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nb>let</span> <span class=p>((</span><span class=nv>role</span> <span class=s>&#34;&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>prompt</span> <span class=s>&#34;&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>start</span> <span class=p>(</span><span class=nf>marker-position</span> <span class=nv>marker</span><span class=p>))</span> <span class=c1>;;标记起始位置</span>
+</span></span><span class=line><span class=cl>           <span class=p>)</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;开始位置-----：%s&#34;</span> <span class=nv>start</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>       <span class=p>(</span><span class=nb>with-current-buffer</span> <span class=p>(</span><span class=nf>marker-buffer</span> <span class=nv>marker</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=c1>;; (message &#34;获取entry: %s&#34; (org-get-entry))</span>
+</span></span><span class=line><span class=cl>         <span class=c1>;; (setq prompt (org-get-entry))</span>
+</span></span><span class=line><span class=cl>         <span class=p>(</span><span class=nb>save-excursion</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nv>org-back-to-heading</span> <span class=no>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nf>goto-char</span> <span class=nv>marker</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=c1>;; 获取 helm 选择的条目的 title ，不包含 todo 优先级 标签等信息</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nb>setq</span> <span class=nv>role</span> <span class=p>(</span><span class=nv>org-get-heading</span> <span class=no>t</span> <span class=no>t</span> <span class=no>t</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nb>setq</span> <span class=nv>helm-calude-current-role</span> <span class=nv>role</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=c1>;; 获取 helm 选择条目的内容</span>
+</span></span><span class=line><span class=cl>           <span class=c1>;; 例如：当选择的 prompt.org 中的 system 条目，就可以获取到 prompt 内容。</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nb>setq</span> <span class=nv>prompt</span> <span class=p>(</span><span class=nf>buffer-substring-no-properties</span>
+</span></span><span class=line><span class=cl>                         <span class=c1>;; start           ;; 包含heading</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nf>line-beginning-position</span> <span class=mi>2</span><span class=p>)</span> <span class=c1>;; 不包含heading</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nv>org-end-of-subtree</span> <span class=no>t</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>           <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;获取prompt: %s&#34;</span> <span class=nv>prompt</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>           <span class=p>)</span>
+</span></span><span class=line><span class=cl>         <span class=p>)))</span>
+</span></span></code></pre></td></tr></table></div></div></li><li>helm-AI-prompt 基于 helm-rog-ql 限制搜索的范围，仅展示 prompt.org 文件中的 heading<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=p>(</span><span class=nb>defun</span> <span class=nv>helm-AI-prompt</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nb>interactive</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nv>helm-org-ql</span> <span class=s>&#34;~/hsg/iNotes/content-org/prompt/prompt.org&#34;</span>
+</span></span><span class=line><span class=cl>                  <span class=nb>:name</span> <span class=s>&#34;AI prompt&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>helm-org-ql-AI-show-marker
+</span></span></code></pre></td></tr></table></div></div><h2 id=基于-org-ql-定制-helm-查询-prompt>基于 org-ql 定制 helm 查询 prompt</h2><p>helm-claude-role：基于 helm + org-ql-query 实现. 通过 query 语法定制 helm 数据源。</p><p>显示 prompt.org 的一级heading</p><ol><li><p>声明交互函数，直接调用 helm 接口展示搜索页面</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=c1>;; 基于 helm 直接封装</span>
+</span></span><span class=line><span class=cl>   <span class=p>(</span><span class=nb>defun</span> <span class=nv>helm-claude-role</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nb>interactive</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nv>helm</span>
+</span></span><span class=line><span class=cl>      <span class=nb>:prompt</span> <span class=p>(</span><span class=nf>format</span> <span class=s>&#34; %s 切换角色为：&#34;</span> <span class=nv>helm-calude-current-role</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=nb>:sources</span> <span class=nv>helm-AI-prompt-source</span>
+</span></span><span class=line><span class=cl>      <span class=nb>:buffer</span> <span class=s>&#34;*Helm AI prompt*&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=nb>:full-frame</span> <span class=no>nil</span>
+</span></span><span class=line><span class=cl>      <span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>使用 org-ql-query 读取 prompt 库文件，初始化数据源</p><p>通过 org-ql-query 屏蔽 system user 等级，限制 helm 显示的文本内容</p><p>弊端：不支持 tags todo 等高级搜索</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>   <span class=c1>;;       为helm提供数据元数据</span>
+</span></span><span class=line><span class=cl>   <span class=c1>;; 通过 org-ql-query 屏蔽 system user 等级，限制 helm 显示的文本内容</span>
+</span></span><span class=line><span class=cl>   <span class=c1>;; 弊端：不支持 tags todo 等高级搜索</span>
+</span></span><span class=line><span class=cl>   <span class=p>(</span><span class=nb>defvar</span> <span class=nv>helm-AI-prompt-source</span>
+</span></span><span class=line><span class=cl>     <span class=p>(</span><span class=nv>helm-make-source</span> <span class=s>&#34;Org QL Views&#34;</span> <span class=ss>&#39;helm-source-sync</span>
+</span></span><span class=line><span class=cl>       <span class=nb>:candidates</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;; TODO 查询之后整理出列表格式，提供显示和action传值。</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>;; 获取数据helm的数据源，通过不同方式整理成 helm支持的格式 list</span>
+</span></span><span class=line><span class=cl>                     <span class=p>(</span><span class=nv>org-ql-query</span>
+</span></span><span class=line><span class=cl>                       <span class=nb>:select</span> <span class=o>&#39;</span><span class=p>(</span><span class=nf>list</span> <span class=p>(</span><span class=nv>org-get-heading</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                 <span class=p>(</span><span class=nv>org-get-heading</span> <span class=no>t</span> <span class=no>t</span> <span class=no>t</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                       <span class=nb>:from</span> <span class=s>&#34;~/hsg/iNotes/content-org/prompt/prompt.org&#34;</span>
+</span></span><span class=line><span class=cl>                       <span class=nb>:where</span> <span class=o>&#39;</span><span class=p>(</span><span class=nv>children</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>       <span class=nb>:action</span> <span class=p>(</span><span class=nf>list</span>
+</span></span><span class=line><span class=cl>                <span class=c1>;; TODO 以这种格式添加选择之后的操作</span>
+</span></span><span class=line><span class=cl>                <span class=c1>;; 1. 声明一个变量，传递给 go-translate 引擎</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=nf>cons</span> <span class=s>&#34;设置 prompt 名称&#34;</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>(</span><span class=nv>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                           <span class=p>(</span><span class=nf>message</span> <span class=s>&#34;选择的heading:%s&#34;</span> <span class=p>(</span><span class=nf>car</span> <span class=nv>x</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                           <span class=p>(</span><span class=nb>setq</span> <span class=nv>helm-calude-current-role</span> <span class=p>(</span><span class=nf>car</span> <span class=nv>x</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                                           <span class=p>))</span>
+</span></span><span class=line><span class=cl>                <span class=p>))</span>
+</span></span><span class=line><span class=cl>     <span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><h2 id=使用场景-在-go-translate-中使用-ai-prompt>使用场景: 在 go-translate 中使用 AI prompt</h2><p>helm-claude-tranlate 使用方式</p><ol><li>需要先设置 <code>helm-claude-current-role</code> 角色，默认：英翻中</li><li>可以通过 helm 选择切换新角色，支持helm 的工具有：<ol><li>helm-org-ql : 新增了选择事件，在使用时，要确保条目来自prompt.org中，这样才能得到正确的 prompt，具体看 prompt.org 的结构</li><li>helm-AI-prompt：基于 helm-org-ql ,仅限制了在 prompt.org 文件中搜索,其他功能一样</li><li>helm-claude-role：基于 helm + org-ql-query 实现，通过query 语法 helm 数据源，显示 prompt.org 的一级heading</li></ol></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl>  <span class=p>(</span><span class=nb>setq</span> <span class=nv>helm-calude-current-role</span> <span class=s>&#34;英翻中&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>defvar</span> <span class=nv>helm-claude-translater</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nv>gts-translator</span>
+</span></span><span class=line><span class=cl>     <span class=nb>:picker</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>               <span class=p>(</span><span class=nb>cond</span> <span class=p>((</span><span class=nf>equal</span> <span class=nv>helm-calude-current-role</span> <span class=s>&#34;英翻中&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                      <span class=p>(</span><span class=nv>gts-noprompt-picker</span> <span class=nb>:texter</span> <span class=p>(</span><span class=nv>gts-current-or-selection-texter</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>                     <span class=p>((</span><span class=nf>equal</span> <span class=nv>helm-calude-current-role</span> <span class=s>&#34;内容总结&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                      <span class=p>(</span><span class=nv>gts-paragraph-picker</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                     <span class=p>(</span><span class=no>t</span> <span class=p>(</span><span class=nv>gts-prompt-picker</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>     <span class=nb>:engines</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=nv>gts-claude-engine</span> <span class=nb>:auth-key</span> <span class=nv>slack-claude-bot-token</span>
+</span></span><span class=line><span class=cl>                                   <span class=nb>:channel</span> <span class=s>&#34;D052Y13FSRY&#34;</span>
+</span></span><span class=line><span class=cl>                                   <span class=nb>:system</span>  <span class=nv>helm-calude-current-role</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=p>)</span>
+</span></span><span class=line><span class=cl>     <span class=nb>:render</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>               <span class=p>(</span><span class=nb>cond</span> <span class=p>((</span><span class=nf>equal</span> <span class=nv>helm-calude-current-role</span> <span class=s>&#34;英翻中&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                      <span class=p>(</span><span class=nv>gts-posframe-pop-render</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                      <span class=p>(</span><span class=no>t</span> <span class=p>(</span><span class=nv>gts-buffer-render</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>               <span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>defun</span> <span class=nv>helm-claude-tranlate</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nb>interactive</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=nv>gts-translate</span> <span class=nv>helm-claude-translater</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=参考代码片段>参考代码片段</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-elisp data-lang=elisp><span class=line><span class=cl><span class=p>(</span><span class=nb>cl-defun</span> <span class=nv>helm-org-ql-source</span> <span class=p>(</span><span class=nv>buffers-files</span> <span class=kp>&amp;key</span> <span class=p>(</span><span class=nv>name</span> <span class=s>&#34;helm-org-ql&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Return Helm source named NAME that searches BUFFERS-FILES with </span><span class=ss>`helm-org-ql&#39;</span><span class=s>.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=c1>;; Expansion of `helm-build-sync-source&#39; macro.</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>helm-make-source</span> <span class=nv>name</span> <span class=ss>&#39;helm-source-sync</span>
+</span></span><span class=line><span class=cl>    <span class=nb>:candidates</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                  <span class=p>(</span><span class=nb>let*</span> <span class=p>((</span><span class=nv>query</span> <span class=p>(</span><span class=nv>org-ql--query-string-to-sexp</span> <span class=nv>helm-pattern</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                         <span class=p>(</span><span class=nv>window-width</span> <span class=p>(</span><span class=nv>window-width</span> <span class=p>(</span><span class=nv>helm-window</span><span class=p>))))</span>
+</span></span><span class=line><span class=cl>                    <span class=p>(</span><span class=nb>when</span> <span class=nv>query</span>
+</span></span><span class=line><span class=cl>                      <span class=p>(</span><span class=nb>with-current-buffer</span> <span class=p>(</span><span class=nv>helm-buffer-get</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                        <span class=p>(</span><span class=nb>setq</span> <span class=nv>helm-org-ql-buffers-files</span> <span class=nv>buffers-files</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                      <span class=p>(</span><span class=nb>ignore-errors</span>
+</span></span><span class=line><span class=cl>                        <span class=c1>;; Ignore errors that might be caused by partially typed queries.</span>
+</span></span><span class=line><span class=cl>                        <span class=p>(</span><span class=nv>org-ql-select</span> <span class=nv>buffers-files</span> <span class=nv>query</span>
+</span></span><span class=line><span class=cl>                          <span class=nb>:action</span> <span class=o>`</span><span class=p>(</span><span class=nv>helm-org-ql--heading</span> <span class=o>,</span><span class=nv>window-width</span><span class=p>))))))</span>
+</span></span><span class=line><span class=cl>    <span class=nb>:match</span> <span class=nf>#&#39;identity</span>
+</span></span><span class=line><span class=cl>    <span class=nb>:fuzzy-match</span> <span class=no>nil</span>
+</span></span><span class=line><span class=cl>    <span class=nb>:multimatch</span> <span class=no>nil</span>
+</span></span><span class=line><span class=cl>    <span class=nb>:nohighlight</span> <span class=no>t</span>
+</span></span><span class=line><span class=cl>    <span class=nb>:volatile</span> <span class=no>t</span>
+</span></span><span class=line><span class=cl>    <span class=nb>:keymap</span> <span class=nv>helm-org-ql-map</span>
+</span></span><span class=line><span class=cl>    <span class=nb>:action</span> <span class=nv>helm-org-ql-actions</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>;;; Org capture templates</span>
+</span></span><span class=line><span class=cl><span class=c1>;;</span>
+</span></span><span class=line><span class=cl><span class=c1>;;</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>defvar</span> <span class=nv>org-capture-templates</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>helm-source-org-capture-templates</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Build source for org capture templates.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>helm-build-sync-source</span> <span class=s>&#34;Org Capture Templates:&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>:candidates</span> <span class=p>(</span><span class=nb>cl-loop</span> <span class=nv>for</span> <span class=nv>template</span> <span class=nv>in</span> <span class=nv>org-capture-templates</span>
+</span></span><span class=line><span class=cl>                         <span class=nv>collect</span> <span class=p>(</span><span class=nf>cons</span> <span class=p>(</span><span class=nf>nth</span> <span class=mi>1</span> <span class=nv>template</span><span class=p>)</span> <span class=p>(</span><span class=nf>nth</span> <span class=mi>0</span> <span class=nv>template</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=nb>:action</span> <span class=o>&#39;</span><span class=p>((</span><span class=s>&#34;Do capture&#34;</span> <span class=o>.</span> <span class=p>(</span><span class=nb>lambda</span> <span class=p>(</span><span class=nv>template-shortcut</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                                <span class=p>(</span><span class=nv>org-capture</span> <span class=no>nil</span> <span class=nv>template-shortcut</span><span class=p>))))))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nb>defun</span> <span class=nv>helm-org-capture-templates</span> <span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=s>&#34;Preconfigured helm for org templates.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nb>interactive</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nv>helm</span> <span class=nb>:sources</span> <span class=p>(</span><span class=nv>helm-source-org-capture-templates</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nb>:truncate-lines</span> <span class=nv>helm-org-truncate-lines</span>
+</span></span><span class=line><span class=cl>        <span class=nb>:buffer</span> <span class=s>&#34;*helm org capture templates*&#34;</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2023-05-25</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><nav class=post-nav><a class=prev href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Claude%E8%BE%93%E5%87%BA%E7%8A%B6%E6%80%81%E5%9C%A8buffer%E4%B8%AD%E5%AE%9E%E7%8E%B0%E5%90%8C%E6%AD%A5/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">扩展 go-translate 渲染器支持 Claude Typing 输入状态</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/org-clock-budget%E6%8F%92%E4%BB%B6%E7%BF%BB%E8%AF%91/><span class="next-text nav-default">翻译 org-clock-budget 时间管理插件的用法</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2023-05-25 03:59:00 +0800 +0800",title:"基于 helm-org-ql 自定义 helm 检索 prompt.org 库",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

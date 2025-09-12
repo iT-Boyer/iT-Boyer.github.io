@@ -1,0 +1,233 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>WKWebView控件和JS脚本传参及交互 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="WebKit简介 {% github it-boyer WKWebView-JS d03bc0e width = 30% %} 自iOS8 以后，苹果推出了新框架 WebKit，提供了替换 UIWebView 的组件 WKWebView。各种 UIWebView 的性能问题没有了，速度更快了，占用内存少了，体验更好了，下面列举一些其它的优势: 1、在性能、稳定性、功能方面有很大提升（加载速度，内存的提升谁用谁知道） 2、更多的支持 HTML5 的特性 3、官方宣称的高达60fps的滚动刷新率以及内置手势 4、Safari 相同的 JavaScript 引擎 5、将 UIWebViewDelegate 与 UIWebView 拆分成了14类与3个协议，包含该更细节功能的实现。
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/iOS/UI/WKWebView%E6%8E%A7%E4%BB%B6%E5%92%8CJS%E8%84%9A%E6%9C%AC%E4%BC%A0%E5%8F%82%E5%8F%8A%E4%BA%A4%E4%BA%92/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/iOS/UI/WKWebView%E6%8E%A7%E4%BB%B6%E5%92%8CJS%E8%84%9A%E6%9C%AC%E4%BC%A0%E5%8F%82%E5%8F%8A%E4%BA%A4%E4%BA%92/"><meta property="og:site_name" content="习七"><meta property="og:title" content="WKWebView控件和JS脚本传参及交互"><meta property="og:description" content="WebKit简介 {% github it-boyer WKWebView-JS d03bc0e width = 30% %} 自iOS8 以后，苹果推出了新框架 WebKit，提供了替换 UIWebView 的组件 WKWebView。各种 UIWebView 的性能问题没有了，速度更快了，占用内存少了，体验更好了，下面列举一些其它的优势: 1、在性能、稳定性、功能方面有很大提升（加载速度，内存的提升谁用谁知道） 2、更多的支持 HTML5 的特性 3、官方宣称的高达60fps的滚动刷新率以及内置手势 4、Safari 相同的 JavaScript 引擎 5、将 UIWebViewDelegate 与 UIWebView 拆分成了14类与3个协议，包含该更细节功能的实现。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-07-07T09:54:41+00:00"><meta property="article:modified_time" content="2017-07-07T09:54:41+00:00"><meta property="article:tag" content="JS"><meta itemprop=name content="WKWebView控件和JS脚本传参及交互"><meta itemprop=description content="WebKit简介 {% github it-boyer WKWebView-JS d03bc0e width = 30% %} 自iOS8 以后，苹果推出了新框架 WebKit，提供了替换 UIWebView 的组件 WKWebView。各种 UIWebView 的性能问题没有了，速度更快了，占用内存少了，体验更好了，下面列举一些其它的优势: 1、在性能、稳定性、功能方面有很大提升（加载速度，内存的提升谁用谁知道） 2、更多的支持 HTML5 的特性 3、官方宣称的高达60fps的滚动刷新率以及内置手势 4、Safari 相同的 JavaScript 引擎 5、将 UIWebViewDelegate 与 UIWebView 拆分成了14类与3个协议，包含该更细节功能的实现。"><meta itemprop=datePublished content="2017-07-07T09:54:41+00:00"><meta itemprop=dateModified content="2017-07-07T09:54:41+00:00"><meta itemprop=wordCount content="2376"><meta itemprop=keywords content="JS"><meta name=twitter:card content="summary"><meta name=twitter:title content="WKWebView控件和JS脚本传参及交互"><meta name=twitter:description content="WebKit简介 {% github it-boyer WKWebView-JS d03bc0e width = 30% %} 自iOS8 以后，苹果推出了新框架 WebKit，提供了替换 UIWebView 的组件 WKWebView。各种 UIWebView 的性能问题没有了，速度更快了，占用内存少了，体验更好了，下面列举一些其它的优势: 1、在性能、稳定性、功能方面有很大提升（加载速度，内存的提升谁用谁知道） 2、更多的支持 HTML5 的特性 3、官方宣称的高达60fps的滚动刷新率以及内置手势 4、Safari 相同的 JavaScript 引擎 5、将 UIWebViewDelegate 与 UIWebView 拆分成了14类与3个协议，包含该更细节功能的实现。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>WKWebView控件和JS脚本传参及交互</h1><div class=post-meta><span class=post-time>2017-07-07</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 2376 字 </span><span class=more-meta>预计阅读 5 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#>WebKit简介</a></li><li><a href=#>iOS原生API调用JS脚本</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-07-07T09:54:41 title="July 7, 2017">July 7, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h3>WebKit简介</h3><p>{% github it-boyer WKWebView-JS d03bc0e width = 30% %}
+自iOS8 以后，苹果推出了新框架 WebKit，提供了替换 UIWebView 的组件 WKWebView。各种 UIWebView 的性能问题没有了，速度更快了，占用内存少了，体验更好了，下面列举一些其它的优势:
+1、在性能、稳定性、功能方面有很大提升（加载速度，内存的提升谁用谁知道）
+2、更多的支持 HTML5 的特性
+3、官方宣称的高达60fps的滚动刷新率以及内置手势
+4、Safari 相同的 JavaScript 引擎
+5、将 UIWebViewDelegate 与 UIWebView 拆分成了14类与3个协议，包含该更细节功能的实现。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>title</span> <span class=n>WKWebView和JS脚本</span>
+</span></span><span class=line><span class=cl><span class=n>center</span> <span class=n>header</span>
+</span></span><span class=line><span class=cl><span class=err>了解传参原理和交互机制</span>
+</span></span><span class=line><span class=cl><span class=n>endheader</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;******* 类声明模块 *******&#39;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;类型:class,abstract,interface,annotation,enum&#39;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;访问域:(-)私有,(#)保护,(~)包私有,(+)公有&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;&amp;&amp;&amp;&amp;&amp;&amp; 类组合模块 类模块 &amp;&amp;&amp;&amp;&amp;&amp;&amp;&#39;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;六种组合样式:Node,Rectangle,Folder,Frame,Cloud,Database&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=s2>&#34;iOS原生API&#34;</span><span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=n>WK</span><span class=o>&lt;</span><span class=n>WKWebView</span><span class=o>&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>__</span> <span class=err>方法组</span> <span class=n>__</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=p>(</span><span class=n>id</span><span class=p>)</span><span class=n>initWithFrame</span><span class=p>:</span><span class=n>configuration</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>evaluateJavaScript</span><span class=p>:</span><span class=n>completionHandler</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=n>config</span><span class=o>&lt;</span><span class=n>WKWebViewConfiguration</span><span class=o>&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span> <span class=err>属性组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span> <span class=n>WKUserContentController</span> <span class=o>*</span><span class=n>userContentController</span>
+</span></span><span class=line><span class=cl>        <span class=n>__方法组__</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span><span class=p>(</span><span class=n>id</span><span class=p>)</span><span class=n>init</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=n>userCC</span><span class=o>&lt;</span><span class=n>WKUserContentController</span><span class=o>&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>__方法组__</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>addScriptMessageHandler</span><span class=p>:</span><span class=n>name</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>+</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>addUserScript</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=n>delegate</span><span class=o>&lt;</span><span class=n>WKScriptMessageHandler</span><span class=o>&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=err>代理方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl>    <span class=o>+</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>userContentController</span><span class=p>:</span><span class=n>didReceiveScriptMessage</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=n>script</span><span class=o>&lt;</span><span class=n>WKUserScript</span><span class=o>&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=err>构造器</span><span class=o>--</span>
+</span></span><span class=line><span class=cl>     <span class=o>+</span> <span class=p>(</span><span class=n>id</span><span class=p>)</span><span class=n>initWithSource</span><span class=p>:</span><span class=n>injectionTime</span><span class=p>:</span><span class=n>forMainFrameOnly</span><span class=p>:;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=n>JS脚本</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span> <span class=c1>#red{</span>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=n>js脚本</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=err>配置组</span><span class=o>--</span>
+</span></span><span class=line><span class=cl>        <span class=n>messageHandlers</span><span class=p>:</span><span class=n>js接口名</span>
+</span></span><span class=line><span class=cl>        <span class=n>postMessage参数</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;###### 类备注模块 类声明末尾使用:note 位置: 备注#########&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>top</span> <span class=n>of</span> <span class=n>WK</span>
+</span></span><span class=line><span class=cl><span class=err>浏览器主体</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>of</span> <span class=n>config</span> <span class=c1>#gray</span>
+</span></span><span class=line><span class=cl><span class=err>用于在构造</span><span class=n>WK时</span><span class=err>，预加载</span><span class=n>js脚本</span><span class=err>，设置监听</span><span class=n>JS接口清单</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>bottom</span> <span class=n>of</span> <span class=n>userCC</span><span class=p>:</span><span class=mf>1.</span><span class=err>提供预加载</span><span class=n>JS脚本操作</span>\<span class=n>n2</span><span class=o>.</span><span class=err>在</span><span class=n>OC中添加监听的接口清单</span><span class=err>：</span><span class=n>JS脚本的接口名</span>\<span class=n>n3</span><span class=o>.</span><span class=err>注入代理类</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>top</span> <span class=n>of</span> <span class=n>js脚本</span><span class=p>:</span> <span class=err>调用原生</span>\<span class=n>n</span> <span class=n>window</span><span class=o>.</span><span class=n>webkit</span><span class=o>.</span><span class=n>messageHandlers</span><span class=o>.</span><span class=n>js接口名</span><span class=o>.</span><span class=n>postMessage</span><span class=p>(</span><span class=err>参数</span><span class=p>)</span>\<span class=n>n</span> <span class=err>参数为</span><span class=n>id类型</span><span class=err>，当无参调用时，参数设置为</span><span class=n>null</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>of</span> <span class=n>delegate</span><span class=p>:</span><span class=err>代理方法：拦截监听</span><span class=n>JS接口</span><span class=err>，获取</span><span class=n>JS传递的参数值</span>\<span class=n>n在回调中获取该参数值</span><span class=err>：</span><span class=n>message</span><span class=o>.</span><span class=n>body</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;&gt;&gt;&gt;&gt;&gt;&gt; 类关系图及连接备注模块 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&#39;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;关系节点符:(|&gt;)继承,(*)合成 ,(o)聚合, 其他#,x,},+,^ 连线符:(--)实线 ，(..)虚线&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>WK</span><span class=s2>&#34;1&#34;</span> <span class=o>*-</span><span class=p>[</span><span class=c1>#red]- &#34;1&#34; config:构造参数 &lt;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>on</span> <span class=n>link</span> <span class=c1>#white</span>
+</span></span><span class=line><span class=cl><span class=err>构造</span><span class=n>WK时</span><span class=err>，配置</span><span class=n>webView的预设条件</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>config</span> <span class=o>*-</span><span class=p>[</span><span class=c1>#green]- userCC:核心组件 &lt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>script</span> <span class=n>o</span><span class=o>-</span><span class=n>left</span><span class=p>[</span><span class=c1>#red]- js脚本:浏览器预加载JS脚本 &lt;</span>
+</span></span><span class=line><span class=cl><span class=n>WK</span> <span class=n>o</span><span class=o>-</span><span class=n>left</span><span class=p>[</span><span class=c1>#red]- js脚本:浏览器调用JS脚本 &lt;</span>
+</span></span><span class=line><span class=cl><span class=n>userCC</span> <span class=o>*-</span><span class=p>[</span><span class=c1>#blue] delegate:处理监听到的JS脚本 &lt;</span>
+</span></span><span class=line><span class=cl><span class=n>delegate</span> <span class=o>&lt;|.</span><span class=n>left</span><span class=p>[</span><span class=c1>#black]. WK: 代理类 &lt;</span>
+</span></span><span class=line><span class=cl><span class=n>userCC</span> <span class=n>o</span><span class=o>-</span><span class=n>left</span><span class=p>[</span><span class=c1>#gray]- script:注入脚本 &lt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>center</span> <span class=n>footer</span>
+</span></span><span class=line><span class=cl><span class=n>boyer模型</span>
+</span></span><span class=line><span class=cl><span class=n>endfooter</span>
+</span></span></code></pre></td></tr></table></div></div><h4>添加监听代理和JS接口</h4><p>在OC中添加监听的接口清单：以JS脚本的接口<code>showMobile</code>为例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=n>WKWebViewConfiguration</span> <span class=o>*</span><span class=n>config</span> <span class=o>=</span> <span class=p>[[</span><span class=n>WKWebViewConfiguration</span> <span class=n>alloc</span><span class=p>]</span> <span class=n>init</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=n>WKUserContentController</span> <span class=o>*</span><span class=n>userCC</span> <span class=o>=</span> <span class=n>config</span><span class=p>.</span><span class=n>userContentController</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>//MARK:在OC中添加监听的接口清单：JS脚本的接口名
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>[</span><span class=n>userCC</span> <span class=nl>addScriptMessageHandler</span><span class=p>:</span><span class=nb>self</span> <span class=nl>name</span><span class=p>:</span><span class=s>@&#34;showMobile&#34;</span><span class=p>];</span>
+</span></span></code></pre></td></tr></table></div></div><h4>设置WKUserContentController的代理</h4><ol><li>设置代理类遵守<code>WKScriptMessageHandler</code>协议</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=k>@interface</span> <span class=nc>ViewController</span> <span class=p>()</span> <span class=o>&lt;</span><span class=n>WKScriptMessageHandler</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>注册对JS接口监听，注入代理类</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=p>[</span><span class=n>userCC</span> <span class=nl>addScriptMessageHandler</span><span class=p>:</span><span class=nb>self</span> <span class=nl>name</span><span class=p>:</span><span class=s>@&#34;showMobile&#34;</span><span class=p>];</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>实现<code>WKUserContentController</code>代理的回调方法,响应JS接口事件</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=p>-</span> <span class=p>(</span><span class=kt>void</span><span class=p>)</span><span class=nf>userContentController:</span><span class=p>(</span><span class=n>WKUserContentController</span> <span class=o>*</span><span class=p>)</span><span class=nv>userContentController</span> <span class=nf>didReceiveScriptMessage:</span><span class=p>(</span><span class=n>WKScriptMessage</span> <span class=o>*</span><span class=p>)</span><span class=nv>message</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>NSLog</span><span class=p>(</span><span class=s>@&#34;%@&#34;</span><span class=p>,</span><span class=n>message</span><span class=p>.</span><span class=n>body</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4>JS脚本接口</h4><p>js接口声明格式：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=nb>window</span><span class=p>.</span><span class=nx>webkit</span><span class=p>.</span><span class=nx>messageHandlers</span><span class=p>.</span><span class=nx>接口名</span><span class=p>.</span><span class=nx>postMessage</span><span class=p>(</span><span class=s1>&#39;参数&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>接口名: 在WKWebView中，当JS执行该接口时，OC会拦截预先监听的接口，并处理相关事件。</p><p>参数：object类型，多个参数时需要封装为集合类型来实现多参传递。</p><p>当OC拦截到该接口时，可以在<code>WKScriptMessageHandler</code>回调方法中的<code>WKScriptMessage</code>参数实例中获取该参数值: <code>message.body</code>。</p><p>三个例子：</p><ol><li>JS无参调用OC<br>当无参调用OC时，参数必须为<code>null</code></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=nb>window</span><span class=p>.</span><span class=nx>webkit</span><span class=p>.</span><span class=nx>messageHandlers</span><span class=p>.</span><span class=nx>showMobile</span><span class=p>.</span><span class=nx>postMessage</span><span class=p>(</span><span class=kc>null</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>JS传参调用OC<br>传递单个参数时，直接写入即可，例如：<code>xiao黄</code></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=nb>window</span><span class=p>.</span><span class=nx>webkit</span><span class=p>.</span><span class=nx>messageHandlers</span><span class=p>.</span><span class=nx>showName</span><span class=p>.</span><span class=nx>postMessage</span><span class=p>(</span><span class=s1>&#39;xiao黄&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>传递多个参数时，需要封装为集合类型实现多参传递。<br>例如:当传递一个电话，一条信息，需要封装为<code>['13300001111','Go Climbing This Weekend !!!']</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=nb>window</span><span class=p>.</span><span class=nx>webkit</span><span class=p>.</span><span class=nx>messageHandlers</span><span class=p>.</span><span class=nx>showSendMsg</span><span class=p>.</span><span class=nx>postMessage</span><span class=p>([</span><span class=s1>&#39;13300001111&#39;</span><span class=p>,</span> <span class=s1>&#39;Go Climbing This Weekend !!!&#39;</span><span class=p>])</span>
+</span></span></code></pre></td></tr></table></div></div><h3>iOS原生API调用JS脚本</h3><p>在网页加载完成之后调用JS代码才会执行，因为这个时候html页面已经注入到webView中并且可以响应到对应方法。<br>例如调用JS函数<code>alertMobile()</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=p>[</span><span class=nb>self</span><span class=p>.</span><span class=n>wkWebView</span> <span class=nl>evaluateJavaScript</span><span class=p>:</span><span class=s>@&#34;alertMobile()&#34;</span> <span class=nl>completionHandler</span><span class=p>:</span><span class=o>^</span><span class=p>(</span><span class=kt>id</span> <span class=n>_Nullable</span> <span class=n>response</span><span class=p>,</span> <span class=n>NSError</span> <span class=o>*</span> <span class=n>_Nullable</span> <span class=n>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//TODO
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>NSLog</span><span class=p>(</span><span class=s>@&#34;%@ %@&#34;</span><span class=p>,</span><span class=n>response</span><span class=p>,</span><span class=n>error</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}];</span>
+</span></span></code></pre></td></tr></table></div></div><h4>在OC中为JS定义属性/函数</h4><ul><li>当注入的类型字符串类型时，必须用<code>''</code>括起来。<br></li><li>OC注入的参数为全局属性，在html中的JS脚本可以直接调用属性名来获取值。<br></li></ul><p>通过NSString形式，编写JS脚本，通过以下两种方式注入网页</p><p>方式一：在初始化<code>WKWebView</code>时，通过配置<code>WKWebViewConfiguration>userContentController</code>注入JS脚本 。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=c1>//MARK:向网页中注入JS脚本例如，参数/函数等
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>WKUserScript</span> <span class=o>*</span><span class=n>script</span> <span class=o>=</span> <span class=p>[[</span><span class=n>WKUserScript</span> <span class=n>alloc</span><span class=p>]</span> <span class=nl>initWithSource</span><span class=p>:</span><span class=s>@&#34;var number=0;&#34;</span>
+</span></span><span class=line><span class=cl><span class=nl>injectionTime</span><span class=p>:</span><span class=n>WKUserScriptInjectionTimeAtDocumentStart</span>
+</span></span><span class=line><span class=cl><span class=nl>forMainFrameOnly</span><span class=p>:</span><span class=nb>YES</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=n>WKUserContentController</span> <span class=o>*</span><span class=n>userCC</span> <span class=o>=</span> <span class=n>config</span><span class=p>.</span><span class=n>userContentController</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>userCC</span> <span class=nl>addUserScript</span><span class=p>:</span><span class=n>script</span><span class=p>];</span>
+</span></span></code></pre></td></tr></table></div></div><p>方式二：使用WKWebView实例方法<code>evaluateJavaScript</code>动态注入JS脚本</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=p>[</span><span class=nb>self</span><span class=p>.</span><span class=n>wkWebView</span> <span class=nl>evaluateJavaScript</span><span class=p>:</span><span class=s>@&#34;var number=0;&#34;</span> <span class=nl>completionHandler</span><span class=p>:</span><span class=nb>nil</span><span class=p>];</span>
+</span></span></code></pre></td></tr></table></div></div><h4>iOS原生API调用JS函数</h4><p>使用WKWebView实例方法<code>evaluateJavaScript</code>动态调用JS函数</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=p>[</span><span class=nb>self</span><span class=p>.</span><span class=n>wkWebView</span> <span class=nl>evaluateJavaScript</span><span class=p>:</span><span class=s>@&#34;alertSendMsg(&#39;18870707070&#39;,&#39;下午好！&#39;)&#34;</span> <span class=nl>completionHandler</span><span class=p>:</span><span class=nb>nil</span><span class=p>];</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-07-07</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/JS/>JS</a></div><nav class=post-nav><a class=prev href=/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/PBBReader%E9%A1%B9%E7%9B%AE%E9%87%8D%E6%9E%84%E6%A8%A1%E5%9E%8B/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">PBBReader项目重构模型</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/shell/vim%E7%BC%96%E8%BE%91%E5%99%A8%E9%94%AE%E7%9B%98%E6%98%A0%E5%B0%84%E5%91%BD%E4%BB%A4map/><span class="next-text nav-default">vim编辑器键盘映射命令map</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-07-07 09:54:41 +0000 UTC",title:"WKWebView控件和JS脚本传参及交互",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

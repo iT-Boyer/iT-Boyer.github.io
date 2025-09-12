@@ -1,0 +1,896 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="不物喜,不己悲;善假物,易参行."><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/><link href=https://it-boyer.github.io/index.xml rel=alternate type=application/rss+xml title=习七><link href=https://it-boyer.github.io/index.xml rel=feed type=application/rss+xml title=习七><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/"><meta property="og:site_name" content="习七"><meta property="og:title" content="习七"><meta property="og:description" content="不物喜,不己悲;善假物,易参行."><meta property="og:locale" content="zh_cn"><meta property="og:type" content="website"><meta itemprop=name content="习七"><meta itemprop=description content="不物喜,不己悲;善假物,易参行."><meta itemprop=datePublished content="2024-04-02T10:16:00+08:00"><meta itemprop=dateModified content="2024-04-02T10:16:00+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="习七"><meta name=twitter:description content="不物喜,不己悲;善假物,易参行."><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><section id=posts class=posts><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/shell/markdown-preview%E5%AE%9E%E7%8E%B0md%E9%A2%84%E8%A7%88/>markdown-preview实现md预览</a></h1><div class=post-meta><span class=post-time>2018-08-21</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 44 字 </span><span class=more-meta>预计阅读 1 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p>{% github iamcco markdown-preview.vim c09a1ca width = 30% %}
+nisha</p><h3>命令行使用</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-md data-lang=md><span class=line><span class=cl>MarkdownPreview
+</span></span><span class=line><span class=cl>&#34; open preview window in markdown buffer
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>MarkdownPreviewStop
+</span></span><span class=line><span class=cl>&#34; close the preview window and server
+</span></span></code></pre></td></tr></table></div></div><h3>插件运行效果预览</h3><p><img src=https://cloud.githubusercontent.com/assets/5492542/15363504/839753be-1d4b-11e6-9ac8-def4d7122e8d.gif alt></p></div><div class=read-more><a href=/post/old/shell/markdown-preview%E5%AE%9E%E7%8E%B0md%E9%A2%84%E8%A7%88/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E5%9B%BE%E6%96%87%E7%BB%84%E4%BB%B6%E5%8F%8A%E5%A4%9A%E5%AA%92%E4%BD%93%E7%BB%84%E4%BB%B6%E7%B1%BB%E5%9B%BE/>图文组件及多媒体组件类图</a></h1><div class=post-meta><span class=post-time>2018-08-18</span><div class=post-category><a href=/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/>项目总结</a></div><span class=more-meta>约 3590 字 </span><span class=more-meta>预计阅读 8 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p><img src=/iPictures/images/%E5%9B%BE%E6%96%87%E7%BB%84%E4%BB%B6UML.png alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span><span class=lnt>292
+</span><span class=lnt>293
+</span><span class=lnt>294
+</span><span class=lnt>295
+</span><span class=lnt>296
+</span><span class=lnt>297
+</span><span class=lnt>298
+</span><span class=lnt>299
+</span><span class=lnt>300
+</span><span class=lnt>301
+</span><span class=lnt>302
+</span><span class=lnt>303
+</span><span class=lnt>304
+</span><span class=lnt>305
+</span><span class=lnt>306
+</span><span class=lnt>307
+</span><span class=lnt>308
+</span><span class=lnt>309
+</span><span class=lnt>310
+</span><span class=lnt>311
+</span><span class=lnt>312
+</span><span class=lnt>313
+</span><span class=lnt>314
+</span><span class=lnt>315
+</span><span class=lnt>316
+</span><span class=lnt>317
+</span><span class=lnt>318
+</span><span class=lnt>319
+</span><span class=lnt>320
+</span><span class=lnt>321
+</span><span class=lnt>322
+</span><span class=lnt>323
+</span><span class=lnt>324
+</span><span class=lnt>325
+</span><span class=lnt>326
+</span><span class=lnt>327
+</span><span class=lnt>328
+</span><span class=lnt>329
+</span><span class=lnt>330
+</span><span class=lnt>331
+</span><span class=lnt>332
+</span><span class=lnt>333
+</span><span class=lnt>334
+</span><span class=lnt>335
+</span><span class=lnt>336
+</span><span class=lnt>337
+</span><span class=lnt>338
+</span><span class=lnt>339
+</span><span class=lnt>340
+</span><span class=lnt>341
+</span><span class=lnt>342
+</span><span class=lnt>343
+</span><span class=lnt>344
+</span><span class=lnt>345
+</span><span class=lnt>346
+</span><span class=lnt>347
+</span><span class=lnt>348
+</span><span class=lnt>349
+</span><span class=lnt>350
+</span><span class=lnt>351
+</span><span class=lnt>352
+</span><span class=lnt>353
+</span><span class=lnt>354
+</span><span class=lnt>355
+</span><span class=lnt>356
+</span><span class=lnt>357
+</span><span class=lnt>358
+</span><span class=lnt>359
+</span><span class=lnt>360
+</span><span class=lnt>361
+</span><span class=lnt>362
+</span><span class=lnt>363
+</span><span class=lnt>364
+</span><span class=lnt>365
+</span><span class=lnt>366
+</span><span class=lnt>367
+</span><span class=lnt>368
+</span><span class=lnt>369
+</span><span class=lnt>370
+</span><span class=lnt>371
+</span><span class=lnt>372
+</span><span class=lnt>373
+</span><span class=lnt>374
+</span><span class=lnt>375
+</span><span class=lnt>376
+</span><span class=lnt>377
+</span><span class=lnt>378
+</span><span class=lnt>379
+</span><span class=lnt>380
+</span><span class=lnt>381
+</span><span class=lnt>382
+</span><span class=lnt>383
+</span><span class=lnt>384
+</span><span class=lnt>385
+</span><span class=lnt>386
+</span><span class=lnt>387
+</span><span class=lnt>388
+</span><span class=lnt>389
+</span><span class=lnt>390
+</span><span class=lnt>391
+</span><span class=lnt>392
+</span><span class=lnt>393
+</span><span class=lnt>394
+</span><span class=lnt>395
+</span><span class=lnt>396
+</span><span class=lnt>397
+</span><span class=lnt>398
+</span><span class=lnt>399
+</span><span class=lnt>400
+</span><span class=lnt>401
+</span><span class=lnt>402
+</span><span class=lnt>403
+</span><span class=lnt>404
+</span><span class=lnt>405
+</span><span class=lnt>406
+</span><span class=lnt>407
+</span><span class=lnt>408
+</span><span class=lnt>409
+</span><span class=lnt>410
+</span><span class=lnt>411
+</span><span class=lnt>412
+</span><span class=lnt>413
+</span><span class=lnt>414
+</span><span class=lnt>415
+</span><span class=lnt>416
+</span><span class=lnt>417
+</span><span class=lnt>418
+</span><span class=lnt>419
+</span><span class=lnt>420
+</span><span class=lnt>421
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>title</span> <span class=err>智能培训类图</span>
+</span></span><span class=line><span class=cl><span class=n>center</span> <span class=n>header</span>
+</span></span><span class=line><span class=cl><span class=err>梳理图文组件类关系图，实现在图文列表中实现智能培训样式</span>
+</span></span><span class=line><span class=cl><span class=n>endheader</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;******* 类声明模块 *******&#39;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;类型:class,abstract,interface,annotation,enum&#39;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;访问域:(-)私有,(#)保护,(~)包私有,(+)公有&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>LayoutEngineViewController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span> <span class=err>方法组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>widgetImageViewClickWithData</span><span class=p>:</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=err>图文框架</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>CenterViewController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=n>Part</span> <span class=o>*</span><span class=n>parentPart</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>二级目录数据源</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>NSMutableArray</span><span class=o>*</span><span class=n>arrParts</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>初始化二级目录方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>queryTwoPartsWithParentForEnterpriseStyle</span><span class=p>:(</span><span class=n>Part</span> <span class=o>*</span><span class=p>)</span><span class=n>parent</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>方法组</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>queryTwoPartsWithParent</span><span class=p>:(</span><span class=n>Part</span> <span class=o>*</span><span class=p>)</span><span class=n>parent</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>初始化二级目录新闻视图页面</span><span class=n>body</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>createNewsRootScrollView</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>通过二级目录信息，获取主体</span><span class=n>body数据方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>addEveryNewsParts</span><span class=p>:(</span><span class=n>NSArray</span> <span class=o>*</span><span class=p>)</span><span class=n>arrNewParts</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>addParts</span><span class=p>:(</span><span class=n>NSArray</span> <span class=o>*</span><span class=p>)</span><span class=n>arrNewParts</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>of</span> <span class=n>CenterViewController</span>
+</span></span><span class=line><span class=cl><span class=err>初始化多媒体</span>
+</span></span><span class=line><span class=cl><span class=err>初始化图文列表</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>Part</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>/**</span> <span class=err>父节点</span><span class=n>Id</span> <span class=o>*/</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span><span class=p>(</span><span class=n>nonatomic</span><span class=p>,</span> <span class=n>copy</span><span class=p>)</span> <span class=n>NSString</span>        <span class=o>*</span><span class=n>parentId</span>
+</span></span><span class=line><span class=cl><span class=o>/**</span> <span class=err>栏目</span><span class=n>Id</span> <span class=o>*/</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span><span class=p>(</span><span class=n>nonatomic</span><span class=p>,</span> <span class=n>copy</span><span class=p>)</span> <span class=n>NSString</span>        <span class=o>*</span><span class=n>partId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>///</span><span class=err>智能培训：</span><span class=n>storeId</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span><span class=p>(</span><span class=n>nonatomic</span><span class=p>,</span> <span class=n>assign</span><span class=p>)</span> <span class=n>NSString</span>   <span class=o>*</span><span class=n>storeId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=err>数据库</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>DatabaseOperation</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>持久化二级目录</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span> <span class=p>(</span><span class=n>BOOL</span><span class=p>)</span><span class=n>insertParts</span><span class=p>:</span><span class=n>withParentId</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>查询二级目录数据</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span> <span class=p>(</span><span class=n>NSMutableArray</span> <span class=o>*</span><span class=p>)</span><span class=n>allpartsWithParentId</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>持久化列表数据</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span> <span class=p>(</span><span class=n>BOOL</span><span class=p>)</span><span class=n>insertNews</span><span class=p>:</span><span class=n>withPartID</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>读取数据库数据</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span> <span class=p>(</span><span class=n>NSMutableArray</span> <span class=o>*</span><span class=p>)</span><span class=n>allNewsWithPartId</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>CenterViewController</span> <span class=o>*--</span> <span class=n>DatabaseOperation</span><span class=p>:</span><span class=err>持久化</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>LayoutEngineViewController</span> <span class=o>*--</span> <span class=n>CenterViewController</span><span class=p>:</span><span class=n>Part</span> <span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=err>智能培训</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>LayoutEngineViewController</span> <span class=o>*--</span> <span class=n>JHBaseViewController</span><span class=p>:</span><span class=err>布局映射入口</span> <span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>JHBaseViewController</span> <span class=o>&lt;|--</span> <span class=n>SmartLearnViewController</span><span class=p>:</span><span class=err>反射类</span> <span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>SmartLearnViewController</span> <span class=o>*--</span> <span class=n>LearnStoreListViewController</span><span class=p>:</span> <span class=err>门店列表</span> <span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>LearnStoreListViewController</span> <span class=o>*--</span> <span class=n>CenterViewController</span><span class=p>:</span><span class=n>Part</span> <span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>LearnStoreListViewController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>方法组</span><span class=o>---</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadUserStores</span> <span class=err>门店列表</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadTLNewsCenterView</span> <span class=err>获取一级目录</span><span class=n>id</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>pushTLNewCenterView</span><span class=p>:(</span><span class=n>Part</span> <span class=o>*</span><span class=p>)</span><span class=n>part初始化图文</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>LearnStoreListViewController</span> <span class=o>*-</span><span class=n>left</span><span class=o>-</span> <span class=n>ReqLearnStoreServer</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>ReqLearnStoreServer</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=p>(</span><span class=n>id</span><span class=p>)</span><span class=n>shared</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>nonatomic</span><span class=p>,</span> <span class=n>strong</span><span class=p>)</span> <span class=n>JHURLRequest</span> <span class=o>*</span> <span class=n>request</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>reqGetUserStore</span><span class=p>:(</span><span class=n>void</span><span class=p>(</span><span class=o>^</span><span class=p>)(</span><span class=n>NSArray</span> <span class=o>*</span><span class=p>))</span><span class=n>handler</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>reqGetParentPart</span><span class=p>:(</span><span class=n>void</span><span class=p>(</span><span class=o>^</span><span class=p>)(</span><span class=n>KnowledgePaper</span> <span class=o>*</span><span class=p>))</span><span class=n>handler</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>CenterViewController</span> <span class=o>*--</span> <span class=n>CenterNewsViewController</span><span class=p>:</span> <span class=n>storeId</span> <span class=p>(</span><span class=n>part</span><span class=o>.</span><span class=n>orderStatus</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span><span class=err>左对齐图文样式</span><span class=o>&gt;</span> 
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>on</span> <span class=n>link</span> 
+</span></span><span class=line><span class=cl><span class=err>通过</span><span class=o>&lt;</span><span class=n>b</span><span class=o>&gt;</span><span class=n>storeid</span><span class=o>&lt;/</span><span class=n>b</span><span class=o>&gt;</span><span class=err>来指定新接口</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=err>加载智能培训数据源</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>CenterViewController</span> <span class=o>*--</span> <span class=n>JHAudioVideoList</span><span class=p>:</span><span class=n>VAStoryCategory</span> <span class=p>(</span><span class=n>part</span><span class=o>.</span><span class=n>orderStatus</span> <span class=o>==</span> <span class=mi>6</span><span class=p>)</span><span class=err>多媒体板式</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>on</span> <span class=n>link</span> 
+</span></span><span class=line><span class=cl><span class=err>通过</span><span class=o>&lt;</span><span class=n>b</span><span class=o>&gt;</span><span class=n>storeid</span><span class=o>&lt;/</span><span class=n>b</span><span class=o>&gt;</span><span class=err>来指定新接口</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=err>加载智能培训数据源</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=n>JHAudioVideoList</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>APListViewController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>接口属性</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=n>VAStoryCategory</span> <span class=o>*</span><span class=n>parentStoryCategory</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=n>TODO</span><span class=p>:</span> <span class=n>tableView数据源模型</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>VAStoryVersion</span><span class=err>：添加智能培训学习进度相关属性</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=n>TODO</span><span class=p>:</span> <span class=err>网络接口方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>getStoryVersionsWithCatId</span><span class=p>:</span><span class=n>LastId</span><span class=p>:</span><span class=n>count</span><span class=p>:</span><span class=n>sortBy</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=n>block回调方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>getStoryVersionsCallback</span><span class=p>:(</span><span class=n>VABSAPIResponse</span> <span class=o>*</span><span class=p>)</span><span class=n>res</span>
+</span></span><span class=line><span class=cl><span class=o>--</span> <span class=err>暂存方法</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>updateCacheData</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>loadCacheData</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>交互方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>tableView</span><span class=p>:</span><span class=n>didSelectRowAtIndexPath</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>    
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>APListViewController2</span> <span class=o>*-</span><span class=n>up</span><span class=o>-</span> <span class=n>VAStoryCategory</span><span class=p>:</span><span class=err>构造参数</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>top</span> <span class=n>on</span> <span class=n>link</span>
+</span></span><span class=line><span class=cl><span class=err>构造剧集列表的参数</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>APListViewController</span> <span class=o>*-</span><span class=n>up</span><span class=o>-</span> <span class=n>VAStoryCategory</span><span class=p>:</span><span class=err>构造参数</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>top</span> <span class=n>on</span> <span class=n>link</span>
+</span></span><span class=line><span class=cl><span class=err>构造列表的参数</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>APListViewController</span> <span class=o>*--</span> <span class=n>VAStoryVersion</span><span class=p>:</span><span class=err>单元格数据</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>top</span> <span class=n>on</span> <span class=n>link</span>
+</span></span><span class=line><span class=cl><span class=err>单元格学习进度等</span>
+</span></span><span class=line><span class=cl><span class=err>样式</span><span class=o>/</span><span class=err>数据的源</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>APListViewController</span> <span class=o>*--</span> <span class=n>VADatabaseOperation</span><span class=p>:</span><span class=err>暂存</span> <span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>top</span> <span class=n>on</span> <span class=n>link</span> 
+</span></span><span class=line><span class=cl><span class=err>根据</span><span class=n>catid</span>
+</span></span><span class=line><span class=cl><span class=err>更新持久化</span>
+</span></span><span class=line><span class=cl><span class=n>table数据源数组</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>APListViewController</span> <span class=o>*-</span><span class=n>left</span><span class=o>-</span> <span class=n>VAMediaBaseCell</span><span class=p>:</span><span class=err>单元格</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>VAMediaBaseCell</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--//</span> <span class=err>发布时间</span><span class=o>|</span><span class=err>阅读时间</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>nonatomic</span><span class=p>,</span> <span class=n>strong</span><span class=p>)</span> <span class=n>UILabel</span> <span class=o>*</span><span class=n>timeLabel</span><span class=p>;</span>             
+</span></span><span class=line><span class=cl><span class=o>--//</span> <span class=err>播放次数</span><span class=o>|</span><span class=err>阅读进度</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>nonatomic</span><span class=p>,</span> <span class=n>strong</span><span class=p>)</span> <span class=n>UILabel</span> <span class=o>*</span><span class=n>numLabel</span><span class=p>;</span>              
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>VAStoryCategory</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=n>NSString</span> <span class=o>*</span><span class=n>catId</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span><span class=p>(</span><span class=n>nonatomic</span><span class=p>,</span> <span class=n>copy</span><span class=p>)</span> <span class=n>NSString</span>  <span class=o>*</span> <span class=n>parentId</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>strong</span><span class=p>,</span> <span class=n>nonatomic</span><span class=p>)</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>storeId</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>VAStoryVersion</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=n>TODO</span><span class=p>:</span> <span class=err>新增参数</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>assign</span><span class=p>,</span> <span class=n>nonatomic</span><span class=p>)</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>storeId</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>--///</span><span class=err>学习时长</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>strong</span><span class=p>,</span> <span class=n>nonatomic</span><span class=p>)</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>StudySec</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>--///</span><span class=err>预估总时长</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>strong</span><span class=p>,</span> <span class=n>nonatomic</span><span class=p>)</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>EstimateSec</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>--///</span><span class=err>学习进度</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>strong</span><span class=p>,</span> <span class=n>nonatomic</span><span class=p>)</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>StudySchedule</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>bottom</span> <span class=n>of</span> <span class=n>VAStoryVersion</span>
+</span></span><span class=line><span class=cl><span class=err>解析列表数据的模型，</span>
+</span></span><span class=line><span class=cl><span class=err>在此类中添加智力培训相关属性</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>VADatabaseOperation</span> <span class=o>*-</span><span class=n>up</span><span class=o>-</span> <span class=n>VAStoryVersion</span><span class=p>:</span><span class=err>持久化对象</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>VADatabaseOperation</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=n>TODO</span><span class=p>:</span><span class=err>当初始化时，持久化</span><span class=n>table数据源</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>BOOL</span><span class=p>)</span><span class=n>writeStoryVersionCacheToDB</span><span class=p>:</span><span class=n>withCatId</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>当查看视频详情时，更新数据库</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span> <span class=p>(</span><span class=n>BOOL</span><span class=p>)</span> <span class=n>updateStoryVersion</span><span class=p>:(</span><span class=n>VAStoryVersion</span> <span class=o>*</span><span class=p>)</span><span class=n>newStory</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=p>(</span><span class=n>BOOL</span><span class=p>)</span><span class=n>updatePlayListWithStoysVersion</span><span class=p>:(</span><span class=n>NSArray</span> <span class=o>*</span><span class=p>)</span><span class=n>StoryVersions</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>bottom</span> <span class=n>of</span> <span class=n>VADatabaseOperation</span>
+</span></span><span class=line><span class=cl><span class=err>暂存列表中的数据模型，</span>
+</span></span><span class=line><span class=cl><span class=err>映射到数据库中</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>APListViewController2</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>top</span> <span class=n>of</span> <span class=n>APListViewController2</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=n>VideoDisplayType</span> <span class=o>&amp;&amp;</span> <span class=n>part</span><span class=o>.</span><span class=n>showType</span> <span class=o>==</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=err>当满足这个条件时初始化该实例</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=n>JHVideoRecording剧集版</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>APListViewController</span> <span class=o>*--</span> <span class=n>VACMoviePlayerViewController</span><span class=p>:</span><span class=n>VAStoryVersion</span> <span class=o>*</span><span class=n>sv</span> <span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>top</span> <span class=n>on</span> <span class=n>link</span>
+</span></span><span class=line><span class=cl><span class=err>当点击</span><span class=n>cell初始化剧集版播放器详情页</span>
+</span></span><span class=line><span class=cl><span class=n>VideoDisplayType</span><span class=p>:</span><span class=o>//</span> <span class=err>判断用新的还是旧的播放界面</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>VACMoviePlayerViewController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=err>多媒体剧集版详情</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>视频播放器启动方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>playContentURL</span><span class=p>:(</span><span class=n>NSURL</span> <span class=o>*</span><span class=p>)</span><span class=n>url</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>VACGlodalManager</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=p>(</span><span class=n>VACGlodalManager</span><span class=o>*</span><span class=p>)</span><span class=n>SharedObj</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>VAALMoviePlayerController</span> <span class=o>*</span><span class=n>pALMoviePlayerController</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>VACMoviePlayerViewController</span> <span class=o>*--</span> <span class=n>VACGlodalManager</span> 
+</span></span><span class=line><span class=cl><span class=n>VACGlodalManager</span> <span class=o>*--</span> <span class=n>VAALMoviePlayerController</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>VAALMoviePlayerController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>VAALMoviePlayerControls</span> <span class=o>*</span><span class=n>controls</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>播放控制方法组</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>---//</span><span class=err>切换屏幕</span><span class=o>---</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>fullscreenOrEmbedded</span><span class=p>:(</span><span class=n>NSString</span> <span class=o>*</span><span class=p>)</span><span class=n>strMode</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>--//</span><span class=err>播放还是暂停</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>playOrPause</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>VAALMoviePlayerController</span> <span class=o>*-</span> <span class=n>VAALMoviePlayerControls</span><span class=p>:</span><span class=err>播放控制</span><span class=n>UI</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>VAALMoviePlayerControls</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>VAALButton</span> <span class=o>*</span><span class=n>fullscreenButton</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>VAStoryVersion</span> <span class=o>*</span><span class=n>story</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>VAALMoviePlayerController</span> <span class=o>*</span><span class=n>moviePlayer</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=n>TODO</span><span class=p>:</span> <span class=err>五定图按钮</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>UIButton</span> <span class=o>*</span><span class=n>showSevenImgButton</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>showSevenImgListAction</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>VACMoviePlayerViewController</span> <span class=o>.|&gt;</span> <span class=n>ALMoviePlayerControllerDelegate</span><span class=p>:</span><span class=err>代理</span> <span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl><span class=n>interface</span> <span class=n>ALMoviePlayerControllerDelegate</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--//</span><span class=err>上一曲</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>beforePlayingVideo</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>--//</span><span class=err>下一曲</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>afterPlayingVideo</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>--//</span><span class=err>切换屏幕</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>fullscreenOrEmbedded</span><span class=p>:(</span><span class=n>NSString</span> <span class=o>*</span><span class=p>)</span><span class=n>strMode</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>--//</span><span class=err>播放还是暂停</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>playOrPause</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=n>JHVideoRecording列表版</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>APListViewController</span> <span class=o>*--</span> <span class=n>VACVideoPlayerDetailViewController</span><span class=p>:</span><span class=err>多媒体详情列表版</span> <span class=o>&lt;</span> 
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>top</span> <span class=n>on</span> <span class=n>link</span>
+</span></span><span class=line><span class=cl><span class=err>当选择</span><span class=n>cell初始化操作</span>
+</span></span><span class=line><span class=cl><span class=n>VAStoryVersion</span> <span class=o>*</span> <span class=n>sv多媒体详情列表</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>VACVideoPlayerDetailViewController</span> <span class=o>*--</span> <span class=n>JHTWVideoPlayer</span><span class=p>:</span><span class=err>播放器</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=n>VACVideoPlayerDetailViewController</span> <span class=o>*--</span> <span class=n>VAStoryVersion</span>
+</span></span><span class=line><span class=cl><span class=n>VACVideoPlayerDetailViewController</span> <span class=o>.|&gt;</span> <span class=n>VideoPlayDetailProtocol</span><span class=p>:</span><span class=err>代理</span> <span class=o>&lt;</span>  
+</span></span><span class=line><span class=cl><span class=n>VACVideoPlayerDetailViewController</span> <span class=o>*--</span> <span class=n>VideoPlayDetailBIZ</span><span class=p>:</span><span class=err>播放器辅助类</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=n>JHTWVideoPlayer</span> <span class=o>*--</span> <span class=n>VAStoryVersion</span><span class=p>:</span><span class=err>构造参数</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=n>APListViewController2</span> <span class=o>*--</span> <span class=n>VACMoviePlayerViewController</span><span class=p>:</span><span class=err>多媒体详情剧集版</span> <span class=o>&gt;</span> 
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>VACVideoPlayerDetailViewController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>基础属性</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=n>VAStoryVersion</span> <span class=o>*</span><span class=n>storyVersion</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>VideoPlayDetailBIZ</span> <span class=o>*</span><span class=n>vpdBIZ</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>播放器浮动框显示五定图相关控件</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>UIView</span> <span class=o>*</span><span class=n>sevenView</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>构造方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>initWithModel</span><span class=p>:(</span><span class=n>VAStoryVersion</span> <span class=o>*</span><span class=p>)</span><span class=n>sv</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>点击按钮显示五定图预览列表</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>showSevenImgList</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>JHTWVideoPlayer</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>私有属性</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>VAStoryVersion</span> <span class=o>*</span><span class=n>sv</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>构造器</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span> <span class=p>(</span><span class=n>id</span><span class=p>)</span><span class=n>initWithFrame</span><span class=p>:</span><span class=n>model</span><span class=p>:(</span><span class=n>VAStoryVersion</span> <span class=o>*</span><span class=p>)</span><span class=n>sv</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>加载新视频</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadVideo</span><span class=p>:(</span><span class=n>VAStoryVersion</span> <span class=o>*</span><span class=p>)</span><span class=n>sv</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>VideoPlayDetailBIZ</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>接口参数</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=n>VAStoryVersion</span> <span class=o>*</span><span class=n>currentStoryVersion</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>interface</span> <span class=n>VideoPlayDetailProtocol</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>加载视频</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadVideo</span><span class=p>:(</span><span class=n>VAStoryVersion</span> <span class=o>*</span><span class=p>)</span><span class=n>sv</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=err>公共组件</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>APListViewController</span> <span class=o>*--</span> <span class=n>VANetEngine</span><span class=p>:</span><span class=err>网络工具</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>VANetEngine</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=n>TODO</span><span class=p>:</span> <span class=err>图文网络接口方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>v5newsQueryPartsWithPartId</span><span class=p>:</span><span class=n>parentId</span><span class=p>:</span><span class=n>count</span><span class=p>:</span><span class=n>dateTime</span><span class=p>:</span><span class=n>lastMeters</span><span class=p>:</span><span class=n>lon</span><span class=p>:</span><span class=n>lat</span><span class=p>:</span><span class=n>newOrOld</span><span class=p>:</span><span class=n>modifyTime</span><span class=p>:</span><span class=n>partModifiedtimeForPart</span><span class=p>:</span><span class=n>orderType</span><span class=p>:</span><span class=n>type</span><span class=p>:</span><span class=n>del</span><span class=p>:</span><span class=n>sel</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=n>TODO</span><span class=p>:</span> <span class=err>视频列表接口方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>getStoryVersionsWithCatId</span><span class=p>:</span><span class=n>LastId</span><span class=p>:</span><span class=n>count</span><span class=p>:</span><span class=n>sortBy</span><span class=p>:</span><span class=n>asc</span><span class=p>:</span><span class=n>del</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=n>block回调方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>getStoryVersionsCallback</span><span class=p>:(</span><span class=n>VABSAPIResponse</span> <span class=o>*</span><span class=p>)</span><span class=n>res</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>VideoPlayDetailProtocol</span> <span class=o>&lt;--</span> <span class=n>SevenImgCapture</span><span class=p>:</span><span class=err>启用五定图</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>SevenImgCapture</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>类方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=p>(</span><span class=n>SevenImgCapture</span> <span class=o>*</span><span class=p>)</span><span class=n>shared</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>五定信息搜集方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>threeInfo</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>文字图片合成方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>UIImage</span> <span class=o>*</span><span class=p>)</span><span class=n>complexText</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>of</span> <span class=n>VANetEngine</span>
+</span></span><span class=line><span class=cl><span class=err>网络工具</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=err>图文列表模块</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>BaseTableViewController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>数据源</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=n>dataArray</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>加载网络数据</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadMoreData</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>BaseTableViewController</span> <span class=o>&lt;|--</span> <span class=n>PartBaseViewController</span><span class=p>:</span><span class=err>继承</span> <span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>PartBaseViewController</span> <span class=o>&lt;|--</span> <span class=n>CenterNewsViewController</span><span class=p>:</span><span class=err>继承</span><span class=n>data数据</span> <span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>PartBaseViewController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>重载网络数据接口</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>loadMoreData</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>PartBaseViewController</span> <span class=o>*-</span> <span class=n>DatabaseOperation</span><span class=p>:</span><span class=err>持久化</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>CenterNewsViewController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>继承父类数据源</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=n>dataArray</span>
+</span></span><span class=line><span class=cl><span class=o>--</span> <span class=err>智能培训标示</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=n>open</span> <span class=n>storeId</span><span class=p>:</span><span class=ne>String</span>
+</span></span><span class=line><span class=cl><span class=n>__</span> <span class=err>初始化</span><span class=n>cell代理方法</span> <span class=n>__</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>UITableViewCell</span> <span class=o>*</span><span class=p>)</span><span class=n>tableView</span><span class=p>:</span><span class=n>cellForRowAtIndexPath</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>id</span><span class=p>)</span><span class=n>getCellDataWith</span><span class=p>:</span> <span class=err>获取</span><span class=n>cell数据</span>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=err>根据新闻取得对应的图集</span><span class=n>cell类</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>Class</span><span class=p>)</span><span class=n>getCellInfoByNews</span><span class=p>:</span><span class=n>CellId</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>图文支持视频列表显示的方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=c1>#pragma mark - 进入阅读跳转</span>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>tableView</span><span class=p>:</span><span class=n>didSelectRowAtIndexPath</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>//</span><span class=err>不收费，且无权限要求时</span><span class=p>,</span><span class=err>进入阅读跳转</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>expush_mothed</span><span class=p>:(</span><span class=n>NSIndexPath</span> <span class=o>*</span><span class=p>)</span><span class=n>indexPath</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=n>JHAcrossNetEngin图文访问网络模块</span> <span class=o>&lt;&lt;</span><span class=n>Folder</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>NetEngine</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>新增图文列表接口</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>v5newsQueryPartsWithPartId</span><span class=p>:</span><span class=n>parentId</span><span class=p>:</span><span class=n>storeId</span><span class=p>:</span><span class=n>count</span><span class=p>:</span><span class=n>dateTime</span><span class=p>:</span><span class=n>lastMeters</span><span class=p>:</span><span class=n>lon</span><span class=p>:</span><span class=n>lat</span><span class=p>:</span><span class=n>newOrOld</span><span class=p>:</span><span class=n>modifyTime</span><span class=p>:</span><span class=n>partModifiedtimeForPart</span><span class=p>:</span><span class=n>orderType</span><span class=p>:</span><span class=n>type</span><span class=p>:</span><span class=n>del</span><span class=p>:</span><span class=n>sel</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>PartBaseViewController</span> <span class=o>&lt;-</span><span class=n>down</span><span class=o>-</span> <span class=n>NetEngine</span><span class=p>:</span> <span class=err>获取列表信息</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=err>图文详情模块</span> <span class=o>&lt;&lt;</span><span class=n>Rectangle</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>JHTWAtlasBaseCell</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=n>News</span> <span class=o>*</span><span class=n>currentNews</span>
+</span></span><span class=line><span class=cl><span class=o>+</span><span class=n>fillDataWithModel</span><span class=p>:(</span><span class=n>New</span> <span class=o>*</span><span class=p>):</span><span class=n>celldata</span>  <span class=err>填充数据</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>JHTWMixedLARListCell</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span> <span class=err>方法</span> <span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>super</span> <span class=n>fillDataWithModel</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl><span class=n>TODO</span><span class=p>:</span><span class=err>适配智能培训</span><span class=n>UI布局</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>New</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>__</span> <span class=err>智能培训相关属性</span> <span class=n>__</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>strong</span><span class=p>,</span> <span class=n>nonatomic</span><span class=p>)</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>StudySec</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>strong</span><span class=p>,</span> <span class=n>nonatomic</span><span class=p>)</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>EstimateSec</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>strong</span><span class=p>,</span> <span class=n>nonatomic</span><span class=p>)</span> <span class=n>NSString</span> <span class=o>*</span><span class=n>StudySchedule</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>of</span> <span class=n>New</span>
+</span></span><span class=line><span class=cl><span class=err>在替换新接口中，复用这个数据模型，添加智能培训相关属性</span>
+</span></span><span class=line><span class=cl><span class=mf>1.</span> <span class=err>添加属性：</span>
+</span></span><span class=line><span class=cl><span class=mf>2.</span> <span class=err>复用解析</span>
+</span></span><span class=line><span class=cl><span class=mf>3.</span> <span class=err>复用暂存</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>ListAndCardNewDetailViewController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>CenterNewsViewController</span> <span class=n>o</span><span class=o>--</span> <span class=n>JHTWAtlasBaseCell</span><span class=p>:</span><span class=err>初始化图文</span><span class=n>cell数据</span> <span class=o>&lt;</span> 
+</span></span><span class=line><span class=cl><span class=n>JHTWAtlasBaseCell</span> <span class=o>&lt;|--</span> <span class=n>JHTWMixedLARListCell</span>
+</span></span><span class=line><span class=cl><span class=n>JHTWMixedLARListCell</span> <span class=n>o</span><span class=o>--</span><span class=n>New</span><span class=p>:</span> <span class=n>picCount</span><span class=o>=</span><span class=mi>1</span> <span class=o>&lt;</span> 
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>on</span> <span class=n>link</span>
+</span></span><span class=line><span class=cl><span class=err>当</span><span class=n>picCount</span><span class=o>=</span><span class=mi>1</span><span class=err>时，图文列表会使用单个图片样式</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>package</span> <span class=err>多媒体</span> <span class=o>&lt;&lt;</span><span class=n>Rectangle</span><span class=o>&gt;&gt;</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>JHTWMixedMediaCell</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>TLNewsHomepage</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=err>播放器初始化方法</span><span class=o>--</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>playMediaNews</span><span class=p>:</span><span class=n>clickedNews</span> <span class=n>playList</span><span class=p>:</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=n>JHTWMediaVideoPlayerDetailViewController</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>JHTWMediaVideoPlayerDetailViewController</span> <span class=o>*--</span> <span class=n>VANetEngine</span><span class=p>:</span><span class=err>五定图相关数据接口</span> <span class=o>&lt;</span> 
+</span></span><span class=line><span class=cl><span class=n>JHTWMediaVideoPlayerDetailViewController</span> <span class=o>&lt;--</span> <span class=n>SevenImgCapture</span><span class=p>:</span> <span class=o>&lt;</span> 
+</span></span><span class=line><span class=cl><span class=n>CenterNewsViewController</span> <span class=o>*--</span> <span class=n>TLNewsHomepage</span><span class=p>:</span><span class=err>多媒体详情</span> <span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>on</span> <span class=n>link</span>
+</span></span><span class=line><span class=cl><span class=err>当点击</span><span class=n>cell调用</span> <span class=err>`</span><span class=n>expush_mothed</span><span class=err>`方法</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>clickedNews</span> <span class=n>isMediaNews</span><span class=p>]</span><span class=err>当点击多媒体</span><span class=n>cell时</span><span class=err>，</span>
+</span></span><span class=line><span class=cl><span class=err>初始化视频播放器</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>CenterNewsViewController</span> <span class=o>*--</span> <span class=n>JHTWMixedMediaCell</span><span class=p>:</span><span class=err>多媒体</span><span class=n>cell</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>on</span> <span class=n>link</span>
+</span></span><span class=line><span class=cl><span class=err>初始化图文列表时，显示多媒体</span><span class=n>cell样式</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>TLNewsHomepage</span> <span class=o>*--</span> <span class=n>JHTWMediaVideoPlayerDetailViewController</span><span class=p>:</span><span class=err>播放器详情</span> <span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>on</span> <span class=n>link</span>
+</span></span><span class=line><span class=cl><span class=err>初始化播放器页面</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl><span class=n>JHTWMediaVideoPlayerDetailViewController</span> <span class=o>*--</span> <span class=n>New</span><span class=p>:</span><span class=err>构造参数</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=n>JHTWMixedMediaCell</span> <span class=n>o</span><span class=o>--</span> <span class=n>New</span><span class=p>:</span><span class=err>构造参数</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=n>ListAndCardNewDetailViewController</span> <span class=o>*--</span> <span class=n>New</span><span class=p>:</span><span class=err>构造参数</span> <span class=o>&lt;</span>
+</span></span><span class=line><span class=cl><span class=n>CenterNewsViewController</span> <span class=o>*--</span> <span class=n>ListAndCardNewDetailViewController</span><span class=p>:</span><span class=err>图文详情</span> <span class=o>&gt;</span> 
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>on</span> <span class=n>link</span>
+</span></span><span class=line><span class=cl><span class=err>当点击</span><span class=n>cell调用</span> <span class=err>`</span><span class=n>expush_mothed</span><span class=err>`方法</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>clickedNews</span> <span class=n>isMediaNews</span><span class=p>]</span><span class=err>当点击多媒体</span><span class=n>cell时</span><span class=err>，</span>
+</span></span><span class=line><span class=cl><span class=err>初始化视频播放器</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;JHTWAtlasBaseCell &lt;|- JHTWMixedLARListCell &#39;</span><span class=n>picCount</span> <span class=o>==</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;显示/隐藏类,类方法属性等 关键字支持class,interface,enum&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;---- 声明类关系线备注,可以当做用例来参与到关系连接中 ---&#39;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;note &#34;图文左列表样式，复用样式，实现智能培训相关内容的显示：学习进度时长等信息&#34; as new </span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;###### 类备注模块 类声明末尾使用:note 位置: 备注#########&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>note</span> <span class=n>right</span> <span class=n>of</span> <span class=n>CenterNewsViewController</span>
+</span></span><span class=line><span class=cl><span class=err>复用图文左列表样式</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>b</span><span class=o>&gt;</span><span class=err>实现智能培训相关属性显示：学习进度等。</span>
+</span></span><span class=line><span class=cl><span class=n>end</span> <span class=n>note</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>center</span> <span class=n>footer</span>
+</span></span><span class=line><span class=cl><span class=err>梳理图文组件类关系图</span>
+</span></span><span class=line><span class=cl><span class=n>endfooter</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=read-more><a href=/post/old/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/%E5%9B%BE%E6%96%87%E7%BB%84%E4%BB%B6%E5%8F%8A%E5%A4%9A%E5%AA%92%E4%BD%93%E7%BB%84%E4%BB%B6%E7%B1%BB%E5%9B%BE/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/shell/iCompleteMe%E6%94%AF%E6%8C%81swift%E8%AF%AD%E6%B3%95%E6%8F%90%E7%A4%BA/>iCompleteMe支持swift语法提示</a></h1><div class=post-meta><span class=post-time>2018-08-10</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 254 字 </span><span class=more-meta>预计阅读 1 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p>{% github jerrymarino iCompleteMe ad0e1fe width = 30% %}
+iCompleteMe是基于YouCompleteMe。在花了一年多的时间试图实现对YouCompleteMe的快速支持之后，发现在YCM无法支持swift自动补齐。
+iCompleteMe实现的行为对于Swift的补齐提示。iCompleteMe的核心子系统只与Swift一起工作。代码基占用的空间要小得多，这使得在CI上更容易安装、更容易理解和更稳定(理论上)。</p></div><div class=read-more><a href=/post/old/shell/iCompleteMe%E6%94%AF%E6%8C%81swift%E8%AF%AD%E6%B3%95%E6%8F%90%E7%A4%BA/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/shell/SwiftPlayground%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/>SwiftPlayground命令操作</a></h1><div class=post-meta><span class=post-time>2018-08-10</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 150 字 </span><span class=more-meta>预计阅读 1 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p>{% github jerrymarino SwiftPlayground.vim f603700 width = 30% %}</p><h2>执行环境</h2><p>在playgrounds后缀的目录中执行swift文件</p><h2>熟悉vim快捷键用法</h2><p>空格 + fs 保存文件：此时插件会自动运行playgrounds，显示效果
+shift + H ：行头
+shift + L：行尾
+:copen : AsyncRun显示运行日志
+:AsyncRun shell命令</p></div><div class=read-more><a href=/post/old/shell/SwiftPlayground%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/FSCalendar%E6%94%AF%E6%8C%81%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E6%97%A5%E5%8E%86%E5%BC%80%E6%BA%90%E5%BA%93/>FSCalendar支持自定义的日历开源库</a></h1><div class=post-meta><span class=post-time>2018-07-17</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 127 字 </span><span class=more-meta>预计阅读 1 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p>{% github it-boyer FSCalendar 1a026a4c width = 30% %}</p><blockquote class=trello-card><a href=https://trello.com/c/Tq2jnc1E/33-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%97%A5%E5%8E%86%E6%8E%A7%E4%BB%B6%EF%BC%8C%E6%97%A5%E6%9C%9F%E5%9B%BE%E6%A0%87>自定义日历控件，日期图标</a></blockquote><script src=https://p.trellocdn.com/embed.min.js></script><p><a href=https://github.com/it-boyer/FSCalendar>FSCalendar</a>
+FSCalendar是一款开源iOS日历控件，支持横向、纵向滑动模式，全屏模式，带有子标题、事件设置等功能。以下是项目截图：
+<img src=https://cloud.githubusercontent.com/assets/5186464/10262249/4fabae40-69f2-11e5-97ab-afbacd0a3da2.jpg alt>
+Use Interface Builder
+1、 Drag an UIView object to ViewController Scene 2、 Change the Custom Class to FSCalendar
+3、 Link dataSource and delegate to the ViewController
+4、 Finally, implement FSCalendarDataSource and FSCalendarDelegate in your ViewController
+<img src=https://cloud.githubusercontent.com/assets/5186464/9488580/a360297e-4c0d-11e5-8548-ee9274e7c4af.jpg alt></p></div><div class=read-more><a href=/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/FSCalendar%E6%94%AF%E6%8C%81%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E6%97%A5%E5%8E%86%E5%BC%80%E6%BA%90%E5%BA%93/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/%E9%98%85%E8%AF%BB/%E9%AB%98%E6%95%88%E4%BA%BA%E5%A3%AB%E7%9A%84%E4%B8%83%E4%B8%AA%E4%B9%A0%E6%83%AF/>高效人士的七个习惯</a></h1><div class=post-meta><span class=post-time>2018-07-03</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 685 字 </span><span class=more-meta>预计阅读 2 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p><a href=https://book.douban.com/annotation/18551525/>豆瓣导图</a>
+<a href=https://book.douban.com/annotation/39594570/>豆瓣总结</a></p><h2>前言 如何善用本书</h2><h2>第一部分 重新探索自我</h2><h2>第一章 由内而外全面造就自己</h2><h2>第二章 七个习惯——概论</h2><h1>第二部分 个人的成功：从依赖到独立</h1><h2>第三章 习惯一：积极主动——个人愿景的原则</h2><h2>第四章 习惯二：以终为始——自我领导的原则</h2><h3>个人使命宣言</h3><p>以终为始最有效的方法，就是撰写一份个人使命宣言，即人生哲学或基础信念。
+宣言：主要说明自己想成为怎样的品行的人。成什么样的事业，及为此奠基的价值观和原则。
+家庭第一
+借重宗教的力量
+在诚信问题上决不妥协
+念及相关的每个人
+未听取正反双方的意见，不妄下断语
+征求他人意见
+维护不在场的人
+诚恳但立场坚定
+每年掌握一种新技能
+今天计划明天的工作
+利用等待的空闲时间
+态度积极
+保持幽默感
+生活与工作有条不紊
+别怕犯错，怕的是不能吸取教训
+协助属下成功
+多请教别人
+专注于当前的工作，不为下一次任务或提升操心</p></div><div class=read-more><a href=/post/old/%E9%98%85%E8%AF%BB/%E9%AB%98%E6%95%88%E4%BA%BA%E5%A3%AB%E7%9A%84%E4%B8%83%E4%B8%AA%E4%B9%A0%E6%83%AF/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/%E9%98%85%E8%AF%BB/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%B7%B3%E6%A7%BD%E5%85%A8%E6%94%BB%E7%95%A5/>程序员跳槽全攻略</a></h1><div class=post-meta><span class=post-time>2018-07-02</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 0 字 </span><span class=more-meta>预计阅读 0 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary></div><div class=read-more><a href=/post/old/%E9%98%85%E8%AF%BB/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%B7%B3%E6%A7%BD%E5%85%A8%E6%94%BB%E7%95%A5/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/%E9%98%85%E8%AF%BB/%E4%B9%A6%E9%83%BD%E4%B8%8D%E4%BC%9A%E8%AF%BB%E8%BF%98%E6%83%B3%E6%88%90%E5%8A%9F/>书都不会读还想成功</a></h1><div class=post-meta><span class=post-time>2018-07-02</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 139 字 </span><span class=more-meta>预计阅读 1 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><h3>处境</h3><p>人到中年，职场受排挤降级，情场被抛弃不如意，怨天尤人，自怨自艾，却不思进取，死扛着压力勉强养家糊口残喘于世。</p><h3>心态转折</h3><ol><li>红皇后的故事：寓意为什么在现实生活中不进则退的境地，见贤思齐，善于发现同事优点，定位榜样学习实线。</li></ol><h3>读书习惯</h3><ol><li>100天33本书: 从量到质达到，培养读书习惯的目的。</li></ol></div><div class=read-more><a href=/post/old/%E9%98%85%E8%AF%BB/%E4%B9%A6%E9%83%BD%E4%B8%8D%E4%BC%9A%E8%AF%BB%E8%BF%98%E6%83%B3%E6%88%90%E5%8A%9F/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/swift/Framework%E5%AE%9E%E7%8E%B0%E4%BD%BF%E7%94%A8swift%E5%BC%80%E5%8F%91/>Framework实现使用swift开发</a></h1><div class=post-meta><span class=post-time>2018-06-23</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 954 字 </span><span class=more-meta>预计阅读 2 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p>{% github it-boyer JHHomeAPP 813e4b width = 30% %}</p><h2>在静态库组件中使用swift开发</h2><p>基于静态库的开发，实现封装静态库/Framework并使用swiftOC混编开发</p><h3>创建三个角色</h3><ol><li>主项目：<code>JHHomeAPP</code></li><li>静态库组件：<code>FirstPlug</code><ul><li><code>SwiftInStaticLib</code>(包含Swift源码实现的静态库)</li></ul></li><li>动态库<code>secondFramework</code></li></ol><h3>静态库：问题1</h3><p>当静态库组件中存在swift源码时，依赖该组件的主工程会报错：</p></div><div class=read-more><a href=/post/old/swift/Framework%E5%AE%9E%E7%8E%B0%E4%BD%BF%E7%94%A8swift%E5%BC%80%E5%8F%91/ class=read-more-link>阅读更多</a></div></div></article><article class=post><header class=post-header><h1 class=post-title><a class=post-link href=/post/old/macOS/%E4%BD%BF%E7%94%A8CocoaPods%E5%BC%80%E5%8F%91%E9%9D%99%E6%80%81%E5%BA%93/>使用CocoaPods开发静态库</a></h1><div class=post-meta><span class=post-time>2018-06-21</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 807 字 </span><span class=more-meta>预计阅读 2 分钟 </span><span class=more-meta>by</span></div></header><div class=post-content><div class=post-summary><p>Cocoapods作为OS X和iOS开发平台的类库管理工具，已经非常完善和强大。通常我们用pod来管理第三方开源类库，但我们也极有可能会开发一个用pod管理依赖关系的静态类库给其他人使用，而又不愿意公开源代码，比如一些SDK，那么就需要打包成.a文件。本文将以一个依赖于ASIHTTPRequest的静态类库，来演示如何创建使用了CocoaPods的静态类库以及打包的过程。</p></div><div class=read-more><a href=/post/old/macOS/%E4%BD%BF%E7%94%A8CocoaPods%E5%BC%80%E5%8F%91%E9%9D%99%E6%80%81%E5%BA%93/ class=read-more-link>阅读更多</a></div></div></article></section><nav class=pagination><a class=prev href=/page/30/><i class="iconfont icon-left"></i>
+<span class=prev-text>上一页</span>
+</a><a class=next href=/page/32/><span class=next-text>下一页</span>
+<i class="iconfont icon-right"></i></a></nav></div></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a><link href=https://it-boyer.github.io/index.xml rel=feed type=application/rss+xml class="iconfont icon-rss" title=习七></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

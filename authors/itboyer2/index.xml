@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>习七</title><link>https://it-boyer.github.io/authors/itboyer2/</link><description>Recent content on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><atom:link href="https://it-boyer.github.io/authors/itboyer2/index.xml" rel="self" type="application/rss+xml"/><item><title>在 hugo 站点实时预览 org 生成的 md 效果</title><link>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/ox-hugo-%E6%94%AF%E6%8C%81-org-%E5%AF%BC%E5%87%BA-md/</link><pubDate>Sat, 08 May 2021 19:32:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%8A%A1/ox-hugo-%E6%94%AF%E6%8C%81-org-%E5%AF%BC%E5%87%BA-md/</guid><description>&lt;h2 id="目的"&gt;目的&lt;/h2&gt;
+&lt;p&gt;要想实现在 hugo 站点实时预览 org 生成的 md 效果,需要借助 ox-hugo 提供的自动导出的功能,配合 hugo server 实时刷新的特性,达到实时预览的目的.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;实时预览&lt;/strong&gt;:hugo server 是 hugo 常用的命令,只要启动了站点服务,就可以实时预览 md 的变更.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自动导出&lt;/strong&gt;:ox-hugo 是基于 &lt;strong&gt;实时预览&lt;/strong&gt;,为 &lt;span class="underline"&gt;emacs&lt;/span&gt; 用户提供了一个强大的 &lt;strong&gt;自动导出&lt;/strong&gt; md 的功能.&lt;br&gt;
+即:当每次编写完成保存 org 文件时,会根据 Export 相关属性,自动导出 md 文件到 hugo 站点,从而实现在 hugo 实时预览 md 效果.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;ox-hugo 的自动导出功能有类似作用域的概念,可以针对目录下所有文件,也可以仅在当前 org 文件中起作用,也可以指定 org 文件不支持自动保存.&lt;/p&gt;</description></item></channel></rss>

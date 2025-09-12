@@ -1,0 +1,141 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>SPM搭建Perfect模版服务器 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="Perfect简介 {% github PerfectlySoft Perfect 60e44e4 width = 30% %} 目前比较流行服务端框架主要有Vapor、Perfect、Kitura和Zewo，他们各有长短，本人这次主要是使用Perfect来写的，因为Perfect的功能比较完善，在GitHub上具有1W+的星，而且有一个非常重要的原因提供了Perfect 中文文档。
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/macOS/SPM%E6%90%AD%E5%BB%BAPerfect%E6%A8%A1%E7%89%88%E6%9C%8D%E5%8A%A1%E5%99%A8/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/macOS/SPM%E6%90%AD%E5%BB%BAPerfect%E6%A8%A1%E7%89%88%E6%9C%8D%E5%8A%A1%E5%99%A8/"><meta property="og:site_name" content="习七"><meta property="og:title" content="SPM搭建Perfect模版服务器"><meta property="og:description" content="Perfect简介 {% github PerfectlySoft Perfect 60e44e4 width = 30% %} 目前比较流行服务端框架主要有Vapor、Perfect、Kitura和Zewo，他们各有长短，本人这次主要是使用Perfect来写的，因为Perfect的功能比较完善，在GitHub上具有1W+的星，而且有一个非常重要的原因提供了Perfect 中文文档。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2018-10-02T11:13:35+00:00"><meta property="article:modified_time" content="2018-10-02T11:13:35+00:00"><meta property="article:tag" content="SPM"><meta property="article:tag" content="Swift"><meta itemprop=name content="SPM搭建Perfect模版服务器"><meta itemprop=description content="Perfect简介 {% github PerfectlySoft Perfect 60e44e4 width = 30% %} 目前比较流行服务端框架主要有Vapor、Perfect、Kitura和Zewo，他们各有长短，本人这次主要是使用Perfect来写的，因为Perfect的功能比较完善，在GitHub上具有1W+的星，而且有一个非常重要的原因提供了Perfect 中文文档。"><meta itemprop=datePublished content="2018-10-02T11:13:35+00:00"><meta itemprop=dateModified content="2018-10-02T11:13:35+00:00"><meta itemprop=wordCount content="1708"><meta itemprop=keywords content="SPM,Swift"><meta name=twitter:card content="summary"><meta name=twitter:title content="SPM搭建Perfect模版服务器"><meta name=twitter:description content="Perfect简介 {% github PerfectlySoft Perfect 60e44e4 width = 30% %} 目前比较流行服务端框架主要有Vapor、Perfect、Kitura和Zewo，他们各有长短，本人这次主要是使用Perfect来写的，因为Perfect的功能比较完善，在GitHub上具有1W+的星，而且有一个非常重要的原因提供了Perfect 中文文档。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>SPM搭建Perfect模版服务器</h1><div class=post-meta><span class=post-time>2018-10-02</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 1708 字 </span><span class=more-meta>预计阅读 4 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>Perfect简介</a></li><li><a href=#>搭建HTTP服务器</a><ul><li><a href=#>创建Web应用</a></li></ul></li><li><a href=#>设置<strong>Perfect HTTPServer</strong>服务器</a><ul><li><a href=#>注册路由和请求／响应句柄</a></li></ul></li><li><a href=#>使用Xcode调试服务器</a><ul><li><a href=#>递归编译设置</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2018-10-02T11:13:35 title="October 2, 2018">October 2, 2018</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><h2>Perfect简介</h2><p>{% github PerfectlySoft Perfect 60e44e4 width = 30% %}
+目前比较流行服务端框架主要有<code>Vapor</code>、<code>Perfect</code>、<code>Kitura</code>和<code>Zewo</code>，他们各有长短，本人这次主要是使用<code>Perfect</code>来写的，因为<code>Perfect</code>的功能比较完善，在GitHub上具有1W+的星，而且有一个非常重要的原因提供了<a href=https://github.com/PerfectlySoft/PerfectDocs/blob/master/README.zh_CN.md>Perfect 中文文档</a>。</p><p><strong>Perfect</strong> 包括了您所期待的所有基本功能，包括<code>路由</code>、<code>websockets</code> 基于 HTTP 的网络套接字、<code>TLS</code>（SSL）通信加密、<code>Mustache</code> 模板和 <code>Markdown</code> 模板、<code>JSON</code> 结构化数据等等，以及全部其他所有 Swift 后台框架加在一起才有的 XML 结构化数据、苹果推送消息 <code>APNS</code>、<code>MqTT</code> 消息队列和 <code>SMTP</code> 邮件发送，甚至大数据也支持。Perfect 的数据库支持非常广泛，其<strong>原生SQL驱动</strong>包括 <code>MySQL</code>、<code>SQLite</code>、<code>PostgreSQL</code> 和 <code>MariaDB</code>，还支持 <code>MongoDB</code>、<code>Redis</code>、<code>CouchDB</code> 甚至还包括 <code>FileMaker</code>（苹果自己的数据库 Swift 都不支持，Perfect 反过来支持——译者注）。<strong>Perfect</strong> 据说还部分支持微软的 <code>ODBC</code>，即多种数据库的底层兼容界面——有点像 <code>ORM</code>，但是以 C 函数库为基础。提到 <code>ORM</code> 数据库对象关系自动化管理，<strong>Perfect</strong>有 <code>StORM</code> 并完整实现了 <code>PostgreSQL</code>、<code>MySQL</code>、<code>CouchDB</code> 和 <code>SQLite</code>。</p><p><a href=https://github.com/PerfectlySoft/PerfectDocGenerator>Perfect文档生成器</a></p><h2>搭建HTTP服务器</h2><p>{% github it-boyer PerfectTemplate 20294e56 width = 30% %}
+本章将引导您使用Swift和Perfect软件框架逐步设置一个简单的HTTP服务器。</p><h3>创建Web应用</h3><p><a href=https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide/gettingStartedFromScratch.md>原文</a></p><ol><li>新建一个文件夹保存项目文件：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ mkdir iPerfect
+</span></span><span class=line><span class=cl>$ cd iPerfect
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>初始化项目，用<code>SPM</code>软件包管理器：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span><span class=w> </span><span class=nx>swift</span><span class=w> </span><span class=kn>package</span><span class=w> </span><span class=nx>init</span><span class=w> </span><span class=o>--</span><span class=kd>type</span><span class=p>=</span><span class=nx>executable</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nx>Creating</span><span class=w> </span><span class=nx>executable</span><span class=w> </span><span class=kn>package</span><span class=p>:</span><span class=w> </span><span class=nx>iPerfect</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nx>Creating</span><span class=w> </span><span class=nx>Package</span><span class=p>.</span><span class=nx>swift</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nx>Creating</span><span class=w> </span><span class=nx>README</span><span class=p>.</span><span class=nx>md</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nx>Creating</span><span class=w> </span><span class=p>.</span><span class=nx>gitignore</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nx>Creating</span><span class=w> </span><span class=nx>Sources</span><span class=o>/</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nx>Creating</span><span class=w> </span><span class=nx>Sources</span><span class=o>/</span><span class=nx>iPerfect</span><span class=o>/</span><span class=nx>main</span><span class=p>.</span><span class=nx>swift</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nx>Creating</span><span class=w> </span><span class=nx>Tests</span><span class=o>/</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><ol start=3><li>配置依赖
+打开<code>Package.swift</code>文件进行编辑：
+该文件在要求Swift编译的最低版本为<code>3.0.0</code>，设置<code>target</code>编译依存库<code>PerfectHTTPServer</code></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl><span class=c1>// swift-tools-version:4.0</span>
+</span></span><span class=line><span class=cl><span class=c1>// The swift-tools-version declares the minimum version of Swift required to build this package.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>import</span> <span class=nc>PackageDescription</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nv>package</span> <span class=p>=</span> <span class=n>Package</span><span class=p>(</span>
+</span></span><span class=line><span class=cl><span class=n>name</span><span class=p>:</span> <span class=s>&#34;iPerfect&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>dependencies</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=n>package</span><span class=p>(</span><span class=n>url</span><span class=p>:</span> <span class=s>&#34;https://github.com/PerfectlySoft/Perfect-HTTPServer.git&#34;</span><span class=p>,</span> <span class=n>from</span><span class=p>:</span> <span class=s>&#34;3.0.0&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=n>targets</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>target</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>name</span><span class=p>:</span> <span class=s>&#34;iPerfect&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>dependencies</span><span class=p>:</span> <span class=p>[</span><span class=s>&#34;PerfectHTTPServer&#34;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>编码</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>mkdir Sources
+</span></span><span class=line><span class=cl>echo &#39;print(&#34;您好！&#34;)&#39; &gt;&gt; Sources/iPerfect/main.swift
+</span></span></code></pre></td></tr></table></div></div><ol start=5><li>编译和运行
+现在项目就已经准备好，可以通过以下两个命令编译和运行：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>swift build
+</span></span><span class=line><span class=cl>.build/debug/iPerfect
+</span></span></code></pre></td></tr></table></div></div><p>成功之后，会打印：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>你好！！！
+</span></span></code></pre></td></tr></table></div></div><h2>设置<strong>Perfect HTTPServer</strong>服务器</h2><h3>注册路由和请求／响应句柄</h3><p>打开<code>Sources/iPerfect/main.swift</code>文件，把内容替换为以下程序：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl><span class=kd>import</span> <span class=nc>PerfectHTTP</span>
+</span></span><span class=line><span class=cl><span class=kd>import</span> <span class=nc>PerfectHTTPServer</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 注册路由和请求／响应句柄</span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nv>routes</span> <span class=p>=</span> <span class=n>Routes</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>routes</span><span class=p>.</span><span class=n>add</span><span class=p>(</span><span class=n>method</span><span class=p>:</span> <span class=p>.</span><span class=kr>get</span><span class=p>,</span> <span class=n>uri</span><span class=p>:</span> <span class=s>&#34;/&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>request</span><span class=p>,</span> <span class=n>response</span> <span class=k>in</span>
+</span></span><span class=line><span class=cl>    <span class=n>response</span><span class=p>.</span><span class=n>setHeader</span><span class=p>(.</span><span class=n>contentType</span><span class=p>,</span> <span class=n>value</span><span class=p>:</span> <span class=s>&#34;text/html&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>response</span><span class=p>.</span><span class=n>appendBody</span><span class=p>(</span><span class=n>string</span><span class=p>:</span> <span class=s>&#34;&lt;html&gt;&lt;title&gt;Hello, world!&lt;/title&gt;&lt;body&gt;Hello, world!&lt;/body&gt;&lt;/html&gt;&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>completed</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>do</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 启动HTTP服务器</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span> <span class=n>HTTPServer</span><span class=p>.</span><span class=n>launch</span><span class=p>(.</span><span class=n>server</span><span class=p>(</span><span class=n>name</span><span class=p>:</span> <span class=s>&#34;www.example.ca&#34;</span><span class=p>,</span> <span class=n>port</span><span class=p>:</span> <span class=mi>8181</span><span class=p>,</span> <span class=n>routes</span><span class=p>:</span> <span class=n>routes</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=k>catch</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=bp>fatalError</span><span class=p>(</span><span class=s>&#34;</span><span class=si>\(</span><span class=n>error</span><span class=si>)</span><span class=s>&#34;</span><span class=p>)</span> <span class=c1>// fatal error launching one of the servers</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>编译运行</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ swift build
+</span></span><span class=line><span class=cl>$ .build/debug/iPerfect
+</span></span><span class=line><span class=cl>&gt;&gt;
+</span></span><span class=line><span class=cl>[INFO] Starting HTTP server www.example.ca on :::8181
+</span></span></code></pre></td></tr></table></div></div><p>在浏览器上打开<code>http://127.0.0.1:8181/</code>
+终止服务器：在终端控制台上用组合键<code>control-c</code>可以随时停止服务器。</p><h2>使用Xcode调试服务器</h2><p>生成<strong>iPerfect.xcodeproj</strong>
+Swift软件包管理器（SPM）能够为您的项目<code>iPerfect</code>生成Xcode工程：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>swift</span><span class=w> </span><span class=kn>package</span><span class=w> </span><span class=nx>generate</span><span class=o>-</span><span class=nx>xcodeproj</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3>递归编译设置</h3><ol><li>设置递归编译项目目录中的所有<code>target</code>
+打开<code>iPerfect.xcodeproj</code>，在检索项目软件库<code>Library Search Paths</code>字典中新增路径：<code>$(PROJECT_DIR)</code> ，路径属性修改为<code>recursive</code>。
+<code>recursive</code>：遍历该目录，<code>non-recursive</code>：默认路径设置；不遍历该目录。
+如果路径的属性为<code>recursive</code>，那么编译的时候在找库的路径的时候，会遍历该目录下的所有子目录的库文件。</li></ol><blockquote><p>PS：在搭建项目的时候，可以创建一个专门放库文件的文件夹并且设置其属性为<code>recursive</code>:即为<code>$(PROJECT_DIR)/**</code>，相当于遍历项目文件同级下的所有路径(不推荐使用，项目大的话，影响编译的速度)。</p></blockquote><ol start=2><li>scheme运行在<strong>My Mac</strong>
+在Xcode打开项目之后，选择可执行目标为 <code>My Mac</code>，并选择正确的Swift工具链。</li><li>设置服务器的资源目录
+为了使服务器能够访问您工程文件夹下的目录，比如html静态网页。
+进入菜单命令 <code>Product > Scheme > Edit Scheme…</code>，设置工作目录 <code>Use Custom Working Directory</code> 为项目文件夹。</li></ol><p>现在您就可以在Xcode中运行调试您的服务器了.</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2018-10-02</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/SPM/>SPM</a>
+<a href=/tags/swift/>swift</a></div><nav class=post-nav><a class=prev href=/post/old/xcode/Xcode10%E6%96%B0%E7%89%B9%E6%80%A7/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Xcode10新特性</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/swift/%E4%BD%BF%E7%94%A8SPM%E7%AE%A1%E7%90%86%E4%BE%9D%E8%B5%96%E5%BA%93/><span class="next-text nav-default">使用SPM管理依赖库</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2018-10-02 11:13:35 +0000 UTC",title:"SPM搭建Perfect模版服务器",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

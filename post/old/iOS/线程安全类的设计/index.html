@@ -1,0 +1,266 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>线程安全类的设计 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="这篇文章将专注于实用技巧，设计模式，以及对于写出线程安全类和使用 GCD 来说所特别需要注意的一些反面模式。
+线程安全 Apple 的框架 首先让我们来看看 Apple 的框架。一般来说除非特别声明，大多数的类默认都不是线程安全的。对于其中的一些类来说，这是很合理的，但是对于另外一些来说就很有趣了。
+"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/iOS/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/iOS/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%B1%BB%E7%9A%84%E8%AE%BE%E8%AE%A1/"><meta property="og:site_name" content="习七"><meta property="og:title" content="线程安全类的设计"><meta property="og:description" content="这篇文章将专注于实用技巧，设计模式，以及对于写出线程安全类和使用 GCD 来说所特别需要注意的一些反面模式。
+线程安全 Apple 的框架 首先让我们来看看 Apple 的框架。一般来说除非特别声明，大多数的类默认都不是线程安全的。对于其中的一些类来说，这是很合理的，但是对于另外一些来说就很有趣了。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-09-24T19:06:03+00:00"><meta property="article:modified_time" content="2017-09-24T19:06:03+00:00"><meta property="article:tag" content="线程"><meta itemprop=name content="线程安全类的设计"><meta itemprop=description content="这篇文章将专注于实用技巧，设计模式，以及对于写出线程安全类和使用 GCD 来说所特别需要注意的一些反面模式。
+线程安全 Apple 的框架 首先让我们来看看 Apple 的框架。一般来说除非特别声明，大多数的类默认都不是线程安全的。对于其中的一些类来说，这是很合理的，但是对于另外一些来说就很有趣了。"><meta itemprop=datePublished content="2017-09-24T19:06:03+00:00"><meta itemprop=dateModified content="2017-09-24T19:06:03+00:00"><meta itemprop=wordCount content="5778"><meta itemprop=keywords content="线程"><meta name=twitter:card content="summary"><meta name=twitter:title content="线程安全类的设计"><meta name=twitter:description content="这篇文章将专注于实用技巧，设计模式，以及对于写出线程安全类和使用 GCD 来说所特别需要注意的一些反面模式。
+线程安全 Apple 的框架 首先让我们来看看 Apple 的框架。一般来说除非特别声明，大多数的类默认都不是线程安全的。对于其中的一些类来说，这是很合理的，但是对于另外一些来说就很有趣了。"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>线程安全类的设计</h1><div class=post-meta><span class=post-time>2017-09-24</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 5778 字 </span><span class=more-meta>预计阅读 12 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>线程安全</a><ul><li><a href=#>Apple 的框架</a></li><li><a href=#>原子属性 (Atomic Properties)</a></li><li><a href=#>你自己的类</a></li></ul></li><li><a href=#>GCD 的陷阱</a><ul><li><a href=#>将 GCD 当作递归锁使用</a></li><li><a href=#>用 dispatch_async 修复时序问题</a></li><li><a href=#>在性能关键的代码中混用 dispatch_sync 和 dispatch_async</a></li><li><a href=#>使用 dispatch_async 来派发内存敏感的操作</a></li></ul></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-09-24T19:06:03 title="September 24, 2017">September 24, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>这篇文章将专注于实用技巧，设计模式，以及对于写出线程安全类和使用 GCD 来说所特别需要注意的一些<a href=http://zh.wikipedia.org/wiki/%E5%8F%8D%E9%9D%A2%E6%A8%A1%E5%BC%8F>反面模式</a>。</p><h2>线程安全</h2><h3>Apple 的框架</h3><p>首先让我们来看看 Apple 的框架。一般来说除非特别声明，大多数的类默认都不是线程安全的。对于其中的一些类来说，这是很合理的，但是对于另外一些来说就很有趣了。</p><p>就算是在经验丰富的 iOS/Mac 开发者，也难免会犯从后台线程去访问 UIKit/AppKit 这种错误。比如因为图片的内容本身就是从后台的网络请求中获取的话，顺手就在后台线程中设置了 <code>image</code> 之类的属性，这样的错误其实是屡见不鲜的。Apple 的代码都经过了性能的优化，所以即使你从别的线程设置了属性的时候，也不会产生什么警告。</p><p>在设置图片这个例子中，症结其实是你的改变通常要过一会儿才能生效。但是如果有两个线程在同时对图片进行了设定，那么很可能因为当前的图片被释放两次，而导致应用崩溃。这种行为是和时机有关系的，所以很可能在开发阶段没有崩溃，但是你的用户使用时却不断 crash。</p><p>现在没有<strong>官方</strong>的用来寻找类似错误的工具，但我们确实有一些技巧来避免这个问题。<a href=https://gist.github.com/steipete/5664345>UIKit Main Thread Guard</a> 是一段用来监视每一次对 <code>setNeedsLayout</code> 和 <code>setNeedsDisplay</code> 的调用代码，并检查它们是否是在主线程被调用的。因为这两个方法在 UIKit 的 setter （包括 image 属性）中广泛使用，所以它可以捕获到很多线程相关的错误。虽然这个小技巧并不包含任何私有 API， 但我们还是不建议将它是用在发布产品中，不过在开发过程中使用的话还是相当赞的。</p><p>Apple没有把 UIKit 设计为线程安全的类是有意为之的，将其打造为线程安全的话会使很多操作变慢。而事实上 UIKit 是和主线程绑定的，这一特点使得编写并发程序以及使用 UIKit 十分容易的，你唯一需要确保的就是对于 UIKit 的调用总是在主线程中来进行。</p><h4>为什么 UIKit 不是线程安全的？</h4><p>对于一个像 UIKit 这样的大型框架，确保它的线程安全将会带来巨大的工作量和成本。将 non-atomic 的属性变为 atomic 的属性只不过是需要做的变化里的微不足道的一小部分。</p><ol><li>通常来说，UI需要同时改变若干个属性，才能看到它所带来的结果。为了解决这个问题，苹果可能不得不提供像 Core Data 中的 <code>performBlock:</code> 和 <code>performBlockAndWait:</code> 那样类似的方法来同步变更。</li><li>绝大多数对 UIKit 类的调用其实都是以<strong>配置</strong>为目的的，这使得将 UIKit 改为线程安全这件事情更显得毫无意义了。</li></ol><p>然而即使是那些与配置共享的内部状态之类事情无关的调用，其实也不是线程安全的。如果你做过 iOS 3.2 或之前的黑暗年代的 app 开发的话，你肯定有过一边在后台准备图像时一边使用 NSString 的 <code>drawInRect:withFont:</code> 时的随机崩溃的经历。值得庆幸的事，在 iOS 4 中 <a href=http://developer.apple.com/library/ios/#releasenotes/General/WhatsNewIniOS/Articles/iPhoneOS4.html>苹果将大部分绘图的方法和诸如 <code>UIColor</code> 和 <code>UIFont</code> 这样的类改写为了后台线程可用</a>。</p><p>但不幸的是 Apple 在线程安全方面的文档是极度匮乏的。他们推荐只访问主线程，并且甚至是绘图方法他们都没有明确地表示保证线程安全。因此在阅读文档的同时，去读读 <a href=http://developer.apple.com/library/ios/#releasenotes/General/WhatsNewIniOS/Articles/iPhoneOS4.html>iOS 版本更新说明</a>会是一个很好的选择。</p><p>对于大多数情况来说，UIKit 类确实只应该用在应用的主线程中。这对于那些继承自 UIResponder 的类以及那些操作你的应用的用户界面的类来说，不管如何都是很正确的。</p><h4>内存回收 (deallocation) 问题</h4><p>另一个在后台使用 UIKit 对象的的危险之处在于“内存回收问题”。Apple 在技术笔记 <a href=http://developer.apple.com/library/ios/#technotes/tn2109/_index.html>TN2109</a> 中概述了这个问题，并提供了多种解决方案。
+这个问题其实是要求 UI 对象应该在主线程中被回收，因为在它们的 <code>dealloc</code> 方法被调用回收的时候，可能会去改变 view 的结构关系，而如我们所知，这种操作应该放在主线程来进行。</p><p>因为调用者被其他线程持有是非常常见的（不管是由于 operation 还是 block 所导致的），这也是很容易犯错并且难以被修正的问题。在 <a href=https://github.com/AFNetworking/AFNetworking/issues/56>AFNetworking 中也一直长久存在这样的 bug</a>，但是由于其自身的隐蔽性而鲜为人知，也很难重现其所造成的崩溃。在异步的 block 或者操作中一致使用 <code>__weak</code>，并且不去直接访问局部变量会对避开这类问题有所帮助。</p><h4>集合类</h4><p>Apple 有一个<a href=https://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/Multithreading/ThreadSafetySummary/ThreadSafetySummary.html#//apple_ref/doc/uid/10000057i-CH12-SW1>针对 iOS 和 Mac 的很好的总览性文档</a>，为大多数基本的 foundation 类列举了其线程安全特性。
+总的来说，比如 <code>NSArry</code> 这样不可变类是线程安全的。然而它们的可变版本，比如 <code>NSMutableArray</code> 是线程不安全的。
+事实上，如果是在一个队列中串行地进行访问的话，在不同线程中使用它们也是没有问题的。要记住的是即使你申明了返回类型是不可变的，方法里还是有可能返回的其实是一个可变版本的集合类。
+一个好习惯是写类似于 <code>return [array copy]</code> 这样的代码来确保返回的对象事实上是不可变对象。</p><p>与和<a href>Java</a>这样的语言不一样，Foundation 框架并不提供直接可用的集合类，这是有其道理的，因为大多数情况下，你想要的是在更高层级上的锁，以避免太多的加解锁操作。但缓存是一个值得注意的例外，iOS 4 中 Apple 添加的 <code>NSCache</code> 使用一个可变的字典来存储不可变数据，它不仅会对访问加锁，更甚至在低内存情况下会清空自己的内容。</p><p>也就是说，在你的应用中存在可变的且线程安全的字典是可以做到的。借助于 class cluster 的方式，我们也很容易<a href=https://gist.github.com/steipete/5928916>写出这样的代码</a>。</p><h3>原子属性 (Atomic Properties)</h3><p>你曾经好奇过 Apple 是怎么处理 atomic 的设置/读取属性的么？至今为止，你可能听说过自旋锁 (spinlocks)，信标 (semaphores)，锁 (locks)，@synchronized 等，Apple 用的是什么呢？因为 <a href=http://www.opensource.apple.com/source/objc4/>Objctive-C 的 runtime 是开源</a>的，所以我们可以一探究竟。</p><p>一个非原子的 setter 看起来是这个样子的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=p>-</span> <span class=p>(</span><span class=kt>void</span><span class=p>)</span><span class=nf>setUserName:</span><span class=p>(</span><span class=n>NSString</span> <span class=o>*</span><span class=p>)</span><span class=nv>userName</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>userName</span> <span class=o>!=</span> <span class=n>_userName</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=p>[</span><span class=n>userName</span> <span class=k>retain</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>        <span class=p>[</span><span class=n>_userName</span> <span class=k>release</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>        <span class=n>_userName</span> <span class=o>=</span> <span class=n>userName</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这是一个手动 retain/release 的版本，ARC 生成的代码和这个看起来也是类似的。当我们看这段代码时，显而易见要是 <code>setUserName:</code> 被并发调用的话会造成麻烦。我们可能会释放 <code>_userName</code> 两次，这回使内存错误，并且导致难以发现的 bug。</p><p>对于任何没有手动实现的属性，编译器都会生成一个 <a href=https://github.com/opensource-apple/objc4/blob/master/runtime/Accessors.subproj/objc-accessors.mm#L127><code>objc_setProperty_non_gc(id self, SEL _cmd, ptrdiff_t offset, id newValue, BOOL atomic, signed char shouldCopy)</code></a> 的调用。在我们的例子中，这个调用的参数是这样的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=n>objc_setProperty_non_gc</span><span class=p>(</span><span class=nb>self</span><span class=p>,</span> <span class=n>_cmd</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=n>ptrdiff_t</span><span class=p>)(</span><span class=o>&amp;</span><span class=n>_userName</span><span class=p>)</span> <span class=o>-</span> <span class=p>(</span><span class=n>ptrdiff_t</span><span class=p>)(</span><span class=nb>self</span><span class=p>),</span> <span class=n>userName</span><span class=p>,</span> <span class=nb>NO</span><span class=p>,</span> <span class=nb>NO</span><span class=p>);</span><span class=err>`</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>ptrdiff_t</code> 可能会吓到你，但是实际上这就是一个简单的指针算术，因为其实 Objective-C 的类仅仅只是 C 结构体而已。</p><p><code>objc_setProperty</code> 调用的是如下方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>static inline void reallySetProperty(id self, SEL _cmd, id newValue,
+</span></span><span class=line><span class=cl>ptrdiff_t offset, bool atomic, bool copy, bool mutableCopy)
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    id oldValue;
+</span></span><span class=line><span class=cl>    id *slot = (id*) ((char*)self + offset);
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    if (copy) {
+</span></span><span class=line><span class=cl>        newValue = [newValue copyWithZone:NULL];
+</span></span><span class=line><span class=cl>    } else if (mutableCopy) {
+</span></span><span class=line><span class=cl>        newValue = [newValue mutableCopyWithZone:NULL];
+</span></span><span class=line><span class=cl>    } else {
+</span></span><span class=line><span class=cl>        if (*slot == newValue) return;
+</span></span><span class=line><span class=cl>        newValue = objc_retain(newValue);
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    if (!atomic) {
+</span></span><span class=line><span class=cl>        oldValue = *slot;
+</span></span><span class=line><span class=cl>        *slot = newValue;
+</span></span><span class=line><span class=cl>    } else {
+</span></span><span class=line><span class=cl>        spin_lock_t *slotlock = &amp;PropertyLocks[GOODHASH(slot)];
+</span></span><span class=line><span class=cl>        _spin_lock(slotlock);
+</span></span><span class=line><span class=cl>        oldValue = *slot;
+</span></span><span class=line><span class=cl>        *slot = newValue;
+</span></span><span class=line><span class=cl>        _spin_unlock(slotlock);
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>    objc_release(oldValue);
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>除开方法名字很有趣以外，其实方法实际做的事情非常直接，它使用了在 <code>PropertyLocks</code> 中的 128 个自旋锁中的 1 个来给操作上锁。这是一种务实和快速的方式，最糟糕的情况下，如果遇到了哈希碰撞，那么 setter 需要等待另一个和它无关的 setter 完成之后再进行工作。</p><p>虽然这些方法没有定义在任何公开的头文件中，但我们还是可用手动调用他们。我不是说这是一个好的做法，但是知道这个还是蛮有趣的，而且如果你想要同时实现原子属性<strong>和</strong>自定义的 setter 的话，这个技巧就非常有用了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=c1>// 手动声明运行时的方法
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>extern</span> <span class=kt>void</span> <span class=nf>objc_setProperty</span><span class=p>(</span><span class=kt>id</span> <span class=nb>self</span><span class=p>,</span> <span class=kt>SEL</span> <span class=n>_cmd</span><span class=p>,</span> <span class=n>ptrdiff_t</span> <span class=n>offset</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=kt>id</span> <span class=n>newValue</span><span class=p>,</span> <span class=kt>BOOL</span> <span class=k>atomic</span><span class=p>,</span> <span class=kt>BOOL</span> <span class=n>shouldCopy</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>extern</span> <span class=kt>id</span> <span class=nf>objc_getProperty</span><span class=p>(</span><span class=kt>id</span> <span class=nb>self</span><span class=p>,</span> <span class=kt>SEL</span> <span class=n>_cmd</span><span class=p>,</span> <span class=n>ptrdiff_t</span> <span class=n>offset</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=kt>BOOL</span> <span class=k>atomic</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cp>#define PSTAtomicRetainedSet(dest, src) objc_setProperty(self, _cmd,
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=p>(</span><span class=n>ptrdiff_t</span><span class=p>)(</span><span class=o>&amp;</span><span class=n>dest</span><span class=p>)</span> <span class=o>-</span> <span class=p>(</span><span class=n>ptrdiff_t</span><span class=p>)(</span><span class=nb>self</span><span class=p>),</span> <span class=n>src</span><span class=p>,</span> <span class=nb>YES</span><span class=p>,</span> <span class=nb>NO</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=cp>#define PSTAtomicAutoreleasedGet(src) objc_getProperty(self, _cmd,
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=p>(</span><span class=n>ptrdiff_t</span><span class=p>)(</span><span class=o>&amp;</span><span class=n>src</span><span class=p>)</span> <span class=o>-</span> <span class=p>(</span><span class=n>ptrdiff_t</span><span class=p>)(</span><span class=nb>self</span><span class=p>),</span> <span class=nb>YES</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p><a href=https://gist.github.com/steipete/5928690>参考这个 gist</a> 来获取包含处理结构体的完整的代码，但是我们其实并不推荐使用它。</p><h4>为何不用 @synchronized ？</h4><p>你也许会想问为什么苹果不用 <code>@synchronized(self)</code> 这样一个已经存在的运行时特性来锁定属？？你可以看看<a href=https://github.com/opensource-apple/objc4/blob/master/runtime/objc-sync.mm#L291>这里的源码</a>，就会发现其实发生了很多的事情。Apple 使用了<a href=http://googlemac.blogspot.co.at/2006/10/synchronized-swimming.html>最多三个加/解锁序列</a>，还有一部分原因是他们也添加了<a href=https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/Multithreading/ThreadSafety/ThreadSafety.html#//apple_ref/doc/uid/10000057i-CH8-SW3>异常开解(exception unwinding)</a>机制。相比于更快的自旋锁方式，这种实现要慢得多。由于设置某个属性一般来说会相当快，因此自旋锁更适合用来完成这项工作。<code>@synchonized(self)</code> 更适合使用在你需要确保在发生错误时代码不会死锁，而是抛出异常的时候。</p><h3>你自己的类</h3><p>单独使用原子属性并不会使你的类变成线程安全。它不能保护你应用的逻辑，只能保护你免于在 setter 中遭遇到<a href=http://objccn.io/issue-3-1>竞态条件</a>的困扰。看看下面的代码片段：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=nb>self</span><span class=p>.</span><span class=n>contents</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>CFAttributedStringRef</span> <span class=n>stringRef</span> <span class=o>=</span> <span class=n>CFAttributedStringCreate</span><span class=p>(</span><span class=nb>NULL</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=k>__bridge</span> <span class=n>CFStringRef</span><span class=p>)</span><span class=nb>self</span><span class=p>.</span><span class=n>contents</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 渲染字符串
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>我之前在 <a href=http://pspdfkit.com>PSPDFKit</a> 中就犯了这个错误。时不时地应用就会因为 <code>contents</code> 属性在通过检查之后却又被设成了 nil 而导致 EXC_BAD_ACCESS 崩溃。捕获这个变量就可以简单修复这个问题；</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>NSString *contents = self.contents;
+</span></span><span class=line><span class=cl>if (contents) {
+</span></span><span class=line><span class=cl>    CFAttributedStringRef stringRef = CFAttributedStringCreate(NULL,
+</span></span><span class=line><span class=cl>    (__bridge CFStringRef)contents, NULL);
+</span></span><span class=line><span class=cl>    // 渲染字符串
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>在这里这样就能解决问题，但是大多数情况下不会这么简单。
+想象一下我们还有一个 <code>textColor</code> 的属性，我们在一个线程中将两个属性都做了改变。我们的渲染线程有可能使用了新的内容，但是依旧保持了旧的颜色，于是我们得到了一组奇怪的组合。这其实也是为什么 Core Data 要将 model 对象都绑定在一个线程或者队列中的原因。</p><p>对于这个问题，其实没有万用解法。使用 <a href=http://www.cocoawithlove.com/2008/04/value-of-immutable-values.html>不可变模型</a>是一个可能的方案，但是它也有自己的问题。另一种途径是限制对存在在主线程或者某个特定队列中的既存对象的改变，而是先进行一次拷贝之后再在工作线程中使用。对于这个问题的更多对应方法，我推荐阅读 Jonathan Sterling 的关于 <a href=http://www.jonmsterling.com/posts/2012-12-27-a-pattern-for-immutability.html>Objective-C 中轻量化不可变对象</a>的文章。</p><p>一个简单的解决办法是使用 <code>@synchronize</code>。其他的方式都非常非常可能使你误入歧途，已经有太多聪明人在这种尝试上一次又一次地以失败告终。</p><h4>可行的线程安全设计</h4><p>在尝试写一些线程安全的东西之前，应该先想清楚是不是真的需要。确保你要做的事情不会是过早优化。如果要写的东西是一个类似配置类 (configuration class) 的话，去考虑线程安全这种事情就毫无意义了。更正确的做法是扔一个断言上去，以保证它被正确地使用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=kt>void</span> <span class=nf>PSPDFAssertIfNotMainThread</span><span class=p>(</span><span class=kt>void</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=n>NSAssert</span><span class=p>(</span><span class=n>NSThread</span><span class=p>.</span><span class=n>isMainThread</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=s>@&#34;Error: Method needs to be called on the main thread. %@&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>NSThread</span> <span class=n>callStackSymbols</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>对于那些肯定应该线程安全的代码（一个好例子是负责缓存的类）来说，一个不错的设计是使用并发的 <code>dispatch_queue</code> 作为读/写锁，并且确保只锁着那些真的需要被锁住的部分，以此来最大化性能。一旦你使用多个队列来给不同的部分上锁的话，整件事情很快就会变得难以控制了。</p><p>于是你也可以重新组织你的代码，这样某些特定的锁就不再需要了。看看下面这段实现了一种多委托的代码（其实在大多数情况下，用 NSNotifications 会更好，但是其实也还是有<a href=https://code.google.com/r/riky-adsfasfasf/source/browse/Utilities/GCDMulticastDelegate.h>多委托的实用例子</a>）的</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=err>头文件</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>nonatomic</span><span class=p>,</span> <span class=n>strong</span><span class=p>)</span> <span class=n>NSMutableSet</span> <span class=o>*</span><span class=n>delegates</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>init方法中</span>
+</span></span><span class=line><span class=cl><span class=n>_delegateQueue</span> <span class=o>=</span> <span class=n>dispatch_queue_create</span><span class=p>(</span><span class=s2>&#34;com.PSPDFKit.cacheDelegateQueue&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=n>DISPATCH_QUEUE_CONCURRENT</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>addDelegate</span><span class=p>:(</span><span class=n>id</span><span class=o>&lt;</span><span class=n>PSPDFCacheDelegate</span><span class=o>&gt;</span><span class=p>)</span><span class=n>delegate</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>dispatch_barrier_async</span><span class=p>(</span><span class=n>_delegateQueue</span><span class=p>,</span> <span class=o>^</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=p>[</span><span class=bp>self</span><span class=o>.</span><span class=n>delegates</span> <span class=n>addObject</span><span class=p>:</span><span class=n>delegate</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>removeAllDelegates</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>dispatch_barrier_async</span><span class=p>(</span><span class=n>_delegateQueue</span><span class=p>,</span> <span class=o>^</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>delegates</span> <span class=n>removeAllObjects</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>callDelegateForX</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>dispatch_sync</span><span class=p>(</span><span class=n>_delegateQueue</span><span class=p>,</span> <span class=o>^</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=p>[</span><span class=bp>self</span><span class=o>.</span><span class=n>delegates</span> <span class=n>enumerateObjectsUsingBlock</span><span class=p>:</span><span class=o>^</span><span class=p>(</span><span class=n>id</span><span class=o>&lt;</span><span class=n>PSPDFCacheDelegate</span><span class=o>&gt;</span> <span class=n>delegate</span><span class=p>,</span> <span class=n>NSUInteger</span> <span class=n>idx</span><span class=p>,</span> <span class=n>BOOL</span> <span class=o>*</span><span class=n>stop</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=o>//</span> <span class=err>调用</span><span class=n>delegate</span>
+</span></span><span class=line><span class=cl>        <span class=p>}];</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>除非 <code>addDelegate:</code> 或者 <code>removeDelegate:</code> 每秒要被调用上千次，否则我们可以使用一个相对简洁的实现方式：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=err>头文件</span>
+</span></span><span class=line><span class=cl><span class=err>@</span><span class=n>property</span> <span class=p>(</span><span class=n>atomic</span><span class=p>,</span> <span class=n>copy</span><span class=p>)</span> <span class=n>NSSet</span> <span class=o>*</span><span class=n>delegates</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>addDelegate</span><span class=p>:(</span><span class=n>id</span><span class=o>&lt;</span><span class=n>PSPDFCacheDelegate</span><span class=o>&gt;</span><span class=p>)</span><span class=n>delegate</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>@</span><span class=n>synchronized</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>delegates</span> <span class=o>=</span> <span class=p>[</span><span class=bp>self</span><span class=o>.</span><span class=n>delegates</span> <span class=n>setByAddingObject</span><span class=p>:</span><span class=n>delegate</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>removeAllDelegates</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>@</span><span class=n>synchronized</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>delegates</span> <span class=o>=</span> <span class=n>nil</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>-</span> <span class=p>(</span><span class=n>void</span><span class=p>)</span><span class=n>callDelegateForX</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span><span class=bp>self</span><span class=o>.</span><span class=n>delegates</span> <span class=n>enumerateObjectsUsingBlock</span><span class=p>:</span><span class=o>^</span><span class=p>(</span><span class=n>id</span><span class=o>&lt;</span><span class=n>PSPDFCacheDelegate</span><span class=o>&gt;</span> <span class=n>delegate</span><span class=p>,</span> <span class=n>NSUInteger</span> <span class=n>idx</span><span class=p>,</span> <span class=n>BOOL</span> <span class=o>*</span><span class=n>stop</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=err>调用</span><span class=n>delegate</span>
+</span></span><span class=line><span class=cl>    <span class=p>}];</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>就算这样，这个例子还是有点理想化，因为其他人可以把变更限制在主线程中。但是对于很多数据结构，可以在可变更操作的方法中创建不可变的拷贝，这样整体的代码逻辑上就不再需要处理过多的锁了。</p><h2>GCD 的陷阱</h2><p>对于大多数上锁的需求来说，GCD 就足够好了。它简单迅速，并且基于 block 的 API 使得粗心大意造成非平衡锁操作的概率下降了不少。然后，GCD 中还是有不少陷阱，我们在这里探索一下其中的一些。</p><h3>将 GCD 当作递归锁使用</h3><p>GCD 是一个对共享资源的访问进行串行化的队列。这个特性可以被当作锁来使用，但实际上它和 <code>@synchronized</code> 有很大区别。 GCD队列并非是<a href="http://zh.wikipedia.org/w/index.php?title=%E5%8F%AF%E9%87%8D%E5%85%A5&amp;variant=zh-cn">可重入</a>的，因为这将破坏队列的特性。很多有试图使用 <code>dispatch_get_current_queue()</code> 来绕开这个限制，但是这是一个<a href=https://gist.github.com/steipete/3713233>糟糕的做法</a>，Apple 在 iOS6 中将这个方法标记为废弃，自然也是有自己的理由。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// This is a bad idea.
+</span></span><span class=line><span class=cl>inline void pst_dispatch_sync_reentrant(dispatch_queue_t queue,
+</span></span><span class=line><span class=cl>dispatch_block_t block)
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>    dispatch_get_current_queue() == queue ? block() : dispatch_sync(queue, block);
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>对当前的队列进行测试也许在简单情况下可以行得通，但是一旦你的代码变得复杂一些，并且你可能有多个队列在同时被锁住的情况下，这种方法很快就悲剧了。一旦这种情况发生，几乎可以肯定的是你会遇到<a href=http://objccn.io/issue-2-1/#dead_locks>死锁</a>。当然，你可以使用 <code>dispatch_get_specific()</code>，这将截断整个队列结构，从而对某个特定的队列进行测试。要这么做的话，你还得为了在队列中附加标志队列的元数据，而去写自定义的队列构造函数。嘛，最好别这么做。其实在实用中，使用 <code>NSRecursiveLock</code> 会是一个更好的选择。</p><h3>用 dispatch_async 修复时序问题</h3><p>在使用 UIKit 的时候遇到了一些时序上的麻烦？很多时候，这样进行“修正”看来非常完美：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-objc data-lang=objc><span class=line><span class=cl><span class=n>dispatch_async</span><span class=p>(</span><span class=n>dispatch_get_main_queue</span><span class=p>(),</span> <span class=o>^</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Some UIKit call that had timing issues but works fine
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// in the next runloop.
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>[</span><span class=nb>self</span> <span class=n>updatePopoverSize</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>千万别这么做！相信我，这种做法将会在之后你的 app 规模大一些的时候让你找不着北。这种代码非常难以调试，并且你很快就会陷入用更多的 dispatch 来修复所谓的莫名其妙的"时序问题"。审视你的代码，并且找到合适的地方来进行调用（比如在 viewWillAppear 里调用，而不是 viewDidLoad 之类的）才是解决这个问题的正确做法。我在自己的代码中也还留有一些这样的 hack，但是我为它们基本都做了正确的文档工作，并且对应的 issue 也被一一记录过。</p><p>记住这不是真正的 GCD 特性，而只是一个在 GCD 下很容易实现的常见反面模式。事实上你可以使用 <code>performSelector:afterDelay:</code> 方法来实现同样的操作，其中 delay 是在对应时间后的 runloop。</p><h3>在性能关键的代码中混用 dispatch_sync 和 dispatch_async</h3><p>这个问题我花了好久来研究。在 <a href=http://pspdfkit.com>PSPDFKit</a> 中有一个使用了 LRU（最久未使用）算法列表的缓存类来记录对图片的访问。当你在页面中滚动时，这个方法将被调用<strong>非常多次</strong>。最初的实现使用了 <code>dispatch_sync</code> 来进行实际有效的访问，使用 <code>dispatch_async</code> 来更新 LRU 列表的位置。这导致了帧数远低于原来的 60 帧的目标。</p><p>当你的 app 中的其他运行的代码阻挡了 GCD 线程的时候，dispatch manager 需要花时间去寻找能够执行 dispatch_async 代码的线程，这有时候会花费一点时间。在找到合适的执行线程之前，你的同步调用就会被 block 住了。其实在这个例子中，异步情况的执行顺序并不是很重要，但没有能将这件事情告诉 GCD 的好办法。读/写锁这里并不能起到什么作用，因为在异步操作中基本上一定会需要进行顺序写入，而在此过程中读操作将被阻塞住。如果误用了 <code>dispatch_async</code> 代价将会是非常惨重的。在将它用作锁的时候，一定要非常小心。</p><h3>使用 dispatch_async 来派发内存敏感的操作</h3><p>我们已经谈论了很多关于 NSOperations 的话题了，一般情况下，使用这个更高层级的 API 会是一个好主意。当你要处理一段内存敏感的操作的代码块时，这个优势尤为突出、</p><p>在 PSPDFKit 的老版本中，我用了 GCD 队列来将已缓存的 JPG 图片写到磁盘中。当 retina 的 iPad 问世之后，这个操作出现了问题。ß因为分辨率翻倍了，相比渲染这张图片，将它编码花费的时间要长得多。所以，操作堆积在了队列中，当系统繁忙时，甚至有可能因为内存耗尽而崩溃。</p><p>我们没有办法追踪有多少个操作在队列中等待运行（除非你手动添加了追踪这个的代码），我们也没有现成的方法来在接收到低内存通告的时候来取消操作、这时候，切换到 NSOperations 可以使代码变得容易调试得多，并且允许我们在不添加手动管理的代码的情况下，做到对操作的追踪和取消。</p><p>当然也有一些不好的地方，比如你不能在你的 <code>NSOperationQueue</code> 中设置目标队列（就像 <code>DISPATCH_QUEUE_PRIORITY_BACKGROUND</code> 之于 缓速 I/O 那样）。但这只是为了可调试性的一点小代价，而事实上这也帮助你避免遇到<a href=http://objccn.io/issue-2-1/#priority_inversion>优先级反转</a>的问题。我甚至不推荐直接使用已经包装好的 <code>NSBlockOperation</code> 的 API，而是建议使用一个 NSOperation 的真正的子类，包括实现其 description。诚然，这样做工作量会大一些，但是能输出所有运行中/准备运行的操作是及其有用的。</p><hr><p><a href=http://objccn.io/issue-2>话题 #2 下的更多文章</a></p><p>原文 <a href=http://www.objc.io/issue-2/thread-safe-class-design.html>Thread-Safe Class Design</a></p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-09-24</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/%E7%BA%BF%E7%A8%8B/>线程</a></div><nav class=post-nav><a class=prev href=/post/old/iOS/MVVM%E4%BB%8B%E7%BB%8D/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">MVVM介绍</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/iOS/GCD%E5%BA%95%E5%B1%82%E5%B9%B6%E5%8F%91API/><span class="next-text nav-default">GCD底层并发API</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-09-24 19:06:03 +0000 UTC",title:"线程安全类的设计",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

@@ -1,0 +1,132 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>macOS支持JavaScript自动化组件基础 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="苹果 OS X Yosemite系统把 JavaScript作为 AppleScript的另一选择。Automation 是 OS X 10.10版本中的新特性，苹果在官网发布JavaScript for Automation Release Notes有篇文章介绍了用JavaScript写自动化Automation脚本。 JavaScript凭借其简单的语法，良好的性能，超轻量的框架，极小耦合的模块系统等等优势已经吸引了很多大厂的关注。 再加上JavaScript先天开放且无版权专利纠纷的问题，拥有非常广泛的开发者（开源）群体，苹果将其引入OS X平台代替私有的AppleScript，可能也有着一部分开放性平台的考虑，从而吸引广泛的第三方开发者。 资源 JavaScript OS X App Examples JavaScript for Automation Cookbook
+"><meta name=keywords content="JavaScript,工具,语法,管理,混编"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/old/macOS/macOS%E6%94%AF%E6%8C%81JavaScript%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/old/macOS/macOS%E6%94%AF%E6%8C%81JavaScript%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/"><meta property="og:site_name" content="习七"><meta property="og:title" content="macOS支持JavaScript自动化组件基础"><meta property="og:description" content="苹果 OS X Yosemite系统把 JavaScript作为 AppleScript的另一选择。Automation 是 OS X 10.10版本中的新特性，苹果在官网发布JavaScript for Automation Release Notes有篇文章介绍了用JavaScript写自动化Automation脚本。 JavaScript凭借其简单的语法，良好的性能，超轻量的框架，极小耦合的模块系统等等优势已经吸引了很多大厂的关注。 再加上JavaScript先天开放且无版权专利纠纷的问题，拥有非常广泛的开发者（开源）群体，苹果将其引入OS X平台代替私有的AppleScript，可能也有着一部分开放性平台的考虑，从而吸引广泛的第三方开发者。 资源 JavaScript OS X App Examples JavaScript for Automation Cookbook"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2017-02-15T17:19:30+00:00"><meta property="article:modified_time" content="2017-02-15T17:19:30+00:00"><meta property="article:tag" content="JS"><meta itemprop=name content="macOS支持JavaScript自动化组件基础"><meta itemprop=description content="苹果 OS X Yosemite系统把 JavaScript作为 AppleScript的另一选择。Automation 是 OS X 10.10版本中的新特性，苹果在官网发布JavaScript for Automation Release Notes有篇文章介绍了用JavaScript写自动化Automation脚本。 JavaScript凭借其简单的语法，良好的性能，超轻量的框架，极小耦合的模块系统等等优势已经吸引了很多大厂的关注。 再加上JavaScript先天开放且无版权专利纠纷的问题，拥有非常广泛的开发者（开源）群体，苹果将其引入OS X平台代替私有的AppleScript，可能也有着一部分开放性平台的考虑，从而吸引广泛的第三方开发者。 资源 JavaScript OS X App Examples JavaScript for Automation Cookbook"><meta itemprop=datePublished content="2017-02-15T17:19:30+00:00"><meta itemprop=dateModified content="2017-02-15T17:19:30+00:00"><meta itemprop=wordCount content="2365"><meta itemprop=keywords content="JavaScript,工具,语法,管理,混编"><meta name=twitter:card content="summary"><meta name=twitter:title content="macOS支持JavaScript自动化组件基础"><meta name=twitter:description content="苹果 OS X Yosemite系统把 JavaScript作为 AppleScript的另一选择。Automation 是 OS X 10.10版本中的新特性，苹果在官网发布JavaScript for Automation Release Notes有篇文章介绍了用JavaScript写自动化Automation脚本。 JavaScript凭借其简单的语法，良好的性能，超轻量的框架，极小耦合的模块系统等等优势已经吸引了很多大厂的关注。 再加上JavaScript先天开放且无版权专利纠纷的问题，拥有非常广泛的开发者（开源）群体，苹果将其引入OS X平台代替私有的AppleScript，可能也有着一部分开放性平台的考虑，从而吸引广泛的第三方开发者。 资源 JavaScript OS X App Examples JavaScript for Automation Cookbook"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>macOS支持JavaScript自动化组件基础</h1><div class=post-meta><span class=post-time>2017-02-15</span><div class=post-category><a href=/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/>解决方案</a></div><span class=more-meta>约 2365 字 </span><span class=more-meta>预计阅读 5 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#>OSA框架:<code>Open Scripting Architecture</code></a></li><li><a href=#>脚本字典</a><ul><li><a href=#>打开脚本字典</a></li></ul></li><li><a href=#>object specifier</a></li><li><a href=#>访问APP</a></li><li><a href=#>语法示例</a><ul><li><a href=#>属性的get/set方法</a></li><li><a href=#>元素数组</a></li><li><a href=#>调用命令</a></li></ul></li><li><a href=#>Creating Objects</a><ul><li><a href=#>Create a new object.</a></li><li><a href=#>Create a new object with properties.</a></li><li><a href=#>Create a new object with data.</a></li><li><a href=#>使用对象</a></li><li><a href=#>Scripting Additions</a></li></ul></li><li><a href=#>Applets</a></li><li><a href=#>UI Automation</a></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2017-02-15T17:19:30 title="February 15, 2017">February 15, 2017</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>苹果 <code>OS X Yosemite系统</code>把 <code>JavaScript</code>作为<code> AppleScript</code>的另一选择。<code>Automation</code> 是 <code>OS X 10.10版本</code>中的新特性，苹果在官网发布<a href=https://developer.apple.com/library/prerelease/mac/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/index.html#//apple_ref/doc/uid/TP40014508>JavaScript for Automation Release Notes</a>有篇文章介绍了用<code>JavaScript</code>写自动化<code>Automation</code>脚本。
+<code>JavaScript</code>凭借其简单的语法，良好的性能，超轻量的框架，极小耦合的模块系统等等优势已经吸引了很多大厂的关注。
+再加上<code>JavaScript</code>先天开放且无版权专利纠纷的问题，拥有非常广泛的开发者（开源）群体，苹果将其引入<code>OS X平台</code>代替私有的<code>AppleScript</code>，可能也有着一部分开放性平台的考虑，从而吸引广泛的第三方开发者。
+资源
+<a href=https://github.com/tylergaw/js-osx-app-examples>JavaScript OS X App Examples</a>
+<a href=https://github.com/dtinth/JXA-Cookbook>JavaScript for Automation Cookbook</a></p><h2>OSA框架:<code>Open Scripting Architecture</code></h2><p><code>OSA</code>组件用于实现MacAPP自动化操作。这些框架组件使用场景包括：<code>Script Editor</code>编辑器，全系统的<code>Script菜单</code>，<code> Run JavaScript Automator</code>命令的操作，<code>applets</code>小程序，命令行<code>osascript</code>工具，<code>NSUserScriptTask API</code>中，还可以运用在其他的<code>OSA</code>组件中例如：<code>AppleScript</code>。这也就包括了<code>Mail</code>规则、<code>Folder</code>操作、<code>Address Book</code>插件、日历闹钟和消息触发器。</p><h2>脚本字典</h2><p>脚本字典详细介绍APP的对象模型。在脚本字典映射到有效的JavaScript标识符遵循一套规范的术语。在<code>Script Editor</code>脚本字典浏览器已经更新到显示术语<code>AppleScript</code>，<code>JavaScript</code>和O<code>bjective-C</code>（Scripting Bridge framework）格式。</p><h3>打开脚本字典</h3><p>启动<code>Script Editor</code> (/Applications/Utilities/) &ndash;><code> File > Open Dictionary or Window > Library</code>。</p><h2>object specifier</h2><p>在<code>JavaScript自动化主机</code>环境中的大部分对象指的是外部实例，如：其他APP，window或在这些APP的相关数据。当访问一个APP对象或APP中的某个元素的<code>JavaScript属性</code>时，会返回一个新的<code>object specifier</code>，也就是这个对象的<code>specifier 属性</code>。</p><blockquote><p>object specifier不是外部实例属性的实际值，是这个对象的引用指针。如果要获取这个属性的实际值，使用get／set方法。</p></blockquote><h2>访问APP</h2><p>六种方式:
+{% codeblock By name lang:js %}
+Application(&lsquo;Mail&rsquo;)
+{% endcodeblock %}</p><p>{% codeblock By bundle ID lang:js %}
+Application(&lsquo;com.apple.mail&rsquo;)
+{% endcodeblock %}</p><p>{% codeblock By path lang:js %}
+Application(&rsquo;/Applications/Mail.app&rsquo;)
+{% endcodeblock %}</p><p>{% codeblock By process ID lang:js %}
+Application(763)
+{% endcodeblock %}</p><p>{% codeblock On a remote machine lang:js %}
+Application(&rsquo;eppc://127.0.0.1/Mail&rsquo;)
+{% endcodeblock %}</p><p>{% codeblock currentApplication lang:js %}
+Application.currentApplication()
+{% endcodeblock %}</p><h2>语法示例</h2><p>{% codeblock Access properties lang:js %}
+Mail.name
+{% endcodeblock %}</p><p>{% codeblock Access elements lang:js %}
+Mail.outgoingMessages[0]
+{% endcodeblock %}</p><p>{% codeblock Call commands lang:js %}
+Mail.open(&mldr;)
+{% endcodeblock %}</p><p>{% codeblock Create new objects lang:js %}
+Mail.OutgoingMessage(&mldr;)
+{% endcodeblock %}</p><h3>属性的get/set方法</h3><p>点运算符访问脚本对象，是JavaScript语法特性之一。
+如上所述，返回的对象是一个<code>object specifier</code>是一个对象的引用，而不是属性实际值。
+当访问属性时，会作为一个get函数，返回实际值：
+{% codeblock lang:js %}
+subject = Mail.inbox.messages[0].subject()
+{% endcodeblock %}
+当赋值属性时，会作为一个set函数，把参数赋值该属性：
+{% codeblock lang:js %}
+Mail.outgoingMessages[0].subject = &lsquo;Hello world&rsquo;
+{% endcodeblock %}
+获取数组中的每个元素属性（在这种情况下，得到邮件收件箱中的每份邮件的标题）
+{% codeblock lang:js %}
+subjects = Mail.inbox.messages.subject()
+{% endcodeblock %}</p><h3>元素数组</h3><p>通过在数组中调用特定元素检索方法，或使用方括号并指定要检索的元素的名称或索引来访问数组中的元素。返回值是对象相关，与自己的属性和元素，引用数组元素。他们可以访问
+{% codeblock 索引 lang:js %}
+window = Mail.windows.at(0)
+window = Mail.windows[0]
+{% endcodeblock %}
+{% codeblock name lang:js %}
+window = Mail.windows.byName(&lsquo;New Message&rsquo;)
+window = Mail.windows[&lsquo;New Message&rsquo;]
+{% endcodeblock %}
+{% codeblock ID lang:js %}
+window = Mail.windows.byId(412)
+{% endcodeblock %}</p><blockquote><p>Note: 使用ID来访问不是方括号[]而是().</p></blockquote><h3>调用命令</h3><p>命令被称为函数。
+2. 直接参数的函数，该参数作为命令的第一个参数传递。
+3. 如果函数需要带参数名的参数，那么这个参数可以接受一个键值对对象。
+3. 如果函数需要一个直接参数，就需要传递一个带参数名的参数作为第二个参数。
+4. 如果函数不存在直接参数，那么带参数名的参数作为第一个参数传递，并且唯一参数。
+5. 直接参数是可选的，可以不用传递任何值，当第一个参数存在参数名时，则传递NULL作为第一个参数。
+{% codeblock 无参数命令 lang:js %}
+message.open()
+{% endcodeblock %}</p><p>{% codeblock 无参数名的命令 lang:js %}
+Mail.open(message)
+{% endcodeblock %}</p><p>{% codeblock 带参数名的命令 lang:js %}
+response = message.reply({
+replayAll: true,
+openingWindow: false
+})
+{% endcodeblock %}</p><p>{% codeblock Command with direct parameter and named parameters lang:js %}
+Safari.doJavaScript(&lsquo;alert(&ldquo;Hello world&rdquo;)&rsquo;, {
+in: Safari.windows[0].tabs[0]
+})
+{% endcodeblock %}</p><h2>Creating Objects</h2><p>通过调用<code>类构造函数</code>初始化<code>属性</code>和<code>数据</code>来创建新对象。
+在创建对象时,需要执行的其中步骤：</p><ol><li><code>make()</code>方法：调用对象上的<code>make()</code>方法来实例化对象。</li><li><code>push()</code>方法：调用对象数组上的<code>push</code>方法来实例化对象。
+在调用这些方法中的一个之前，对象实际上并不存在于应用程序中。</li></ol><h3>Create a new object.</h3><p>{% codeblock lang:js %}
+message = Mail.OutgoingMessage().make()
+{% endcodeblock %}</p><h3>Create a new object with properties.</h3><p>{% codeblock lang:js %}
+message = Mail.OutgoingMessage({
+subject: &lsquo;Hello world&rsquo;,
+visible: true
+})
+Mail.outgoingMessages.push(message)
+{% endcodeblock %}</p><h3>Create a new object with data.</h3><p>{% codeblock lang:js %}
+para = TextEdit.Paragraph({}, &lsquo;Some text&rsquo;)
+TextEdit.documents[0].paragraphs.push(para)
+{% endcodeblock %}</p><h3>使用对象</h3><p>一旦你在应用程序中创建一个新的对象（通过调用<code>make</code>或<code>push</code>），可以像任何现有的应用程序对象一样进行交互。
+{% codeblock lang:js %}
+message = Mail.OutgoingMessage().make()
+message.subject = &lsquo;Hello world&rsquo;
+{% endcodeblock %}</p><h3>Scripting Additions</h3><p>使用脚本添加（脚本插件）来增强应用程序的功能。操作系统有一套标准的脚本添加提供speak text,展示用户交互对话，等。
+使用这些，必须明确设置<code>includeStandardAdditions</code>的<code>flag</code>为 <code>true</code>。
+{% codeblock lang:js %}
+app = Application.currentApplication()
+app.includeStandardAdditions = true
+app.say(&lsquo;Hello world&rsquo;)
+app.displayDialog(&lsquo;Please enter your email address&rsquo;, {
+withTitle: &lsquo;Email&rsquo;,
+defaultAnswer: &lsquo;<a href=mailto:your_email@site.com>your_email@site.com</a>&rsquo;
+})
+{% endcodeblock %}</p><h2>Applets</h2><p>在<code>Script Editor</code>编写脚本并保存为一个应用程序，且可以被双击独立运行的程序称为<code>Applet</code>。
+程序支持以下事件处理：
+当Applet运行时，<code>run</code>处理事件被调用：
+{% codeblock lang:js %}
+function run() {&mldr;}
+{% endcodeblock %}</p><p>用于拖放操作的<code>openDocuments</code>处理事件程序包配置小程序，当文档被拖放到该小程序上时，这个处理操作将被执行：
+{% codeblock lang:js %}
+function openDocuments(docs) {&mldr;}
+{% endcodeblock %}
+传递的参数是一个文件路径字符串数组。
+<a href=https://developer.apple.com/library/content/releasenotes/InterapplicationCommunication/RN-JavaScriptForAutomation/Articles/OSX10-10.html#//apple_ref/doc/uid/TP40014508-CH109-SW8>更多样例</a></p><h2>UI Automation</h2><p>通过编写系统事件应用程序，可以自动化应用程序的用户界面。在脚本编辑器<code>Script Editor</code>中浏览<code>System Events</code>的脚本字典，特别是进程套件<code>Processes Suite</code>，以查看支持此类型自动化的应用程序接口元素的列表。
+下面的示例使用UI脚本创建Notes中的新注释。
+{% codeblock lang:js %}
+Notes = Application(&lsquo;Notes&rsquo;)
+Notes.activate()</p><p>delay(1)
+SystemEvents = Application(&lsquo;System Events&rsquo;)
+Notes = SystemEvents.processes[&lsquo;Notes&rsquo;]</p><p>Notes.windows[0].splitterGroups[0].groups[1].groups[0].buttons[0].click()
+{% endcodeblock %}</p></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2017-02-15</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/JS/>JS</a></div><nav class=post-nav><a class=prev href=/post/old/macOS/JavaScript%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BB%84%E4%BB%B6OC%E6%A1%A5%E6%8E%A5/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">JavaScript自动化组件OC桥接</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/old/macOS/%E9%80%9A%E8%BF%87%E6%B2%99%E7%9B%92%E4%B8%ADJS%E8%84%9A%E6%9C%AC%E8%AE%BF%E9%97%AE%E5%85%B6%E4%BB%96APP/><span class="next-text nav-default">通过沙盒中JS脚本访问其他APP</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2017-02-15 17:19:30 +0000 UTC",title:"macOS支持JavaScript自动化组件基础",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>

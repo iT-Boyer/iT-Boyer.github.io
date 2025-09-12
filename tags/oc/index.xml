@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oc on 习七</title><link>https://it-boyer.github.io/tags/oc/</link><description>Recent content in Oc on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Tue, 01 Dec 2015 11:42:18 +0800</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/oc/index.xml" rel="self" type="application/rss+xml"/><item><title>OC与swift相互调用</title><link>https://it-boyer.github.io/post/old/swift/OC%E4%B8%8Eswift%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8/</link><pubDate>Tue, 01 Dec 2015 11:42:18 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/swift/OC%E4%B8%8Eswift%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8/</guid><description>&lt;h4&gt;Swift中使用OC的类声明 &amp;ndash; 实现配置 桥接的头文件&lt;/h4&gt;
+&lt;h6&gt;方式一：自动添加桥接头文件&lt;/h6&gt;
+&lt;ol&gt;
+&lt;li&gt;在一个全新的Swift，利用第一次新建提示的方式自动添加桥接头文件。&lt;/li&gt;
+&lt;li&gt;点确定这后就会生成一个以&amp;lt;produceName-Bridging-Header.h&amp;gt;的头文件。&lt;/li&gt;
+&lt;li&gt;在targets-&amp;gt;build settings -&amp;gt;Object-C Bridging Header 设为生成的个桥接的头文件即可。&lt;/li&gt;
+&lt;li&gt;把想要在swift类中调用的OC头文件放使用import &amp;quot;&amp;quot; 写到这个桥接文件中：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-objc" data-lang="objc"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="c1"&gt;//  Use this file to import your target&amp;#39;s public headers that you would like to expose to Swift.  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;	&lt;span class="c1"&gt;//MixDemo/MixDemo-Bridging-Header.h    
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;&lt;/span&gt;	&lt;span class="cp"&gt;#import &amp;#34;OCChannel.h&amp;#34;  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h6&gt;方式二：手动添加桥接头文件&lt;/h6&gt;
+&lt;p&gt;同样的，当你知道这个swift搜索头文件的关系后，就不需要再理会这个-Bridging-Header.h的文件了。
+完全可以手工建一个并取自己喜欢的名字：&lt;/p&gt;</description></item></channel></rss>

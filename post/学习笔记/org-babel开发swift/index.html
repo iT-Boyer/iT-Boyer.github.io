@@ -1,0 +1,369 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>AI 解放 IDE ，专注 emacs 提升生产力 - 习七</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=Cache-Control content="no-transform"><meta http-equiv=Cache-Control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="iTBoyer"><meta name=description content="博客简介"><meta name=keywords content="swift,iOS,积极主动,以终为始,要事第一,效能平衡"><meta name=generator content="Hugo 0.150.0 with theme even"><link rel=canonical href=https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/org-babel%E5%BC%80%E5%8F%91swift/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.d4d0dce78b3ec6333437bc36540c4749ae9a27ff4ca2d7562da2dbfbf991dde3.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/search.css><link rel=stylesheet href=/css/copy-to-clipboard.css><link rel=stylesheet href=/css/todo.css><meta property="og:url" content="https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/org-babel%E5%BC%80%E5%8F%91swift/"><meta property="og:site_name" content="习七"><meta property="og:title" content="AI 解放 IDE ，专注 emacs 提升生产力"><meta property="og:description" content="博客简介"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-04-19T21:05:00+08:00"><meta property="article:modified_time" content="2023-04-20T08:22:52+08:00"><meta itemprop=name content="AI 解放 IDE ，专注 emacs 提升生产力"><meta itemprop=description content="博客简介"><meta itemprop=datePublished content="2023-04-19T21:05:00+08:00"><meta itemprop=dateModified content="2023-04-20T08:22:52+08:00"><meta itemprop=wordCount content="2537"><meta itemprop=keywords content=",学习笔记"><meta name=twitter:card content="summary"><meta name=twitter:title content="AI 解放 IDE ，专注 emacs 提升生产力"><meta name=twitter:description content="博客简介"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--><script>(function(){""&&prompt("请输入文章密码")!==""&&(alert("密码错误！"),history.back())})()</script></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>习七</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>主页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/categories/%E5%91%A8%E6%8A%A5/><li class=mobile-menu-item>周报</li></a><a href=/iDocs/><li class=mobile-menu-item>文档</li></a><a href=/authors/itboyer/><li class=mobile-menu-item>关于</li></a><a href=/resume><li class=mobile-menu-item>认识我</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>习七</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>主页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/categories/%E5%91%A8%E6%8A%A5/>周报</a></li><li class=menu-item><a class=menu-item-link href=/iDocs/>文档</a></li><li class=menu-item><a class=menu-item-link href=/authors/itboyer/>关于</a></li><li class=menu-item><a class=menu-item-link href=/resume>认识我</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>AI 解放 IDE ，专注 emacs 提升生产力</h1><div class=post-meta><span class=post-time>2023-04-19</span><div class=post-category><a href=/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>学习笔记</a></div><span class=more-meta>约 2537 字 </span><span class=more-meta>预计阅读 6 分钟 </span><span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span><span class=more-meta>by
+<a href=/authors/iTBoyer>iTBoyer</a></span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#使用-ai-制作-prompt-snippets-提升-chatgpt-沟通>使用 AI 制作 prompt snippets 提升 chatgpt 沟通</a><ul><li><a href=#分析数据模型>分析数据模型</a></li><li><a href=#emacs-plus-ai-开发模式>emacs + AI 开发模式</a></li><li><a href=#获取中文全拼缩>获取中文全拼缩</a></li><li><a href=#脚本的核心功能和运用>脚本的核心功能和运用</a></li></ul></li><li><a href=#ob-babel-导入第三库遇到的问题><span class="org-todo todo TODO">TODO</span> ob-babel 导入第三库遇到的问题</a></li></ul></nav></div></div><div class=post-outdated><div class=warn><p>【注意】最后更新于 <span class=timeago datetime=2023-04-20T08:22:52 title="April 20, 2023">April 20, 2023</span>，文中内容可能已过时，请谨慎使用。</p></div></div><div class=post-content><p>和 AI 对话一段时间，受到很大的启发。</p><p>在 AI 辅助下，日常开发，时间和项目管理，效率都有了明显的提升。相信 AI 将在生活中扮演更多角色，影响自己的行为习惯。</p><p>网上看到已经有大牛，用 AI 实现了无代码开发，从项目框架设计，功能开发和测试发布，都由 AI 一步步回答实现，例如 mygptreader 。</p><p>受此启发，在尝试开发过程中，尽量使用 AI 来完成，功能的设计和开发。</p><p>例如，使用 swift 开发一个 snippet 转换插件过程中，只需负责提需求，验收 AI 代码可用性，然后集成到脚本运行就好。</p><p>这样以来，任务重心偏向了需求挖掘，功能设计，代码验收上。做这些工作，更多体现在领导和管理上，如何扮演好新的角色至关重要。</p><p>emacs 拥有丰富的插件，在 <code>org-AI</code> 的加持下， <code>tj3</code> 项目管理，博客写作 <code>ox-hugo</code> 插件， <code>plantuml</code> 插件， <code>代码块</code> 插件等，都能有效的提升生产力。经过这次 AI 浪潮洗礼，将 emacs 训练成高效能七个习惯的执行者的愿望，也许指日可待了。</p><h2 id=使用-ai-制作-prompt-snippets-提升-chatgpt-沟通>使用 AI 制作 prompt snippets 提升 chatgpt 沟通</h2><p>使用脚本收集流行的 prompt 库，批量转换 snippet， 例如：alfred snippet ， emacs snippet 等。</p><p>通过这个简单脚本的开发，借助 AI 尝试无代码编程。在需求，设计，编码，调试实战中，工作中心偏设计管理，尽量在 emacs 中探索可提升产出的技术栈，学习积累新的开发习惯。</p><p>技术设计：采用 swift 语言， <code>JSON</code> 库解析 propmt 源数据转为目标 snippt 格式。</p><p>开发工具：借助 emacs 插件提升产出效率。例如：利用 <code>org-swift</code> <code>plantuml</code> 快速设计，测试等。</p><h3 id=分析数据模型>分析数据模型</h3><ol><li><p>prompt 数据源样例</p><p>这段 json 片段来自微信机器人 chat-on-wechat 中的角色插件，插件中整理很多关于角色 prompt。</p><p>主要功能：例如在片段的角色的描述，在微信中和 AI 聊天时，只要输入 <code>佛祖</code> 即可。</p><p>制作 snippet 会用到 title ， descan remark 字段。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl>   <span class=p>{</span>
+</span></span><span class=line><span class=cl>       <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;佛祖&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>       <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;从现在开始你是佛祖，你会像佛祖一样说话。你精通佛法，熟练使用佛教用语，你擅长利用佛学和心理学的知识解决人们的困扰。你在每次对话结尾都会加上佛教的祝福。&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>       <span class=nt>&#34;descn&#34;</span><span class=p>:</span> <span class=s2>&#34;从现在开始你是佛祖，你会像佛祖一样说话。你精通佛法，熟练使用佛教用语，你擅长利用佛学和心理学的知识解决人们的困扰。你在每次对话结尾都会加上佛教的祝福。&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>       <span class=nt>&#34;wrapper&#34;</span><span class=p>:</span> <span class=s2>&#34;您好佛祖，我：\&#34;%s\&#34;&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>       <span class=nt>&#34;remark&#34;</span><span class=p>:</span> <span class=s2>&#34;扮演佛祖排忧解惑&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>       <span class=nt>&#34;tags&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>           <span class=s2>&#34;interesting&#34;</span>
+</span></span><span class=line><span class=cl>       <span class=p>]</span>
+</span></span><span class=line><span class=cl>   <span class=p>}</span><span class=err>,</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>snippet 目标结构样例： emacs snippet 格式</p><p>这段显示的 <code>or-ai</code> 的 snippet 结构展示，作为脚本的输出格式。</p><p>snippet 的 key 使用 prompt 名称的中文全拼缩写。</p><p>例如：将 <code>佛祖</code> prompt 转为 snippet 效果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>     # -*- mode: snippet -*-
+</span></span><span class=line><span class=cl>     # name: 佛祖
+</span></span><span class=line><span class=cl>     # key: fz
+</span></span><span class=line><span class=cl>     # --
+</span></span><span class=line><span class=cl>     #+begin_ai markdown :max-tokens 250
+</span></span><span class=line><span class=cl>     ${1:[SYS]: ${2:从现在开始你是佛祖，你会像佛祖一样说话。你精通佛法，熟练使用佛教用语，你擅长利用佛学和心理学的知识解决人们的困扰。你在每次对话结尾都会加上佛教的祝福。}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>     }[ME]: 您好佛祖，我：
+</span></span><span class=line><span class=cl>     $0
+</span></span><span class=line><span class=cl>     #+end_ai
+</span></span></code></pre></td></tr></table></div></div></li></ol><h3 id=emacs-plus-ai-开发模式>emacs + AI 开发模式</h3><p>在 org 中进行 swift 语言开发，主要用到一下插件：</p><ol><li><p><code>org-ai</code> 在 org 中 AI 实时对话</p></li><li><p><code>org-swift</code> ，支持 swift 脚本 org-babel ，在 org 中轻松运行脚本，便于测试验收代码，类似 swift playgroud 。</p><p>采用字符串的形式，处理格式转换，然后写入目标文件保存到文件</p><ol><li>用变量模拟 json 数据</li><li>采用多行字符串组装要转换的格式</li><li>使用 print 验证字符串结果</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl>   <span class=kd>var</span> <span class=nv>name</span> <span class=p>=</span> <span class=s>&#34;miao&#34;</span>
+</span></span><span class=line><span class=cl>   <span class=kd>var</span> <span class=nv>key</span> <span class=p>=</span> <span class=s>&#34;mn&#34;</span>
+</span></span><span class=line><span class=cl>   <span class=kd>var</span> <span class=nv>prompt</span> <span class=p>=</span> <span class=s>&#34;猫娘&#34;</span>
+</span></span><span class=line><span class=cl>   <span class=kd>let</span> <span class=nv>snippet</span> <span class=p>=</span> <span class=s>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s>     # -*- mode: snippet -*-
+</span></span></span><span class=line><span class=cl><span class=s>     # name: </span><span class=si>\(</span><span class=n>name</span><span class=si>)</span><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>     # key: </span><span class=si>\(</span><span class=n>key</span><span class=si>)</span><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>     # --
+</span></span></span><span class=line><span class=cl><span class=s>     #+begin_ai markdown :max-tokens 250
+</span></span></span><span class=line><span class=cl><span class=s>     ${1:[SYS]: ${2:</span><span class=si>\(</span><span class=n>prompt</span><span class=si>)</span><span class=s>}
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>     }[ME]: $0
+</span></span></span><span class=line><span class=cl><span class=s>     &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>   <span class=bp>print</span><span class=p>(</span><span class=n>snippet</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>打印结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl># -*- mode: snippet -*-
+</span></span><span class=line><span class=cl># name: miao
+</span></span><span class=line><span class=cl># key: mn
+</span></span><span class=line><span class=cl># --
+</span></span><span class=line><span class=cl>#+begin_ai markdown :max-tokens 250
+</span></span><span class=line><span class=cl>${1:[SYS]: ${2:猫娘}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>}[ME]: $0
+</span></span></code></pre></td></tr></table></div></div></li></ol><h3 id=获取中文全拼缩>获取中文全拼缩</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl><span class=kd>import</span> <span class=nc>Foundation</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>PYFirst</span><span class=p>(</span><span class=n>string</span><span class=p>:</span><span class=nb>String</span><span class=p>?,</span> <span class=kc>_</span> <span class=n>allFirst</span><span class=p>:</span><span class=nb>Bool</span><span class=p>=</span><span class=kc>false</span><span class=p>)-&gt;</span><span class=nb>String</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nv>py</span><span class=p>=</span><span class=s>&#34;#&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=kd>let</span> <span class=nv>s</span> <span class=p>=</span> <span class=n>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>s</span> <span class=p>==</span> <span class=s>&#34;&#34;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>py</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=kd>let</span> <span class=nv>str</span> <span class=p>=</span> <span class=n>CFStringCreateMutableCopy</span><span class=p>(</span><span class=kc>nil</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=n>s</span> <span class=k>as</span> <span class=n>CFString</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>CFStringTransform</span><span class=p>(</span><span class=n>str</span><span class=p>,</span> <span class=kc>nil</span><span class=p>,</span> <span class=n>kCFStringTransformToLatin</span><span class=p>,</span> <span class=kc>false</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>CFStringTransform</span><span class=p>(</span><span class=n>str</span><span class=p>,</span> <span class=kc>nil</span><span class=p>,</span> <span class=n>kCFStringTransformStripCombiningMarks</span><span class=p>,</span> <span class=kc>false</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>py</span> <span class=p>=</span> <span class=s>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>allFirst</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>x</span> <span class=k>in</span> <span class=p>(</span><span class=n>str</span><span class=p>!</span> <span class=k>as</span> <span class=nb>String</span><span class=p>).</span><span class=n>components</span><span class=p>(</span><span class=n>separatedBy</span><span class=p>:</span><span class=s>&#34; &#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>py</span> <span class=o>+=</span> <span class=n>PYFirst</span><span class=p>(</span><span class=n>string</span><span class=p>:</span><span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>py</span>  <span class=p>=</span> <span class=p>(</span><span class=n>str</span><span class=p>!</span> <span class=k>as</span> <span class=n>NSString</span><span class=p>).</span><span class=n>substring</span><span class=p>(</span><span class=n>to</span><span class=p>:</span> <span class=mi>1</span><span class=p>).</span><span class=n>uppercased</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>py</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//调用示例，返回#</span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nv>s</span> <span class=p>:</span><span class=nb>String</span><span class=p>?</span>
+</span></span><span class=line><span class=cl><span class=c1>//PYFirst(string:s)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=p>=</span> <span class=s>&#34;中华人民共和国@hi wor</span><span class=se>\r\n</span><span class=s>ld.&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1>//调用示例，返回ZHRMGHGW</span>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nv>result</span> <span class=p>=</span>  <span class=n>PYFirst</span><span class=p>(</span><span class=n>string</span><span class=p>:</span><span class=n>s</span><span class=p>,</span><span class=kc>true</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//调用示例，返回Z</span>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nv>result2</span> <span class=p>=</span> <span class=n>PYFirst</span><span class=p>(</span><span class=n>string</span><span class=p>:</span><span class=n>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=bp>print</span><span class=p>(</span><span class=s>&#34;结果1: </span><span class=si>\(</span><span class=n>result</span><span class=si>)</span><span class=s> </span><span class=se>\n</span><span class=s> 结果2: </span><span class=si>\(</span><span class=n>result2</span><span class=si>)</span><span class=s>&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>结果1: ZHRMGHGW
+</span></span><span class=line><span class=cl> result2: Z
+</span></span></code></pre></td></tr></table></div></div><h3 id=脚本的核心功能和运用>脚本的核心功能和运用</h3><p>使用 JSONEncoder 解析本地的 json 文件，转为 model 对象。</p><p>目前支持三个工具的 snippet</p><ol><li><p>alfred snippet</p><p>转为 json 文件集合，需要手动压缩成 <code>.zip</code> ，然后命名为 <code>.alfredsnippets</code></p><p>如果安装无效，尝试以下方式安装</p><ol><li>在alfred snippet 新建一个snippet 集合，然后导出为 <code>alfredsnippets</code> 包</li><li>再使用 zip 工具不解压缩的情况下，将生成的 json 导入到 包中。</li><li>双击包，成功导入到 alred snippet 中。</li></ol></li><li><p>emacs-snippet</p></li><li><p>auto-gpt yaml模板</p><p>使用方法：python -m auto-gpt &ndash;settings-file role.yaml</p></li><li><p>生成chatfred 的aliases</p><p>安装方法：把chatfred的内容拷贝到chatfred 配置项中</p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>static</span> <span class=kd>func</span> <span class=nf>toSnippets</span><span class=p>(</span><span class=n>json</span><span class=p>:</span><span class=nb>String</span><span class=p>)</span> <span class=p>-&gt;</span> <span class=nb>String</span><span class=p>?</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 使用 JSONEncoder 解析本地的json 文件，转为model 对象。</span>
+</span></span><span class=line><span class=cl>        <span class=kd>let</span> <span class=nv>url</span> <span class=p>=</span> <span class=n>URL</span><span class=p>(</span><span class=n>fileURLWithPath</span><span class=p>:</span> <span class=n>json</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=kd>let</span> <span class=nv>data</span> <span class=p>=</span> <span class=k>try</span><span class=p>!</span> <span class=n>Data</span><span class=p>(</span><span class=n>contentsOf</span><span class=p>:</span> <span class=n>url</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=kd>let</span> <span class=nv>prompt</span> <span class=p>=</span> <span class=k>try</span><span class=p>!</span> <span class=n>JSONDecoder</span><span class=p>().</span><span class=n>decode</span><span class=p>(</span><span class=n>Prompt</span><span class=p>.</span><span class=kc>self</span><span class=p>,</span> <span class=n>from</span><span class=p>:</span> <span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>prompt</span><span class=p>.</span><span class=n>roles</span><span class=p>.</span><span class=bp>map</span> <span class=p>{</span> <span class=n>role</span> <span class=k>in</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// 保存为json 文件</span>
+</span></span><span class=line><span class=cl>            <span class=kd>var</span> <span class=nv>wrapper</span> <span class=p>=</span> <span class=n>role</span><span class=p>.</span><span class=n>wrapper</span>
+</span></span><span class=line><span class=cl>            <span class=n>wrapper</span><span class=p>.</span><span class=n>replaceAll</span><span class=p>(</span><span class=n>matching</span><span class=p>:</span> <span class=s>&#34;</span><span class=se>\n</span><span class=s>.*$&#34;</span><span class=p>,</span> <span class=n>with</span><span class=p>:</span> <span class=s>&#34;&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>do</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// alfred -----</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>jsonEncoder</span> <span class=p>=</span> <span class=n>JSONEncoder</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>alfred</span> <span class=p>=</span> <span class=n>SnippetModel</span><span class=p>(</span><span class=n>uid</span><span class=p>:</span> <span class=n>UUID</span><span class=p>().</span><span class=n>uuidString</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                                          <span class=n>name</span><span class=p>:</span> <span class=n>role</span><span class=p>.</span><span class=n>title</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                                          <span class=n>keyword</span><span class=p>:</span> <span class=n>role</span><span class=p>.</span><span class=n>title</span><span class=p>.</span><span class=n>pinyin</span><span class=p>.</span><span class=n>lowercased</span><span class=p>(),</span>
+</span></span><span class=line><span class=cl>                                          <span class=n>snippet</span><span class=p>:</span> <span class=n>role</span><span class=p>.</span><span class=n>descn</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>alfredM</span> <span class=p>=</span> <span class=n>AlfredModel</span><span class=p>(</span><span class=n>alfredsnippet</span><span class=p>:</span> <span class=n>alfred</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=n>jsonEncoder</span><span class=p>.</span><span class=n>outputFormatting</span> <span class=p>=</span> <span class=p>.</span><span class=n>prettyPrinted</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>resultData</span> <span class=p>=</span> <span class=k>try</span> <span class=n>jsonEncoder</span><span class=p>.</span><span class=n>encode</span><span class=p>(</span><span class=n>alfredM</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>filename</span> <span class=p>=</span> <span class=n>alfred</span><span class=p>.</span><span class=n>name</span> <span class=o>+</span> <span class=s>&#34; [</span><span class=si>\(</span><span class=n>alfred</span><span class=p>.</span><span class=n>uid</span><span class=si>)</span><span class=s>]&#34;</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>newfile</span> <span class=p>=</span> <span class=s>&#34;/Users/boyer/Desktop/propmt/</span><span class=si>\(</span><span class=n>filename</span><span class=si>)</span><span class=s>.json&#34;</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>url</span> <span class=p>=</span> <span class=n>URL</span><span class=p>(</span><span class=n>fileURLWithPath</span><span class=p>:</span> <span class=n>newfile</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=k>try</span> <span class=n>resultData</span><span class=p>.</span><span class=n>write</span><span class=p>(</span><span class=n>to</span><span class=p>:</span> <span class=n>url</span><span class=p>,</span> <span class=n>options</span><span class=p>:</span> <span class=p>.</span><span class=n>atomic</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=c1>// emacs-snippet ---把字符串保存为文件 ---</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>snippet</span> <span class=p>=</span> <span class=s>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s>                    # -*- mode: snippet -*-
+</span></span></span><span class=line><span class=cl><span class=s>                    # name: </span><span class=si>\(</span><span class=n>role</span><span class=p>.</span><span class=n>title</span><span class=si>)</span><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>                    # key: </span><span class=si>\(</span><span class=n>alfred</span><span class=p>.</span><span class=n>keyword</span><span class=si>)</span><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>                    # group: </span><span class=si>\(</span><span class=n>role</span><span class=p>.</span><span class=n>tags</span><span class=p>.</span><span class=bp>first</span> <span class=p>??</span> <span class=s>&#34;&#34;</span><span class=si>)</span><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>                    # --
+</span></span></span><span class=line><span class=cl><span class=s>                    #+begin_ai markdown :max-tokens 250
+</span></span></span><span class=line><span class=cl><span class=s>                    [SYS]: </span><span class=si>\(</span><span class=n>role</span><span class=p>.</span><span class=n>descn</span><span class=si>)</span><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>                    [ME]: </span><span class=si>\(</span><span class=n>wrapper</span><span class=si>)</span><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>                    $0
+</span></span></span><span class=line><span class=cl><span class=s>                    #+end_ai
+</span></span></span><span class=line><span class=cl><span class=s>                    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>snippetfile</span> <span class=p>=</span> <span class=s>&#34;.doom.d/snippets/org-mode/ai/</span><span class=si>\(</span><span class=n>alfred</span><span class=p>.</span><span class=n>name</span><span class=si>)</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>emacsnippet</span> <span class=p>=</span> <span class=n>Path</span><span class=p>.</span><span class=n>home</span><span class=o>+</span><span class=n>snippetfile</span>
+</span></span><span class=line><span class=cl>                <span class=k>try</span><span class=p>!</span> <span class=n>emacsnippet</span><span class=p>.</span><span class=n>write</span><span class=p>(</span><span class=n>snippet</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=c1>//auto-gpt -----</span>
+</span></span><span class=line><span class=cl>                <span class=c1>//使用方法：python -m auto-gpt --settings-file role.yaml</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>auto_gpt</span> <span class=p>=</span> <span class=s>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s>                    ai_goals:
+</span></span></span><span class=line><span class=cl><span class=s>                    - </span><span class=si>\(</span><span class=n>role</span><span class=p>.</span><span class=n>remark</span><span class=si>)</span><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>                    ai_name: </span><span class=si>\(</span><span class=n>role</span><span class=p>.</span><span class=n>title</span><span class=si>)</span><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>                    ai_role: </span><span class=si>\(</span><span class=n>role</span><span class=p>.</span><span class=n>descn</span><span class=si>)</span><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>                    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>autofile</span> <span class=p>=</span> <span class=s>&#34;.dotfiles/auto-gpt/roles/</span><span class=si>\(</span><span class=n>role</span><span class=p>.</span><span class=n>title</span><span class=si>)</span><span class=s>.yaml&#34;</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>autogpt</span> <span class=p>=</span> <span class=n>Path</span><span class=p>.</span><span class=n>home</span><span class=o>+</span><span class=n>autofile</span>
+</span></span><span class=line><span class=cl>                <span class=k>try</span><span class=p>!</span> <span class=n>autogpt</span><span class=p>.</span><span class=n>write</span><span class=p>(</span><span class=n>auto_gpt</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=c1>//生成chatfred 的aliases</span>
+</span></span><span class=line><span class=cl>                <span class=c1>//使用方法：把chatfred的内容拷贝到chatfred 配置项中。</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>alfred_aliases</span> <span class=p>=</span> <span class=n>role</span><span class=p>.</span><span class=n>title</span><span class=p>.</span><span class=n>pinyin</span><span class=p>.</span><span class=n>lowercased</span><span class=p>()</span> <span class=o>+</span> <span class=s>&#34;=&#34;</span> <span class=o>+</span> <span class=n>role</span><span class=p>.</span><span class=n>descn</span> <span class=o>+</span> <span class=s>&#34;;</span><span class=se>\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>fred</span> <span class=p>=</span> <span class=s>&#34;Desktop/chatfred.txt&#34;</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>chatfred</span> <span class=p>=</span> <span class=n>Path</span><span class=p>.</span><span class=n>home</span><span class=o>+</span><span class=n>fred</span>
+</span></span><span class=line><span class=cl><span class=c1>//                try! chatfred.append(alfred_aliases)</span>
+</span></span><span class=line><span class=cl>                <span class=kd>let</span> <span class=nv>fileHandle</span> <span class=p>=</span> <span class=k>try</span> <span class=n>FileHandle</span><span class=p>(</span><span class=n>forWritingTo</span><span class=p>:</span> <span class=n>chatfred</span><span class=p>.</span><span class=n>url</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                    <span class=n>fileHandle</span><span class=p>.</span><span class=n>seekToEndOfFile</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                    <span class=k>if</span> <span class=kd>let</span> <span class=nv>data</span> <span class=p>=</span> <span class=n>alfred_aliases</span><span class=p>.</span><span class=n>data</span><span class=p>(</span><span class=n>using</span><span class=p>:</span> <span class=p>.</span><span class=n>utf8</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                        <span class=n>fileHandle</span><span class=p>.</span><span class=n>write</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                    <span class=p>}</span>
+</span></span><span class=line><span class=cl>                    <span class=n>fileHandle</span><span class=p>.</span><span class=n>closeFile</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span> <span class=k>catch</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=bp>print</span><span class=p>(</span><span class=s>&#34;生成失败&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=s>&#34;生成成功&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ob-babel-导入第三库遇到的问题><span class="org-todo todo TODO">TODO</span> ob-babel 导入第三库遇到的问题</h2><p>问题1. org-mode 9.6.1 在使用 var 传递变量失败</p><ol><li><p>在导入第三方库时，通过 ai 提供了几种方法，验证都无效</p><ol><li>使用：var myLibrary=&ldquo;Regex&rdquo; 在swift 块中，import $myLibrary</li><li>使用：var loadpath ="" 源码路径，在 emacs-elisp 块中夹带 load-path 方式</li><li>在 swift 块中使用 load-file 的方式加载 swift 文件，然后使用库方法</li></ol><p>三种方法在验证之后都是无效的。</p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-emacs-lisp data-lang=emacs-lisp><span class=line><span class=cl><span class=p>(</span><span class=nb>setq</span> <span class=nv>load-path</span> <span class=p>(</span><span class=nf>cons</span> <span class=nv>includepath</span> <span class=nv>load-path</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nv>load-file</span> <span class=p>(</span><span class=nf>concat</span> <span class=nv>includepath</span> <span class=s>&#34;Regex.swift&#34;</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl><span class=kd>let</span> <span class=nv>myString</span> <span class=p>=</span> <span class=err>$</span><span class=n>myString</span>  <span class=c1>// 将Org-mode代码块中的myString变量赋值给Swift变量</span>
+</span></span><span class=line><span class=cl><span class=bp>print</span><span class=p>(</span><span class=s>&#34;声明的变量：</span><span class=si>\(</span><span class=n>myString</span><span class=si>)</span><span class=s>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nv>pattern</span> <span class=p>=</span> <span class=s>&#34;T.*T&#34;</span>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nv>regex</span> <span class=p>=</span> <span class=k>try</span><span class=p>!</span> <span class=n>Regex</span><span class=p>(</span><span class=n>pattern</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=n>regex</span><span class=p>.</span><span class=n>matches</span><span class=p>(</span><span class=n>myString</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=bp>print</span><span class=p>(</span><span class=s>&#34;Regex matched!&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=bp>print</span><span class=p>(</span><span class=s>&#34;Regex didn&#39;t match.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>&lt;stdin&gt;:1:16: error: cannot find &#39;$myString&#39; in scope
+</span></span><span class=line><span class=cl>let myString = $myString  // 将Org-mode代码块中的myString变量赋值给Swift变量
+</span></span><span class=line><span class=cl>&lt;stdin&gt;:5:10: error: value of type &#39;Regex&lt;AnyRegexOutput&gt;&#39; has no member &#39;matches&#39;
+</span></span><span class=line><span class=cl>if regex.matches(myString) {
+</span></span><span class=line><span class=cl>   ~~~~~ ^~~~~~~
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-swift data-lang=swift><span class=line><span class=cl><span class=kd>import</span> <span class=nc>Foundation</span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nv>text</span> <span class=p>=</span> <span class=s>&#34;test</span><span class=se>\n</span><span class=s> </span><span class=se>\&#34;</span><span class=s>%s</span><span class=se>\&#34;</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl><span class=bp>print</span><span class=p>(</span><span class=s>&#34;kkkk==</span><span class=si>\(</span><span class=n>text</span><span class=si>)</span><span class=s>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>//text.removeLast(4)//replacingOccurrences(of: &#34;\&#34;%s\&#34;&#34;, with: &#34;&#34;)</span>
+</span></span><span class=line><span class=cl><span class=n>text</span><span class=p>.</span><span class=n>replaceAll</span><span class=p>(</span><span class=n>matching</span><span class=p>:</span> <span class=s>&#34;%.*$&#34;</span><span class=p>,</span> <span class=n>with</span><span class=p>:</span> <span class=s>&#34;&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=bp>print</span><span class=p>(</span><span class=s>&#34;jjjj==</span><span class=si>\(</span><span class=n>text</span><span class=si>)</span><span class=s>&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>&lt;stdin&gt;:5:6: error: value of type &#39;String&#39; has no member &#39;replaceAll&#39;
+</span></span><span class=line><span class=cl>text.replaceAll(matching: &#34;%.*$&#34;, with: &#34;&#34;)
+</span></span><span class=line><span class=cl>~~~~ ^~~~~~~~~~
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>iTBoyer</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2023-04-20</span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/img/reward/weixin.jpg>
+<span>微信打赏</span>
+</label><label class=qr-code-image for=reward><img class=image src=/img/reward/zhifubao.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><nav class=post-nav><a class=prev href=/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E5%BF%AB%E6%8D%B7%E6%8C%87%E4%BB%A4%E5%92%8Cifttt%E6%B7%BB%E5%8A%A0%E5%BC%80%E5%85%B3%E6%9C%BA%E5%88%B6/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">通过 shortcut 集成 AI 和 Siri 实现语音对话</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a><a class=next href=/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/autogpt%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/><span class="next-text nav-default">auto-gpt：将思维框架赋予chatgpt</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js crossorigin=anonymous></script><script type=text/javascript>var gitalk=new Gitalk({id:"2023-04-19 21:05:00 +0800 +0800",title:"AI 解放 IDE ，专注 emacs 提升生产力",clientID:"d46ea301857e36a08319",clientSecret:"9da00f1f475c4166b96fbe157d0afdbd64cc613c",repo:"it-boyer.github.io",owner:"it-boyer",admin:["it-boyer"],body:decodeURI(location.href)});gitalk.render("gitalk-container")</script><noscript>Please enable JavaScript to view the <a href=https://github.com/gitalk/gitalk>comments powered by gitalk.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:iTBoyer@qq.com class="iconfont icon-email" title=email></a><a href=https://github.com/it-boyer class="iconfont icon-github" title=github></a><a href=http://weibo.com/1791281385 class="iconfont icon-weibo" title=weibo></a><a href=http://www.zhihu.com/people/boyers class="iconfont icon-zhihu" title=zhihu></a><a href=http://douban.com/people/boyers class="iconfont icon-douban" title=douban></a><a href=https://space.bilibili.com/67083417 class="iconfont icon-bilibili" title=bilibili></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span><span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次
+</span><span class=division>|</span> <span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy; 2017 - 2025<span class=heart><i class="iconfont icon-heart"></i></span><span>iTBoyer</span></span></div><script src=https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js></script><script>mermaid.initialize({startOnLoad:!0})</script><script src=/js/copy-to-clipboard.js></script></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,"_").replace(/_(.*)/,function(e,t){return e.replace(t,t.toUpperCase())});timeago().render(document.querySelectorAll(".timeago"),languageCode),timeago.cancel()</script><script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script></body></html><style>#fastSearch{visibility:hidden;position:absolute;left:10px;top:10px;display:inline-block;width:320px;margin:0 10px 0 0;padding:0}#fastSearch input{padding:4px;width:100%;height:31px;font-size:1.6em;color:#222129;font-weight:700;background-color:gray;border-radius:3px 3px 0 0;border:none;outline:none;text-align:left;display:inline-block}#searchResults li{list-style:none;margin-left:0;background-color:gray;border-bottom:1px dotted #000}#searchResults li .title{font-size:1.1em;margin:0;display:inline-block}#searchResults{visibility:inherit;display:inline-block;width:320px;margin:0;max-height:calc(100vh - 120px);overflow:hidden}#searchResults a{text-decoration:none!important;padding:10px;display:inline-block;width:100%}#searchResults a:hover,#searchResults a:focus{outline:0;background-color:#666;color:#fff}#search-btn{position:absolute;top:10px;right:20px;font-size:24px}@media(max-width:683px){#fastSearch,#search-btn{top:64px}}</style><div id=fastSearch><input id=searchInput tabindex=0><ul id=searchResults></ul></div><script src=/js/fuse.js></script><script src=/js/fastsearch.js></script>
