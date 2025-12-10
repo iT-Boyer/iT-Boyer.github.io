@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AR on 习七</title><link>https://it-boyer.github.io/tags/AR/</link><description>Recent content in AR on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Sun, 22 Jan 2017 18:55:21 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/AR/index.xml" rel="self" type="application/rss+xml"/><item><title>AR 开发资料汇</title><link>https://it-boyer.github.io/post/old/swift/AR%E5%BC%80%E5%8F%91%E8%B5%84%E6%96%99%E6%B1%87/</link><pubDate>Sun, 22 Jan 2017 18:55:21 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/swift/AR%E5%BC%80%E5%8F%91%E8%B5%84%E6%96%99%E6%B1%87/</guid><description>&lt;p&gt;总结了AR开发的平台汇总，AR视频经典教程，AR主流资讯网站，Vuforia，EasyAR一些实例教程以及AR精选应用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;AR 平台&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://developer.vuforia.com/"&gt;Vuforia&lt;/a&gt;&amp;ndash;不用多说，最流行的AR应用开发引擎。
+&lt;a href="http://www.easyar.cn/"&gt;EasyAR&lt;/a&gt;－－EasyAR是国内最专业的AR引擎,是国内首款投入应用的AR SDK。EasyAR是好用且免费的增强现实(Augmented Reality)开发者引擎。
+&lt;a href="http://www.hiar.com.cn/"&gt;HiAR&lt;/a&gt;&amp;ndash;HiAR 增强现实开发平台 HiAR 是亮风台信息科技打造的新一代移动增强现实(AR)开发平台,提供一整套世界领先的增强现实(AR)技术服务。
+&lt;a href="http://www.voidar.net/"&gt;太虚AR&lt;/a&gt;－－成都米有网络科技有限公司自主研发集成于Unity3d实现增强现实的SDK开发包,虚拟现实SDK太虚官方网站。
+&lt;a href="http://www.wikitude.com/"&gt;Wikitude&lt;/a&gt;&amp;ndash;Wikitude是一家专门从事智能手机增强现实的应用，分别出品了两款应用Wikitude drive与Wikitude World Browser。
+&lt;a href="http://www.intel.com/content/www/us/en/architecture-and-technology/realsense-overview.html"&gt;Inter RealSense&lt;/a&gt;&amp;ndash;RealSense 3D是一套感知计算解决方案,包括世界上最小的3D摄像头,模块比两个硬币摞起来还薄,除了硬件外,英特尔还将提供驱动及软件等全套开发工具
+&lt;a href="https://www.icreator.cn/"&gt;ICreator&lt;/a&gt;&amp;ndash;依托于iCreator 3D, VR引擎,模型师可以快速创建交互式3D, VR内容,并支持微信平台传播,也为模型师提供可视化3D模型交易功能。
+&lt;a href="http://www.tianyanar.com/"&gt;天眼&lt;/a&gt;－－天眼AR包括天眼云平台和天眼AR浏览器,用户需在天眼云平台完成“AR内容”制作,然后在天眼AR浏览器查看效果。
+&lt;a href="https://developers.google.com/tango/"&gt;Google Tango&lt;/a&gt;&amp;ndash;小编重点推荐。运动追踪(Motion Tracking)，深度感知(Depth Perception)和区域学习(Area Learning)。&lt;/p&gt;</description></item></channel></rss>

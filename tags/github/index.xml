@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Github on 习七</title><link>https://it-boyer.github.io/tags/github/</link><description>Recent content in Github on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Mon, 15 Oct 2018 08:26:32 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>Zsh插件之github使用</title><link>https://it-boyer.github.io/post/old/git/Zsh%E6%8F%92%E4%BB%B6%E4%B9%8Bgithub%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 15 Oct 2018 08:26:32 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/git/Zsh%E6%8F%92%E4%BB%B6%E4%B9%8Bgithub%E4%BD%BF%E7%94%A8/</guid><description>&lt;h2&gt;github插件&lt;/h2&gt;
+&lt;p&gt;This plugin supports working with GitHub from the command line. It provides a few things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sets up the &lt;code&gt;hub&lt;/code&gt; wrapper and completions for the &lt;code&gt;git&lt;/code&gt; command if you have &lt;code&gt;hub&lt;/code&gt; installed.&lt;/li&gt;
+&lt;li&gt;Completion for the &lt;code&gt;github&lt;/code&gt; Ruby gem.&lt;/li&gt;
+&lt;li&gt;Convenience functions for working with repos and URLs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Functions&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;empty_gh&lt;/code&gt; - Creates a new empty repo (with a &lt;code&gt;README.md&lt;/code&gt;) and pushes it to GitHub&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;new_gh&lt;/code&gt; - Initializes an existing directory as a repo and pushes it to GitHub&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;exist_gh&lt;/code&gt; - Takes an existing repo and pushes it to GitHub&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git.io&lt;/code&gt; - Shortens a URL using &lt;a href="https://git.io"&gt;git.io&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>使用curl命令管理远程github库</title><link>https://it-boyer.github.io/post/old/git/%E4%BD%BF%E7%94%A8curl%E5%91%BD%E4%BB%A4%E7%AE%A1%E7%90%86%E8%BF%9C%E7%A8%8Bgithub%E5%BA%93/</link><pubDate>Wed, 20 Jun 2018 11:14:00 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/git/%E4%BD%BF%E7%94%A8curl%E5%91%BD%E4%BB%A4%E7%AE%A1%E7%90%86%E8%BF%9C%E7%A8%8Bgithub%E5%BA%93/</guid><description>&lt;p&gt;使用&lt;code&gt;curl&lt;/code&gt;命令管理远程github库&lt;/p&gt;
+&lt;h2&gt;新建远程仓库&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;在本地准备工作
+进入一个目录，这个目录是本地仓库的目录；
+在本地建立仓库&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git init &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; git add . &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; git commit -m &lt;span class="s1"&gt;&amp;#39;some information&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="2"&gt;
+&lt;li&gt;新建一个&lt;code&gt;API token&lt;/code&gt;
+打开此链接，&lt;a href="https://github.com/settings/tokens"&gt;generate new token&lt;/a&gt;，写入&lt;code&gt;description&lt;/code&gt;，选择&lt;code&gt;scopes&lt;/code&gt;（设置此token持有者的权限）。记住&lt;code&gt;personal access token&lt;/code&gt;（也就是那一串字符和数字）！这一串东西只出现一次，下次查看不到。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;基础命令&lt;/h3&gt;
+&lt;p&gt;这是最直接的一种形式，直接把参数写到命令行搞定：&lt;/p&gt;</description></item></channel></rss>

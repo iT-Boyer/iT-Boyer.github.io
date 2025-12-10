@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Inbox on 习七</title><link>https://it-boyer.github.io/categories/Inbox/</link><description>Recent content in Inbox on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Wed, 10 Dec 2025 22:27:41 +0800</lastBuildDate><atom:link href="https://it-boyer.github.io/categories/Inbox/index.xml" rel="self" type="application/rss+xml"/><item><title>在elisp 中如何向list 变量添加新元素</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/elisp%E8%AF%AD%E6%B3%95/</link><pubDate>Wed, 10 Dec 2025 22:27:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/elisp%E8%AF%AD%E6%B3%95/</guid><description>&lt;style&gt;
+.org-todo {
+ font-size: 0.8em;
+ font-weight: 700;
+}
+/* *** Org TODO set to TODO state */
+.org-todo.todo {
+ color: #e60000;
+}
+/* *** Org TODO set to DONE state */
+.org-todo.done {
+ color: green;
+}
+
+.org-todo.cancel {
+ color: blue;
+}
+&lt;/style&gt;
+&lt;p&gt;&lt;strong&gt;1. &lt;code&gt;push&lt;/code&gt; —— 最方便的头部添加&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用法：=(push new-element list-variable)=&lt;/li&gt;
+&lt;li&gt;效果：把新元素加到列表最前面，直接修改原变量&lt;/li&gt;
+&lt;li&gt;文档：&lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Modifying-Lists.html"&gt;GNU Emacs Lisp手册 - 修改列表&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!--listend--&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-elisp" data-lang="elisp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;my-list&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="nv"&gt;c&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;push&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;x&lt;/span&gt; &lt;span class="nv"&gt;my-list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;my-list&lt;/span&gt; &lt;span class="c1"&gt;; =&amp;gt; (x a b c)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;2. &lt;code&gt;add-to-list&lt;/code&gt; —— 防止重复的添加&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>gptel-agent 代理模式使用指南</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/gptel-agent%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link><pubDate>Wed, 10 Dec 2025 21:31:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/gptel-agent%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid><description>&lt;div class="ox-hugo-toc toc"&gt;
+&lt;div class="heading"&gt;Table of Contents&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#%E5%AE%89%E8%A3%85-gptel-agent"&gt;安装 gptel-agent&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"&gt;基本使用方法&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#%E5%9C%A8%E4%B8%93%E7%94%A8%E4%BC%9A%E8%AF%9D%E4%B8%AD%E4%BD%BF%E7%94%A8"&gt;在专用会话中使用：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E5%9C%A8-emacs-%E4%BB%BB%E4%BD%95%E5%9C%B0%E6%96%B9%E4%BD%BF%E7%94%A8"&gt;在 Emacs 任何地方使用：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E5%8F%AF%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7"&gt;可用的工具&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E9%A2%84%E8%AE%BE%E8%AF%B4%E6%98%8E"&gt;预设说明&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E5%AD%90%E4%BB%A3%E7%90%86%E4%BD%BF%E7%94%A8"&gt;子代理使用&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#%E5%86%85%E7%BD%AE%E5%AD%90%E4%BB%A3%E7%90%86"&gt;内置子代理：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"&gt;使用方法：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%90%E4%BB%A3%E7%90%86"&gt;自定义子代理&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#%E4%BB%8E-markdown-%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA"&gt;从 Markdown 文件创建：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E4%BB%8E-org-%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA"&gt;从 Org 文件创建：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E9%87%8D%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"&gt;重要注意事项&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;!--endtoc--&gt;
+&lt;style&gt;
+.org-todo {
+ font-size: 0.8em;
+ font-weight: 700;
+}
+/* *** Org TODO set to TODO state */
+.org-todo.todo {
+ color: #e60000;
+}
+/* *** Org TODO set to DONE state */
+.org-todo.done {
+ color: green;
+}
+
+.org-todo.cancel {
+ color: blue;
+}
+&lt;/style&gt;
+&lt;section class="outline-1 foo"&gt;
+&lt;h2 id="安装-gptel-agent"&gt;安装 gptel-agent&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;方法1：通过 MELPA&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>siri 对话 Claude AI，低延迟畅聊</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/siriAIClaude%E7%9A%84%E4%BD%8E%E5%BB%B6%E8%BF%9F%E5%AF%B9%E8%AF%9D/</link><pubDate>Sat, 22 Apr 2023 23:26:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/siriAIClaude%E7%9A%84%E4%BD%8E%E5%BB%B6%E8%BF%9F%E5%AF%B9%E8%AF%9D/</guid><description>&lt;p&gt;在体验 AI 对工作和生活越来越大，疯狂的探索更多的技巧和使用场景，改善生活习惯。很自然，就瞄上了 Siri 本该强大的小助手，是时候通过 AI 来提升对话体验了。&lt;/p&gt;</description></item><item><title>使用 shortcuts 订阅 Claude AI对话</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/shortcut+slack%E5%AE%9E%E7%8E%B0AI%E9%80%9A%E8%AF%9D/</link><pubDate>Sat, 22 Apr 2023 22:28:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/shortcut+slack%E5%AE%9E%E7%8E%B0AI%E9%80%9A%E8%AF%9D/</guid><description>&lt;h2 id="第一步搞定-slack-webhooks-配置"&gt;第一步搞定 slack webhooks 配置&lt;/h2&gt;
+&lt;p&gt;Slack 中 Incoming Webhooks 是输入消息的功能，可以作为订阅工具介绍用户的消息吗？&lt;/p&gt;
+&lt;p&gt;Slack 的 Incoming Webhooks 功能允许外部应用程序通过 HTTP 请求向 Slack 发送消息。它不能直接用于订阅用户消息。但通过 webhook 消息中的用户信息,我们可以实现某个用户消息的过滤与订阅。具体步骤如下:&lt;/p&gt;</description></item><item><title>通过 shortcut 集成 AI 和 Siri 实现语音对话</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E5%BF%AB%E6%8D%B7%E6%8C%87%E4%BB%A4%E5%92%8Cifttt%E6%B7%BB%E5%8A%A0%E5%BC%80%E5%85%B3%E6%9C%BA%E5%88%B6/</link><pubDate>Sat, 22 Apr 2023 22:17:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E5%BF%AB%E6%8D%B7%E6%8C%87%E4%BB%A4%E5%92%8Cifttt%E6%B7%BB%E5%8A%A0%E5%BC%80%E5%85%B3%E6%9C%BA%E5%88%B6/</guid><description>&lt;p&gt;在苹果手机上，通过 shortcut 集成 AI 和 Siri 实现语音对话，进一步提升了 AI 对话的体验。&lt;/p&gt;
+&lt;p&gt;具体过程是，通过 Siri 唤醒 Shortcut 通过语音方式开启和 AI 对话，Shortcut 在接收到 AI 以文本形式反馈后，使用语音工具朗读文本。&lt;/p&gt;</description></item><item><title>auto-gpt：将思维框架赋予chatgpt</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/autogpt%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</link><pubDate>Wed, 19 Apr 2023 17:03:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/autogpt%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</guid><description>&lt;p&gt;auto-gpt 是一款提前设定目标，然后交给 chatgpt 自问自答的一些的操作，人类仅做好每一步的选择就好，大大简化了对话过程。&lt;/p&gt;
+&lt;p&gt;相比普通的聊天模式，缺乏和用户的交互的灵活性。&lt;/p&gt;</description></item><item><title>借助AI修复插件中中文乱码问题</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/AI%E6%8F%90%E5%8D%87%E5%AD%A6%E4%B9%A0elisp%E6%95%88%E7%8E%87/</link><pubDate>Wed, 19 Apr 2023 13:56:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/AI%E6%8F%90%E5%8D%87%E5%AD%A6%E4%B9%A0elisp%E6%95%88%E7%8E%87/</guid><description>&lt;p&gt;在使用org-sync 过程中，对中文解析问题，导致无法正常同步。&lt;/p&gt;
+&lt;p&gt;现在尝试通过让AI 阅读elisp 源码，给出解决办法，和编写可用的脚本。&lt;/p&gt;
+&lt;p&gt;AI对话需要解决的两个问题：先问为什么会同步失败。&lt;/p&gt;</description></item><item><title>AI协作doom集成第三方插件</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/AI%E5%8D%8F%E4%BD%9Cdoom%E9%9B%86%E6%88%90%E7%AC%AC%E4%B8%89%E6%96%B9%E6%8F%92%E4%BB%B6/</link><pubDate>Tue, 18 Apr 2023 11:48:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/AI%E5%8D%8F%E4%BD%9Cdoom%E9%9B%86%E6%88%90%E7%AC%AC%E4%B8%89%E6%96%B9%E6%8F%92%E4%BB%B6/</guid><description>&lt;p&gt;基于doom的办公环境，在集成第三插件时，经常遇到配置方式不兼容的情况，对 &lt;code&gt;elisp&lt;/code&gt; 语法不求甚解的使用者，在集成过程非常煎熬。&lt;/p&gt;
+&lt;p&gt;比如在集成org-sync插件时，该插件处于停止维护状态，配置加载脚本使用的 &lt;code&gt;mapc ‘load&lt;/code&gt; 语法，没有太多经验的话，github issue 又无人问津的时候，就很能错过一个很好工具。&lt;/p&gt;</description></item><item><title>在org-mode中插入GitHub源代码块的方法</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E5%9C%A8org-mode%E4%B8%AD%E6%8F%92%E5%85%A5GitHub%E6%BA%90%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E6%96%B9%E6%B3%95/</link><pubDate>Tue, 18 Apr 2023 10:29:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E5%9C%A8org-mode%E4%B8%AD%E6%8F%92%E5%85%A5GitHub%E6%BA%90%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E6%96%B9%E6%B3%95/</guid><description>&lt;p&gt;在Org mode中,我们可以使用源代码块来嵌套远程代码库的代码片段。例如,要插入Github上的swift库的第3-18行代码,我们可以:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;确定该库的链接,例如:&lt;a href="https://github.com/apple/swift"&gt;https://github.com/apple/swift&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;在Org文件中插入该链接的源代码块:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!--listend--&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-org" data-lang="org"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;#+BEGIN_SRC swift :file https://github.com/apple&lt;span class="ge"&gt;/swift :lines 3-18
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="ge"&gt; struct Swift {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="ge"&gt; var version: Int
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="ge"&gt; let repositoryURL = &amp;#34;https:/&lt;/span&gt;/github.com/apple/swift&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; init() {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; self.version = 5
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; func sayHello() {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; print(&amp;#34;Hello from Swift version \(version)!&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;##+END_SRC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;Org mode会从该链接获取 swift 仓库的源码,并插入我们指定行号范围(3-18行)的代码。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;那么完整的org例子如下:&lt;/p&gt;</description></item><item><title>使用org-sync同步github issue功能</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/org-sync%E7%9A%84%E9%9B%86%E6%88%90%E5%92%8C%E5%BA%94%E7%94%A8/</link><pubDate>Tue, 18 Apr 2023 09:58:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/org-sync%E7%9A%84%E9%9B%86%E6%88%90%E5%92%8C%E5%BA%94%E7%94%A8/</guid><description>&lt;p&gt;如何同步org到github issues的需求，终于在AI的帮助下，确定了使用 org-sync 来实现。&lt;/p&gt;
+&lt;p&gt;这篇文章主要记录：如何集成到doom 中，调试运行org-sync功能，同步测试githubissues。&lt;/p&gt;</description></item></channel></rss>

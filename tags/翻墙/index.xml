@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>翻墙 on 习七</title><link>https://it-boyer.github.io/tags/%E7%BF%BB%E5%A2%99/</link><description>Recent content in 翻墙 on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Wed, 05 Sep 2018 12:11:58 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/%E7%BF%BB%E5%A2%99/index.xml" rel="self" type="application/rss+xml"/><item><title>shadowrocket无需越狱重签翻墙</title><link>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/shadowrocket%E6%97%A0%E9%9C%80%E8%B6%8A%E7%8B%B1%E9%87%8D%E7%AD%BE%E7%BF%BB%E5%A2%99/</link><pubDate>Wed, 05 Sep 2018 12:11:58 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E6%99%BA%E8%83%BD%E8%AE%BE%E5%A4%87/shadowrocket%E6%97%A0%E9%9C%80%E8%B6%8A%E7%8B%B1%E9%87%8D%E7%AD%BE%E7%BF%BB%E5%A2%99/</guid><description>&lt;!--github库卡片--&gt;
+&lt;p&gt;{% github it-boyer WCShadowrocket f101e23 width = 30% %}
+&lt;a href="https://www.hinwen.com/3662.html/3/"&gt;一次讲透：IOS翻墙利器“小火箭（Shadowrocket）”上手、进阶、配合Workflow获取免费节点攻略&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;iOS版Shadowrocket 完美重签 无需付费 无需越狱~&lt;/h1&gt;
+&lt;h3&gt;越狱手机砸壳工具 详见&lt;a href="https://github.com/AloneMonkey/frida-ios-dump"&gt;https://github.com/AloneMonkey/frida-ios-dump&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;砸壳教程&lt;a href="https://github.com/we11cheng/WCStudy/blob/master/frida-ios-dump.md"&gt;https://github.com/we11cheng/WCStudy/blob/master/frida-ios-dump.md&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;dumpdecrypted砸壳&lt;a href="https://github.com/we11cheng/WCStudy/blob/master/dumpdecrypted%20%E5%AF%BC%E5%87%BA%E5%A4%B4%E6%96%87%E4%BB%B6.md"&gt;https://github.com/we11cheng/WCStudy/blob/master/dumpdecrypted%20%E5%AF%BC%E5%87%BA%E5%A4%B4%E6%96%87%E4%BB%B6.md&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;Clutch砸壳&lt;a href="https://github.com/we11cheng/WCStudy/blob/master/Clutch%E7%A0%B8%E5%A3%B3(%E8%8F%9C%E9%B8%A1%E7%89%88).md"&gt;https://github.com/we11cheng/WCStudy/blob/master/Clutch%E7%A0%B8%E5%A3%B3(%E8%8F%9C%E9%B8%A1%E7%89%88).md&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;其他砸壳收集请戳&lt;a href="https://github.com/we11cheng/WCCrackedCollect"&gt;https://github.com/we11cheng/WCCrackedCollect&lt;/a&gt;&lt;/h3&gt;
+&lt;h2&gt;本repo使用方法如下:&lt;/h2&gt;
+&lt;h4&gt;1、安装MonkeyDev(如已安装，跳过)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;安装最新的theos&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo git clone --recursive https://github.com/theos/theos.git /opt/theos
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;安装ldid(如安装theos过程安装了ldid，跳过)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;brew install ldid
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;指定的Xcode&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo xcode-select -s /Applications/Xcode.app
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;执行安装命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo /bin/sh -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/AloneMonkey/MonkeyDev/master/bin/md-install)&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;更新&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo /bin/sh -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/AloneMonkey/MonkeyDev/master/bin/md-update)&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;卸载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo /bin/sh -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/AloneMonkey/MonkeyDev/master/bin/md-uninstall)&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4&gt;2、运行工程&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;打开工程 WCShadowrocket.xcodeproj&lt;/li&gt;
+&lt;li&gt;选择证书：自动配置证书即可（相信大家都是没有问题的）。&lt;/li&gt;
+&lt;li&gt;选择设备(不可选择模拟器，且仅支持64位设备)运行。&lt;/li&gt;
+&lt;li&gt;本次测试机iphone6s 10.3.3 xcode 9.3（iOS11测试过可以运行,其他机型应该也没啥问题）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;版权及免责声明&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;iOS逆向实践，不可使用于商业和个人其他意图。一切问题均由个人承担，与本人无关。&lt;/li&gt;
+&lt;li&gt;感谢MonkeyDev的作者庆总&lt;a href="https://github.com/AloneMonkey/MonkeyDev"&gt;https://github.com/AloneMonkey/MonkeyDev&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;如内容对您的权利造成了影响，请&lt;a href="https://github.com/we11cheng/WCShadowrocket/issues"&gt;issues&lt;/a&gt;, 我会在第一时间进行删除。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;效果截图&lt;/h2&gt;
+&lt;p&gt;&lt;img src="http://p2bzzkn05.bkt.clouddn.com/18-4-10/70735207.jpg" alt=""&gt;&lt;/p&gt;</description></item></channel></rss>

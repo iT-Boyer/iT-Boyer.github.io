@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>数据库 on 习七</title><link>https://it-boyer.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link><description>Recent content in 数据库 on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Wed, 24 May 2017 17:07:47 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml"/><item><title>远程操作mysql数据库</title><link>https://it-boyer.github.io/post/old/%E5%85%B6%E4%BB%96/%E8%BF%9C%E7%A8%8B%E6%93%8D%E4%BD%9Cmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</link><pubDate>Wed, 24 May 2017 17:07:47 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%85%B6%E4%BB%96/%E8%BF%9C%E7%A8%8B%E6%93%8D%E4%BD%9Cmysql%E6%95%B0%E6%8D%AE%E5%BA%93/</guid><description>&lt;h2&gt;腾讯云服务器&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;申请账户，体验5天，搭建一个jira服务，还有微信小程序服务&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;需要在服务器上安装docker （腾讯服务器提供了一款支持docker的Ubuntu系统）&lt;/p&gt;</description></item><item><title>Realm数据库引擎-swift</title><link>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/Realm%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%95%E6%93%8E-swift/</link><pubDate>Wed, 16 Dec 2015 05:56:15 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/Realm%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%95%E6%93%8E-swift/</guid><description>&lt;p&gt;中心思想：
+继承RLMObject新建数据模型，添加相应属性，即可使用realm数据库引擎，对用户数据创建持久化，更新，删除等操作。&lt;/p&gt;
+&lt;h4&gt;简介：&lt;/h4&gt;
+&lt;p&gt;&lt;a href="http://realm.io/"&gt;Realm&lt;/a&gt; 是一个跨平台的移动数据库引擎，于 2014 年 7 月发布，准确来说，它是专门为移动应用所设计的数据持久化解决方案之一。&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SDK on 习七</title><link>https://it-boyer.github.io/tags/SDK/</link><description>Recent content in SDK on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Thu, 04 Oct 2018 09:04:35 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/SDK/index.xml" rel="self" type="application/rss+xml"/><item><title>RxSwift应用登录验证</title><link>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/RxSwift%E5%BA%94%E7%94%A8%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81/</link><pubDate>Thu, 04 Oct 2018 09:04:35 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/RxSwift%E5%BA%94%E7%94%A8%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81/</guid><description>&lt;!--github库卡片--&gt;
+&lt;p&gt;{% github it-boyer SimpleValidation fb7a58b width = 30% %}&lt;/p&gt;
+&lt;!--音乐欣赏--&gt; 
+&lt;p&gt;{% meting &amp;ldquo;0036mZ7Q1pk7st&amp;rdquo; &amp;ldquo;tencent&amp;rdquo; &amp;ldquo;song&amp;rdquo; %}&lt;/p&gt;
+&lt;h2&gt;使用RxSwift的优点&lt;/h2&gt;
+&lt;p&gt;RxSwift的目的是让让数据/事件流和异步任务能够更方便的序列化处理，能够使用swift进行响应式编程&lt;/p&gt;</description></item><item><title>RxSwift函数响应式开发</title><link>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/RxSwift%E5%87%BD%E6%95%B0%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/</link><pubDate>Thu, 23 Aug 2018 09:56:38 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/RxSwift%E5%87%BD%E6%95%B0%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/</guid><description>&lt;!--github库卡片--&gt;
+&lt;p&gt;{% github beeth0ven RxSwift-Chinese-Documentation cbbc87e width = 30% %}&lt;/p&gt;
+&lt;h1&gt;RxSwift学习&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://beeth0ven.github.io/RxSwift-Chinese-Documentation/"&gt;RxSwift 中文文档&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;更多示例&lt;/h1&gt;
+&lt;table style="width:100%"&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src="https://beeth0ven.github.io/RxSwift-Chinese-Documentation/assets/MoreDemo/ImagePicker/ImagePickerFull.gif"/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src="https://beeth0ven.github.io/RxSwift-Chinese-Documentation/assets/MoreDemo/TableViewSectionedViewController/TableViewSectionedViewControllerFull.png"/&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src="https://beeth0ven.github.io/RxSwift-Chinese-Documentation/assets/MoreDemo/Calculator/CalculatorFull.gif"/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href="https://github.com/ReactiveX/RxSwift/tree/master/RxExample/RxExample/Examples"&gt;RxExample&lt;/a&gt; 中包含许多具有代表性的示例。它们都是&lt;strong&gt;很好的学习材料&lt;/strong&gt;。这里我们取出其中几个示例来展示如何应用 &lt;strong&gt;RxSwift&lt;/strong&gt; ：
+演示RxExample的两种方式&lt;/p&gt;</description></item><item><title>FSCalendar支持自定义的日历开源库</title><link>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/FSCalendar%E6%94%AF%E6%8C%81%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E6%97%A5%E5%8E%86%E5%BC%80%E6%BA%90%E5%BA%93/</link><pubDate>Tue, 17 Jul 2018 17:59:05 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/FSCalendar%E6%94%AF%E6%8C%81%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E6%97%A5%E5%8E%86%E5%BC%80%E6%BA%90%E5%BA%93/</guid><description>&lt;!--github库卡片--&gt;
+&lt;p&gt;{% github it-boyer FSCalendar 1a026a4c width = 30% %}&lt;/p&gt;
+&lt;blockquote class="trello-card"&gt;&lt;a href="https://trello.com/c/Tq2jnc1E/33-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%97%A5%E5%8E%86%E6%8E%A7%E4%BB%B6%EF%BC%8C%E6%97%A5%E6%9C%9F%E5%9B%BE%E6%A0%87"&gt;自定义日历控件，日期图标&lt;/a&gt;&lt;/blockquote&gt;&lt;script src="https://p.trellocdn.com/embed.min.js"&gt;&lt;/script&gt;
+&lt;p&gt;&lt;a href="https://github.com/it-boyer/FSCalendar"&gt;FSCalendar&lt;/a&gt;
+FSCalendar是一款开源iOS日历控件，支持横向、纵向滑动模式，全屏模式，带有子标题、事件设置等功能。以下是项目截图：
+&lt;img src="https://cloud.githubusercontent.com/assets/5186464/10262249/4fabae40-69f2-11e5-97ab-afbacd0a3da2.jpg" alt=""&gt;
+Use Interface Builder
+1、 Drag an UIView object to ViewController Scene 2、 Change the Custom Class to FSCalendar
+3、 Link dataSource and delegate to the ViewController
+4、 Finally, implement FSCalendarDataSource and FSCalendarDelegate in your ViewController
+&lt;img src="https://cloud.githubusercontent.com/assets/5186464/9488580/a360297e-4c0d-11e5-8548-ee9274e7c4af.jpg" alt=""&gt;&lt;/p&gt;</description></item><item><title>iOS和OSX集成gitAPI</title><link>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/iOS%E5%92%8COSX%E9%9B%86%E6%88%90gitAPI/</link><pubDate>Wed, 17 May 2017 17:33:46 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/iOS%E5%92%8COSX%E9%9B%86%E6%88%90gitAPI/</guid><description>&lt;p&gt;在项目中使用git submodule工具集成子项目ObjectiveGit&lt;/p&gt;
+&lt;h4&gt;在新项目中使用git submodule集成gitAPI&lt;/h4&gt;
+&lt;p&gt;参考官方提供的两个demo&lt;/p&gt;</description></item><item><title>RxSwift基本概念</title><link>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/RxSwift%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</link><pubDate>Fri, 03 Mar 2017 13:01:41 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%BC%80%E6%BA%90%E5%BA%93/RxSwift%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</guid><description>&lt;h2&gt;FRP函数式反应型编程&lt;/h2&gt;
+&lt;p&gt;Functional Reactive Programming ， 缩写为 FRP&lt;/p&gt;
+&lt;h2&gt;函数编程&lt;/h2&gt;
+&lt;h3&gt;函数是第一等公民&lt;/h3&gt;
+&lt;p&gt;所谓 第一等公民 (first class) ，指的是函数与其他数据类型一样，处于平等地位。既可以赋值给其他变量，也可以作为参数传入另一个函数，或者作为别的函数的返回值。
+将数组通过指定的函数映射成另一个数组，例如将&lt;code&gt;increment函数&lt;/code&gt;作为参数传入数组的&lt;code&gt;map函数&lt;/code&gt;:
+{% codeblock lang:swift %}
+let increment = { return $0 + 1 }
+[1,2,3].map(increment) // [2,3,4]
+{% endcodeblock %}&lt;/p&gt;</description></item><item><title>Fabric对macOS系统的支持</title><link>https://it-boyer.github.io/post/old/macOS/Fabric%E5%AF%B9macOS%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%94%AF%E6%8C%81%E8%B0%83%E7%A0%94/</link><pubDate>Tue, 14 Feb 2017 11:14:35 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/macOS/Fabric%E5%AF%B9macOS%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%94%AF%E6%8C%81%E8%B0%83%E7%A0%94/</guid><description>&lt;h2&gt;Fabric&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Fabric&lt;/code&gt; 是Twitter的移动应用开发平台，一个模块化、跨平台的移动开发套件，该博文主要研究&lt;code&gt;crashlytics&lt;/code&gt;在app中的运用。
+&lt;a href="https://try.crashlytics.com/"&gt;注册新的账户&lt;/a&gt;登录，审核通过时间为几个小时或者1到2天不等。然后注册时候输入的邮箱就会收到如下的邀请涵
+&lt;a href="https://docs.fabric.io/apple/crashlytics/os-x.html#macos-support"&gt;浏览官方文档&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;crashlytics支持macOS&lt;/h3&gt;
+&lt;p&gt;对&lt;code&gt;macOS&lt;/code&gt;的支持中出现的问题
+问题：&lt;code&gt;NSApplicationCrashOnExceptions&lt;/code&gt; is not set. This will result in poor &lt;code&gt;top-level&lt;/code&gt; uncaught exception reporting
+官方解释：
+{% blockquote 官方文档 &lt;a href="https://docs.fabric.io/apple/crashlytics/os-x.html#macos-support"&gt;https://docs.fabric.io/apple/crashlytics/os-x.html#macos-support&lt;/a&gt; macOS Support %}
+Uncaught Exceptions
+Intercepting and reporting uncaught exceptions on macOS is more complex than it is on iOS. On macOS, AppKit will catch exceptions thrown on the main thread, preventing the application from crashing, but also preventing Crashlytics from reporting them. To make matters worse, Apple’s frameworks are not exception safe. This means that while AppKit will prevent your app from crashing, it will also likely corrupt your process’s state, often including AppKit itself. Typically, once an exception involving UI interaction is thrown, it will prevent your app from working correctly from that moment on.
+Thankfully, AppKit has a little-known feature you can turn on to make the behavior much more predictable. We strongly recommend that you do the following in your application, right before you initialize Crashlytics.
+{% codeblock lang:objc %}
+[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @&amp;ldquo;NSApplicationCrashOnExceptions&amp;rdquo;: @YES }];
+{% endcodeblock %}&lt;/p&gt;</description></item></channel></rss>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on 习七</title><link>https://it-boyer.github.io/tags/AI/</link><description>Recent content in AI on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Wed, 10 Dec 2025 22:27:41 +0800</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/AI/index.xml" rel="self" type="application/rss+xml"/><item><title>在elisp 中如何向list 变量添加新元素</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/elisp%E8%AF%AD%E6%B3%95/</link><pubDate>Wed, 10 Dec 2025 22:27:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/elisp%E8%AF%AD%E6%B3%95/</guid><description>&lt;style&gt;
+.org-todo {
+ font-size: 0.8em;
+ font-weight: 700;
+}
+/* *** Org TODO set to TODO state */
+.org-todo.todo {
+ color: #e60000;
+}
+/* *** Org TODO set to DONE state */
+.org-todo.done {
+ color: green;
+}
+
+.org-todo.cancel {
+ color: blue;
+}
+&lt;/style&gt;
+&lt;p&gt;&lt;strong&gt;1. &lt;code&gt;push&lt;/code&gt; —— 最方便的头部添加&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用法：=(push new-element list-variable)=&lt;/li&gt;
+&lt;li&gt;效果：把新元素加到列表最前面，直接修改原变量&lt;/li&gt;
+&lt;li&gt;文档：&lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Modifying-Lists.html"&gt;GNU Emacs Lisp手册 - 修改列表&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!--listend--&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-elisp" data-lang="elisp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;my-list&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="nv"&gt;c&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;push&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;x&lt;/span&gt; &lt;span class="nv"&gt;my-list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;my-list&lt;/span&gt; &lt;span class="c1"&gt;; =&amp;gt; (x a b c)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;2. &lt;code&gt;add-to-list&lt;/code&gt; —— 防止重复的添加&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>

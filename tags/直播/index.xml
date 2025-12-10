@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>直播 on 习七</title><link>https://it-boyer.github.io/tags/%E7%9B%B4%E6%92%AD/</link><description>Recent content in 直播 on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Fri, 10 Feb 2017 10:45:03 +0000</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/%E7%9B%B4%E6%92%AD/index.xml" rel="self" type="application/rss+xml"/><item><title>bilibiliForMac版之mpv依赖编译</title><link>https://it-boyer.github.io/post/old/%E7%BC%96%E8%AF%91/bilibili%E4%B9%8BMac%E7%89%88ffmpeg%E4%BE%9D%E8%B5%96%E7%BC%96%E8%AF%91/</link><pubDate>Fri, 10 Feb 2017 10:45:03 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E7%BC%96%E8%AF%91/bilibili%E4%B9%8BMac%E7%89%88ffmpeg%E4%BE%9D%E8%B5%96%E7%BC%96%E8%AF%91/</guid><description>&lt;h2&gt;&lt;a href="https://github.com/typcn/bilibili-mac-client"&gt;Bilibili Mac Client&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;一款基于mpv和ffmpeg底层库实现的播放器.&lt;/p&gt;
+&lt;h2&gt;项目依赖库&lt;/h2&gt;
+&lt;p&gt;编译在项目中所需的相关依赖库&lt;/p&gt;
+&lt;h3&gt;下载资源&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下载mpv-build
+{% codeblock lang:git %}
+git clone &lt;a href="https://github.com/mpv-player/mpv-build.git"&gt;https://github.com/mpv-player/mpv-build.git&lt;/a&gt;
+{% endcodeblock %}&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;执行下载&lt;code&gt;ffmpeg&lt;/code&gt;, &lt;code&gt;libass&lt;/code&gt; 和&lt;code&gt;mpv资源&lt;/code&gt;，同时完成编译的命令：
+{% codeblock lang:bash %}
+cd mpv-build/
+./rebuild -j4&lt;br&gt;
+{% endcodeblock %}&lt;/p&gt;</description></item><item><title>腾讯云之小直播开发</title><link>https://it-boyer.github.io/post/old/%E5%85%B6%E4%BB%96/%E8%85%BE%E8%AE%AF%E4%BA%91%E4%B9%8B%E5%B0%8F%E7%9B%B4%E6%92%AD%E5%BC%80%E5%8F%91/</link><pubDate>Sun, 22 Jan 2017 18:55:21 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%85%B6%E4%BB%96/%E8%85%BE%E8%AE%AF%E4%BA%91%E4%B9%8B%E5%B0%8F%E7%9B%B4%E6%92%AD%E5%BC%80%E5%8F%91/</guid><description>&lt;h1&gt;视频服务&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.qcloud.com/product/LVB"&gt;直播LVB&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://www.qcloud.com/document/product/267/7964"&gt;开发指南&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.qcloud.com/product/mlvb"&gt;移动直播MLVB&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://www.qcloud.com/document/product/454/7876"&gt;开发指南&lt;/a&gt;
+移动直播是一套移动终端直播解决方案的&lt;code&gt;集合&lt;/code&gt;，它以免费源码的形式向您展示：如何利用腾讯云直播(LVB)、点播(VOD)、云通信(IM) 和 对象存储(COS)等几项服务组合构建出适合您的直播解决方案。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;快速集成方案&lt;/h2&gt;
+&lt;p&gt;{% img 导图 &lt;a href="https://mc.qcloudimg.com/static/img/92a464fc26bbe52fea8816f8e6061ef3/image.jpg"&gt;https://mc.qcloudimg.com/static/img/92a464fc26bbe52fea8816f8e6061ef3/image.jpg&lt;/a&gt; 100% 200 集成导图 图片 %}
+如果您想要在自己的 APP 里集成直播推流和播放功能，下面三步就能达成目标：&lt;/p&gt;</description></item></channel></rss>

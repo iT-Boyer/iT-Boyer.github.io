@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>习七</title><link>https://it-boyer.github.io/authors/iTBoyer/</link><description>Recent content on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><atom:link href="https://it-boyer.github.io/authors/iTBoyer/index.xml" rel="self" type="application/rss+xml"/><item><title>在elisp 中如何向list 变量添加新元素</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/elisp%E8%AF%AD%E6%B3%95/</link><pubDate>Wed, 10 Dec 2025 22:27:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/elisp%E8%AF%AD%E6%B3%95/</guid><description>&lt;style&gt;
+.org-todo {
+ font-size: 0.8em;
+ font-weight: 700;
+}
+/* *** Org TODO set to TODO state */
+.org-todo.todo {
+ color: #e60000;
+}
+/* *** Org TODO set to DONE state */
+.org-todo.done {
+ color: green;
+}
+
+.org-todo.cancel {
+ color: blue;
+}
+&lt;/style&gt;
+&lt;p&gt;&lt;strong&gt;1. &lt;code&gt;push&lt;/code&gt; —— 最方便的头部添加&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用法：=(push new-element list-variable)=&lt;/li&gt;
+&lt;li&gt;效果：把新元素加到列表最前面，直接修改原变量&lt;/li&gt;
+&lt;li&gt;文档：&lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Modifying-Lists.html"&gt;GNU Emacs Lisp手册 - 修改列表&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!--listend--&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-elisp" data-lang="elisp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;my-list&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="nv"&gt;c&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;push&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;x&lt;/span&gt; &lt;span class="nv"&gt;my-list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;my-list&lt;/span&gt; &lt;span class="c1"&gt;; =&amp;gt; (x a b c)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;2. &lt;code&gt;add-to-list&lt;/code&gt; —— 防止重复的添加&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>gptel-agent 代理模式使用指南</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/gptel-agent%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link><pubDate>Wed, 10 Dec 2025 21:31:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/gptel-agent%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid><description>&lt;div class="ox-hugo-toc toc"&gt;
+&lt;div class="heading"&gt;Table of Contents&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#%E5%AE%89%E8%A3%85-gptel-agent"&gt;安装 gptel-agent&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"&gt;基本使用方法&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#%E5%9C%A8%E4%B8%93%E7%94%A8%E4%BC%9A%E8%AF%9D%E4%B8%AD%E4%BD%BF%E7%94%A8"&gt;在专用会话中使用：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E5%9C%A8-emacs-%E4%BB%BB%E4%BD%95%E5%9C%B0%E6%96%B9%E4%BD%BF%E7%94%A8"&gt;在 Emacs 任何地方使用：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E5%8F%AF%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7"&gt;可用的工具&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E9%A2%84%E8%AE%BE%E8%AF%B4%E6%98%8E"&gt;预设说明&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E5%AD%90%E4%BB%A3%E7%90%86%E4%BD%BF%E7%94%A8"&gt;子代理使用&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#%E5%86%85%E7%BD%AE%E5%AD%90%E4%BB%A3%E7%90%86"&gt;内置子代理：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"&gt;使用方法：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%90%E4%BB%A3%E7%90%86"&gt;自定义子代理&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#%E4%BB%8E-markdown-%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA"&gt;从 Markdown 文件创建：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E4%BB%8E-org-%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA"&gt;从 Org 文件创建：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#%E9%87%8D%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"&gt;重要注意事项&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;!--endtoc--&gt;
+&lt;style&gt;
+.org-todo {
+ font-size: 0.8em;
+ font-weight: 700;
+}
+/* *** Org TODO set to TODO state */
+.org-todo.todo {
+ color: #e60000;
+}
+/* *** Org TODO set to DONE state */
+.org-todo.done {
+ color: green;
+}
+
+.org-todo.cancel {
+ color: blue;
+}
+&lt;/style&gt;
+&lt;section class="outline-1 foo"&gt;
+&lt;h2 id="安装-gptel-agent"&gt;安装 gptel-agent&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;方法1：通过 MELPA&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>今天日志3</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/wenyan%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link><pubDate>Sun, 07 Sep 2025 06:22:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/wenyan%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid><description>&lt;div class="ox-hugo-toc toc"&gt;
+&lt;div class="heading"&gt;Table of Contents&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#2-dot-%E4%BD%BF%E7%94%A8-wenyan-mcp-%E5%8F%91%E5%B8%83%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0"&gt;&lt;strong&gt;2. 使用 &lt;code&gt;wenyan-mcp&lt;/code&gt; 发布公众号文章&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#3-dot-%E6%95%B4%E5%90%88%E5%88%B0-emacs-%E5%B7%A5%E4%BD%9C%E6%B5%81"&gt;&lt;strong&gt;3. 整合到 Emacs 工作流&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#4-dot-%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"&gt;&lt;strong&gt;4. 已知问题与解决方案&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#5-dot-%E5%8F%82%E8%80%83%E8%B5%84%E6%BA%90"&gt;&lt;strong&gt;5. 参考资源&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;!--endtoc--&gt;
+&lt;p&gt;&lt;img src="https://babyno.top/imgs/posts/2025-06-05-let-ai-help-you-manage-your-gzh-layout-and-publishing/7.jpg" alt="title"&gt;&lt;/p&gt;
+&lt;section class="outline-1 foo"&gt;
+&lt;h2 id="2-dot-使用-wenyan-mcp-发布公众号文章"&gt;&lt;strong&gt;2. 使用 &lt;code&gt;wenyan-mcp&lt;/code&gt; 发布公众号文章&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;*目标*：将 Markdown 文件通过 &lt;code&gt;wenyan-mcp&lt;/code&gt; 格式化并发布到微信公众号草稿箱。&lt;/li&gt;
+&lt;li&gt;*步骤*：
+&lt;ol&gt;
+&lt;li&gt;*安装 =wenyan-mcp=*：
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;npx&lt;/code&gt; 或 Docker 方式部署 &lt;code&gt;wenyan-mcp&lt;/code&gt; 工具。&lt;/li&gt;
+&lt;li&gt;示例（Docker）：
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; docker run -v &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/app -w /app wenyan/mcp publish &amp;lt;your-file&amp;gt;.md
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;*配置 MCP 工具*：
+&lt;ul&gt;
+&lt;li&gt;确保 &lt;code&gt;wenyan-mcp&lt;/code&gt; 的配置文件（如 &lt;code&gt;mcp.config.js=）中包含公众号的 =appid&lt;/code&gt; 和 =secret=。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;*发布文章*：
+&lt;ul&gt;
+&lt;li&gt;使用命令行工具或脚本调用 &lt;code&gt;wenyan-mcp&lt;/code&gt; 的发布功能。&lt;/li&gt;
+&lt;li&gt;示例：
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; npx wenyan-mcp publish &amp;lt;your-file&amp;gt;.md
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;/section&gt;
+&lt;section class="outline-1 foo"&gt;
+&lt;h2 id="3-dot-整合到-emacs-工作流"&gt;&lt;strong&gt;3. 整合到 Emacs 工作流&lt;/strong&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;*自动化脚本*：&lt;/p&gt;</description></item><item><title>商家自营销开启促销活动</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E5%95%86%E5%AE%B6%E6%B4%BB%E5%8A%A8%E8%AE%BE%E7%BD%AE/</link><pubDate>Tue, 02 Apr 2024 10:16:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E5%95%86%E5%AE%B6%E6%B4%BB%E5%8A%A8%E8%AE%BE%E7%BD%AE/</guid><description>&lt;p&gt;美团外卖平台为商家提供了门店自营销活动。商家通过设置门店活动可以有效提升订单 量、排名，是商家自营销的有力工具。商家可以通过美团外卖商家版&amp;gt;店铺&amp;gt;活动报名&amp;gt;自营销活动，查看所有商家自营销工具。注:活动介绍排序按照新商家成长经营建议从高到低排序。&lt;/p&gt;</description></item><item><title>门店入驻流程</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E7%BE%8E%E5%9B%A2%E5%A4%96%E5%8D%96%E9%97%A8%E5%BA%97%E5%85%A5%E9%A9%BB%E6%B5%81%E7%A8%8B/</link><pubDate>Sun, 31 Mar 2024 15:36:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E7%BE%8E%E5%9B%A2%E5%A4%96%E5%8D%96%E9%97%A8%E5%BA%97%E5%85%A5%E9%A9%BB%E6%B5%81%E7%A8%8B/</guid><description>&lt;p&gt;商家入驻是指从非外卖商家通过录入信息、审核、签约成为外卖商家的过程，入驻完成后，商家即可获得账号，在外卖平台上进行交易，该过程简称为上单。&lt;/p&gt;
+&lt;p&gt;门店在入驻为外卖商家前，需要先认领，然后在认领的页面进行上单操作，录入信息、审核、签约；商家入驻完成后，如果需要修改认证信息或者重新签约，可以进入到商家详情页进行操作。&lt;/p&gt;</description></item><item><title>4月商家活动促销计划</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/4%E6%9C%88%E5%95%86%E5%AE%B6%E6%B4%BB%E5%8A%A8%E4%BF%83%E9%94%80%E8%AE%A1%E5%88%92/</link><pubDate>Sun, 31 Mar 2024 09:19:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/4%E6%9C%88%E5%95%86%E5%AE%B6%E6%B4%BB%E5%8A%A8%E4%BF%83%E9%94%80%E8%AE%A1%E5%88%92/</guid><description>&lt;p&gt;必读人员：渠道经理、城市经理、合作商伙伴重要等级：需知晓&lt;/p&gt;
+&lt;h2 id="一-背景和目标"&gt;一 背景和目标&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;月初整体沟通整月零售方向的策略地图与任务地图，帮助合作商合理规划整月节奏。&lt;/li&gt;
+&lt;li&gt;拉齐零售方向策略和任务的优先级、重要性，提升BD执行效率以及策略落地效果。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="二-零售策略地图一览"&gt;二 零售策略地图一览&lt;/h2&gt;
+&lt;p&gt;四月重点策略：&lt;/p&gt;</description></item><item><title>重新定义知识库：临场发挥，不要局限于经验，要善用AI大数据</title><link>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E7%9F%A5%E8%AF%86%E5%BA%93/</link><pubDate>Fri, 13 Oct 2023 11:25:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E6%97%A5%E5%BF%97%E9%9A%8F%E7%AC%94/%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E7%9F%A5%E8%AF%86%E5%BA%93/</guid><description>&lt;p&gt;场景演练万事先，何苦人生无彩排书到用时方恨少，古来世人阅历深万卷速食碎片化，信息爆炸日日新经验难成无系统，人如浮萍薄纸命何以成长集大成，轻重缓急拎得清学习达人责任重，方格笔记勤应用善用利器助效能，探索原则习技能随机应变解困境，临场方可稳中赢&lt;/p&gt;</description></item><item><title>爆款视频的底层逻辑</title><link>https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%9F%AD%E8%A7%86%E9%A2%91%E7%9A%84%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/</link><pubDate>Tue, 10 Oct 2023 12:58:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%9F%AD%E8%A7%86%E9%A2%91%E7%9A%84%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/</guid><description>&lt;p&gt;从业 6 年来，我发现刚开始做短视频的人都会问一个问题，就是为什么那些制作看着特别普通的短视频能够成为爆款，而自己花了好几个小时，甚至是好几天用心创作的视频，观看者却寥寥无几呢？&lt;/p&gt;</description></item><item><title>怎么持续产出高质量的短视频?</title><link>https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8C%81%E7%BB%AD%E4%BA%A7%E5%87%BA%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84%E7%9F%AD%E8%A7%86%E9%A2%91/</link><pubDate>Mon, 09 Oct 2023 22:06:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8C%81%E7%BB%AD%E4%BA%A7%E5%87%BA%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84%E7%9F%AD%E8%A7%86%E9%A2%91/</guid><description>&lt;p&gt;现在短视频的创作门槛越来越低，似乎每个人只要拿起手机就可以拍出一段短视频。拍短视频一夜爆火的现象当然有，但这只是个例。想要持续产出高质量的短视频，并不容易。&lt;/p&gt;</description></item><item><title>拍短视频可以给我们带来什么?</title><link>https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8B%8D%E7%9F%AD%E8%A7%86%E9%A2%91%E7%9A%84%E5%A5%BD%E5%A4%84/</link><pubDate>Mon, 09 Oct 2023 19:43:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8B%8D%E7%9F%AD%E8%A7%86%E9%A2%91%E7%9A%84%E5%A5%BD%E5%A4%84/</guid><description>&lt;p&gt;一说起拍短视频的好处，我总是会想起我见证过的千千万万的小故事。故事的主角全部都是像你我一样的普通人，但是他们通过拍摄短视频，最终在人群中闪闪发亮。&lt;/p&gt;</description></item></channel></rss>

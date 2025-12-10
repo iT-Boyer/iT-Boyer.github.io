@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Shell on 习七</title><link>https://it-boyer.github.io/tags/shell/</link><description>Recent content in Shell on 习七</description><generator>Hugo</generator><language>zh-cn</language><managingEditor>itboyer@qq.com (iTBoyer)</managingEditor><webMaster>itboyer@qq.com (iTBoyer)</webMaster><lastBuildDate>Sat, 08 May 2021 11:52:49 +0800</lastBuildDate><atom:link href="https://it-boyer.github.io/tags/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>借助环境变量简化shell脚本</title><link>https://it-boyer.github.io/post/old/%E5%80%9F%E5%8A%A9%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%AE%80%E5%8C%96shell%E8%84%9A%E6%9C%AC/</link><pubDate>Fri, 09 Aug 2019 15:22:00 +0800</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/%E5%80%9F%E5%8A%A9%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%AE%80%E5%8C%96shell%E8%84%9A%E6%9C%AC/</guid><description>&lt;h2 id="需求描述"&gt;需求描述&lt;/h2&gt;
+&lt;p&gt;本人使用oh-my-zsh终端主题，它提供了很多快捷命令，还有平时也积累的一些alias快捷命令,配置在.zshrc中，方便每次打开终端，加载命令工具。但是如何在shell脚本中利用之前积累的命令，来简化脚本的编写呢。&lt;/p&gt;</description></item><item><title>SSH命令安装及使用</title><link>https://it-boyer.github.io/post/old/shell/SSH%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</link><pubDate>Tue, 26 Feb 2019 18:16:23 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/shell/SSH%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid><description>&lt;p&gt;写下这篇文章的目的是为了更清楚的讲解和展现ssh的用法和操作，避免网上庞杂的文章和材料影响新手的学习过程。所以如果你是为老手，可以略过这篇文章了。&lt;/p&gt;</description></item><item><title>iOS系统的shell工具blink</title><link>https://it-boyer.github.io/post/old/shell/iOS%E7%B3%BB%E7%BB%9F%E7%9A%84shell%E5%B7%A5%E5%85%B7blink/</link><pubDate>Tue, 26 Feb 2019 18:11:37 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/shell/iOS%E7%B3%BB%E7%BB%9F%E7%9A%84shell%E5%B7%A5%E5%85%B7blink/</guid><description>&lt;h3&gt;简介&lt;/h3&gt;
+&lt;p&gt;用于iOS的Blink Shell(为更多Shell util进行了编辑)
+Blink是第一个利用&lt;code&gt;Mosh&lt;/code&gt;和&lt;code&gt;SSH&lt;/code&gt;支持的专业桌面级iOS终端。因此，我们可以明确地保证稳定的连接、闪电般的速度和完整的配置。它可以而且应该是你一整天的工具。
+我们没有创建另一个终端来修复您的网站的运行。Blink从一开始就被打造为专业级产品。
+我们从分析什么是必须拥有的开始，我们最终基于以下三个概念:&lt;/p&gt;</description></item><item><title>makefile自动化编译工具</title><link>https://it-boyer.github.io/post/old/shell/makefile%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7/</link><pubDate>Thu, 08 Nov 2018 20:30:54 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/shell/makefile%E8%87%AA%E5%8A%A8%E5%8C%96%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7/</guid><description>&lt;p&gt;make命令执行时，需要一个makefile文件，以告诉make命令需要怎么样的去编译和链接程序。&lt;/p&gt;
+&lt;p&gt;首先，我们用一个示例来说明makefile的书写规则，以便给大家一个感性认识。这个示例来源于gnu 的make使用手册，在这个示例中，我们的工程有8个c文件，和3个头文件，我们要写一个makefile来告 诉make命令如何编译和链接这几个文件。我们的规则是：&lt;/p&gt;</description></item><item><title>使用screen在后台运行进程</title><link>https://it-boyer.github.io/post/old/shell/%E4%BD%BF%E7%94%A8screen%E5%9C%A8%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E8%BF%9B%E7%A8%8B/</link><pubDate>Sun, 21 Oct 2018 22:42:59 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/shell/%E4%BD%BF%E7%94%A8screen%E5%9C%A8%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E8%BF%9B%E7%A8%8B/</guid><description>&lt;h2&gt;screen&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;支持会话恢复
+当我们开启screen后，只要screen进程没有终止，其内部运行的会话都可以恢复。网络连接中断临时，用户也可以进入开启的screen中，对中断的会话的进行控制(恢复或删除)。
+通常的用法是在暂时离开的时候，让在screen中运行的会话保持正常运行并将Screen切换到后台。&lt;/li&gt;
+&lt;li&gt;支持多窗口
+当使用screen时，可以开启多个窗口，让每个会话都独立运行到不同的窗口，并拥有各自的编号、名称等。用户可以通过这些编号及名称进入不同的窗口。&lt;/li&gt;
+&lt;li&gt;会话共享
+Screen可以让一个或多个用户从不同终端登录一个会话，并共享会话。使用户登陆同一会话的用户看到同一会话内容。
+同时它可以提供窗口访问权限的设置，对窗口进行密码保护。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;screen参数&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-A 　 将所有的视窗都调整为目前终端机的大小
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-d 　 将指定的screen作业离线
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-h 　 指定视窗的缓冲区行数
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-m 即使目前已在作业中的screen作业，仍强制建立新的screen作业
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-r 恢复离线的screen作业
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-R 　 先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-s 　 指定建立新视窗时，所要执行的shell
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-S 指定screen作业的名称
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-v 　 显示版本信息
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-x 　 恢复之前离线的screen作业
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-ls或-list 　 显示目前所有的screen作业
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-wipe 　 检查目前所有的screen作业，并删除已经无法使用的screen作业
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4&gt;screen命令&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;自定义shell脚本启动一个进程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;screen_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;ngrok&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# 创建了一个名为 my_screen 的窗&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;screen -dmS &lt;span class="nv"&gt;$screen_name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;ngrok tcp 22&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;screen -x -S &lt;span class="nv"&gt;$screen_name&lt;/span&gt; -p &lt;span class="m"&gt;0&lt;/span&gt; -X stuff &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$cmd&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;screen -x -S &lt;span class="nv"&gt;$screen_name&lt;/span&gt; -p &lt;span class="m"&gt;0&lt;/span&gt; -X stuff &lt;span class="s1"&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start="2"&gt;
+&lt;li&gt;退出进程&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;screen -S session_name -X quit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其他&lt;/p&gt;</description></item><item><title>安装ruby及chruby版本管理</title><link>https://it-boyer.github.io/post/old/shell/%E5%AE%89%E8%A3%85ruby%E5%8F%8Achruby%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/</link><pubDate>Fri, 19 Oct 2018 15:58:23 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/shell/%E5%AE%89%E8%A3%85ruby%E5%8F%8Achruby%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/</guid><description>&lt;!--github库卡片--&gt;
+&lt;p&gt;{% github postmodern ruby-install ea2b8bb width = 30% %}&lt;/p&gt;
+&lt;h2&gt;安装工具ruby-install&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ brew install ruby-install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3&gt;安装指定 Ruby 版本&lt;/h3&gt;
+&lt;p&gt;方式一：使用&lt;code&gt;Homebrew&lt;/code&gt;安装&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ ruby-install ruby 2.4.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ ruby-install --system ruby #覆盖系统版本
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;但Mac最新系统安装Xcode时已经没有Command Line工具，需要单独安装。安装命令行：&lt;code&gt;xcode-select --install&lt;/code&gt;&lt;/p&gt;</description></item><item><title>package_json文件配置说明</title><link>https://it-boyer.github.io/post/old/shell/package_json%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E/</link><pubDate>Sun, 14 Oct 2018 23:47:05 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/shell/package_json%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E/</guid><description>&lt;p&gt;&lt;a href="https://blog.csdn.net/u011240877/article/details/76582670"&gt;npm 与 package.json 快速入门教程&lt;/a&gt;
+每个项目的根目录下一般都有一个package.json文件，定义项目所需要的各种模块，以及项目的配置信息。npm install则是根据这个配置文件，自动下载所需要的模块，也就是配置项目所需的运行和开发环境。
+package.json文件可以手工编写，也可以用npm init命令自动生成，除了项目名称和项目版本是必填的，其他都是选填的。&lt;/p&gt;</description></item><item><title>使用gem升级pod方法</title><link>https://it-boyer.github.io/post/old/shell/%E4%BD%BF%E7%94%A8gem%E5%8D%87%E7%BA%A7pod%E6%96%B9%E6%B3%95/</link><pubDate>Sat, 06 Oct 2018 14:50:12 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/shell/%E4%BD%BF%E7%94%A8gem%E5%8D%87%E7%BA%A7pod%E6%96%B9%E6%B3%95/</guid><description>&lt;h1&gt;升级cocopods&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo gem update --system
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;gem &lt;span class="nb"&gt;source&lt;/span&gt; -l
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pod setup
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pod repo update --verbose
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo gem install cocoapods --pre
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo gem cleanup
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;gem source&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ gem sources -l
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;https://gems.ruby-china.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# 确保只有 gems.ruby-china.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;腾讯云：&lt;code&gt; https://gems.ruby-china.com/&lt;/code&gt;
+淘宝：&lt;code&gt;https://ruby.taobao.org/&lt;/code&gt;&lt;/p&gt;</description></item><item><title>设置环境变量的profile与bash_profile区别</title><link>https://it-boyer.github.io/post/old/shell/%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84profile%E4%B8%8Ebash_profile%E5%8C%BA%E5%88%AB/</link><pubDate>Fri, 05 Oct 2018 09:32:44 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/shell/%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84profile%E4%B8%8Ebash_profile%E5%8C%BA%E5%88%AB/</guid><description>&lt;h2&gt;profile文件&lt;/h2&gt;
+&lt;p&gt;1.1 profile文件的作用
+&lt;strong&gt;profile&lt;/strong&gt;(&lt;code&gt;/etc/profile&lt;/code&gt;)，用于设置系统级的环境变量和启动程序，在这个文件下配置会对所有用户生效。当用户登录(login)时，文件会被执行。
+1.2 在profile中添加环境变量
+一般不建议在&lt;code&gt;/etc/profile&lt;/code&gt;文件中添加环境变量，因为在这个文件中添加的设置会对所有用户起作用。
+当必须添加时，我们可以按以下方式添加：
+如，添加一个HOST值为linuxprobe.com的环境变量：&lt;/p&gt;</description></item><item><title>vim一般模式下查找和替换命令</title><link>https://it-boyer.github.io/post/old/shell/vim%E4%B8%80%E8%88%AC%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 04 Oct 2018 23:48:08 +0000</pubDate><author>itboyer@qq.com (iTBoyer)</author><guid>https://it-boyer.github.io/post/old/shell/vim%E4%B8%80%E8%88%AC%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E5%91%BD%E4%BB%A4/</guid><description>&lt;h3&gt;&lt;code&gt;/&lt;/code&gt;,&lt;code&gt;?&lt;/code&gt;查找命令&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/word&lt;/code&gt; 向下查找word字符串&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;?word&lt;/code&gt;向上查找word字符串
+组合查找
+&lt;code&gt;n&lt;/code&gt;:  代表重复前一个查找的操作
+&lt;code&gt;N&lt;/code&gt;:反向进行前一个查找操作  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;code&gt;s/old/new/g&lt;/code&gt;替换命令&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;行间查找
+在第n1和n2行查找&lt;code&gt;word1&lt;/code&gt;比替换为&lt;code&gt;word2&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;:n1,n2s/word1/word2/g
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;举例：  &lt;code&gt;：100,200s/vbird/VBIRD/g&lt;/code&gt;&lt;/p&gt;</description></item></channel></rss>
